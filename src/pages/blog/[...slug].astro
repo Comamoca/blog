@@ -1,0 +1,33 @@
+---
+import { CollectionEntry, getCollection } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+
+import readingTime from 'reading-time';
+import { Markdown } from 'astro/components';
+import { AstroMarkdown } from '@astrojs/renderer-markdown';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+
+// const glob = await Astro.glob("../content/blog/*.md");
+// console.log("blogpost", glob[0].frontmatter.emoji)
+
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const stats = readingTime(post.body)
+
+post.data.minitesRead = Math.round(stats.minutes);
+
+const { Content } = await post.render();
+---
+
+<BlogPost {...post.data}>
+	<Content />
+</BlogPost>

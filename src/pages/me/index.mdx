@@ -1,0 +1,48 @@
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.tsx';
+import Footer from '../../components/Footer.tsx';
+import CardList from '../../components/CardList.tsx';
+import PostCard from '../../components/PostCard.tsx';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+
+
+<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+
+<Header  />
+
+<img src="icon.png"
+class="mx-auto h-32 w-32 rounded-full md:mb-6 mt-8 md:mt-2"
+/>
+
+<main>
+<h1 class="text-2xl md:text-4xl text-center my-4">About Me</h1>
+<article class="prose flex justify-center mx-auto">
+    <div className="border(t gray-200) w-96 m-3 p-4">
+      <div
+        className="block p-4 bg-white rounded-lg border border-gray-200 shadow md:p-6"
+      >
+        <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 md:text-2xl dark:text-white">
+          Comamoca
+        </h5>
+        <p className="font-normal text-gray-700">
+	インターネット大好きマン  
+	好きな言語は
+
+	- Go
+	- Nim
+	- Rust
+
+	Elixirは勉強中です。
+
+	### Links
+
+	[Wakatime](https://wakatime.com/@Comamoca)
+
+        </p>
+      </div>
+    </div>
+
+</article>
+</main>
+
+<Footer />

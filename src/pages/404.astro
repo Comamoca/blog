@@ -1,0 +1,33 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.tsx';
+import Footer from '../components/Footer.tsx';
+import CardList from '../components/CardList.tsx';
+import PostCard from '../components/PostCard.tsx';
+import { getCollection } from "astro:content";
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const posts = await getCollection("blog");
+
+const post = posts[0];
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="flex flex-col min-h-screen">
+		<Header  />
+		<main class="flex-grow">
+	<img src="https://deno-avatar.deno.dev/avatar/avatar.svg"
+	class="mx-auto h-32 w-32 rounded-full md:mb-6 mt-8 md:mt-2"
+	/>
+
+      <h1 class="text-2xl mt-8 md:text-4xl font-body text-center">
+      404 Page Not Found
+      </h1>
+	</main>
+		<Footer />
+	</body>
+</html>
