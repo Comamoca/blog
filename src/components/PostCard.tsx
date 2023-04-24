@@ -5,12 +5,12 @@ export default function PostCard(props: { post }) {
   const data = post.data;
 
   return (
-    <div className="border(t gray-200) w-96 m-3 p-4">
+    <div className="border(t gray-200) w-70 md:w-96 m-3 p-4">
       <a
         href={`/blog/${post.slug}`}
-        className="block p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow md:p-6 hover:bg-gray-100"
+        className="block p-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow md:p-4 md:p-6 hover:bg-gray-100"
       >
-        <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 md:text-2xl dark:text-white">
+        <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 md:text-xl md:text-2xl dark:text-white">
           {data.title}
         </h5>
         <p className="font-normal text-gray-700">

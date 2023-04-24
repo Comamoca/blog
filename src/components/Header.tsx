@@ -5,36 +5,36 @@ import { Rss } from "lucide-react";
 import { Twitter } from "lucide-react";
 import { User } from "lucide-react";
 
-const iconSize = "30";
+// const iconSize = "30";
 
 const links = [
   {
-    child: <Home size={iconSize} />,
+    child: <Home />,
     name: "Home",
     href: "/",
   },
   {
-    child: <User size={iconSize} />,
+    child: <User />,
     name: "Me",
     href: "/me",
   },
   {
-    child: <Info size={iconSize} />,
+    child: <Info />,
     name: "Infomation",
     href: "/info/",
   },
   {
-    child: <Rss size={iconSize} />,
+    child: <Rss />,
     name: "RSS",
     href: "/api/feed.xml",
   },
   {
-    child: <Github size={iconSize} />,
+    child: <Github />,
     name: "Github",
     href: "https://github.com/Comamoca/blog",
   },
   {
-    child: <Twitter size={iconSize} />,
+    child: <Twitter />,
     name: "Twitter",
     href: "https://twitter.com/Comamoca_",
   },
@@ -51,8 +51,8 @@ export default function Header() {
                 href={link.href}
                 className={"text-gray-500 hover:text-gray-700 py-1 border-gray-500"}
               >
-                <div className={"ml-6 m-t4"}>
-                  {link.child}
+                <div className={"mx-3"}>
+                  <div className="w-3 md:w-10">{link.child}</div>
                 </div>
               </a>
             </li>
