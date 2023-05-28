@@ -4,12 +4,19 @@ import Header from '../components/Header.tsx';
 import Footer from '../components/Footer.tsx';
 import CardList from '../components/CardList.tsx';
 import PostCard from '../components/PostCard.tsx';
+import Twemoji from '../components/Twemoji.tsx';
 import { getCollection } from "astro:content";
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import "@fontsource/sawarabi-gothic";
 
 const posts = await getCollection("blog");
 
 ---
+<style>
+body {
+  font-family: 'Sawarabi Gothic', sans-serif;
+}
+</style>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -19,9 +26,13 @@ const posts = await getCollection("blog");
 	<body class="flex flex-col min-h-screen">
 		<Header  />
 		<main class="flex-grow">
+			<dev class="flex justify-center">
+			<img src="https://emoji2svg.deno.dev/api/🧠" class="w-10 mt-1.5 mr-1">
+			<!-- <img src="https://emoji2svg.deno.dev/api/🧠" class="w-16 mr-2 -mt-1 -ml-3"> -->
       			<h1 class="text-3xl mt-2 md:text-4xl font-body text-center">
-      				{SITE_TITLE}
+				 |> IO.puts()
      			</h1>
+			</dev>
 
       			<h2 class="text-center mt-4 md:mt-8 text-2xl">最近の投稿<h2>
 
