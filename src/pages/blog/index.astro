@@ -6,6 +6,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 import PostCard from '../../components/PostCard.tsx';
+import Logo from '../../components/Logo.tsx';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
@@ -19,10 +20,8 @@ const posts = (await getCollection('blog')).sort(
 	</head>
 	<body class="flex flex-col min-h-screen">
 		<Header />
+			<Logo />
 		<main class="flex-grow">
-		<h1 class="text-4xl font-body flex justify-center">
-		{SITE_TITLE}
-		</h1>
 
       		<h2 class="flex justify-center mt-8 text-2xl">すべての投稿<h2>
 
