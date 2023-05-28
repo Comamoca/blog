@@ -55,7 +55,9 @@ export default function Header() {
             <li>
               <a
                 href={link.href}
-                className={"text-gray-500 hover:text-gray-700 py-1 border-gray-500"}
+                className={
+                  "text-gray-500 hover:text-gray-700 py-1 border-gray-500"
+                }
                 title={link.title}
               >
                 <div className={"mx-3"}>
