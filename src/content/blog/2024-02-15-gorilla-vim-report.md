@@ -1,12 +1,16 @@
 ---
 title: "ゴリラ.vimに行ってきた"
 description: "ゴリラ.vimに行ってきたのでその話"
-pubDate: "Feb 15 2024"
+pubDate: "Feb 23 2024"
 emoji: "🦊"
 ---
 
 もう3月になってしまいますが、2/10に開催された「ゴリラ.vim #30 ~ 四谷ラボコラボ」に行ってきたのでその感想とか諸々を書いていきます。  
 普段は平日の夜に開催されていますが、今回は土曜日開催ということで初めて参加してみました。前から参加してみたかったので嬉しい。
+
+追記:  
+今回はNostr界隈と合同で開催とのことで、Nostrプロコトルを活用した長文投稿サービス[Habla](https://habla.news/ja/a/naddr1qqxnzdes8qmrwwp5xqerwvfeqgsyhnqz9qg20ml4w8c6qgpyeuagxhrettcsnd8v4vg7g5rz9xg5r4crqsqqqa28w4z3h6)にも記事を投稿してます。  
+Nostrってこんなことも出来るんだ～と感じでいただければ嬉しいです。
 
 
 ## 発表の内容
