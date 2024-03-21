@@ -34,7 +34,6 @@ Gleamで整形表示(pretty print)をするためのライブラリがv1に到�
 
 https://github.com/Acepie/p5js_gleam
 
-A demo showcasing how to create and use bindings to create a little animation site with p5js.
 
 Gleamで[p5js](https://p5js.jp)を操作するためのバインディングとデモ。
 p5jsを使うとクリエイティブなWebサイトを構築できるため、Gleamのクリエイティブ分野の道が切り開かれたとも言えそう。
