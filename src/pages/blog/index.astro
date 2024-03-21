@@ -30,7 +30,7 @@ const posts = (await getCollection('blog')).sort(
      		 <li>
      		 {
      		 posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-      		.slice(0, 2).map((post) => <PostCard post={post} />)
+      		.map((post) => <PostCard post={post} />)
       		}
      		</li>
      		</ul>
