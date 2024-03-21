@@ -12,27 +12,27 @@ const { title, description, emoji } = Astro.props;
 ---
 
 <html lang="ja">
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<div class="md:ml-20 justify-center">
-				<div class="flex flex-col mt-8">
-					<div class="mx-auto md:mb-2">
-						<Twemoji emoji={emoji} />
-					</div>
-					<h1 class="text-2xl md:text-4xl mx-auto mt-8">{title}</h1>
-				</div>
-			</div>
-				<hr class="w-4/6 h-1 mx-auto bg-gray-100 border-0 rounded mt-8 md:mt-8"/>
-				<div class="ml-20 mr-20 mt-12 md:mt-12 text-lg mt-10">
-					<article class="prose">
-						<slot />
-					</article>
-				</div>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <div class="md:ml-20 justify-center">
+        <div class="flex flex-col mt-8">
+          <div class="mx-auto md:mb-2">
+            <Twemoji emoji={emoji} />
+          </div>
+          <h1 class="text-2xl md:text-4xl mx-auto mt-8">{title}</h1>
+        </div>
+      </div>
+      <hr class="w-4/6 h-1 mx-auto bg-gray-100 border-0 rounded mt-8 md:mt-8" />
+      <div class="ml-20 mr-20 mt-12 md:mt-12 text-lg mt-10">
+        <article class="prose">
+          <slot />
+        </article>
+      </div>
+    </main>
+    <Footer />
+  </body>
 </html>

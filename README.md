@@ -15,7 +15,6 @@ This is my blog
 <br>
 <br>
 
-
 </div>
 
 <table>
@@ -35,7 +34,7 @@ This is my blog
 
 See [this page](https://comamoca.pages.dev).
 
-## ⛏️   Development
+## ⛏️ Development
 
 clone this repo, follow under commands.
 
@@ -43,6 +42,7 @@ clone this repo, follow under commands.
 ni
 nr dev
 ```
+
 ## 📝 Todo
 
 - [ ] Search bar feature

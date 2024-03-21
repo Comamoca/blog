@@ -9,33 +9,38 @@ import PostCard from '../../components/PostCard.tsx';
 import Logo from '../../components/Logo.tsx';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
 );
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body class="flex flex-col min-h-screen">
-		<Header />
-			<Logo />
-		<main class="flex-grow">
-
-      		<h2 class="flex justify-center mt-8 text-2xl">すべての投稿<h2>
-
-     	 	<div class="flex flex-col items-center mt-3">
-     	 	<ul>
-     		 <li>
-     		 {
-     		 posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-      		.map((post) => <PostCard post={post} />)
-      		}
-     		</li>
-     		</ul>
-     		</div>
-		</main>
-	</body>
-	<Footer />
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <Header />
+    <Logo />
+    <main class="flex-grow">
+      <h2 class="flex justify-center mt-8 text-2xl">
+        すべての投稿<h2>
+          <div class="flex flex-col items-center mt-3">
+            <ul>
+              <li>
+                {
+                  posts
+                    .sort(
+                      (a, b) =>
+                        b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+                    )
+                    .map((post) => <PostCard post={post} />)
+                }
+              </li>
+            </ul>
+          </div>
+        </h2>
+      </h2>
+      <Footer />
+    </main>
+  </body>
 </html>

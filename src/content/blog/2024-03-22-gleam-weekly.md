@@ -1,8 +1,8 @@
 ---
-title: "3/22 Gleam Weekly"
-description: "Gleam Weeklyの内容を解説していきます。"
-pubDate: "Mar 22 2024"
-emoji: "🦊"
+title: '3/22 Gleam Weekly'
+description: 'Gleam Weeklyの内容を解説していきます。'
+pubDate: 'Mar 22 2024'
+emoji: '🦊'
 ---
 
 [Gleam Weekly](https://gleamweekly.com)というGleamで起った出来事を毎週まとめて送ってくれるメールサービス(無料)です。
@@ -17,13 +17,11 @@ https://gleam.run/news/gleam-version-1/
 
 今週最も大きなニュースはまちがいなくこれ。安定版がリリースされたことで今後もっとGleamコミュニティが活性化することを願う。
 
-
 ### n-sided-lucy
 
 https://0xca551e.github.io/n-sided-lucy/
 
 オリジナルのLucy[^2]を作れるWebアプリケーション。LustreというGleamでSPAを作れるフレームワークを使っていて、GleamでWebアプリを作るサンプルとして参考になる。
-
 
 ### pprint 1.0
 
@@ -31,7 +29,6 @@ https://github.com/MystPi/pprint
 
 Gleamで整形表示(pretty print)をするためのライブラリがv1に到達した。
 今のところGleamでデバッグするのは`io.debug()`一択なので、オブジェクトの中身を見やすくしてくれるライブラリはありがたい。
-
 
 ### p5js_gleam
 
@@ -49,7 +46,6 @@ p5jsを使うとクリエイティブなWebサイトを構築できるため、G
 https://github.com/tovedetered/xmleam
 
 GleamでXMLを構築できるライブラり。RSSライブラリとか作るのに使えそう。
-
 
 ### Binary Data in Gleam: Implementing The RCON Protocol
 
@@ -83,7 +79,6 @@ Go、Gleam、Cなどのシンプルな言語をあげてそれぞれの「単純
 ## 余談
 
 初めてこういった試みをしてみたけど、Gleamのみならずプログラミングの広範な情報が集まってくるためインプットとアウトプットの両方の観点から結構良さそうだと感じた。来週もやってみたい。
-
 
 [^1]: Gleam使ってる人のことをそう言うらしいです。
 [^2]: Gleamのマスコット。以前はもっと幾何学的なキャラデザをしていました。
