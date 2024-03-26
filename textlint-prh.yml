@@ -1,0 +1,5 @@
+version: 1
+rules:
+  - expected: できます
+    pattern: 出来ます
+
