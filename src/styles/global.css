@@ -5,3 +5,66 @@
 body {
   font-family: "Sawarabi Gothic", sans-serif;
 }
+
+h1 {
+	text-align: center;
+}
+
+.rlc-container {
+	display: flex;
+	height: 6em;
+
+	--tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+	--tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.rlc-info {
+	display: flex;
+	flex-direction: column;
+}
+
+.rlc-container:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.rlc-title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-top: 0.7rem;
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+	overflow: hidden;
+}
+
+.rlc-url-container {
+	display: flex;
+	font-size: 70%;
+	margin-top: 2rem;
+	margin-bottom: 0.5rem;
+	margin-left: 0.5rem;
+}
+
+.rlc-favicon {
+	margin-top: 0rem;
+	margin-bottom: 0rem;
+	object-fit: contain;
+}
+
+.rlc-url {
+	margin-right: 0.5rem;
+	margin-left: 0.5rem;
+	color: #505050;
+}
+
+.rlc-image {
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+	object-fit: cover;
+}
+
+.rlc-image-container {
+	align-self: center;
+}	
