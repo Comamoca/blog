@@ -19,11 +19,6 @@ h1 {
 	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.rlc-info {
-	display: flex;
-	flex-direction: column;
-}
-
 .rlc-container:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -39,14 +34,6 @@ h1 {
 	overflow: hidden;
 }
 
-.rlc-url-container {
-	display: flex;
-	font-size: 70%;
-	margin-top: 2rem;
-	margin-bottom: 0.5rem;
-	margin-left: 0.5rem;
-}
-
 .rlc-favicon {
 	margin-top: 0rem;
 	margin-bottom: 0rem;
@@ -59,12 +46,35 @@ h1 {
 	color: #505050;
 }
 
+.rlc-url-container {
+	display: flex;
+	font-size: 50%;
+	margin-top: 2rem;
+	/* margin-bottom: 0.5rem; */
+	margin-left: 0.5rem;
+}
+
+.rlc-info {
+	max-width: 23em;
+	display: flex;
+	flex-direction: column;
+}
+
+.rlc-description {
+	display: none;
+}
+
 .rlc-image {
+	max-width: 9em;
 	margin-top: 0px !important;
 	margin-bottom: 0px !important;
 	object-fit: cover;
+	--tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+	--tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
 }
 
 .rlc-image-container {
+	margin-left: auto;
+	margin-right: 10px;
 	align-self: center;
 }	
