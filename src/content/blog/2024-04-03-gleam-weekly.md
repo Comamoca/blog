@@ -1,7 +1,7 @@
 ---
 title: '4/3 Gleam Weekly'
 description: 'Gleam Weeklyの内容を勝手に解説していきます。'
-pubDate: 'Apr 22 2024'
+pubDate: 'Apr 3 2024'
 emoji: '🦊'
 ---
 
