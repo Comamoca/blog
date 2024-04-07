@@ -9,11 +9,11 @@ import PostCard from '../../components/PostCard.tsx';
 import Logo from '../../components/Logo.tsx';
 
 const posts = (await getCollection('blog')).sort(
-  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
 );
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
@@ -31,7 +31,7 @@ const posts = (await getCollection('blog')).sort(
                   posts
                     .sort(
                       (a, b) =>
-                        b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+                        b.data.pubDate.getTime() - a.data.pubDate.getTime()
                     )
                     .map((post) => <PostCard post={post} />)
                 }
