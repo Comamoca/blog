@@ -24,13 +24,12 @@ https://codesandbox.io/p/devbox/github/codesandbox/sandbox-templates/tree/main/g
 [codesandbox](https://codesandbox.io/)にGleamのプロジェクトテンプレートが追加されました。
 Gleamのオンライン実行環境といえば[Gleam Playground](https://johndoneth.github.io/gleam-playground/)ですが、実は2年ほど更新されておらず最新の仕様に追い付いていないので`use`など最近の構文を使ったコードではエラーが発生します。
 
-
 ## Even more great Gleam stuff
 
 ### Priorityq: A priority queue implementation based on max pairing heaps. Written in pure Gleam.
 
-ペアリングヒープ[^1]をPure Gleamで実装したライブラリがアップデートされたようです。
-
+ペアリングヒープ[^1]をPure
+Gleamで実装したライブラリがアップデートされたようです。
 
 ## まとめ
 

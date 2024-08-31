@@ -9,7 +9,7 @@ emoji: '🦊'
 週一だと分量が少ないと感じ始めたので、今回から隔週[^1]で書いていきたいと思います。
 
 ## issue9
-                                                                                       
+
 ### This week in Gleam
 
 #### A Practical Use Case for Function Capture in Gleam
@@ -28,12 +28,13 @@ io.debug(add_1(2)) // => 3
 
 ### chrobot: v1.0
 
-Chrome devtool protcol を使ってChromeの操作を自動化するライブラリchrobotがv1.0になりました。
+Chrome devtool protcol
+を使ってChromeの操作を自動化するライブラリchrobotがv1.0になりました。
 Playwrightみたいに自動テストを行なったり、スクレイピングで使えそうで期待してます。
 
 ### Even more great Gleam stuff
 
-#### Stacky: BEAM stack trace in Gleam. 
+#### Stacky: BEAM stack trace in Gleam.
 
 https://github.com/inoas/stacky
 
@@ -50,7 +51,6 @@ https://github.com/ghivert/gleam-lang-npm
 
 npmでGleamコンパイラを使えるようにしたnpmパッケージです。主にJavaScriptターゲットのCIを想定しているらしいです。
 
-
 #### Grille-Pain - A Toast component for Gleam
 
 https://github.com/ghivert/grille-pain
@@ -60,7 +60,7 @@ Lustreを中心としたGleamのフロントエンドが着実に成長してい
 
 ### Even more great Gleam stuff
 
-#### Erlang/OTP 27.0 Release 
+#### Erlang/OTP 27.0 Release
 
 https://www.erlang.org/news/170
 

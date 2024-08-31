@@ -13,7 +13,8 @@ emoji: '🦊'
 
 https://code-change.nl/gleam-blog/20240322-monitoring-processes.html
 
-`gleam/otp`には Erlang VM 上の`process`を実行できるけれど、この方法だと呼び出し先でクラッシュすると呼び出し元も巻き込まれてクラッシュする。
+`gleam/otp`には Erlang VM
+上の`process`を実行できるけれど、この方法だと呼び出し先でクラッシュすると呼び出し元も巻き込まれてクラッシュする。
 それを防ぐために呼び出し先の`process`を監視し、安全に実行する方法を解説している。
 
 ### Getting to know Actors in Gleam. Code BEAM SF 2024
@@ -26,14 +27,16 @@ Code BEAM America で発表された Gleam の型付けに関するセッショ�
 
 https://github.com/lustre-labs/lustre
 
-Gleam で SPA を開発できるフレームワーク Lustre が v4 に到達した。Elixir Phoenix に影響を受けているらしく、個人的にかなり期待しているプロジェクト。
+Gleam で SPA を開発できるフレームワーク Lustre が v4 に到達した。Elixir Phoenix
+に影響を受けているらしく、個人的にかなり期待しているプロジェクト。
 いつか記事を書きたい。
 
 ### Exploring Gleam with Genetic Algorithms
 
 https://silasmarvin.dev/exploring-gleam-with-genetic-algorithms
 
-Gleam で遺伝的アルゴリズムを Gleam で書いてみるというもの。遺伝的アルゴリズム自体馴染みがないので後でじっくり読んでみたい。
+Gleam で遺伝的アルゴリズムを Gleam
+で書いてみるというもの。遺伝的アルゴリズム自体馴染みがないので後でじっくり読んでみたい。
 
 ### Exploring the Gleam FFI
 
@@ -53,19 +56,22 @@ Gleam コアチームのポッドキャスト。
 
 https://tahazsh.com/blog/why-gleam-is-good
 
-Gleam の人気が高まっている理由を解説した記事。最近は構文がシンプルな言語が好まれる傾向があるのかも...なんて思った。
+Gleam
+の人気が高まっている理由を解説した記事。最近は構文がシンプルな言語が好まれる傾向があるのかも...なんて思った。
 
 ### PostgreSQL protocol decoder/encoder Project update
 
 https://github.com/grodaus/postgresql_protocol
 
-PostgreSQL とクライアント間で通信されるプロトコルを Gleam 実装したライブラリがアップデートされたらしい。
+PostgreSQL とクライアント間で通信されるプロトコルを Gleam
+実装したライブラリがアップデートされたらしい。
 
 ### Act, compose stateful actions to simulate mutable state Project update
 
 https://github.com/MystPi/act
 
-Gleam で可変な状態を表現するためのライブラリ。Actor と区別するためこのような命名になったらしい。個人的に気になっているライブラリ。
+Gleam で可変な状態を表現するためのライブラリ。Actor
+と区別するためこのような命名になったらしい。個人的に気になっているライブラリ。
 
 ### Monitoring processes (2/3) Blog post
 
@@ -78,8 +84,8 @@ https://code-change.nl/gleam-blog/20240326-monitoring-processes.html
 
 ## 余談
 
-今回は`process`関連の話が多かった気がする。
-Erlang VM の真価は軽量な process とそれを元にした堅牢なシステムなので当たり前っちゃそうかもしれない。
+今回は`process`関連の話が多かった気がする。 Erlang VM の真価は軽量な process
+とそれを元にした堅牢なシステムなので当たり前っちゃそうかもしれない。
 
 次回はどんな News が来るのか楽しみ。
 あとメールの自動振り分けを設定したので次は来たらすぐ投稿できると思う。

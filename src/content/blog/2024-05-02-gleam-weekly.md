@@ -6,8 +6,7 @@ tag: ["gleamweekly"]
 emoji: '🦊'
 ---
 
-5月になりましたね。
-今週もGleam Weeklyやっていきます。
+5月になりましたね。 今週もGleam Weeklyやっていきます。
 
 ## This week in Gleam
 
@@ -19,7 +18,6 @@ Lustreで書かれたシンプルなブログジェネレーターです。
 LustreのOrgにはSSGのリポジトリがあるのでいつか出るとは思っていましたがわりと早く出てきました。
 
 注意点として、Node.js上でしか動かないので注意です。
-
 
 ## The optimizations in Erlang/OTP 27
 
@@ -34,7 +32,6 @@ https://github.com/maxdeviant/bigben
 
 Gleamの時刻ライブラリには[birl](https://github.com/massivefermion/birl)というのがありますが、bigbenはbirlに擬似的な時刻を与えるものとなっています。
 なので開発というよりテストに向いていそうな印象を受けました。
-
 
 ## Even more great Gleam stuff
 
