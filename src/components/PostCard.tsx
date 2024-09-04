@@ -1,4 +1,4 @@
-import { Post } from '../types';
+import { Post } from "../types";
 
 export default function PostCard(props: { post }) {
   const { post } = props;
