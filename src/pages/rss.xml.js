@@ -7,9 +7,7 @@ export async function get(context) {
   return rss({
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    // context.site,
-    // 実際にホストしているアドレス(comamoca.pages.dev)が表示されてしまうので明示的に指定する。
-    site: "comamoca.dev", 
+    site: context.site,
     items: posts.map((post) => ({
       ...post.data,
       link: `/blog/${post.slug}/`,

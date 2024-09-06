@@ -2,8 +2,6 @@ import rss from "@astrojs/rss";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import { marked } from "marked";
 
-// import.meta.env.SITE => comamoca.pages.dev
-const ADDRESS = "comamoca.dev"
 
 const postImportResult = import.meta.glob("../../content/blog/*.md", {
   eager: true,
@@ -24,7 +22,7 @@ export const get = () =>
   rss({
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    site: ADDRESS,
+    site: import.meta.env.SITE,
     items: posts.map((post) => ({
       link: `/blog/${post.file.split("/").reverse()[0].split(".")[0]}`,
       title: post.frontmatter.title,
