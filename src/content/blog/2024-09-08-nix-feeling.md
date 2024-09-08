@@ -9,7 +9,8 @@ Nixを始めてから一週間経ったので雑感とか書いていく。
 
 ## 自分がNixを勧めたい人
 
-まず自分がNixをオススメしたい人を挙げていく。これに当てはまる人がいたらこの後は読まずにNixをインストールするのが良いかもしれない。
+まず自分がNixをオススメしたい人を挙げていく。
+これに当てはまる人がいたらこの後は読まずにNixをインストールするのが良いかもしれない。
 
 Nixのインストールには[DeterminateのNixインストーラ](https://github.com/DeterminateSystems/nix-installer)がオススメ(キレイにアンインストールできる)だけど、**脆弱性のあるバージョン(2.24)がインストールされるらしい**ので[^1]、不安な人は[公式のインストーラー](https://nixos.org/download/)を使った方が良いかもしれない。
 
@@ -58,6 +59,6 @@ Nix言語は始めは取っ付きずらそうに見えるけど、いざ書い�
 まだ一週間しか使ってないけど、NixはYOL(yasunority of life)を向上させたり環境構築を簡単にできたりと有用性を感じているのでこれからも触っていきたい。
 
 
-[^1]: https://github.com/NixOS/nixpkgs/pull/335342#pullrequestreview-2270740278
-[^2]: https://x.com/tenntenn/status/1801183831942397983
+[^1]: [該当のissue](https://github.com/NixOS/nixpkgs/pull/335342#pullrequestreview-2270740278)
+[^2]: [参照](https://x.com/tenntenn/status/1801183831942397983)
 [^3]: OS(大抵の場合Linux)をクリーンインストールするという意。転じて何かを消すことを指すこともある。
