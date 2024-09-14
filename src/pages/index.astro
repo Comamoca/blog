@@ -6,8 +6,7 @@ import CardList from '../components/CardList.tsx';
 import PostCard from '../components/PostCard.tsx';
 import Twemoji from '../components/Twemoji.tsx';
 import Logo from '../components/Logo.tsx';
-import { getCollection } from 'astro:content';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content'; import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 const posts = await getCollection('blog');
 ---
