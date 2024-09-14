@@ -25,6 +25,7 @@ const posts = (await getCollection('blog')).sort(
       <h2 class="flex justify-center mt-8 text-2xl">
         すべての投稿<h2>
           <div class="flex flex-col items-center mt-3">
+          <span>日報は<a href="/diary" class="underline">すべての日報</a>に移動しました。</span>
             <ul>
               <li>
                 {
@@ -33,6 +34,10 @@ const posts = (await getCollection('blog')).sort(
                       (a, b) =>
                         b.data.pubDate.getTime() - a.data.pubDate.getTime()
                     )
+                    .filter((post) => {
+                      const re = new RegExp(".*-diary$")
+                      return !(re.test(post.slug))
+                    })
                     .map((post) => <PostCard post={post} />)
                 }
               </li>
