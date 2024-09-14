@@ -1,9 +1,12 @@
-import { Github } from "lucide-react";
-import { Home } from "lucide-react";
-import { Info } from "lucide-react";
-import { Rss } from "lucide-react";
-import { Twitter } from "lucide-react";
-import { User } from "lucide-react";
+import {
+  Github,
+  Home,
+  Info,
+  Rss,
+  Twitter,
+  User,
+  NotepadText
+} from "lucide-react";
 
 // const iconSize = "30";
 
@@ -13,6 +16,12 @@ const links = [
     name: "Home",
     href: "/",
     title: "Home",
+  },
+  {
+    child: <NotepadText />,
+    name: "Diary",
+    href: "/diary",
+    title: "Diary",
   },
   {
     child: <User />,
