@@ -1,0 +1,50 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.tsx';
+import Footer from '../../components/Footer.tsx';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+import PostCard from '../../components/PostCard.tsx';
+import Logo from '../../components/Logo.tsx';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <Header />
+    <Logo />
+    <main class="flex-grow">
+      <h2 class="flex justify-center mt-8 text-2xl">
+        すべての日報<h2>
+          <div class="flex flex-col items-center mt-3">
+            <ul>
+              <li>
+                {
+                  posts
+                  .filter((post) => {
+                    const re = new RegExp(".*-diary$")
+                    return re.test(post.slug)
+                  })
+                    .sort(
+                      (a, b) =>
+                        b.data.pubDate.getTime() - a.data.pubDate.getTime()
+                    )
+                    .map((post) => <PostCard post={post} />)
+                }
+              </li>
+            </ul>
+          </div>
+        </h2>
+      </h2>
+      <Footer />
+    </main>
+  </body>
+</html>
