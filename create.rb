@@ -2,21 +2,25 @@ require "date"
 require "erb"
 require "pathname"
 require "readline"
-require "optparse"
+require "thor"
 
-isodate = Date.today.strftime("%F")
-date = Date.today.strftime("%-m/%-d")
-us_date = Date.today.strftime("%b %-d %Y")
 
-content_path = "./src/content/blog/"
+$today = Date.today
+$yesterday = Date.today - 1
 
-# 2024-09-03-diary.md
+def isodate(time);  time.strftime("%F"); end
+def date(time);  time.strftime("%-m/%-d"); end
+def us_date (time); time.strftime("%b %-d %Y"); end
 
-diary_template = ERB.new <<-EOF
+$content_path = "./src/content/blog/"
+
+
+def diary_template(day)
+  tmpl = <<EOF
 ---
-title: '<%= isodate %>の日報'
-description: '<%= date %>の日報をお届けいたします。'
-pubDate: '<%= us_date %>'
+title: '#{isodate(day)}の日報'
+description: '#{date(day)}の日報をお届けいたします。'
+pubDate: '#{us_date(day)}'
 emoji: '🦊'
 tags: []
 ---
@@ -27,27 +31,56 @@ tags: []
 
 EOF
 
-basic_template = ERB.new <<-EOF
+return tmpl
+end
+
+def article_template(day)
+  tmpl = <<EOF
 ---
-title: '<%= title %>'
+title: ''
 description: ''
-pubDate: '<%= us_date %>'
+pubDate: '#{us_date(day)}'
 emoji: '🦊'
 tags: []
 ---
 EOF
 
-# puts(diary_template.result)
+return tmpl
+end
 
-opt = OptionParser.new
 
 type = ARGV[0]
 
-if type == "diary"
-  diary_slug = "#{isodate}-diary.md"
-  diary_path = Pathname.new(content_path).join(diary_slug)
-  puts diary_path
+if type == "diary" then
+  is_yesterday = Readline.readline("Do you want to specify yesterday as the date? (y/N) >") 
+
+  if is_yesterday == "y"
+    diary_slug = "#{isodate($yesterday)}-diary"
+    diary_path = Pathname.new($content_path).join("#{diary_slug}.md")
+
+    # puts(diary_template($yesterday))
+    File.write(diary_path, diary_template($yesterday))
+
+    puts "Created diary at #{diary_path}"
+  else
+    day = isodate($today)
+    diary_slug = "#{day}-diary"
+    diary_path = Pathname.new($content_path).join("#{diary_slug}.md")
+
+    # puts(diary_template($today))
+    File.write(diary_path, diary_template($today))
+
+    puts "Created diary at #{diary_path}"
+  end
+
+  exit(0)
 else
-  title = Readline.readline(" >")
-  puts "hi"
+  slug = Readline.readline("Slug? > ")
+
+  article_path = Pathname.new($content_path).join("#{isodate($today)}-#{slug}.md")
+  # puts(article_template($today))
+
+  File.write(article_path, article_template($today))
+
+  puts "Created diary at #{article_path}"
 end
