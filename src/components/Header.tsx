@@ -2,10 +2,10 @@ import {
   Github,
   Home,
   Info,
+  NotepadText,
   Rss,
   Twitter,
   User,
-  NotepadText
 } from "lucide-react";
 
 // const iconSize = "30";
