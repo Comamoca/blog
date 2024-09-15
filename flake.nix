@@ -33,10 +33,15 @@
             textlint
             textlint-rule-preset-ja-technical-writing
 
+            ruby
+            rubyPackages.thor
+
             nil
             lua-language-server
             efm-langserver
             nodePackages_latest.typescript-language-server
+
+            just
           ];
         };
       }
