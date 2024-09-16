@@ -10,7 +10,7 @@
 
 # blog
 
-This is my blog
+My tech? blog.
 
 <br>
 <br>
@@ -41,6 +41,13 @@ clone this repo, follow under commands.
 ```sh
 ni
 nr dev
+```
+
+### With Nix
+
+```sh
+nix develop # to devshell
+nix fmt     # formatting
 ```
 
 ## 📝 Todo
