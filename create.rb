@@ -4,16 +4,14 @@ require "pathname"
 require "readline"
 require "thor"
 
-
 $today = Date.today
 $yesterday = Date.today - 1
 
-def isodate(time);  time.strftime("%F"); end
-def date(time);  time.strftime("%-m/%-d"); end
-def us_date (time); time.strftime("%b %-d %Y"); end
+def isodate(time); time.strftime("%F"); end
+def date(time); time.strftime("%-m/%-d"); end
+def us_date(time); time.strftime("%b %-d %Y"); end
 
 $content_path = "./src/content/blog/"
-
 
 def diary_template(day)
   tmpl = <<EOF
@@ -31,7 +29,7 @@ tags: []
 
 EOF
 
-return tmpl
+  return tmpl
 end
 
 def article_template(day)
@@ -45,14 +43,13 @@ tags: []
 ---
 EOF
 
-return tmpl
+  return tmpl
 end
-
 
 type = ARGV[0]
 
-if type == "diary" then
-  is_yesterday = Readline.readline("Do you want to specify yesterday as the date? (y/N) >") 
+if type == "diary"
+  is_yesterday = Readline.readline("Do you want to specify yesterday as the date? (y/N) >")
 
   if is_yesterday == "y"
     diary_slug = "#{isodate($yesterday)}-diary"

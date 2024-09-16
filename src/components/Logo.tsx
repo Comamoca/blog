@@ -1,4 +1,4 @@
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 export function OldLogo() {
   return (
@@ -22,7 +22,7 @@ export default function Logo() {
     <>
       <div className="flex justify-center">
         <h1 class="text-3xl mt-2 md:text-4xl font-body text-center pl-8">
-	 {SITE_TITLE}
+          {SITE_TITLE}
         </h1>
       </div>
     </>
