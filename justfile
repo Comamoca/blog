@@ -1,3 +1,6 @@
+open:
+  $EDITOR $(fd . ./src/content/blog/ -e md | fzf)
+
 edit:
   $EDITOR $(fd '\-diary\.md$'  ./src/content/blog/ -e md | fzf)
 
