@@ -24,7 +24,7 @@ https://github.com/Comamoca/dotfiles/blob/37a580948db0ba5fdc6889380d62a8efc42d8a
 
 ## moonbitのLSPについて
 
-クローズドソースだけど公開されている。
+クローズドソースだけどパッケージは公開されている。
 Bunでも動くっぽいので自分はBunでインストールした。
 
 https://www.npmjs.com/package/@moonbit/moonbit-lsp
