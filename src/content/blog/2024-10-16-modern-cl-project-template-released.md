@@ -3,7 +3,7 @@ title: 'CLとNixのプロジェクトテンプレートをリリースした話'
 description: 'イマドキCommon Lispのプロジェクト構成について'
 pubDate: 'Oct 16 2024'
 emoji: '🦊'
-tags: ["lisp", "nix", "release"]
+tags: ["common lisp", "lisp", "nix", "release"]
 ---
 
 脱腸の痛みに耐えながら深夜テンションで書いてるので誤字・脱字やしっちゃかめっちゃかな記述があるかもしれません。
