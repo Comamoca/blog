@@ -40,6 +40,7 @@
             lua-language-server
             efm-langserver
             nodePackages_latest.typescript-language-server
+            ruby-lsp
 
             just
           ];
