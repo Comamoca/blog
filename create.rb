@@ -11,6 +11,23 @@ def isodate(time); time.strftime("%F"); end
 def date(time); time.strftime("%-m/%-d"); end
 def us_date(time); time.strftime("%b %-d %Y"); end
 
+def ask_override(diary_path, template)
+  if File.exist?(diary_path) then
+    # ファイルが存在する場合は上書きするか聞く
+    answer = Readline.readline("File already exists. Do you want to overwrite it?(y/N)")
+
+    if answer == "y"
+      File.write(diary_path, template)
+      puts "🎉 Created diary at #{diary_path}"
+    else
+      puts "☕ Terminated"
+    end
+  else
+    File.write(diary_path, template)
+    puts "🎉 Created diary at #{diary_path}"
+  end
+end
+
 $content_path = "./src/content/blog/"
 
 def diary_template(day)
@@ -56,18 +73,15 @@ if type == "diary"
     diary_path = Pathname.new($content_path).join("#{diary_slug}.md")
 
     # puts(diary_template($yesterday))
-    File.write(diary_path, diary_template($yesterday))
 
-    puts "Created diary at #{diary_path}"
+    ask_override(diary_path, diary_template($yesterday))
   else
     day = isodate($today)
     diary_slug = "#{day}-diary"
     diary_path = Pathname.new($content_path).join("#{diary_slug}.md")
 
     # puts(diary_template($today))
-    File.write(diary_path, diary_template($today))
-
-    puts "Created diary at #{diary_path}"
+    ask_override(diary_path, diary_template($yesterday))
   end
 
   exit(0)
@@ -79,5 +93,5 @@ else
 
   File.write(article_path, article_template($today))
 
-  puts "Created diary at #{article_path}"
+  puts "🎉 Created article at #{article_path}"
 end
