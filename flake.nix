@@ -43,6 +43,7 @@
             ruby-lsp
 
             just
+	    nushell
           ];
         };
       }
