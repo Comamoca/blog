@@ -12,7 +12,8 @@ tags: ["common lisp", "lisp", "nix", "release"]
 
 ---
 
-ここ最近取り組んでいたモダンCommon Lispについてある程度成果が得られたので、ここで一旦得られた成果を発表しようかと思います。
+ここ最近取り組んでいたモダンCommon
+Lispについてある程度成果が得られたので、ここで一旦得られた成果を発表しようかと思います。
 
 https://github.com/Comamoca/scaffold/tree/main/cl-nix
 
@@ -29,19 +30,23 @@ https://github.com/Comamoca/scaffold/tree/main/cl-nix
 
 ## イマドキのCommon Lispについて
 
-Common Lispは誕生からかれこれ50年くらい経っているため「古い言語」というイメージを持たれていると思いますが、Lispに備わっている拡張性から現代の開発でも使える言語だったりします。[^1]
+Common
+Lispは誕生からかれこれ50年くらい経っているため「古い言語」というイメージを持たれていると思いますが、Lispに備わっている拡張性から現代の開発でも使える言語だったりします。[^1]
 
-ですが現代の開発にCommon Lispを使う知見はあまりなく、これまでは手当たり次第調べた情報を繋げていきながら開発を進めてきました。
+ですが現代の開発にCommon
+Lispを使う知見はあまりなく、これまでは手当たり次第調べた情報を繋げていきながら開発を進めてきました。
 
 特にASDF3[^2]でリリースされた**package-inferred-system**[^3]は理解にかなり苦しんだので、この現状をなんとかしたいと思っていました。
 
 ## cl-projectの存在
 
-Common Lispで新しいプロジェクトを作成する際は[cl-project](https://github.com/fukamachi/cl-project)を使うのが一般的だと思うのですが、このツールは****自分が調べた限りだとpackage-inferred-systemに対応していません**。
+Common
+Lispで新しいプロジェクトを作成する際は[cl-project](https://github.com/fukamachi/cl-project)を使うのが一般的だと思うのですが、このツールは****自分が調べた限りだとpackage-inferred-systemに対応していません**。
 
 また、最近個人的に流行している[Nix](https://nixos.org/)にも対応してません。
 
-Common Lispの開発では[roswell](https://roswell.github.io/)や[quicklisp](https://www.quicklisp.org/index.html)を使うことが多いですが、管理するツールや覚えることがいかんせん多いです。[^4]
+Common
+Lispの開発では[roswell](https://roswell.github.io/)や[quicklisp](https://www.quicklisp.org/index.html)を使うことが多いですが、管理するツールや覚えることがいかんせん多いです。[^4]
 
 また、これらのツールは(Nix以外のツールは大抵そうですが)ビルドにおいて冪等性が保証されていません。
 Nixを使うことで安定した開発環境を整えられ、Nix1つで開発からデプロイまで一環してNixによる冪等性が担保された環境を維持できます。
@@ -62,10 +67,12 @@ Nixを使うことで安定した開発環境を整えられ、Nix1つで開発�
 そこで、[cl-emb](https://cl-emb.common-lisp.dev/)を使うとプロジェクトテンプレートを作成できるそう(cl-projectも使用している)なので、これを使ってテンプレートを作成するツールを作ってみたいです。
 
 また、これは**モダンCommon Lispを広める狼煙です**。
-と言うのも、[Twitterでも発言している通り](https://x.com/Comamoca_/status/1837912692172247244)僕はモダンCommon Lispが現代的なWeb開発[^5]に使えるということを証明したいと考えているので、これではまだまだ足りないからです。
+と言うのも、[Twitterでも発言している通り](https://x.com/Comamoca_/status/1837912692172247244)僕はモダンCommon
+Lispが現代的なWeb開発[^5]に使えるということを証明したいと考えているので、これではまだまだ足りないからです。
 
 最終的には**実稼働している**Webアプリケーションをみなさんにお見せできるところまで漕ぎつけたいと考えています。
-それを持ってして「Common Lispは現代的なWeb開発に使える」と宣言することで、自分の目標は達成します。
+それを持ってして「Common
+Lispは現代的なWeb開発に使える」と宣言することで、自分の目標は達成します。
 
 その目標を達成できるよう日々Lispしてきたいですね。
 
@@ -82,7 +89,8 @@ http://dev.ariel-networks.com/wp/archives/303/
 個人的には「ハッカーと画家」が非常にオススメなので、気になった方はぜひ読んでみてください。
 なんと[邦訳が無料で読めます](https://gist.github.com/sifue/b6506ea6b3f3d3a46a0c3bb885cd5ddf)。
 
-Common LispでWeb開発をする事例はまだまだ少ないので、もしこの記事を読んで気になった方は今回公開したテンプレートを使って実際にアプリケーションを書いてみてください。
+Common
+LispでWeb開発をする事例はまだまだ少ないので、もしこの記事を読んで気になった方は今回公開したテンプレートを使って実際にアプリケーションを書いてみてください。
 
 🙆 **みんなで広げていこうCommon Lispの輪**
 
@@ -90,14 +98,19 @@ Common LispでWeb開発をする事例はまだまだ少ないので、もしこ
 
 ### トラブルがあったら
 
-もし何がトラブルがあったら[自分のTwitterアカウント](https://x.com/Comamoca_)に**メンションするか**[vim-jp](https://vim-jp.org/docs/chat.html)(vim-jpのサイトに飛びます)のSlackにある**times-comamoca**チャンネルなどで質問すれば出来る限り答えさせて頂きます。(最近はvim-jpにいるので恐らく後者の方が返答が速いです。)
+もし何がトラブルがあったら[自分のTwitterアカウント](https://x.com/Comamoca_)に**メンションするか**
+[vim-jp](https://vim-jp.org/docs/chat.html)(vim-jpのサイトに飛びます)のSlackにある**times-comamoca**チャンネルなどで質問すれば出来る限り答えさせて頂きます。(最近はvim-jpにいるので恐らく後者の方が返答が速いです。)
 
 TwitterのDMは基本見ないので返信は返ってこないものだと思ってください。
 
 また、上記のどちらもハードルが高いと感じている方は質問をツイートしてくださればエゴサで勝手に探し出します。
 
 [^1]: 少なくとも自分はそう信じています
+
 [^2]: C言語で言う`make`みたいなものだと思ってください。
+
 [^3]: ファイルの依存関係をファイル名から推測し、自動で読み込み順を解決する仕組み。
+
 [^4]: Common Lispでの開発はとにかく覚えることが多い(特にツールの使い方)です。
+
 [^5]: ここではRESTfulバックエンド/リッチなフロントエンド/DB等で構成される「よくある」Webアプリケーションを指します。

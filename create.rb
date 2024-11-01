@@ -12,7 +12,7 @@ def date(time); time.strftime("%-m/%-d"); end
 def us_date(time); time.strftime("%b %-d %Y"); end
 
 def ask_override(diary_path, template)
-  if File.exist?(diary_path) then
+  if File.exist?(diary_path)
     # ファイルが存在する場合は上書きするか聞く
     answer = Readline.readline("File already exists. Do you want to overwrite it?(y/N)")
 

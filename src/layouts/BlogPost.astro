@@ -35,9 +35,11 @@ const { title, description, pubDate, updatedDate, minitesRead, emoji } =
       </div>
       <hr class="w-4/6 h-1 mx-auto my-2 bg-gray-100 border-0 rounded my-10" />
       <div class="mx-10 md:mx-20 mt-12 text-lg flex justify-center">
-        <article class="prose">
-          <slot />
-        </article>
+	<div class="flex-none max-w-sm">
+          <article class="prose">
+            <slot />
+          </article>
+        </div>
       </div>
     </main>
     <Footer />
