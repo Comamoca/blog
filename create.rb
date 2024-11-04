@@ -76,12 +76,11 @@ if type == "diary"
 
     ask_override(diary_path, diary_template($yesterday))
   else
-    day = isodate($today)
-    diary_slug = "#{day}-diary"
+    diary_slug = "#{isodate($today)}-diary"
     diary_path = Pathname.new($content_path).join("#{diary_slug}.md")
 
     # puts(diary_template($today))
-    ask_override(diary_path, diary_template($yesterday))
+    ask_override(diary_path, diary_template($today))
   end
 
   exit(0)
