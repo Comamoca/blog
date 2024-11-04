@@ -19,12 +19,13 @@ const { title, description, pubDate, updatedDate, minitesRead, emoji } =
   <body>
     <Header />
     <main>
-      <div class="md:ml-20 justify-center">
+      <div class="justify-center">
         <div class="flex flex-col mt-6">
           <div class="mx-auto mb-3">
             <Twemoji emoji={emoji} />
           </div>
-          <h1 class="text-xl mx-10 md:text-2xl md:text-4xl md:mx-auto">
+	  {/*  md:text-2xl md:text-4xl md:mx-auto */}
+          <h1 class="text-xl mx-4">
             {title}
           </h1>
           <div class="flex flex-col md:flex-row mt-3 mx-auto">
@@ -34,9 +35,9 @@ const { title, description, pubDate, updatedDate, minitesRead, emoji } =
         </div>
       </div>
       <hr class="w-4/6 h-1 mx-auto my-2 bg-gray-100 border-0 rounded my-10" />
-      <div class="mx-10 md:mx-20 mt-12 text-lg flex justify-center">
-	<div class="flex-none max-w-sm">
-          <article class="prose">
+      <div class="mt-12 md:text-lg flex justify-center">
+	<div class="flex justify-center">
+          <article class="prose mx-10">
             <slot />
           </article>
         </div>
