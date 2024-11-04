@@ -5,7 +5,7 @@ export default function PostCard(props: { post }) {
   const data = post.data;
 
   return (
-    <div className="border(t gray-200) w-70 md:w-96 m-3 p-4">
+    <div className="border(t gray-200) w-70 md:w-100 m-3 p-4">
       <a
         href={`/blog/${post.slug}`}
         className="block p-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow md:p-4 md:p-6 hover:bg-gray-100"
