@@ -43,14 +43,14 @@ GitHubのテンプレート機能を使うと楽に作成できるのでお勧�
 
 各ディレクトリの説明簡単にしていく。基本はnixpkgsと似たような感じになっている。
 
-- lib  
-ライブラリ関数があるディレクトリ。
-- modules  
-NixOS modulesがあるディレクトリ。
-- overlays  
-Overlayがあるディレクトリ。
-- pkgs  
-パッケージがあるディレクトリ。
+- lib
+  ライブラリ関数があるディレクトリ。
+- modules
+  NixOS modulesがあるディレクトリ。
+- overlays
+  Overlayがあるディレクトリ。
+- pkgs
+  パッケージがあるディレクトリ。
 
 独自にパッケージしたflakeを移したいなら基本はpkgsを使うことになると思う。
 
@@ -62,7 +62,6 @@ pkgs配下にディレクトリを作成する。
 
 ディレクトリを作成したら、その中に`default.nix`というファイルを作成する。
 最終的にはこうなっているはず。
-
 
 ```
 └── pkgs
@@ -91,6 +90,7 @@ stdenv.mkDerivation rec {
   installPhase = "install -Dm755 example $out";
 }
 ```
+
 [pkgs/example-package/default.nix](https://github.com/nix-community/nur-packages-template/blob/master/pkgs/example-package/default.nix)
 
 単純に`echo Hello World`が書き込まれた`example`という実行可能ファイルを作成する。
@@ -106,6 +106,7 @@ stdenv.mkDerivation rec {
 このままだと外部から参照できないので、外部から参照できるようパッケージ定義を追加する。
 
 ディレクトリルートにある`default.nix`を開くとこんな感じのコードが書かれているはず。
+
 ```nix
 # This file describes your repository contents.
 # It should return a set of nix derivations
@@ -128,6 +129,7 @@ stdenv.mkDerivation rec {
   # ...
 }
 ```
+
 [default.nix](https://github.com/nix-community/nur-packages-template/blob/master/default.nix)
 
 `example-package`が該当の箇所になる。この記述をすることでパッケージ定義が公開され、外部から参照できる。
@@ -146,11 +148,12 @@ Nixは羃等性を担保する設計になっているので、**同じ定義な
 
 書き換える箇所は以下の通り。
 
-- nurRepo  
-  このテンプレート自体NUR(Nix User Repository)というリポジトリに登録するためのものになっている。
+- nurRepo\
+  このテンプレート自体NUR(Nix User
+  Repository)というリポジトリに登録するためのものになっている。
   これに登録したい場合はここに自身の名前を指定する必要がある。なおNURへの登録にはPRが必要なため、それをせず個人的なリポジトリとしても使用できる。
 
-- cachixName   
+- cachixName\
   Cachixでキャッシュ作成時に指定した名前を指定する。
   たとえば、mycache.cachix.orgというキャッシュを使いたい場合は`mycache`を指定する。
 
@@ -158,24 +161,25 @@ Nixは羃等性を担保する設計になっているので、**同じ定義な
 
 Cachixの認証で使用するSecretを設定する。
 
-- CACHIX_SIGNING_KEY  
+- CACHIX_SIGNING_KEY\
   Nixのバイナリは鍵で署名されているのだけど、それを指定するためのもの。
   今回は使わないけれど、気になる人は[Getting Started](https://docs.cachix.org/getting-started)から詳しい説明が載っている。
 
-- CACHIX_AUTH_TOKEN  
+- CACHIX_AUTH_TOKEN\
   Cachixのサイトから生成できるトークン。今回はこれを使う。
 
 以下の手順で`CACHIX_AUTH_TOKEN`を取得できる。
 
-Cachixのキャッシュ一覧からダッシュボードを開き、Settingsを開く。
-**Auth Tokens**というというページがあるので、Generateボタンから生成できる。
+Cachixのキャッシュ一覧からダッシュボードを開き、Settingsを開く。 **Auth
+Tokens**というというページがあるので、Generateボタンから生成できる。
 するとトークンが表示されるのでコピーしておく。
 
 トークンが取得できたらGitHubリポジトリの設定をしていく。
-nur-packagesリポジトリのSettingsを開き、**Secrets and variables**をクリックする。
+nur-packagesリポジトリのSettingsを開き、**Secrets and
+variables**をクリックする。
 一覧が展開されるので、一番上にある**Actions**をクリックする。
-ページ下部に**Repository secrets**という項目があるので、その右にある**New repository secret**ボタンをクリックする。
-登録画面に遷移するので、
+ページ下部に**Repository secrets**という項目があるので、その右にある**New
+repository secret**ボタンをクリックする。 登録画面に遷移するので、
 
 - Nameに**CACHIX_AUTH_TOKEN**
 - Secretに**先程コピーしたトークン**
@@ -193,7 +197,7 @@ nur-packagesリポジトリのSettingsを開き、**Secrets and variables**を�
 以下のコマンドを実行すると良い感じのFlakeが作成できるので、特にこだわりがない人はこれを使うのがお勧め。
 
 ```sh
-nix flake init -t github:Comamoca/scaffold#flake-basic 
+nix flake init -t github:Comamoca/scaffold#flake-basic
 ```
 
 `flake.nix`を開いたらinputsの要素に`nur-packages = "github:自分のユーザー名/リポジトリ名"`を追加する。
