@@ -4,7 +4,7 @@ import { join } from "jsr:@std/path/join";
 export const tags = ["posts"];
 
 export const layout = "layouts/post.tsx";
-export const templateEngine = "jsx";
+export const templateEngine = "md";
 
 // export const layout = "layouts/post.vto"
 // export const templateEngine = "vto"
