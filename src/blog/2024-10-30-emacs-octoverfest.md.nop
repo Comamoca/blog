@@ -1,0 +1,41 @@
+---
+title: '東京Emacs勉強会 オクトーバーフェスティバルに行ってきた'
+description: '東京Emacs勉強会 オクトーバーフェスティバルに行ってきた話'
+pubDate: 'Oct 30 2024'
+emoji: '🦊'
+tags: []
+---
+
+今更な気もしますが書いていきます。
+Emacsのイベントには初参加で、更にリアルイベントでの登壇も初という初めてづくしの一日でした。
+
+## GNU Emacs を用いた Next.js コントリビュートの howto
+
+Emacsを用いたフロントエンド開発のHowtoに関する発表でした。
+普段はVimでフロントを書いているけれど、Emacsでどうするかは知らなかったので色々参考になった。
+
+## Nostr + emacs
+
+Nostrでお馴染み発火大根さんのセッション。
+伺かが出てきた時の盛り上がりようは凄かった...一瞬で場がインターネット老人会になってて面白かった。
+
+## 私の Rails 開発環境
+
+EmacsでRailsを開発する際のEmacsの設定に関するセッション。
+RubyはEmacsと相性良いらしいし、今度EmacsでRubyを書いてみようかなと思えた。
+
+## (仮)今更ながらpython開発環境elpyに徹底入門する
+
+Emacsのorg-modeで
+
+## Evil Emacs はいいぞ！ (仮)
+
+
+
+## dmacro.elのVimへの移植 ~ Vim と Emacsの違い ~
+
+## Emacs meets Treesitter
+
+## EmacsとNixでCommon Lispを楽しもう
+
+画面トラブルでデモが出来なかったのが悔しい

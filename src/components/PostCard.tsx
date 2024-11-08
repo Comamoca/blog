@@ -1,5 +1,3 @@
-// import { Post } from "../types";
-
 export default function PostCard(props) {
   // props: { post }
   // const { post } = props;
