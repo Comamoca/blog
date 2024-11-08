@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.tsx';
+import Footer from '../components/Footer.tsx';
+import FormattedDate from '../components/FormattedDate.astro';
+import Twemoji from '../components/Twemoji.tsx';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, minitesRead, emoji } =
+  Astro.props;
+---
+
+<html lang="ja">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <div class="justify-center">
+        <div class="flex flex-col mt-6">
+          <div class="mx-auto mb-3">
+            <Twemoji emoji={emoji} />
+          </div>
+	  {/*  md:text-2xl md:text-4xl md:mx-auto */}
+          <h1 class="text-xl mx-4">
+            {title}
+          </h1>
+          <div class="flex flex-col md:flex-row mt-3 mx-auto">
+            <FormattedDate date={pubDate} />
+            <spam class="md:ml-2">読み終わるまでの目安 約{minitesRead}分</spam>
+          </div>
+        </div>
+      </div>
+      <hr class="w-4/6 h-1 mx-auto my-2 bg-gray-100 border-0 rounded my-10" />
+      <div class="mt-12 md:text-lg flex justify-center">
+	<div class="flex justify-center">
+		<article class="prose max-w-none">
+            <slot />
+          </article>
+        </div>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

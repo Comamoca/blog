@@ -1,0 +1,79 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.tsx';
+import Footer from '../../components/Footer.tsx';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+---
+
+<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+
+<Header />
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<img
+  src="https://r2.comamoca.dev/icon.png"
+  class="mx-auto h-32 w-32 rounded-full md:mb-6 mt-8 md:mt-2"
+/>
+
+<main>
+  <h1 class="text-2xl md:text-4xl text-center my-4">About Me</h1>
+  <article class="prose flex justify-center mx-auto">
+    <div class="border(t gray-200) w-96 m-3 p-4">
+      <div
+        class="block p-4 bg-white rounded-lg border border-gray-200 shadow md:p-6"
+      >
+        <h5
+          class="mb-2 text-xl font-bold tracking-tight text-gray-900 md:text-2xl dark:text-white"
+        >
+          Comamoca
+        </h5>
+        <p class="font-normal text-gray-700">
+          わんだふる〜！ 好きな言語は
+
+          <ul>
+            <li>Go</li>
+            <li>Nim</li>
+            <li>Rust</li>
+          </ul>
+
+          Elixirは勉強中です。
+
+          <h3>Links</h3>
+
+          <a href="https://bsky.app/profile/comamoca.dev">Bluesky</a>
+          <a
+            href="https://nostx.io/npub1f0xqy2qs5lhl2u035qszfne6sdw8jkh3px6we2c3u3gxy2v3g8tsvkn2qr"
+            >Nostr</a
+          >
+          <a href="https://twitter.com/Comamoca_">Twitter</a>
+          <a
+            href="https://vrchat.com/home/user/usr_695212b9-72ea-4503-8109-47eb12d02a5d"
+            >VRChat</a
+          >
+          <a href="https://discord.com/users/comamoca">Discord</a>
+          <a href="https://wakatime.com/@Comamoca">Wakatime</a>
+        </p>
+      </div>
+      <div class="text-center">
+        <button
+          data-confetti-button
+          class="mt-5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+        >
+          <img
+            width="30"
+            src="https://emoji2svg.deno.dev/api/🎉"
+            alt="party popper emoji button"
+          />
+        </button>
+      </div>
+    </div>
+  </article>
+</main>
+<script>
+  const buttons = document.querySelectorAll('[data-confetti-button]');
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => confetti());
+  });
+</script>
+
+<Footer />
