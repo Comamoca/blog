@@ -51,6 +51,14 @@
               };
             };
           };
+
+          git-secrets = pkgs.writeShellApplication {
+            name = "git-secrets";
+            runtimeInputs = [ pkgs.git-secrets ];
+            text = ''
+              git secrets --scan
+            '';
+          };
         in
         {
           treefmt = {
@@ -71,11 +79,9 @@
                 nixfmt-rfc-style.enable = true;
                 ripsecrets.enable = true;
                 git-secrets = {
+                  enable = true;
                   name = "git-secrets";
-                  entry = pkgs.writeShellScriptBin "entry" ''
-                    git secrets --add '^[a-z]{4}-[a-z]{4}-[a-z]{4}-[a-z0-9]{4}$'
-                    git secrets --scan
-                  '';
+                  entry = "${git-secrets}/bin/git-secrets";
                   language = "system";
                   types = [ "text" ];
                 };
