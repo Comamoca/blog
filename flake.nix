@@ -108,6 +108,9 @@
 		  };
 	        }
 	      ];
+	      hooks = {
+	        nixfmt.enable = true;
+	      };
 	    };
 	  };
 
