@@ -51,8 +51,32 @@
               };
             };
           };
+        in
+        {
+          treefmt = {
+            projectRootFile = "flake.nix";
+            programs = {
+              nixfmt-rfc-style.enable = true;
+              deno.enable = true;
+              rufo.enable = true;
+            };
 
-          devShell = pkgs.mkShell {
+            settings.formatter = { };
+          };
+
+          pre-commit = {
+            check.enable = true;
+            settings = {
+              hooks = {
+                nixfmt-rfc-style.enable = true;
+                ripsecrets.enable = true;
+              };
+            };
+          };
+
+          # When execute `nix develop`, you go in shell installed nil.
+          devShells.default = pkgs.mkShell {
+            inputsFrom = [ config.pre-commit.devShell ];
             packages = with pkgs; [
               (textlint.withPackages [
                 textlint-rule-preset-ja-technical-writing
@@ -79,32 +103,6 @@
               ln -s ${textlintrc} .textlintrc
             '';
           };
-        in
-        {
-          treefmt = {
-            projectRootFile = "flake.nix";
-            programs = {
-              nixfmt.enable = true;
-              deno.enable = true;
-              rufo.enable = true;
-            };
-
-            settings.formatter = { };
-          };
-
-          pre-commit = {
-            check.enable = true;
-            devShell = devShell;
-            settings = {
-              hooks = {
-                nixfmt.enable = true;
-                ripsecrets.enable = true;
-              };
-            };
-          };
-
-          # When execute `nix develop`, you go in shell installed nil.
-          devShells.default = devShell;
         };
     };
 }
