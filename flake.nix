@@ -72,7 +72,10 @@
                 ripsecrets.enable = true;
                 git-secrets = {
                   name = "git-secrets";
-                  entry = "git secrets --scan";
+                  entry = pkgs.writeShellScriptBin "entry" ''
+                    git secrets --add '^[a-z]{4}-[a-z]{4}-[a-z]{4}-[a-z0-9]{4}$'
+                    git secrets --scan
+                  '';
                   language = "system";
                   types = [ "text" ];
                 };
