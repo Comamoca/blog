@@ -70,6 +70,12 @@
               hooks = {
                 nixfmt-rfc-style.enable = true;
                 ripsecrets.enable = true;
+                git-secrets = {
+                  name = "git-secrets";
+                  entry = "git secrets --scan";
+                  language = "system";
+                  types = [ "text" ];
+                };
               };
             };
           };
