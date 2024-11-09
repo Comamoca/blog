@@ -6,9 +6,9 @@ export default function (
   data: Lume.Data,
   helpers: Lume.Helpers,
 ) {
-  const { title, children, content } = data;
+  const { title, children, pubDate, emoji, content } = data;
 
-  // console.log(data)
+  // console.log("post.tsx", emoji)
 
   return (
     <>
@@ -26,7 +26,7 @@ export default function (
               <div className="flex flex-col mt-6">
                 <div className="mx-auto mb-3">
                   {/* TODO: ちゃんとfrontmatterの絵文字を取得するようにする */}
-                  <Twemoji emoji={"🦊"} />
+                  <Twemoji emoji={emoji} />
                 </div>
                 {/*  md:text-2xl md:text-4xl md:mx-auto */}
                 <h1 className="md:text-xl text-4xl mx-4">
