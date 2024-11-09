@@ -8,16 +8,17 @@
 // <meta name="title" content={title} />
 // <meta name="description" content={description}
 
-export interface Props {
-  title: string;
-  description: string;
-  image?: string;
-}
+// export interface Props {
+//   title: string;
+//   description: string;
+//   image?: string;
+// }
 
 // const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // const { title, description, image = "/favicon.svg" } = Astro.props;
 
-export default function () {
+export default function (props) {
+  const { title, description } = props;
   return (
     <>
       <meta name="viewport" content="width=device-width,initial-scale=1" />
