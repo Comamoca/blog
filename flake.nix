@@ -60,6 +60,7 @@
             efm-langserver
             nodePackages_latest.typescript-language-server
             ruby-lsp
+            tailwindcss-language-server
 
             just
             nushell
