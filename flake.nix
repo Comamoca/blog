@@ -96,37 +96,9 @@
             check.enable = true;
             devShell = devShell;
             settings = {
-              repos = [
-                {
-                  repo = "https://github.com/pre-commit/pre-commit-hooks";
-                  rev = "v4.3.0";
-                  hooks.id = [
-                    "check-added-large-files"
-                    "check-json"
-                    "check-merge-conflict"
-                    "check-toml"
-                    "check-xml"
-                    "check-yaml"
-                    "debug-statements"
-                    "detect-private-key"
-                    "end-of-file-fixer"
-                    "fix-byte-order-marker"
-                    "trailing-whitespace"
-                  ];
-                }
-                {
-                  repo = "local";
-                  hooks = {
-                    id = "git-secrets";
-                    name = "git secrets";
-                    entry = "git secrets --scan";
-                    language = "system";
-                    types = [ "text" ];
-                  };
-                }
-              ];
               hooks = {
                 nixfmt.enable = true;
+                ripsecrets.enable = true;
               };
             };
           };
