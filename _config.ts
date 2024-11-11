@@ -14,7 +14,7 @@ import filter_pages from "lume/plugins/filter_pages.ts";
 import mdx from "lume/plugins/mdx.ts";
 import base_path from "lume/plugins/base_path.ts";
 import esbuild from "lume/plugins/esbuild.ts";
-import minifyHTML from "lume/plugins/minify_html.ts";
+import minify_html from "lume/plugins/minify_html.ts";
 import anchor from "npm:markdown-it-anchor";
 import footnote from "npm:markdown-it-footnote";
 
