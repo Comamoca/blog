@@ -16,7 +16,7 @@ emoji: '🦊'
 
 https://gleaming.dev/articles/function-capture-in-gleam
 
-Gleamの記事を投稿している[gleaming](gleaming.dev)で関数キャプチャの解説記事が投稿されました。
+Gleamの記事を投稿している[gleaming](https://gleaming.dev)で関数キャプチャの解説記事が投稿されました。
 関数キャプチャとは、一言で言えば関数をカリー化するための構文です。これもまたZennで詳しく解説したいと思います。
 
 ```rust
