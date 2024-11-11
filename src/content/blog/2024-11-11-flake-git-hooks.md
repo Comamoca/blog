@@ -109,3 +109,41 @@ shellHook = ''
 pre-commitとgit-secretsが干渉することに思い当たらなかったので参考になった。
 
 https://zenn.dev/anieca/articles/6a16e0f3664481
+
+## 追記
+
+### 2024/11/11
+
+以下をmkShellに追加しないとgit-hooksが有効にならないらしい。
+
+```nix
+inputsFrom = [ config.pre-commit.devShell ];
+```
+
+全体像としてはこうなる。
+
+```nix
+pre-commit = {
+  check.enable = true;
+  settings = {
+    hooks = {
+      git-secrets = {
+        enable = true;
+        name = "git-secrets";
+        entry = "${git-secrets'}/bin/git-secrets";
+        language = "system";
+        types = [ "text" ];
+      };
+    };
+  };
+};
+
+devShells.default = pkgs.mkShell {
+  inputsFrom = [ config.pre-commit.devShell ];
+  packages = with pkgs; [ ... ]
+
+shellHook = ''
+  ln -s ${textlintrc} .textlintrc 
+  ${pkgs.git-secrets}/bin/git-secrets --add '''^[a-z]{4}-[a-z]{4}-[a-z]{4}-[a-z0-9]{4}$'
+'';
+```
