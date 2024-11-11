@@ -24,7 +24,7 @@ export default async function ({ search }: Lume.Data, helpers: Lume.Helpers) {
           })
           .map((page, idx) => {
             return (
-              <div className="mx-auto justify-center">
+              <div className="mx-auto justify-center flex-grow w-8/12">
                 <PostCard
                   key={idx}
                   title={page.title}
