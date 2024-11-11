@@ -38,6 +38,7 @@
     "npm:@catppuccin/vscode@*": "3.16.0",
     "npm:@js-temporal/polyfill@0.4.4": "0.4.4",
     "npm:@mdx-js/mdx@3.1.0": "3.1.0",
+    "npm:@shikijs/markdown-it@*": "1.22.2",
     "npm:@tailwindcss/typography@*": "0.5.15_tailwindcss@3.4.14__postcss@8.4.47",
     "npm:@types/estree@1.0.6": "1.0.6",
     "npm:@types/node@*": "22.5.4",
@@ -52,6 +53,8 @@
     "npm:ico-endec@0.1.6": "0.1.6",
     "npm:markdown-it-anchor@*": "9.2.0_@types+markdown-it@14.1.2_markdown-it@14.1.0",
     "npm:markdown-it-attrs@4.2.0": "4.2.0_markdown-it@14.1.0",
+    "npm:markdown-it-code-copy@*": "0.2.1",
+    "npm:markdown-it-copy@*": "1.2.0",
     "npm:markdown-it-deflist@3.0.0": "3.0.0",
     "npm:markdown-it-footnote@*": "4.0.0",
     "npm:markdown-it@14.1.0": "14.1.0",
@@ -70,6 +73,7 @@
     "npm:remark-parse@11.0.0": "11.0.0",
     "npm:remark-rehype@11.1.1": "11.1.1",
     "npm:sharp@0.33.5": "0.33.5",
+    "npm:shiki@*": "1.22.2",
     "npm:shiki@1.13.0": "1.13.0",
     "npm:svg2png-wasm@1.4.1": "1.4.1",
     "npm:tailwindcss@3.4.14": "3.4.14_postcss@8.4.47",
@@ -394,6 +398,49 @@
         "@types/hast"
       ]
     },
+    "@shikijs/core@1.22.2": {
+      "integrity": "sha512-bvIQcd8BEeR1yFvOYv6HDiyta2FFVePbzeowf5pPS1avczrPK+cjmaxxh0nx5QzbON7+Sv0sQfQVciO7bN72sg==",
+      "dependencies": [
+        "@shikijs/engine-javascript",
+        "@shikijs/engine-oniguruma",
+        "@shikijs/types",
+        "@shikijs/vscode-textmate",
+        "@types/hast",
+        "hast-util-to-html"
+      ]
+    },
+    "@shikijs/engine-javascript@1.22.2": {
+      "integrity": "sha512-iOvql09ql6m+3d1vtvP8fLCVCK7BQD1pJFmHIECsujB0V32BJ0Ab6hxk1ewVSMFA58FI0pR2Had9BKZdyQrxTw==",
+      "dependencies": [
+        "@shikijs/types",
+        "@shikijs/vscode-textmate",
+        "oniguruma-to-js"
+      ]
+    },
+    "@shikijs/engine-oniguruma@1.22.2": {
+      "integrity": "sha512-GIZPAGzQOy56mGvWMoZRPggn0dTlBf1gutV5TdceLCZlFNqWmuc7u+CzD0Gd9vQUTgLbrt0KLzz6FNprqYAxlA==",
+      "dependencies": [
+        "@shikijs/types",
+        "@shikijs/vscode-textmate"
+      ]
+    },
+    "@shikijs/markdown-it@1.22.2": {
+      "integrity": "sha512-PgNY3s350UijOWLaoeAXHcYUeDqJKM2De9t8DMkBnQHi6tibo4eoV6sfnsULiJu47TwD1d4VG2YsH0Lxp/VM7A==",
+      "dependencies": [
+        "markdown-it",
+        "shiki@1.22.2"
+      ]
+    },
+    "@shikijs/types@1.22.2": {
+      "integrity": "sha512-NCWDa6LGZqTuzjsGfXOBWfjS/fDIbDdmVDug+7ykVe1IKT4c1gakrvlfFYp5NhAXH/lyqLM8wsAPo5wNy73Feg==",
+      "dependencies": [
+        "@shikijs/vscode-textmate",
+        "@types/hast"
+      ]
+    },
+    "@shikijs/vscode-textmate@9.3.0": {
+      "integrity": "sha512-jn7/7ky30idSkd/O5yDBfAnVt+JJpepofP/POZ1iMOxK59cOfqIgg/Dj0eFsjOTMw+4ycJN0uhZH/Eb0bs/EUA=="
+    },
     "@tailwindcss/typography@0.5.15_tailwindcss@3.4.14__postcss@8.4.47": {
       "integrity": "sha512-AqhlCXl+8grUz8uqExv5OTtgpjuVIwFTSXTrh8y9/pw6q2ek7fJ+Y8ZEVw7EB2DCcuCOtEjf9w3+J3rzts01uA==",
       "dependencies": [
@@ -606,6 +653,14 @@
         "readdirp"
       ]
     },
+    "clipboard@2.0.11": {
+      "integrity": "sha512-C+0bbOqkezLIsmWSvlsXS0Q0bmkugu7jcfMIACB+RDEntIzQIkdr148we28AfSloQLRdZlYL/QYyrq05j/3Faw==",
+      "dependencies": [
+        "good-listener",
+        "select",
+        "tiny-emitter"
+      ]
+    },
     "collapse-white-space@2.1.0": {
       "integrity": "sha512-loKTxY1zCOuG4j9f6EPnuyyYkf58RnhhWTvRoZEokgB+WbdXehfjFviyOVYkqzEWz1Q5kRiZdBYS5SwxbQYwzw=="
     },
@@ -682,6 +737,9 @@
       "dependencies": [
         "character-entities"
       ]
+    },
+    "delegate@3.2.0": {
+      "integrity": "sha512-IofjkYBZaZivn0V8nnsMJGBr4jVLxHDheKSW88PyxS5QC4Vo9ZbZVvhzlSxY87fVq3STR6r+4cGepyHkcWOQSw=="
     },
     "dequal@2.0.3": {
       "integrity": "sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA=="
@@ -851,6 +909,12 @@
         "minipass",
         "package-json-from-dist",
         "path-scurry"
+      ]
+    },
+    "good-listener@1.2.2": {
+      "integrity": "sha512-goW1b+d9q/HIwbVYZzZ6SsTr4IgE+WA44A0GmPIQstuOrgsFcT7VEJ48nmr9GaRtNu0XTKacFLGnBPAM6Afouw==",
+      "dependencies": [
+        "delegate"
       ]
     },
     "hasown@2.0.2": {
@@ -1096,6 +1160,9 @@
     "lodash.merge@4.6.2": {
       "integrity": "sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ=="
     },
+    "lodash@4.17.21": {
+      "integrity": "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
+    },
     "longest-streak@3.1.0": {
       "integrity": "sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g=="
     },
@@ -1123,6 +1190,16 @@
       "dependencies": [
         "markdown-it"
       ]
+    },
+    "markdown-it-code-copy@0.2.1": {
+      "integrity": "sha512-WuMKSdhYDwTXM78LYHDj4ZFd2RFmodzyfDoJGEW7YLVwVPpaSAm2Jhcxgr3LWFygfvjTUeQu+TH+JZ/IF0u7yg==",
+      "dependencies": [
+        "clipboard",
+        "lodash"
+      ]
+    },
+    "markdown-it-copy@1.2.0": {
+      "integrity": "sha512-8Pm/cF7kpr+9VArhICCndb31zmz75hMR0WpmelUNn1RYe8vkqumLKt0xaInTT4mELhMqmnIr+8dm30w7Pzqc4A=="
     },
     "markdown-it-deflist@3.0.0": {
       "integrity": "sha512-OxPmQ/keJZwbubjiQWOvKLHwpV2wZ5I3Smc81OjhwbfJsjdRrvD5aLTQxmZzzePeO0kbGzAo3Krk4QLgA8PWLg=="
@@ -1703,6 +1780,12 @@
     "object-hash@3.0.0": {
       "integrity": "sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw=="
     },
+    "oniguruma-to-js@0.4.3": {
+      "integrity": "sha512-X0jWUcAlxORhOqqBREgPMgnshB7ZGYszBNspP+tS9hPD3l13CdaXcHbgImoHUHlrvGx/7AvFEkTRhAGYh+jzjQ==",
+      "dependencies": [
+        "regex"
+      ]
+    },
     "package-json-from-dist@1.0.1": {
       "integrity": "sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw=="
     },
@@ -1899,6 +1982,9 @@
         "vfile"
       ]
     },
+    "regex@4.4.0": {
+      "integrity": "sha512-uCUSuobNVeqUupowbdZub6ggI5/JZkYyJdDogddJr60L764oxC2pMZov1fQ3wM9bdyzUILDG+Sqx6NAKAz9rKQ=="
+    },
     "rehype-raw@7.0.0": {
       "integrity": "sha512-/aE8hCfKlQeA8LmyeyQvQF3eBiLRGNlfBJEvWH7ivp9sBqs7TNqBL5X3v157rM4IFETqDnIOO+z5M/biZbo9Ww==",
       "dependencies": [
@@ -1998,6 +2084,9 @@
         "loose-envify"
       ]
     },
+    "select@1.1.2": {
+      "integrity": "sha512-OwpTSOfy6xSs1+pwcNrv0RBMOzI39Lp3qQKUTPVVPRjCdNa5JH/oPRiqsesIskK8TVgmRiHwO4KXlV2Li9dANA=="
+    },
     "semver@7.6.3": {
       "integrity": "sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A=="
     },
@@ -2040,7 +2129,18 @@
     "shiki@1.13.0": {
       "integrity": "sha512-e0dWfnONbEv6xl7FJy3XIhsVHQ/65XHDZl92+6H9+4xWjfdo7pmkqG7Kg47KWtDiEtzM5Z+oEfb4vtRvoZ/X9w==",
       "dependencies": [
-        "@shikijs/core",
+        "@shikijs/core@1.13.0",
+        "@types/hast"
+      ]
+    },
+    "shiki@1.22.2": {
+      "integrity": "sha512-3IZau0NdGKXhH2bBlUk4w1IHNxPh6A5B2sUpyY+8utLu2j/h1QpFkAaUA1bAMxOWWGtTWcAh531vnS4NJKS/lA==",
+      "dependencies": [
+        "@shikijs/core@1.22.2",
+        "@shikijs/engine-javascript",
+        "@shikijs/engine-oniguruma",
+        "@shikijs/types",
+        "@shikijs/vscode-textmate",
         "@types/hast"
       ]
     },
@@ -2165,6 +2265,9 @@
       "dependencies": [
         "any-promise"
       ]
+    },
+    "tiny-emitter@2.1.0": {
+      "integrity": "sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q=="
     },
     "to-regex-range@5.0.1": {
       "integrity": "sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==",
@@ -2634,6 +2737,7 @@
     "https://deno.land/x/lume@v2.4.2/deps/postcss.ts": "4bd702f1315a05d7793f140bba403c433203197e0dc65b381724aa9f6822c448",
     "https://deno.land/x/lume@v2.4.2/deps/prism.ts": "808c1b1131ec63f0ea20914e2035befa00946f84acb5a02e0c8358c193cd085c",
     "https://deno.land/x/lume@v2.4.2/deps/react.ts": "5289586588ac3e38c4e8f329fac760fde5b1bf489a33e40102eeffe0e17c5e67",
+    "https://deno.land/x/lume@v2.4.2/deps/remark.ts": "8862b77648d65be3a36872b3c64ff6819ebb62807ff39409e850d996d08e12b1",
     "https://deno.land/x/lume@v2.4.2/deps/sharp.ts": "67d02a65eda73fc23cc76220c95a832ccbc842bdb7eab205761da27352c38aae",
     "https://deno.land/x/lume@v2.4.2/deps/streams.ts": "3dd288bb971449c4e31ec5291d374e1448df06d1993e90f336d780daa8e049c1",
     "https://deno.land/x/lume@v2.4.2/deps/svg2png.ts": "d761fb39c37e5c5ba4ac2db25768cf0c2ff34643d3d1847a9fe736449175d5ec",
@@ -2716,6 +2820,237 @@
     "https://esm.sh/lucide-react@0.455.0": "667eac32472222b70ae6e8b554dd087cce30ff287750960822664259431639c5",
     "https://esm.sh/stable/react@18.3.1/denonext/react.mjs": "fc048ffc55366baf7669519127d186761db72046e2bebf35fe8d0de3964defa3",
     "https://esm.sh/v135/lucide-react@0.455.0/denonext/lucide-react.mjs": "18ddc71eed2f11d3672c3e4e777325d9ee5cfacc1d75785a99c0a7e9b5c161b3",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/abap.js": "a115fda2a581f3eea76daafa1e3a1456c6c3866aa63afe4c112b84af6000157f",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/actionscript-3.js": "ba55e1ca96e36caf02d06ac968baf33887683484c77efb2896f4614990ee92f8",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/ada.js": "571a2066d497f96e8b3939b3aad302ec200d51ef0e44e7243763725305dd096b",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/angular-expression.js": "6869dd6faaf3a13ba19860bd8144c112ca90879a5779b867d2bc50ea1f7a1042",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/angular-html.js": "002dcd36da10c39f4a7c697b63c299c18a115ccf42665fd94eb7b6c91947670f",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/angular-inline-style.js": "0d51aec380a0658b43aaa992b641b962ee20babf47100e07e0babdaf1b7be964",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/angular-inline-template.js": "5f32cee686e5e230a50508176648b1350baaf59b22e2f7f404112d54df0a5578",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/angular-let-declaration.js": "72ef9343d5330e3b796c5a172929570f0646380d28bd46afa2d872d29a734353",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/angular-template-blocks.js": "982191013b4970c82a58c38c4ec271b57e82bdc6155d0f51c36525f56899af41",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/angular-template.js": "23a76f84b955d83e95b10307c16c0e031c6b359224054393c1030b09bf0f5dbd",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/angular-ts.js": "161c4beeb5a77f564a332b4584387b7aba8bfe9fd871d4b377ce186f9a256d72",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/apache.js": "5b02ebc941c77369aa6c810bde8939d3cd6cdbea47dd5cf7e698f48534b3bc92",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/apex.js": "27a36d221e9a3711c50e0398d917c576fb0fb119d4642f93a61a37d038685597",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/apl.js": "574e2ed5114c059707d594bedb4c931f1b45ba52542d47eb33cd4543d3b683f9",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/applescript.js": "bbb2565c2ae91d2e71b2212422c9dc39b1317f16bee234d3abc94d512fbd54b4",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/ara.js": "18562dbdce2719b27d378ef4122403eafc5a0a15c00d6c4f3ba7df8810a72758",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/asciidoc.js": "938e94c3cf21144e8c3bbbf210c61faf38537f59973cce24744fff9793cc773a",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/asm.js": "1f2ee89f28185e8ed7340b525e30f4b209cb4bae68450e83916b5331c5bec26f",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/astro.js": "43bc8526e125d63c93e4161caf14454dbf1a1755b3d19abe6606452d8fc24451",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/awk.js": "31ec4394ccf36ddd482094b28d15b25f45ea4ca09b93f6a3119770fb3398945e",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/ballerina.js": "aeb262d9c1d9894491d9fe06d918b78932067a2ef3183df64c067f38aa62430a",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/bat.js": "ce9c3856c62d2d12a819236e3e4f7032a3c337f5d996d69de19a092d65ea7596",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/beancount.js": "4b94f1dc6cf70cd9ae9e82b0da1d6f6001691168c48d8d9112596f231351f316",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/berry.js": "cdfc124923dda46e7f7205840e8e64bea601f2233ba6cf24b1b8c091e3052324",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/bibtex.js": "58df1a0f2a0a7c1d6b4f69e6531bf428949b1ef224fe22b38044b5ec0ea00301",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/bicep.js": "7f02943ad6d6ee3a0bad16c11a5b3fafd1ad20852cef87da82ebaaee3503fc0a",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/blade.js": "530163d9015535b30d7466e42910b2cd67872f8bc3a725ae175000e0c2d6852c",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/c.js": "16afa6db8aec9e061e5470d63f8ad9b40e023a418c1f32a7b7799cbddeec88f5",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/cadence.js": "42097c43df9c988bde1c54cfd0b57b52051a7e247089b701f88fc5ba76df5a00",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/clarity.js": "e35c06b0effbee2cccb6682eb9d0069b6e6d387dd181fd311d32db3b1ba4523c",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/clojure.js": "b848fcbabc6bdb4aa7344cedab2dc95c6c57f40347ee3e15048087750501ff50",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/cmake.js": "71c410a3368b06acd65d8f2cd90bc0d7a385e83d94aba2edd3f4fd3a249cd9c1",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/cobol.js": "c341bcf8648b3d1c9fdf0f26b35a4d6dd4a7214db6ed7a2d01f6d5b0851bd155",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/codeowners.js": "b102132451f9eac0d8c7acae1e7644244bd658a089ec1dfe083ef308ef390f77",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/codeql.js": "82dd6646985155ec03302f0d33b3555a4f2fceda320c0bb8365bf60ae67f7b79",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/coffee.js": "b2d912c4ab2ba4cef1fa261319bceb55ca6d7cefcb690325735ba124eabd1046",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/common-lisp.js": "f3f88bf4fa9bd02e9b0c7f3e730aa0f091db6b4b37ea940b101009f6ddb34244",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/coq.js": "96db411960a4d73ff7b587941ff56e2ab757df55cf812217a51ec80d2058465f",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/cpp-macro.js": "18aa73902a9449f5dc4e5cbea1ee16f6ebaff7caa2c4cdec5732ff0589ea46d4",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/cpp.js": "d4f779e0a1fc9a56ba1e0e6c29c2b315c96465d206f0c28db44aa5a37568da40",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/crystal.js": "ea1e67b101660e955d7ccb69660d2d3e16e4b3dfd1d5a6cdb9658f3a8686f787",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/csharp.js": "4302d3405e62d525dc82d52f464548b59f5897aa18b5d95dfc4fd2af1758d1c8",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/css.js": "fa48376c372145c971f33725283fd9d4b7bf12365e0ba4ad4ccd41d413185b28",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/csv.js": "b291aeefaf69c40ac98ff80bad38e8e1f97ded7882b24416f792bcfedd57269c",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/cue.js": "3e4978146a6d4d2249921036fb4e817c3e197a7e0c82bfa8a06b61dc70e13d5d",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/cypher.js": "0913118d80457e80445a6460ac55a9e727e99f23b5483625dbe8744776f8ab88",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/d.js": "9d2e5af73690531e04f57a6821781ab89fca041b17cbc2486a3ed72da8044c4c",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/dart.js": "89b52bbf0ba6359e611bfca00b036619a1bb1bc0e7ca51431a5893c70fb7a8bf",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/dax.js": "309baebf56b7d5d6a2d2d0032f2eb1c61169ec8f2e1bbf9a9c62b665f087e383",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/desktop.js": "837765963ea37dc3e4f67488f326820dd1bf89134f6399f63152c2938499c70a",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/diff.js": "4332785b49b4f228e2d9da43e34a7bf11760e89f7df31ae59e1995ac704b3830",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/docker.js": "b628ae05326508e5cd0641a323531508ad191cc513c1cb26fa3f0832f59ef46e",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/dotenv.js": "e69c9b6c133f078cc256fe48cb87dfba286ed3604e8595cdd9ffe53d2789f0e5",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/dream-maker.js": "09d6d3e9538c12e1e825d5640072ba9bca81e010f878ce662029d1c9e1a59a9a",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/edge.js": "93a16027f579186eacd8d5c0f8d271ed793b8bae36b88a3636f1281beb11cfa4",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/elixir.js": "77b1b84936b9f5d7bf1be9234e4c75b9cff30f73e362e8651736cbfff32f4107",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/elm.js": "8c206affc40208446efe201c22e10d83c968d27cb587a0b68e6adbba4751b7d5",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/emacs-lisp.js": "077a13dced35292aee5f39ac24136decbe62f84189baf945f69520d92c54a50c",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/erb.js": "b1564a1c2b21ab220c31c4ffe36ca6e1ca5097ef7e8d5f9d655d4877d23f1e1a",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/erlang.js": "0521bd4736982fa5ce466f3560634722733e5e523f0c828207eef509ad12352f",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/es-tag-css.js": "1ea52457c0979e7048b11365532b61da18032dbcef25f8029ca449053b8e9fce",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/es-tag-glsl.js": "68c7fb4cdcf7b0c7480804cb80b89ce89a3b857966533b1360d1be5b00bec2f4",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/es-tag-html.js": "9741146a872a082780674e494d6bcb30dc673cb320617b59e906e0d9b9807895",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/es-tag-sql.js": "d410168fe81ba5f91c16c05954281e1869369899bbf9e1283c065e5a984df9d3",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/es-tag-xml.js": "a30cf22bc5f337b9f68e77f60bd99059e2b0a0df514a7af96feab3ab845c05cb",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/fennel.js": "eb10f784bcf38b33dbeeb05b698558cb04c756271ec5992d768088187162b072",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/fish.js": "a007291fd151c4ff12208685d4588d62970ed69ca01060c6a83493202a3de1a8",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/fluent.js": "c38b0fbbe59f5e357a1a02bebda243b2420159b27e978e96d7e66df17fb32046",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/fortran-fixed-form.js": "7fb615a4a464aee318520afa98089b4cb9f5143b8ce3698b81e7e80acfe4d1d2",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/fortran-free-form.js": "842f9d80898ca083b0e6ec7ded73d7567ea93010b699d8da23b35ac852e1f384",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/fsharp.js": "dd8012eaecf98eac639eb01150d36cab6552a531b43e740d8a00220ea5c1838f",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/gdresource.js": "e45019c8d172b20cfe4402f4c4af007edd1e7129a77a73d5d0feb7e0757b7a8f",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/gdscript.js": "247ade4670ddfafbf2c1b3efe91538d9b491db622c35b7b11178f61c0593310c",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/gdshader.js": "6c1d2f16baf021a2d89551cd0951ebe630a1df1dd2c54fc6d739b623aafaca59",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/genie.js": "362ff819aced5525913a071050c69f9e1a6d0cb77e39e964391871c2903d84e2",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/gherkin.js": "001445ab96a6d9849fafdff504bba1fa70c785c2f7000cb4c8098de2ca68eb71",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/git-commit.js": "b2c2e0a0cda0b50a792b2715ef56f50214d7771ff71dfe1a12de4d4f12f27aa3",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/git-rebase.js": "4548cbd60cf415df68a32cf158bf58f5f4f2258d38574bbe1ac5ad1ad3ff2e6d",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/gleam.js": "49ecca718246251d3b93d2e9ccee65546291a8389992a3cb83fd059d95bc73ce",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/glimmer-js.js": "397eb729cb24fa2b30063af6ade6071e3871befe8b89c8dc40a61de5d6188e68",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/glimmer-ts.js": "a65add493ac9b6057b464b24dca77d85ebbf986295080304669e018e3b9ca92f",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/glsl.js": "51d39d88bdd29bbb8e07ca3426cc85beb410b0f89490cbff2dfe7ba8e318e962",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/gnuplot.js": "4beb2c7ddcd615421ddd2dd2d1fe0c887df7e5f95bacb814dba5f263a1d47c69",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/go.js": "5cd8fc0a8341a87c8f951792122a766bfe9c83edf5e5e794453a56f6add7d714",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/graphql.js": "479bcd86a043b80fbffcba090405c34240935665274f289e241f49ab8ee5ee41",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/groovy.js": "a5b808d511455168f321e99dd56a9987e22ff0ae3f4e4c0e3f1cc0be6829b26b",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/hack.js": "ed5d4100d39c2fb800929b1c6db5671cd94f4c1ae025e75c0aabfd2cbff23afc",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/haml.js": "fd89c1868b63a4cb39ad0f64963196fdf75fc6d4681d5549603ca065826a2279",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/handlebars.js": "23937b71fe07c9776f99032e7caff121cdbe47b261fa7286b5429145cacf9ca4",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/haskell.js": "e22da15cd91a4d3fce613c4f7ec926312d7e681451a520676a68fb4e06e6db3d",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/haxe.js": "c452a0c7e2bd1f4dd9fa2b8ff63bd8b54ec8e0758c77cf24eb11ee26aa8d9ed2",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/hcl.js": "eaaa7291d173943b1e742393338256344fcb57e2b1cc9c1f5552fa8a05f1094d",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/hjson.js": "ec03f1b07a3b2996cf1cb51b76d9895e3113607435047779ae02b0bef51fdfea",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/hlsl.js": "53d30f7b5fd3a470b04a18683e8d79b9177f4b038703e811299aae557e285dd4",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/html-derivative.js": "c96450c736c057481f186cf2b5bf6784f51bdd172d73c4a457b501c842a98bc2",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/html.js": "9d32cd35a99f3b55e6831bb686f3d0556687ee725169f5b1fff9809daf9ffd3a",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/http.js": "36c572123de5ac0abc41e7c7cdc9d4d3c42b9c363d802c70d96e8b3470e32185",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/hxml.js": "cb3b897ff3450d019ab611e8efd67cdad9d5dc8c068f19f83d0e2c077ebb88fe",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/hy.js": "d7a27b95c79e175f932c9fc2c586e980e03a5bdbe81ff8a8f40f083ae6f9a616",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/imba.js": "1182a5a82da4f94268485b833011538b8c5e8b34f4c32a9e653a529c235c7d1b",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/ini.js": "d9f02a64aa2996b01a7e42c691dbe579500fb86af970963112765395f51a449a",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/java.js": "bbe77114a4a4f30f09f6c14fb2f7ae28f26e75c7085f4058175efdba33f58a2e",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/javascript.js": "27cc07d7b99486904d6c9df7d3462ca20c5e6288e03bc525b91c2256511792bb",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/jinja-html.js": "eb30d4c179098ff3caee16ae71c11896b10bb58e14e7770a38c55ccd7f379cfa",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/jinja.js": "87173c1ac884c0ce2ee14e5a0ecfd50dd2bced77f472e3e61e10096abf85ed9c",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/jison.js": "fa36ff430887ebd80f8bd45f4e2f63c6a06d2446f302a9f3d58689ee9e584ce8",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/json.js": "48b8b10d91b2a3030e84c9ffdd2657d0d665d49b63823640fede30524274d379",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/json5.js": "4470728378e3b85ba6c2539a5c78438f022a795a0a8327dfab382e0f8e77e4d8",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/jsonc.js": "0383ab26c591eb357db61d0c8b56c0711f6ec67e9b9bf26fb5fde53f44cd19fe",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/jsonl.js": "9ce6377bfe15d6f7dbf4870db809e3adc156e58dbea816d64f617ac08a92f776",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/jsonnet.js": "7e8dd0935aaedeac7f10cebf56e3663f109b660b8d818caa3b9b33a1578f7451",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/jssm.js": "f30af3f8437586a8603ba22dc1aa393e3e7388078eb11a4b996f974d3d5bd38f",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/jsx.js": "b43ec13744754148cac4f93f74d63b0c877563456e8583917615425d70666bf2",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/julia.js": "17b491c37082d9a5f93c4961a081a2bc3da5d7190f2e1ed52d34e75f5c465e04",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/kotlin.js": "5c556c2728a9aa9b064a9dc297055a0d50f9c1952ff972ade7d798a488d14ccf",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/kusto.js": "e70accf899d5f5708a459b8033de922792ea98aed79f4c1d5a17f1fa2d37a73d",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/latex.js": "d97d57dddcb8f45c3d2503998b492ecd2591b16470e1b63b26de9c27feb0d7b9",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/lean.js": "5372dfaca5d72f3ef2a09ea5699c63f0cef24bf266da5430cb963e30b6581685",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/less.js": "e7bdca5f2b7231a593f0aa79ea09700eb753615b8ffe9fbb1ee645b05c77ef3b",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/liquid.js": "d093f50bdd11523b01750fa52898c85e6162614ab1feb53e61ef11c79a317a5b",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/log.js": "21ead92ae10fdeb254f5de2a02176bce528a320ecdcead517753177bdedaddfb",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/logo.js": "11c8521c621eff54f2f15323ef5e420aa3f99991ab97baa5e57bd69b7f8455cc",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/lua.js": "8ad92545f4082a06298e70e18374f27122970c66968d4112735b7376aaa706cd",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/luau.js": "319665c1a7e7a07eede43a5a5c3493bc2bdf7d49d2417d8445a8854fcac325a7",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/make.js": "15794187c1b4397b737b7cec8d23a619d304c4464e69ca96c5b0ba2972b34951",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/markdown-vue.js": "7fb317d75fac6ded40111a8bcea313643efd78bf77522f781220e479bed3c91b",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/markdown.js": "f743bd9aa83a0708f3ac3df10208cae93b117c78f01328bfb86d69bc6f3c4533",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/marko.js": "7c20cc40e54d8123c77c4cdd9e589c4814c7d7b004f2839799befdc1e5d303dd",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/matlab.js": "5e91555e44a1e3407c321a1c540ded1a2aca6ebf9ebc11ba4fabc7d7cbfcbdb5",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/mdc.js": "3c53523bd76af3a2f2f614b6e7132dfb61721823190dde98afdc252b8e9aeab3",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/mdx.js": "03e7b8ef86ceebd714a5d00ab6c6b00ca68a468c74e3c17b5529eee8ceaf7ffb",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/mermaid.js": "09893b8159e1b9c785f7709710fc28b289149f3a6a23672eff816395264019b0",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/mipsasm.js": "ccad1349d5ab8c1f44beb6ca054e853753d658842d3ae4d82f892bc974e7a126",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/mojo.js": "5214907516b98755221c278a7f93cec4629e1573b97529e82e86b57a023e622e",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/move.js": "2c43ab71447f754cb504c27932e0af344888487a4796fecac63f77437be867ad",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/narrat.js": "c4e3001964028ae530d89efa65a1941c661592136aa939d5d32883f67ef643f3",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/nextflow.js": "b2cd4314c3891b2747574e30b91e8cfa46fc3ab5ee34c83d89d058301d4f675c",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/nginx.js": "7d104d86a4b0807cd1fc2f924442e056243310f97cad787cf249f81ce0206e23",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/nim.js": "1c6ab19223cfbd924c53a7fb38d86e544ef0c3cd634911708539eb7fc0719a88",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/nix.js": "6a6e8134b4537531b3c3c1b2e98b82839a2bfcab76101b37b7b9803a12e30b97",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/nushell.js": "3e67ab409f5788087cde034310dbdec3dd860fff2886703bdea0d6f2217a4fb5",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/objective-c.js": "663c745bb98cb98e0b441fc9cd938ce39e7e7f2a75b904f6375fcbaad8a46249",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/objective-cpp.js": "5c281c9ce4ba574e522d9a1f741d4801b6c7ed80e5bfbc973cfd3eb6a13db4a8",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/ocaml.js": "3421fde4e3704b70535b6ed8f63d82b9462f4750d7d50f8f0a5495c175ad3f11",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/pascal.js": "277906bd0bc7329bb8aab4b5a15e3aaefc0cfb531e9da2bec3dc592dbb8d9a85",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/perl.js": "de5446693e248a319fe5c60a08a23d7e82ad8de2b8d86fdfd976b4f25751a781",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/php.js": "d77ccee59f571c247340773918b7176b6a65036857d2bb454f408690ab7b70d4",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/plsql.js": "ae62e81d74a28cb8c3cb724016a7f32e80ab2d04d12e17ef52a98d6a8e152910",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/po.js": "65e7cd6c791240dcf78cf50643d6f996e804430f2bd299f0a91011b2d5aef463",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/postcss.js": "9ea33925f64d8f86b6355b7048c301d10119335c7cf137d3a3acd89fd023f67f",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/powerquery.js": "2cd624730b0dc2743ac2c8c3508c31e2ab5d5e6ddd607de58eea1251169f384f",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/powershell.js": "3a8e6aa27a14b588bf1bb733b0e756c6d73c9c5d0502cb2124b5a233f1d1ebfc",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/prisma.js": "a65751d56e019cea4300508ec1407a6ec021b1cd5999296f9811a273f598bcf8",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/prolog.js": "e0159ea1238efabd0eadc48b740d4e837159b9374a90528518656aadd69bd9a9",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/proto.js": "f324020640d343e6723fc1505c7ef6921569b9ed87a5d938320d9beac4ed2b82",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/pug.js": "347821a27a96de7614764d8757f8cadee79389a2d9f2d88da44dfd491f3ecb95",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/puppet.js": "119ad79a3d06626c669c00ecdc00bdb06550cda4fe0d6fcc7e1a1b98e06248f0",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/purescript.js": "0f5f85c22e87ed20db0f611d9b6bf6aadfe20e942cd58c208e05e827c4a115e3",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/python.js": "6c32ccdf5bf994a63203bc821fc6741f474e53b7413847a6a1aba80984bb2408",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/qml.js": "20c0abe7038e4f9079e85d93ae62da9345798d3089763cfcbb0d0a052fb97935",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/qmldir.js": "6fe6652be29b4f31b7507d1f5deb630ea49531b0020e3ceddca235cb82b56f85",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/qss.js": "39f7543147d6fb4fa3742f61920b2ee016754a80f78c6f8eb4328ede09a08cb5",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/r.js": "e434754044906325a7b5f5d6a2630dbd6b28a4a943457fa192aa8e974db85b26",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/racket.js": "20fe8ae299f5d8eb5643b62782a95787702a29476d4782b60fdbcf1dc09dc3f1",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/raku.js": "56293cb79d8b5431a3451d0b48c6cda093f2fc79b717df6876d112fcdae5efd0",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/razor.js": "9569cbe1560224ec083d5161dcc5f0f75049cf9f8a6281ce235f10e3bcc90ef8",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/reg.js": "c3759111793a6e0b1b6c1e83d3c5d1a2620e758d6af5354ce87326c4185d057a",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/regexp.js": "0696d450c6f9035e2c59ec7743cb670ec5b343627af4aeccb22ff50c5428136c",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/rel.js": "fc74c9f2ad6b329879e6d299fa336fe64b057391b014a6c71fcc13878e750544",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/riscv.js": "f06b4694fdff69e26c2312dd42e0911bc0fbd1d3a0ff6c6293bc061f4019d788",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/rst.js": "7e918c7bb1d8f27aaba27d517788e813fd5e07914a6fa6910dbafe5a7da4f7f5",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/ruby.js": "7e1f0b149421b66ff303376ad49162e1c5bb1964b333c899d0edeabcf4293cda",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/rust.js": "d04fe0557eecb7201b45341f8d5f31edc76db7813a80621b0bbf398c44d4bc2c",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/sas.js": "1532f59583adacaa5f78aa84e33519eeeb5acce32d49101d89621ae20f82d156",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/sass.js": "295714be70c414e44a8c8d4552469a52712ac60f35b6243b00cf25a8b42627e6",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/scala.js": "4f4d314294b1a321b0a5cb08753db582729ead625f94dab5509e125332ba1aec",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/scheme.js": "aef5579fddb2cb109d049efa8641d4b9f4944cfe08ca32892cc64476cb4fa4d4",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/scss.js": "78db6ba8ed02133bcc36b3b5fbfd124340658012daba4e041b659722f1fad18d",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/shaderlab.js": "8355f45a327c89cf8e3ff99ced8e33311ca68be9aac85cbdabe7423ef0d211a9",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/shellscript.js": "97bc03058036a26489c9919ebca3470d7e1adb83110c4ae964909c12c5fdb57c",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/shellsession.js": "4f7211fbb9884960a6bf1d3ac45ed235fdb10783a4c5a00c1173a8bcf0243c4a",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/smalltalk.js": "a865547aa683d03e73ff3851dd02d34aa06e3fc9c3a02dcae71beee308cf74ce",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/solidity.js": "bfbfedc1cd739e8d43a1b17a0e71ed9a62fcdf2a15e6b23a59b84ff822e72712",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/soy.js": "3d6e04412c343238f0871ce665e9010d4ae3293c1d4295e39ed8d49a8cca57c7",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/sparql.js": "9f1b9696728fe7589fbe34285e1a5031a7f572c59b763cc9a14959ceb3dba157",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/splunk.js": "1af4a587a4120f46bf7508b14c3440cbeaf9d8aa4ddd111bd11a25fd24bfa77a",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/sql.js": "94706f7cc0c56af4ac50a4a0285e09477cb656a4620e9cb681285696270fa35e",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/ssh-config.js": "ab32231a84162cb26b08ba5283be6a6e2db6dda55bcafe42eb34292662fde78e",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/stata.js": "483e7e792da24e0a21bbfb292a538f6967bfb548daff5883188ddff034ab69cc",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/stylus.js": "cf6061c4b0c5f5240be5347c53dfedbd3392a561265c8e3f2cf8dd6af77b6514",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/svelte.js": "2245f59e023a912471ab9eeeaa7b34d2c3f745885a7e9bb2c820a41d53c74898",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/swift.js": "78cb725e223e1dfe9ec36afd826771cfeeb8bf9826b7a090e1fedc1ae784dff0",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/system-verilog.js": "d7eabccd9752470ea5e90b00b15211f39e39e58c93133f5f8740b929a3767619",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/systemd.js": "e73f0dafec6db33a9b26ffd8af52e7868697afcf76c591dc45769727c21bce40",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/tasl.js": "a3499d2af4636e933614881f23273724e004ece9ba047761091befd206b3dd9a",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/tcl.js": "425bc7e0471feaf63bb6d6113b31156783505582f3bf7f89a4546c67a1674289",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/templ.js": "401d1ea058f17aa26ece3e1afe7f920c9db2cae5bc90f848dd9ed566224dfb1c",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/terraform.js": "e35b04df1ff72c6a23d44d969bd9c5257df74fc2ff027e1d868dec05929b6946",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/tex.js": "f031adabbefe1bac42c4457daf63be31769f7a0ca422ace8489bad1cc053e1b3",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/toml.js": "ccc82e4c1f59e2df5ea41ac8a73b7e516f01f6b403d2dc03167494c39d3bbc05",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/ts-tags.js": "428eafa9f7fe6f6fad44cf4be6b396008fd4789a5e94d48c038905540d6a7a64",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/tsv.js": "8e5be139c71d49b656480ca0fa36e7aa304dde3c6f3199bd186cd1821d53c630",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/tsx.js": "e733bc1e88880534c0b6c3984afac2014da72dba64adcf4bc0174d07e4ac4296",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/turtle.js": "7ff04f81aac8c51bbbd25340e1f6d5d56e46005d08b08d6dc4a833f9450ea0cb",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/twig.js": "f277164a1891fa6037ab1344174da0e2219d0b9dbe62843fcc824ff08c23afed",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/typescript.js": "508460443821e93c92b2808851f71fe4fbc037f3a39bbff8ccc42e403ab106a4",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/typespec.js": "ad26e48326656ec396c3cb1efee2ea673e277a6996549234eead2f665ea75d1e",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/typst.js": "8c4642b5e5bfab5717e87d96dbb4bb6a5254291407fb952b65ffb080d28a0c03",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/v.js": "f2ffd44f2160877fb9d7d1cca6289ef4d370176a28451628399caa5b29a9f9fc",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/vala.js": "2aa08e7d5797d62bff856a0712f392478cfffb0393b7d54047e0473a6f8b49be",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/vb.js": "6de13514e778e59940b71582a57a6271c3008db19035686a73f88004d60427f4",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/verilog.js": "ba966a24eb4413f8a59ff346f6816d8c9dd840bc46f9d1ced6e6c937645f73b3",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/vhdl.js": "f32c9a550d2e43482a2bf4f9b3c26d9f0968a42f64dbff5df061e8dffe8ecfab",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/viml.js": "d54c37588847f0c8e7de43aecf8007180d1b8daba8ef2de2c17dc306f4a67927",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/vue-directives.js": "5c7bb85629f395a10a0633f028efca2c3965ac2acbfe5a19af3e609df9634e70",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/vue-html.js": "5a4518f4684985a10a972aabdcae3ff6545ee6e5fe23fa29f51129979ec2faa4",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/vue-interpolations.js": "138d5235e01b71d64a8acd556bcd945ad728b4dc7f85468a1eade86365fe93f2",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/vue-sfc-style-variable-injection.js": "c5d8ed2ebb4376e6161d48d898b4445b0ce39576cc0eda7e8108f72081920aff",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/vue.js": "a195fc1fcf1c647df08f562109c19cb4a9683d24dcc14572ae10cda2c05a4a24",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/vyper.js": "52e5bab96d8550d88f58b8fd14f20d824714dcb8e18b4ae7522fb22085ca8a34",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/wasm.js": "017af586509605bf64ada36cd7e2e5b5996418a4b724fba193605d26b9b5962c",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/wenyan.js": "1834b3cb163a41bcbde648cbec2d831ee6bd19e2b5ea7000155d1ec2e74c183d",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/wgsl.js": "b25b6b2072e77b11718cfa49832f067c8c3429aa1946e27709890c559562bb30",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/wikitext.js": "017c6beb3a633c598d249e52a1df6dbb30d84f7c25d064854baf2d3666a8756d",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/wolfram.js": "28b3a1fd0f043b59ff6675b7100aef334fd03f621429ed5f8e945c2e1b8bed66",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/xml.js": "cd48265ac453108ca73d50efcdaf40e4c8b907e3bb9065b1f9ba02a88e4d5810",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/xsl.js": "8f678c21f66a29d33c13d3f2b5854474267661cfeb12a910a18598a0ceffad30",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/yaml.js": "905d4f34077c7efdd32d4f0dfc00a64ec1000ecd77bec5d8a37512db51b277d3",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/zenscript.js": "4b53e32fb9d02f10df45f62e0c49b70a683c087a6ccf951deb9ef492c538549e",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/dist/langs/zig.js": "26857e1db0f8b20c3379afbe0419dce3d3e742a52912e9171a66e3d0c9771836",
+    "https://esm.sh/v135/shiki@1.22.2/es2022/langs.js": "f3a995985593a8d592440ed7bdafe44aaf5357fe734ee62ebba0b766c2e3ea61",
     "https://wilsonl.in/minify-html/deno/0.15.0/index.js": "8e7ee5067ca84fb5d5a1f33118cac4998de0b7d80b3f56cc5c6728b84e6bfb70"
   }
 }
