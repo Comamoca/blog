@@ -18,6 +18,10 @@ export default function (
           <meta charSet="UTF-8" />
           <title>{title}</title>
           <link rel="stylesheet" href="/style.css" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
         </head>
         <body>
           <Header />
@@ -29,7 +33,7 @@ export default function (
                   <Twemoji emoji={emoji} />
                 </div>
                 {/*  md:text-2xl md:text-4xl md:mx-auto */}
-                <h1 className="md:text-xl text-4xl mx-4">
+                <h1 className="sm:text-xl text-4xl mx-4">
                   {title}
                 </h1>
                 <div className="flex flex-col mt-3 mx-auto">
@@ -39,9 +43,9 @@ export default function (
               </div>
             </div>
             <hr className="w-4/6 h-1 mx-auto my-2 bg-gray-100 border-0 rounded my-10" />
-            <div className="mt-12 md:text-lg flex justify-center">
+            <div className="mt-12 sm:text-lg flex justify-center">
               <div className="flex justify-center mx-48">
-                <article className="md:prose prose-xl max-w-none">
+                <article className="sm:prose prose-xl max-w-none">
                   {children}
                 </article>
               </div>

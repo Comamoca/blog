@@ -13,12 +13,14 @@ export default function (
         <head>
           {/*<BaseHead title={title} description={description} />*/}
           <link rel="stylesheet" href="/style.css" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
         </head>
         <body>
           <Header />
-          <div className="ml-20 mr-20 mt-12 text-lg mt-10">
-            {children}
-          </div>
+          {children}
           <Footer />
         </body>
       </html>
