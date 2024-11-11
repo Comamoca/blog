@@ -69,6 +69,7 @@
               nixfmt.enable = true;
               deno.enable = true;
               rufo.enable = true;
+            };
             settings.formatter = { };
           };
 
