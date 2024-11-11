@@ -35,6 +35,8 @@
         let
           stdenv = pkgs.stdenv;
 
+          libPath = pkgs.lib.makeLibraryPath ([ stdenv.cc.cc.lib ]);
+
           textlintrc = (pkgs.formats.json { }).generate "textlintrc" {
             filters = { };
             rules = {
@@ -98,6 +100,9 @@
                 textlint-rule-prh
               ])
 
+              # For sharp
+              vips
+
               ruby
               rubyPackages.thor
 
@@ -112,6 +117,8 @@
               nushell
               git-secrets
             ];
+
+            LD_LIBRARY_PATH = libPath;
 
             shellHook = ''
               unlink .textlintrc
