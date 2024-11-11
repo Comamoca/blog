@@ -20,7 +20,7 @@ import footnote from "npm:markdown-it-footnote";
 
 import tailwindOptions from "./tailwind.config.js";
 
-const RELEASE = Deno.env.get("RELEASE")
+const RELEASE = Deno.env.get("RELEASE");
 
 const markdown = {
   plugins: [
@@ -47,22 +47,21 @@ if (RELEASE) {
   // site.use(filter_pages());
 }
 
-
 site.use(jsx());
 site.use(mdx());
 site.use(tailwindcss({ options: tailwindOptions }));
 site.use(postcss());
 
 site.use(checkUrls({
-        output: "_broken_links.json",
-}))
+  output: "_broken_links.json",
+}));
 
 site.use(favicon({
-        input: "./public/favicon.svg"
+  input: "./public/favicon.svg",
 }));
 
 site.use(feed({
-        output: "api/feed.xml",
+  output: "api/feed.xml",
 }));
 
 site.ignore(
