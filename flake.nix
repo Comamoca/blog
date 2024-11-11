@@ -123,6 +123,8 @@
             shellHook = ''
               unlink .textlintrc
               ln -s ${textlintrc} .textlintrc 
+
+              ${pkgs.git-secrets}/bin/git-secrets --add '''^[a-z]{4}-[a-z]{4}-[a-z]{4}-[a-z0-9]{4}$'
             '';
           };
         };
