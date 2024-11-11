@@ -103,6 +103,7 @@
               vips
 
               deno
+              bun
 
               ruby
               rubyPackages.thor
