@@ -25,12 +25,43 @@ import mocha from "npm:@catppuccin/vscode/themes/mocha.json" with {
 
 import tailwindOptions from "./tailwind.config.js";
 
+import { fromHighlighter } from "npm:@shikijs/markdown-it/core";
+import Shiki from "npm:@shikijs/markdown-it";
+import shiki_wasm from "npm:shiki/wasm";
+import { createHighlighterCore } from "npm:shiki/bundle/full";
+import { createHighlighter } from "npm:shiki";
+import {
+  AUTHOR,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+} from "./src/consts.ts";
+
 const RELEASE = Deno.env.get("RELEASE");
+
+const highlighter = await createHighlighter({
+  themes: [mocha],
+  langs: [
+    "js",
+    "ts",
+    "nix",
+    "sh",
+    "lua",
+    "viml",
+    "rust",
+    "lisp",
+    "yaml",
+    "gleam",
+  ],
+});
 
 const markdown = {
   plugins: [
     [anchor, { level: 2 }],
     footnote,
+    fromHighlighter(highlighter, {
+      themes: { light: "Catppuccin Mocha", dark: "Catppuccin Mocha" },
+    }),
   ],
 };
 
@@ -47,6 +78,28 @@ if (RELEASE) {
   site.use(minify_html());
   site.use(brotli());
   site.use(gzip());
+
+  site.use(feed({
+    output: "api/feed.xml",
+    query: "type=posts",
+    info: {
+      title: SITE_TITLE,
+      description: SITE_DESCRIPTION,
+      published: new Date(),
+      lang: "ja",
+      generator: false,
+      authorName: AUTHOR,
+      authorUrl: SITE_URL,
+    },
+  }));
+
+  site.use(checkUrls({
+    output: "_broken_links.json",
+  }));
+
+  site.use(favicon({
+    input: "./public/favicon.svg",
+  }));
 
   // site.use(base_path());
   // site.use(toml());
