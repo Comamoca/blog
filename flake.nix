@@ -106,8 +106,10 @@
               bun
               wrangler
 
-              ruby
+              # ruby
+              ruby_3_4
               rubyPackages.thor
+              rubyPackages.prism
 
               nil
               lua-language-server
