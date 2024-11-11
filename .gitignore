@@ -25,3 +25,4 @@ direnv
 
 .textlintrc
 _site
+_cache
