@@ -18,6 +18,11 @@ import minify_html from "lume/plugins/minify_html.ts";
 import anchor from "npm:markdown-it-anchor";
 import footnote from "npm:markdown-it-footnote";
 
+import shiki from "https://deno.land/x/lume_shiki@0.0.16/mod.ts";
+import mocha from "npm:@catppuccin/vscode/themes/mocha.json" with {
+  type: "json",
+};
+
 import tailwindOptions from "./tailwind.config.js";
 
 const RELEASE = Deno.env.get("RELEASE");
@@ -31,6 +36,7 @@ const markdown = {
 
 const site = lume({
   src: "./src",
+  location: new URL("https://comamoca.dev"),
 }, { markdown });
 
 if (RELEASE) {
@@ -46,6 +52,28 @@ if (RELEASE) {
   // site.use(toml());
   // site.use(filter_pages());
 }
+
+site.use(
+  shiki({
+    highlighter: {
+      langs: [
+        "js",
+        "ts",
+        "nix",
+        "sh",
+        "lua",
+        "viml",
+        "rust",
+        "lisp",
+        "yaml",
+        "gleam",
+      ],
+      themes: ["github-light", mocha],
+    },
+    // theme: "github-light",
+    theme: "Catppuccin Mocha",
+  }),
+);
 
 site.use(jsx());
 site.use(mdx());
