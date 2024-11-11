@@ -66,7 +66,7 @@
           treefmt = {
             projectRootFile = "flake.nix";
             programs = {
-              nixfmt-rfc-style.enable = true;
+              nixfmt.enable = true;
               deno.enable = true;
               rufo.enable = true;
             };
@@ -78,7 +78,7 @@
             check.enable = true;
             settings = {
               hooks = {
-                nixfmt-rfc-style.enable = true;
+                treefmt.enable = true;
                 ripsecrets.enable = true;
                 git-secrets = {
                   enable = true;
@@ -122,7 +122,7 @@
 
             shellHook = ''
               unlink .textlintrc
-              ln -s ${textlintrc} .textlintrc
+              ln -s ${textlintrc} .textlintrc 
             '';
           };
         };
