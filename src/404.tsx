@@ -1,10 +1,3 @@
-// import BaseHead from './components/BaseHead.astro';
-import Header from "./components/Header.tsx";
-import Footer from "./components/Footer.tsx";
-import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
-// import CardList from './components/CardList.tsx';
-// import PostCard from './components/PostCard.tsx';
-
 export const layout = "layouts/main.tsx";
 
 export default function () {

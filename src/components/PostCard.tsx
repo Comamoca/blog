@@ -1,8 +1,4 @@
 export default function PostCard(props) {
-  // props: { post }
-  // const { post } = props;
-  // const data = post.data;
-
   const { title, description, slug } = props;
 
   return (

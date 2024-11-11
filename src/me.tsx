@@ -1,9 +1,5 @@
 import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
-import { basename } from "jsr:@std/path";
-import PostCard from "./components/PostCard.tsx";
 import BaseHead from "./components/BaseHead.tsx";
-import Header from "./components/Header.tsx";
-import Footer from "./components/Footer.tsx";
 
 export const layout = "layouts/main.tsx";
 

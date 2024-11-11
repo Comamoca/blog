@@ -53,44 +53,10 @@ if (RELEASE) {
   // site.use(filter_pages());
 }
 
-site.use(
-  shiki({
-    highlighter: {
-      langs: [
-        "js",
-        "ts",
-        "nix",
-        "sh",
-        "lua",
-        "viml",
-        "rust",
-        "lisp",
-        "yaml",
-        "gleam",
-      ],
-      themes: ["github-light", mocha],
-    },
-    // theme: "github-light",
-    theme: "Catppuccin Mocha",
-  }),
-);
-
 site.use(jsx());
 site.use(mdx());
 site.use(tailwindcss({ options: tailwindOptions }));
 site.use(postcss());
-
-site.use(checkUrls({
-  output: "_broken_links.json",
-}));
-
-site.use(favicon({
-  input: "./public/favicon.svg",
-}));
-
-site.use(feed({
-  output: "api/feed.xml",
-}));
 
 site.ignore(
   "README.md",

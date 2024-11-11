@@ -8,8 +8,6 @@ export default function (
 ) {
   const { title, children, pubDate, emoji, content } = data;
 
-  // console.log("post.tsx", emoji)
-
   return (
     <>
       <html lang="ja">
