@@ -17,8 +17,8 @@ jobs:
       - uses: cachix/install-nix-action@v27
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - run: nix develop
       - run: |
+          nix develop
           deno task build
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
