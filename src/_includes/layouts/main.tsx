@@ -16,13 +16,9 @@ export default function (
         </head>
         <body>
           <Header />
-          <main>
-            <div className="ml-20 mr-20 mt-12 text-lg mt-10">
-              <main>
-                {children}
-              </main>
-            </div>
-          </main>
+          <div className="ml-20 mr-20 mt-12 text-lg mt-10">
+            {children}
+          </div>
           <Footer />
         </body>
       </html>

@@ -40,7 +40,7 @@ export default function (
             </div>
             <hr className="w-4/6 h-1 mx-auto my-2 bg-gray-100 border-0 rounded my-10" />
             <div className="mt-12 md:text-lg flex justify-center">
-              <div className="flex justify-center md:mx-28 mx-48">
+              <div className="flex justify-center mx-48">
                 <article className="md:prose prose-xl max-w-none">
                   {children}
                 </article>
