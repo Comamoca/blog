@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 .direnv
 direnv
+
+.textlintrc
+_site

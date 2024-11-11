@@ -43,14 +43,10 @@ GitHubのテンプレート機能を使うと楽に作成できるのでお勧�
 
 各ディレクトリの説明簡単にしていく。基本はnixpkgsと似たような感じになっている。
 
-- lib
-  ライブラリ関数があるディレクトリ。
-- modules
-  NixOS modulesがあるディレクトリ。
-- overlays
-  Overlayがあるディレクトリ。
-- pkgs
-  パッケージがあるディレクトリ。
+- lib ライブラリ関数があるディレクトリ。
+- modules NixOS modulesがあるディレクトリ。
+- overlays Overlayがあるディレクトリ。
+- pkgs パッケージがあるディレクトリ。
 
 独自にパッケージしたflakeを移したいなら基本はpkgsを使うことになると思う。
 

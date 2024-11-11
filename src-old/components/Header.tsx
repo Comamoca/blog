@@ -6,7 +6,7 @@ import {
   Rss,
   Twitter,
   User,
-} from "https://esm.sh/lucide-react@0.455.0";
+} from "lucide-react";
 
 // const iconSize = "30";
 
@@ -68,7 +68,7 @@ export default function Header() {
                 title={link.title}
               >
                 <div className={"mx-3"}>
-                  <div className="w-3 w-10">{link.child}</div>
+                  <div className="w-3 md:w-10">{link.child}</div>
                 </div>
               </a>
             </li>
