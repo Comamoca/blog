@@ -104,6 +104,7 @@
 
               deno
               bun
+              wrangler
 
               ruby
               rubyPackages.thor
