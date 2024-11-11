@@ -67,7 +67,7 @@ const markdown = {
 
 const site = lume({
   src: "./src",
-  location: new URL("https://comamoca.dev"),
+  // location: new URL("https://comamoca.dev"),
 }, { markdown });
 
 if (RELEASE) {
