@@ -54,7 +54,7 @@
             };
           };
 
-          git-secrets = pkgs.writeShellApplication {
+          git-secrets' = pkgs.writeShellApplication {
             name = "git-secrets";
             runtimeInputs = [ pkgs.git-secrets ];
             text = ''
@@ -83,7 +83,7 @@
                 git-secrets = {
                   enable = true;
                   name = "git-secrets";
-                  entry = "${git-secrets}/bin/git-secrets";
+                  entry = "${git-secrets'}/bin/git-secrets";
                   language = "system";
                   types = [ "text" ];
                 };
