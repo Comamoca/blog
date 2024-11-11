@@ -68,6 +68,7 @@ site.ignore(
   "README.md",
   "README.ja.md",
   "src-old",
+  "content/blog",
   "textlint-prh.yml",
   "CHANGELOG.md",
   "node_modules",
