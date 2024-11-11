@@ -10,7 +10,6 @@ tags: []
 
 これをやった。
 
-
 ## 構成
 
 - git-hooks
@@ -18,12 +17,14 @@ tags: []
 
 git-hooksはpre-commitをNixで扱いやすくしたもの。なので実質pre-commitと考えてOK。
 
-git-secretsはAWS LabsっていうAWS向けのサービスを公開してるところから公開されてるもの。
+git-secretsはAWS
+LabsっていうAWS向けのサービスを公開してるところから公開されてるもの。
 クレデンシャル検知ツールはsecertlintがデファクトなのだけど(多分)、シェルクスリプトで書かれていてNixでも扱いやすいと考え、今回はこれを採用した。
 
 ## pre-commitについて
 
-GitにはGit Hooksっていう`.git/hooks`配下のスクリプトを実行する機能があるのだけど、それを補助するのがpre-commitになる。
+GitにはGit
+Hooksっていう`.git/hooks`配下のスクリプトを実行する機能があるのだけど、それを補助するのがpre-commitになる。
 これらのスクリプトはコミットの前に実行されるためこのような名前になっている。(だと思う)
 
 これだけ聞くと便利なツールだと思うのだけど、pre-commitは**Pythonで書かれている**。
@@ -38,7 +39,6 @@ Nixを使うとプロジェクト毎にPythonの環境を隔離するのなん�
 
 このブログのflakeには既に導入してある。
 残念ながらgit-hooksにはまだgit-secretsが対応してないので、任意のhooksとして設定する。
-
 
 ```nix
 pre-commit = {
@@ -60,7 +60,8 @@ pre-commit = {
 };
 ```
 
-`entry`には実行可能なスクリプトを指定できるので、`writeShellApplication`で実行可能なshell scriptを作成してそのパスを指定している。
+`entry`には実行可能なスクリプトを指定できるので、`writeShellApplication`で実行可能なshell
+scriptを作成してそのパスを指定している。
 
 ```nix
 git-secrets = pkgs.writeShellApplication {
@@ -75,7 +76,8 @@ git-secrets = pkgs.writeShellApplication {
 ```
 
 `writeShellScriptBin`とかでも良いのだけど、実行時の依存とかを考えてこう書いていた。
-結局使わなかったし、いざ使う時はstore pathを指定すれば良いから必要なかったなと思っている。
+結局使わなかったし、いざ使う時はstore
+pathを指定すれば良いから必要なかったなと思っている。
 
 ## 任意のpatternを追加する
 
