@@ -1,9 +1,12 @@
 export default function Twemoji(props) {
+  const url = new URL("https://emoji2svg.deno.dev");
+  url.pathname += `api/${props.emoji}`;
+
   return (
     <>
       <img
-        src={"https://emoji2svg.deno.dev/api/" + props.emoji}
-        className="pb-2 size-38 md:size-28"
+        src={url.toString()}
+        className="pb-2 size-20 md:size-28"
       />
     </>
   );
