@@ -52,14 +52,16 @@ export default function () {
 
                 <h3>Links</h3>
 
-                {links.map((link: { link: string; name: string }) => {
-                  return <a href={link.link}>{link.name}</a>;
-                })}
+                <div className="flex flex-wrap">
+                  {links.map((link: { link: string; name: string }) => {
+                    return <a href={link.link} className="px-1">{link.name}</a>;
+                  })}
+                </div>
               </p>
             </div>
             <img
               data-confetti-button
-              width="30"
+              width="70"
               src="https://emoji2svg.deno.dev/api/🎉"
               alt="party popper emoji button"
               className="mx-auto border rounded p-5"

@@ -31,7 +31,7 @@ export default function (
                   <Twemoji emoji={emoji} />
                 </div>
                 {/*  md:text-2xl md:text-4xl md:mx-auto */}
-                <h1 className="sm:text-xl text-4xl mx-4">
+                <h1 className="text-xl md:text-3xl mx-10">
                   {title}
                 </h1>
                 <div className="flex flex-col mt-3 mx-auto">
@@ -41,9 +41,9 @@ export default function (
               </div>
             </div>
             <hr className="w-4/6 h-1 mx-auto my-2 bg-gray-100 border-0 rounded my-10" />
-            <div className="mt-12 sm:text-lg flex justify-center">
-              <div className="flex justify-center mx-48">
-                <article className="sm:prose prose-xl max-w-none">
+            <div className="mt-12 flex justify-center">
+              <div className="flex justify-center mx-10">
+                <article className="max-w-xs md:max-w-3xl prose md:prose-md prose-ul:list-disc">
                   {children}
                 </article>
               </div>

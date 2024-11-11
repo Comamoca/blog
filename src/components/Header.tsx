@@ -58,7 +58,7 @@ const links = [
 export default function Header() {
   return (
     <>
-      <div className="flex m-3 md:flex-row-reverse">
+      <div className="flex m-3 sm:flex-row-reverse">
         <ul className="flex items-center mx-auto md:m-2">
           {links.map((link) => (
             <li>

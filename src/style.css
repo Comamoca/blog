@@ -155,3 +155,11 @@ h1 {
     align-self: center;
   }
 }
+
+.shiki {
+  @apply overflow-y-scroll;
+}
+
+.twitter-tweet {
+  @apply mx-auto;
+}
