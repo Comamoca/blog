@@ -28,7 +28,7 @@ def ask_override(diary_path, template)
   end
 end
 
-$content_path = "./src/content/blog/"
+$content_path = "./src/blog/"
 
 def diary_template(day)
   tmpl = <<EOF
