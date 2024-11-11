@@ -102,6 +102,8 @@
               # For sharp
               vips
 
+              deno
+
               ruby
               rubyPackages.thor
 
