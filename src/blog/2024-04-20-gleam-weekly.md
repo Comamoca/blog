@@ -4,6 +4,7 @@ description: 'Gleam Weeklyの内容を勝手に解説していきます。'
 pubDate: 'Apr 20 2024'
 tag: ["gleamweekly"]
 emoji: '🦊'
+published: true
 ---
 
 今回からタイトルを`issue{回数} Gleam Weekly`という形式に変更します。

@@ -4,6 +4,7 @@ description: 'Gleam Weeklyの内容を勝手に解説していきます。'
 pubDate: 'Apr 21 2024'
 tag: ["gleamweekly"]
 emoji: '🦊'
+published: true
 ---
 
 投稿をサボっていたせいで詰っているので連続で投稿します。

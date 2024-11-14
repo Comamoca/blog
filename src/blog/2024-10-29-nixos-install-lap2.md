@@ -4,6 +4,7 @@ description: '2度目のNixOSインストールバトルで詰まりがちな部
 pubDate: 'Oct 29 2024'
 emoji: '🦊'
 tags: []
+published: true
 ---
 
 NixOSをもう一度インストールする機会があったのでその際詰った部分の個人的メモ。

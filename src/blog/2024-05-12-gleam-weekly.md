@@ -3,6 +3,7 @@ title: 'issue8 Gleam Weekly'
 description: 'Gleam Weeklyの内容を勝手に解説していきます。'
 pubDate: 'May 12 2024'
 emoji: '🦊'
+published: true
 ---
 
 Gleam Weeklyの8回目です。

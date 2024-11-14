@@ -4,6 +4,7 @@ description: 'Neovimでmoonbitを書く設定について'
 pubDate: 'Oct 6 2024'
 emoji: '🦊'
 tags: []
+published: true
 ---
 
 moonbitもくもく会でNeovimのmoonbit設定を書いたので共有してみる。

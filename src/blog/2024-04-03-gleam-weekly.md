@@ -3,6 +3,7 @@ title: '4/3 Gleam Weekly'
 description: 'Gleam Weeklyの内容を勝手に解説していきます。'
 pubDate: 'Apr 3 2024'
 emoji: '🦊'
+published: true
 ---
 
 2 つめがなかなか来ないなぁと思っていたら 6 日前に来てました。気が付かなかった...

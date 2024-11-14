@@ -3,6 +3,7 @@ title: 'ブログを自作した話'
 description: 'ブログを自作した動機や使用した技術について'
 pubDate: 'Apr 08 2023'
 emoji: '🦊'
+published: true
 ---
 
 ## ブログを初めた話

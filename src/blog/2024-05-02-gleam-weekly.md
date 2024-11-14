@@ -4,6 +4,7 @@ description: 'Gleam Weeklyの内容を勝手に解説していきます。'
 pubDate: 'May 2 2024'
 tag: ["gleamweekly"]
 emoji: '🦊'
+published: true
 ---
 
 5月になりましたね。 今週もGleam Weeklyやっていきます。

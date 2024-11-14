@@ -3,6 +3,7 @@ title: '俺のVim2024 上半期'
 description: '自分の開発環境について'
 pubDate: 'Feb 23 2024'
 emoji: '🦊'
+published: false
 ---
 
 VimにSKKを導入して何か書きたくなってきたので、最近書いてない開発環境周りについて書いていく。

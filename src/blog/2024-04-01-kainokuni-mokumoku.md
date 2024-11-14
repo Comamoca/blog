@@ -3,6 +3,7 @@ title: '甲斐国もくもく会に行ってきた'
 description: '甲斐国もくもく会に行ってきた話'
 pubDate: 'Apr 1 2024'
 emoji: '🦊'
+published: true
 ---
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">本日はこちらに <a href="https://t.co/SYyGgn2w60">pic.twitter.com/SYyGgn2w60</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1774287425357099464?ref_src=twsrc%5Etfw">March 31, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

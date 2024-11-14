@@ -4,6 +4,7 @@ description: 'LiveCDのミラーサイトを公開した話'
 pubDate: 'Oct 18 2024'
 emoji: '🦊'
 tags: ["release"]
+published: true
 ---
 
 こちらになります。

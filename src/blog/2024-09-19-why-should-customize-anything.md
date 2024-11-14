@@ -4,6 +4,7 @@ description: '持論です。'
 pubDate: 'Sep 19 2024'
 emoji: '🦊'
 tags: []
+published: true
 ---
 
 - 持論です。

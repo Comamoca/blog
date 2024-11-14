@@ -3,6 +3,7 @@ title: '4/6 Gleam Weekly'
 description: 'Gleam Weeklyの内容を勝手に解説していきます。'
 pubDate: 'Apr 6 2024'
 emoji: '🦊'
+published: true
 ---
 
 Gleam Weekly の 3 つめが配信されました。
