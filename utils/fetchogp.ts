@@ -16,7 +16,7 @@ export type OGInfo = v.InferOutput<typeof OGInfoSchema>;
 
 export async function fetchOGInfo(
   url: string,
-  timeout = 5000,
+  timeout = 10000,
 ): Promise<OGInfo> {
   const cache = await caches.open("fetchOgp");
   const _url = new URL(url);
