@@ -1,5 +1,5 @@
 import { visit } from "npm:unist-util-visit";
-import { fetchOGInfo, OGInfo } from "../utils/ogp.ts";
+import { fetchOGInfo, OGInfo } from "../utils/fetchogp.ts";
 import { toASCII } from "node:punycode";
 import { is } from "jsr:@core/unknownutil";
 
