@@ -5,7 +5,7 @@ on:
       - "main"
 
 jobs:
-  update:
+  deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
