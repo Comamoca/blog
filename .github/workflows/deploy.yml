@@ -11,19 +11,19 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
-      # - uses: cachix/install-nix-action@v27
+      - uses: cachix/install-nix-action@v27
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - run: nix develop -c deploy
+      # - uses: denoland/setup-deno@v2
       #   with:
-      #     github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      # - run: nix develop
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-      - run: |
-          env RELEASE=1 deno task build
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        id: wrangler
-        with:
-          apiToken: ${{ secrets.CF_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./_site --project-name=blog --commit-dirty=true
+      #     deno-version: v2.x
+      # - run: |
+      #     env RELEASE=1 deno task build
+      # - name: Publish to Cloudflare Pages
+      #   uses: cloudflare/wrangler-action@v3
+      #   id: wrangler
+      #   with:
+      #     apiToken: ${{ secrets.CF_TOKEN }}
+      #     accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      #     command: pages deploy ./_site --project-name=blog --commit-dirty=true
