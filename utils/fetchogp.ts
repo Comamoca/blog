@@ -29,7 +29,7 @@ export async function fetchOGInfo(
 
       const req = new Request(_url);
       const resp = await fetch(req, { signal: AbortSignal.timeout(timeout) });
-      await cache.put(req, resp);
+      await cache.put(req, resp.clone());
 
       return resp;
     } else {
