@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
-env RELEASE=1 deno task build
+export RELEASE=1
+
+deno task build
 wrangler pages deploy ./_site --project-name=blog --commit-dirty=true
