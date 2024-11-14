@@ -14,10 +14,12 @@ jobs:
       - uses: cachix/install-nix-action@v27
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      # - run: nix develop -c deploy
-      - run: |
+        env:
+          RELEASE: 1
+        run: |
           nix develop
           ./scripts/deploy
+      # - run: nix develop -c deploy
       # - uses: denoland/setup-deno@v2
       #   with:
       #     deno-version: v2.x
