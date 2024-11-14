@@ -30,14 +30,14 @@ export default function () {
 
       <h3>フロントエンド</h3>
       <ul>
-        <li>Astro</li>
-        <span>MIT License</span>
+        <li>Lume</li>
+        https://lume.land/
 
         <li>Tailwind CSS</li>
-        <span>MIT License</span>
+        https://tailwindcss.com/
 
         <li>Lucide</li>
-        <span>ISC License</span>
+        https://lucide.dev/
       </ul>
 
       <h3>バックエンド</h3>
