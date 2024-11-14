@@ -92,7 +92,7 @@ async function cardLinkElement(url) {
         title="Link Card"
       >
         <div class="flex flex-col ${og.image ? "basis-3/4" : "basis-full"}">
-          <h3 class="flex-grow text-xs px-3 pt-2 py-0 !mt-0 !mb-0 font-bold tracking-tight text-gray-900">
+          <h3 class="grow text-xs px-3 pt-2 py-0 !mt-0 !mb-0 font-bold tracking-tight text-gray-900">
             ${title}
           </h3>
           <p class="font-xs px-3 pb-4 md:pb-2 md:!mb-0 text-gray-700 text-sm max-w-48 md:max-w-full overflow-hidden whitespace-nowrap text-ellipsis">
