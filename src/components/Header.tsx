@@ -59,7 +59,7 @@ export default function Header() {
   return (
     <>
       <div className="flex m-3 sm:flex-row-reverse">
-        <ul className="flex items-center mx-auto md:m-2">
+        <ul className="list-none flex items-center mx-auto md:m-2">
           {links.map((link) => (
             <li>
               <a
