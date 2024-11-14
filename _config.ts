@@ -9,26 +9,15 @@ import sitemap from "lume/plugins/sitemap.ts";
 import postcss from "lume/plugins/postcss.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
 import checkUrls from "lume/plugins/check_urls.ts";
+import mdx from "lume/plugins/mdx.ts";
+import minify_html from "lume/plugins/minify_html.ts";
 import toml from "lume/plugins/toml.ts";
 import filter_pages from "lume/plugins/filter_pages.ts";
-import mdx from "lume/plugins/mdx.ts";
 import base_path from "lume/plugins/base_path.ts";
 import esbuild from "lume/plugins/esbuild.ts";
-import minify_html from "lume/plugins/minify_html.ts";
-import anchor from "npm:markdown-it-anchor";
-import footnote from "npm:markdown-it-footnote";
-
-import shiki from "https://deno.land/x/lume_shiki@0.0.16/mod.ts";
-import mocha from "npm:@catppuccin/vscode/themes/mocha.json" with {
-  type: "json",
-};
 
 import tailwindOptions from "./tailwind.config.js";
 
-import { fromHighlighter } from "npm:@shikijs/markdown-it/core";
-import Shiki from "npm:@shikijs/markdown-it";
-import shiki_wasm from "npm:shiki/wasm";
-import { createHighlighterCore } from "npm:shiki/bundle/full";
 import { createHighlighter } from "npm:shiki";
 import {
   AUTHOR,
@@ -36,6 +25,16 @@ import {
   SITE_TITLE,
   SITE_URL,
 } from "./src/consts.ts";
+
+// Remark
+import remark from "lume/plugins/remark.ts";
+import rehypeShikiFromHighlighter from "npm:@shikijs/rehype/core";
+import linkcard from "./plugins/linkcard.ts";
+
+// Shiki theme
+import mocha from "npm:@catppuccin/vscode/themes/mocha.json" with {
+  type: "json",
+};
 
 const RELEASE = Deno.env.get("RELEASE");
 
@@ -55,20 +54,27 @@ const highlighter = await createHighlighter({
   ],
 });
 
-const markdown = {
-  plugins: [
-    [anchor, { level: 2 }],
-    footnote,
-    fromHighlighter(highlighter, {
-      themes: { light: "Catppuccin Mocha", dark: "Catppuccin Mocha" },
-    }),
-  ],
-};
-
 const site = lume({
   src: "./src",
-  // location: new URL("https://comamoca.dev"),
-}, { markdown });
+});
+
+site.use(remark({
+  remarkPlugins: [
+    linkcard,
+  ],
+  rehypePlugins: [
+    // [remarkRehype, {
+    //   footnoteLabel: "脚注",
+    // }],
+    [
+      rehypeShikiFromHighlighter,
+      highlighter,
+      {
+        themes: { light: "Catppuccin Mocha", dark: "Catppuccin Mocha" },
+      },
+    ],
+  ],
+}));
 
 if (RELEASE) {
   // NOTE: Got error when with use esbuild and pagefind plugin.
