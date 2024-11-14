@@ -68,14 +68,6 @@ async function cardLinkElement(url) {
     }
   })();
 
-  const ogUrl = (() => {
-    if (is.Undefined(og.url)) {
-      return _url.origin;
-    } else {
-      return og.url;
-    }
-  })();
-
   const image = (() => {
     if (is.Undefined(og.image)) {
       return "";
@@ -87,7 +79,7 @@ async function cardLinkElement(url) {
   return `
     <div class="flex flex-grow border(t gray-200) w-full h-20 max-w-md md:min-w-10">
       <a
-        href="${ogUrl}"
+        href="${url}"
         class="!no-underline flex w-full bg-white rounded-lg border border-gray-200 shadow hover:bg-gray-100"
         title="Link Card"
       >
