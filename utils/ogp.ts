@@ -1,5 +1,6 @@
 import { DOMParser } from "jsr:@b-fuze/deno-dom";
 import * as v from "npm:valibot";
+import { is } from "jsr:@core/unknownutil";
 
 export const OGInfoSchema = v.object({
   url: v.string(),
@@ -14,7 +15,22 @@ export async function fetchOGInfo(
   url: string,
   timeout = 5000,
 ): Promise<OGInfo> {
-  const resp = await fetch(url, { signal: AbortSignal.timeout(timeout) });
+  const cache = await caches.open("fetchOgp");
+
+  const resp = await (async () => {
+    const resp = await cache.match(url);
+
+    if (is.Undefined(resp)) {
+      const req = new Request(new URL(url));
+      const resp = await fetch(req, { signal: AbortSignal.timeout(timeout) });
+      await cache.put(req, resp);
+
+      return resp;
+    } else {
+      return resp;
+    }
+  })();
+
   const body = await resp.text();
   const doc = new DOMParser().parseFromString(body, "text/html");
   const og = [...doc.querySelectorAll("meta")]
