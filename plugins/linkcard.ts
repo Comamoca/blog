@@ -28,8 +28,7 @@ export default function linkcard(options) {
         const url = genURL(urls[0]);
 
         transformers.push(async () => {
-          const info = await fetchOGInfo(url);
-          const cardHTML = cardLinkElement(info);
+          const cardHTML = await cardLinkElement(url);
           const node = {
             type: "html",
             value: cardHTML,
@@ -56,30 +55,52 @@ function genURL(urlStr: string) {
   return url;
 }
 
-function cardLinkElement(og: OGInfo) {
-  const url = new URL(og.url);
-  const name = url.origin;
+async function cardLinkElement(url) {
+  const _url = new URL(url);
+  const og = await fetchOGInfo(url);
+
+  const name = _url.origin;
+  const title = (() => {
+    if (is.Undefined(og.title)) {
+      return og.siteTitle;
+    } else {
+      return og.title;
+    }
+  })();
+
+  const ogUrl = (() => {
+    if (is.Undefined(og.url)) {
+      return _url.origin;
+    } else {
+      return og.url;
+    }
+  })();
+
+  const image = (() => {
+    if (is.Undefined(og.image)) {
+      return "";
+    } else {
+      return `<img class="object-cover rounded-tr-lg rounded-br-lg h-full m-0" src="${og.image}" />`;
+    }
+  })();
 
   return `
     <div class="flex flex-grow border(t gray-200) w-full h-20 max-w-md md:min-w-10">
       <a
-        href="${og.url}"
+        href="${ogUrl}"
         class="!no-underline flex w-full bg-white rounded-lg border border-gray-200 shadow hover:bg-gray-100"
         title="Link Card"
       >
-        <div class="flex flex-col basis-3/4">
+        <div class="flex flex-col ${og.image ? "basis-3/4" : "basis-full"}">
           <h3 class="flex-grow text-xs px-3 pt-2 py-0 !mt-0 !mb-0 font-bold tracking-tight text-gray-900">
-            ${og.title}
+            ${title}
           </h3>
-          <p class="font-xs px-3 py-2 !mb-0 text-gray-700 text-sm">
+          <p class="font-xs px-3 pb-4 md:pb-2 md:!mb-0 text-gray-700 text-sm max-w-48 md:max-w-full overflow-hidden whitespace-nowrap text-ellipsis">
             ${name}
           </p>
         </div>
         <div>
-        <img
-        class="object-cover rounded-tr-lg rounded-br-lg h-full m-0"
-          src="${og.image}"
-        />
+        ${image}
         </div>
       </a>
     </div>
