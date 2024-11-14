@@ -57,14 +57,8 @@ function genURL(urlStr: string) {
 }
 
 function cardLinkElement(og: OGInfo) {
-  const name = (() => {
-    if (is.Nullish(og.name)) {
-      const url = new URL(og.url);
-      return url.origin;
-    } else {
-      return og.name;
-    }
-  })();
+  const url = new URL(og.url);
+  const name = url.origin;
 
   return `
     <div class="flex flex-grow border(t gray-200) w-full h-20 max-w-md md:min-w-10">
