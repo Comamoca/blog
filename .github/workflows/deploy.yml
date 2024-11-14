@@ -17,7 +17,7 @@ jobs:
         env:
           RELEASE: 1
         run: |
-          nix develop
+          nix develop --impure
           ./scripts/deploy
       # - run: nix develop -c deploy
       # - uses: denoland/setup-deno@v2
