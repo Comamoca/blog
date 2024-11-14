@@ -40,7 +40,5 @@ export async function fetchOGInfo(
       return obj ? { ...acc, ...obj } : acc;
     }, {});
 
-  console.log(og);
-
   return v.parse(OGInfoSchema, og);
 }
