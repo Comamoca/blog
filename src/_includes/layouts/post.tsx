@@ -20,6 +20,8 @@ export default function (
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
+          <script src="https://embed.zenn.studio/js/listen-embed-event.js">
+          </script>
         </head>
         <body>
           <Header />
@@ -31,7 +33,7 @@ export default function (
                   <Twemoji emoji={emoji} />
                 </div>
                 {/*  md:text-2xl md:text-4xl md:mx-auto */}
-                <h1 className="text-xl md:text-3xl mx-10">
+                <h1 className="text-xl md:text-3xl mx-auto">
                   {title}
                 </h1>
                 <div className="flex flex-col mt-3 mx-auto">
