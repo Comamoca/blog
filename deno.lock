@@ -13,10 +13,13 @@
     "jsr:@std/datetime@*": "0.225.2",
     "jsr:@std/encoding@1.0.5": "1.0.5",
     "jsr:@std/encoding@^1.0.5": "1.0.5",
+    "jsr:@std/fmt@*": "1.0.3",
     "jsr:@std/fmt@1.0.3": "1.0.3",
     "jsr:@std/fmt@^1.0.2": "1.0.3",
     "jsr:@std/fmt@^1.0.3": "1.0.3",
+    "jsr:@std/front-matter@*": "1.0.5",
     "jsr:@std/front-matter@1.0.5": "1.0.5",
+    "jsr:@std/fs@*": "1.0.5",
     "jsr:@std/fs@1.0.5": "1.0.5",
     "jsr:@std/fs@^1.0.4": "1.0.5",
     "jsr:@std/html@1.0.3": "1.0.3",
@@ -66,6 +69,7 @@
     "npm:markdown-it-footnote@*": "4.0.0",
     "npm:markdown-it@*": "14.1.0",
     "npm:markdown-it@14.1.0": "14.1.0",
+    "npm:mdast-util-to-string@*": "4.0.0",
     "npm:meriyah@6.0.3": "6.0.3",
     "npm:open-graph-scraper@*": "6.8.2",
     "npm:pagefind@1.2.0": "1.2.0",
@@ -75,6 +79,7 @@
     "npm:react-dom@18.3.1": "18.3.1_react@18.3.1",
     "npm:react@*": "18.3.1",
     "npm:react@18.3.1": "18.3.1",
+    "npm:reading-time@*": "1.5.0",
     "npm:rehype-raw@7.0.0": "7.0.0",
     "npm:rehype-react@*": "8.0.0",
     "npm:rehype-sanitize@6.0.0": "6.0.0",
@@ -9110,6 +9115,9 @@
       "dependencies": [
         "picomatch"
       ]
+    },
+    "reading-time@1.5.0": {
+      "integrity": "sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg=="
     },
     "recma-build-jsx@1.0.0": {
       "integrity": "sha512-8GtdyqaBcDfva+GUKDr3nev3VpKAhup1+RvkMvUxURHpW7QyIvk9F5wz7Vzo06CEMSilw6uArgRqhpiUcWp8ew==",
