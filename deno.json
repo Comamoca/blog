@@ -15,5 +15,13 @@
     "jsxImportSource": "npm:react",
     "jsxImportSourceTypes": "npm:@types/react"
   },
-  "nodeModulesDir": "auto"
+  "nodeModulesDir": "auto",
+  "fmt": {
+    "exclude": [
+      "_site",
+      "_cache",
+      "node_modules",
+      "_broken_links.json"
+    ]
+  }
 }
