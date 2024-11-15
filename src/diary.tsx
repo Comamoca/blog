@@ -6,6 +6,7 @@ export const layout = "layouts/main.tsx";
 
 export default async function ({ search }: Lume.Data, helpers: Lume.Helpers) {
   const pages = search.pages("posts")
+    .filter((page) => page.published)
     .filter((page) => basename(page.url).indexOf("-diary") != -1)
     .sort((a, b) => {
       // Sort articles by `pubDate`
