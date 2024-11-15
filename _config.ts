@@ -58,24 +58,6 @@ const site = lume({
   src: "./src",
 });
 
-site.use(remark({
-  remarkPlugins: [
-    linkcard,
-  ],
-  rehypePlugins: [
-    // [remarkRehype, {
-    //   footnoteLabel: "脚注",
-    // }],
-    [
-      rehypeShikiFromHighlighter,
-      highlighter,
-      {
-        themes: { light: "Catppuccin Mocha", dark: "Catppuccin Mocha" },
-      },
-    ],
-  ],
-}));
-
 if (RELEASE) {
   // NOTE: Got error when with use esbuild and pagefind plugin.
   // site.use(esbuild());
@@ -87,13 +69,13 @@ if (RELEASE) {
 
   site.use(feed({
     output: "api/feed.xml",
-    query: "type=posts",
+    query: "posts",
     info: {
       title: SITE_TITLE,
       description: SITE_DESCRIPTION,
       published: new Date(),
       lang: "ja",
-      generator: false,
+      generator: true,
       authorName: AUTHOR,
       authorUrl: SITE_URL,
     },
@@ -111,6 +93,23 @@ if (RELEASE) {
   // site.use(toml());
   // site.use(filter_pages());
 }
+
+site.use(remark({
+  remarkPlugins: RELEASE ? [linkcard] : [],
+  rehypePlugins: [
+    // [remarkRehype, {
+    //   footnoteLabel: "脚注",
+    // }],
+    [
+      rehypeShikiFromHighlighter,
+      highlighter,
+      {
+        themes: { light: "Catppuccin Mocha", dark: "Catppuccin Mocha" },
+        inline: "tailing-curly-colon",
+      },
+    ],
+  ],
+}));
 
 site.use(jsx());
 site.use(mdx());
