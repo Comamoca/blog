@@ -1,4 +1,13 @@
+import { SITE_DESCRIPTION } from "./consts.ts";
+
 export const layout = "layouts/main.tsx";
+export const openGraphLayout = "layouts/mainOgImage.tsx";
+
+export const title = "Page Not Found";
+export const metas = {
+  title: "=title",
+  description: SITE_DESCRIPTION,
+};
 
 export default function () {
   return (

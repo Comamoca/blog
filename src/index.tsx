@@ -1,9 +1,15 @@
 import { basename } from "jsr:@std/path";
 import PostCard from "./components/PostCard.tsx";
+import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
 import PostList from "./components/PostList.tsx";
 import Logo from "./components/Logo.tsx";
 
 export const layout = "layouts/main.tsx";
+export const openGraphLayout = "layouts/mainOgImage.tsx";
+export const metas = {
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+};
 
 export default async function ({ search }: Lume.Data, helpers: Lume.Helpers) {
   const pages = search.pages("posts")

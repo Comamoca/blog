@@ -1,10 +1,17 @@
 import { basename } from "jsr:@std/path";
 import PostList from "./components/PostList.tsx";
 import Logo from "./components/Logo.tsx";
+import { SITE_DESCRIPTION } from "./consts.ts";
 
+export const title = "すべての日報";
 export const layout = "layouts/main.tsx";
+export const openGraphLayout = "layouts/mainOgImage.tsx";
+export const metas = {
+  title: "=title",
+  description: SITE_DESCRIPTION,
+};
 
-export default async function ({ search }: Lume.Data, helpers: Lume.Helpers) {
+export default function ({ search }: Lume.Data, helpers: Lume.Helpers) {
   const pages = search.pages("posts")
     .filter((page) => page.published)
     .filter((page) => basename(page.url).indexOf("-diary") != -1)

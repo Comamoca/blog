@@ -1,7 +1,13 @@
 import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
 import BaseHead from "./components/BaseHead.tsx";
 
+export const title = "About Me";
 export const layout = "layouts/main.tsx";
+export const openGraphLayout = "layouts/mainOgImage.tsx";
+export const metas = {
+  title: "=title",
+  description: SITE_DESCRIPTION,
+};
 
 const links: Array<{ link: string; name: string }> = [
   { link: "https://bsky.app/profile/comamoca.dev", name: "Bluesky" },
