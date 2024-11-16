@@ -12,9 +12,9 @@ export default function PostCard(props) {
         title={title}
       >
         {/* dark:text-white */}
-        <h3 className="text-lg md:text-2xl py-1 md:py-2 px-3 font-bold tracking-tight text-gray-900">
+        <div className="text-lg md:text-2xl py-1 md:py-2 px-3 font-bold tracking-tight text-gray-900">
           {title}
-        </h3>
+        </div>
         <p className="font-normal py-1 md:py-2 px-3 text-gray-700 text-sm md:text-base">
           {description}
         </p>
