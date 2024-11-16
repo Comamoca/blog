@@ -5,6 +5,10 @@ export const tags = ["posts"];
 
 export const layout = "layouts/post.tsx";
 export const templateEngine = "md";
+export const openGraphLayout = "layouts/postOgImage.tsx";
+export const metas = {
+  description: "=description",
+};
 
 // export const layout = "layouts/post.vto"
 // export const templateEngine = "vto"
