@@ -11,6 +11,9 @@ import tailwindcss from "lume/plugins/tailwindcss.ts";
 import checkUrls from "lume/plugins/check_urls.ts";
 import mdx from "lume/plugins/mdx.ts";
 import minify_html from "lume/plugins/minify_html.ts";
+import { ogImages } from "lume/plugins/og_images.ts";
+import metas from "lume/plugins/metas.ts";
+import { read } from "lume/core/utils/read.ts";
 import toml from "lume/plugins/toml.ts";
 import filter_pages from "lume/plugins/filter_pages.ts";
 import base_path from "lume/plugins/base_path.ts";
@@ -56,6 +59,7 @@ const highlighter = await createHighlighter({
 
 const site = lume({
   src: "./src",
+  location: new URL("https://comamoca.dev"),
 });
 
 if (RELEASE) {
@@ -94,6 +98,35 @@ if (RELEASE) {
   // site.use(filter_pages());
 }
 
+site.use(ogImages({
+  cache: true,
+  satori: {
+    width: 1200,
+    height: 600,
+    fonts: [
+      {
+        name: "NotoSansJPBlack",
+        weight: 900,
+        style: "normal",
+        data: await read("./fonts/noto-fonts/NotoSansCJKjp-Black.otf", true),
+      },
+      {
+        name: "NotoSansJPBold",
+        weight: 800,
+        style: "normal",
+        data: await read("./fonts/noto-fonts/NotoSansCJKjp-Bold.otf", true),
+      },
+      {
+        name: "NotoSansJP",
+        weight: 600,
+        style: "normal",
+        data: await read("./fonts/noto-fonts/NotoSansCJKjp-Regular.otf", true),
+      },
+    ],
+  },
+}));
+
+site.use(metas());
 site.use(remark({
   remarkPlugins: RELEASE ? [linkcard] : [],
   rehypePlugins: [
@@ -127,5 +160,6 @@ site.ignore(
 );
 
 site.copy("./public", ".");
+site.copy("./assets", ".");
 
 export default site;
