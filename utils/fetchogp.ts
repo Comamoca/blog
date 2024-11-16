@@ -58,12 +58,12 @@ export async function fetchOGInfo(
         const imageUrl = elem.getAttribute("content");
 
         if (is.String(imageUrl)) {
-          const base = basename(imageUrl);
+          // const base = basename(imageUrl);
 
           if (URL.canParse(imageUrl)) {
             return { image: imageUrl };
           } else {
-            return { image: join(_url.origin, base) };
+            return { image: join(_url.origin, imageUrl) };
           }
         } else {
           return undefined;
