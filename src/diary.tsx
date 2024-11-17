@@ -13,7 +13,6 @@ export const metas = {
 
 export default function ({ search }: Lume.Data, helpers: Lume.Helpers) {
   const pages = search.pages("posts")
-    .filter((page) => page.published)
     .filter((page) => basename(page.url).indexOf("-diary") != -1)
     .sort((a, b) => {
       // Sort articles by `pubDate`

@@ -13,7 +13,6 @@ export const metas = {
 
 export default async function ({ search }: Lume.Data, helpers: Lume.Helpers) {
   const pages = search.pages("posts")
-    .filter((page) => page.published)
     .filter((page) => basename(page.url).indexOf("-diary") == -1)
     .sort((a, b) => {
       // Sort articles by `pubDate`
@@ -31,7 +30,12 @@ export default async function ({ search }: Lume.Data, helpers: Lume.Helpers) {
           <Logo />
         </div>
         <div className="flex md:items-center flex-col gap-6 grid-cols-4">
-          <PostList pages={pages} />
+          <PostList pages={pages.slice(0, 3)} />
+          <PostCard
+            title="全ての投稿"
+            description="全ての投稿はこちらから"
+            slug="/all"
+          />
         </div>
       </div>
     </>
