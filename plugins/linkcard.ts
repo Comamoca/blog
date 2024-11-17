@@ -2,6 +2,7 @@ import { visit } from "npm:unist-util-visit";
 import { fetchOGInfo, OGInfo } from "../utils/fetchogp.ts";
 import { toASCII } from "node:punycode";
 import { is } from "jsr:@core/unknownutil";
+import { logger } from "../utils/logger.ts";
 
 export default function linkcard(options) {
   return async (tree) => {
@@ -59,6 +60,8 @@ async function cardLinkElement(url) {
   const _url = new URL(url);
   const og = await fetchOGInfo(url);
 
+  logger.debug(`{ url: ${url}, data: ${JSON.stringify(og)} }`);
+
   const name = _url.origin;
   const title = (() => {
     if (is.Undefined(og.title)) {
@@ -87,7 +90,7 @@ async function cardLinkElement(url) {
           <span class="grow !text-xs md:!text-base px-3 pt-2 py-0 h-20 !mt-0 !mb-0 font-bold tracking-tight text-gray-900 overflow-hidden text-ellipsis">
             ${title}
           </span>
-          <span class="font-xs px-3 pb-2 !mb-0 text-gray-700 text-sm max-w-48 md:max-w-full overflow-hidden whitespace-nowrap text-ellipsis">
+          <span class="font-xs px-3 pb-4 !mb-0 text-gray-700 text-sm max-w-48 md:max-w-full overflow-hidden whitespace-nowrap text-ellipsis">
             ${name}
           </span>
         </div>
