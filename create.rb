@@ -38,7 +38,7 @@ description: '#{date(day)}の日報をお届けいたします。'
 pubDate: '#{us_date(day)}'
 emoji: '🦊'
 tags: []
-published: true
+draft: false
 ---
 
 ## 今日やったこと
@@ -58,7 +58,7 @@ description: ''
 pubDate: '#{us_date(day)}'
 emoji: '🦊'
 tags: []
-published: false
+draft: false
 ---
 EOF
 
