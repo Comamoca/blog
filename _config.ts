@@ -93,38 +93,41 @@ if (RELEASE) {
     input: "./public/favicon.svg",
   }));
 
+  site.use(ogImages({
+    cache: true,
+    satori: {
+      width: 1200,
+      height: 600,
+      fonts: [
+        {
+          name: "NotoSansJPBlack",
+          weight: 900,
+          style: "normal",
+          data: await read("./fonts/noto-fonts/NotoSansCJKjp-Black.otf", true),
+        },
+        {
+          name: "NotoSansJPBold",
+          weight: 800,
+          style: "normal",
+          data: await read("./fonts/noto-fonts/NotoSansCJKjp-Bold.otf", true),
+        },
+        {
+          name: "NotoSansJP",
+          weight: 600,
+          style: "normal",
+          data: await read(
+            "./fonts/noto-fonts/NotoSansCJKjp-Regular.otf",
+            true,
+          ),
+        },
+      ],
+    },
+  }));
+
   // site.use(base_path());
   // site.use(toml());
   // site.use(filter_pages());
 }
-
-site.use(ogImages({
-  cache: true,
-  satori: {
-    width: 1200,
-    height: 600,
-    fonts: [
-      {
-        name: "NotoSansJPBlack",
-        weight: 900,
-        style: "normal",
-        data: await read("./fonts/noto-fonts/NotoSansCJKjp-Black.otf", true),
-      },
-      {
-        name: "NotoSansJPBold",
-        weight: 800,
-        style: "normal",
-        data: await read("./fonts/noto-fonts/NotoSansCJKjp-Bold.otf", true),
-      },
-      {
-        name: "NotoSansJP",
-        weight: 600,
-        style: "normal",
-        data: await read("./fonts/noto-fonts/NotoSansCJKjp-Regular.otf", true),
-      },
-    ],
-  },
-}));
 
 site.use(metas());
 site.use(remark({
@@ -154,6 +157,7 @@ site.ignore(
   "README.ja.md",
   "src-old",
   "content/blog",
+  "components",
   "textlint-prh.yml",
   "CHANGELOG.md",
   "node_modules",
