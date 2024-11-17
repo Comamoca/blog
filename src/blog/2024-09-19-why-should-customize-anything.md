@@ -1,10 +1,10 @@
 ---
-title: 'どうして設定しなければいけないのか'
-description: '持論です。'
-pubDate: 'Sep 19 2024'
-emoji: '🦊'
+title: どうして設定しなければいけないのか
+description: 持論です。
+pubDate: Sep 19 2024
+emoji: 🦊
 tags: []
-published: true
+draft: false
 ---
 
 - 持論です。

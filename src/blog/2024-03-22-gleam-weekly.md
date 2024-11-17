@@ -1,9 +1,9 @@
 ---
-title: '3/22 Gleam Weekly'
-description: 'Gleam Weeklyの内容を解説していきます。'
-pubDate: 'Mar 22 2024'
-emoji: '🦊'
-published: true
+title: 3/22 Gleam Weekly
+description: Gleam Weeklyの内容を解説していきます。
+pubDate: Mar 22 2024
+emoji: 🦊
+draft: false
 ---
 
 [Gleam Weekly](https://gleamweekly.com)という Gleam

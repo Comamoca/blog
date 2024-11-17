@@ -1,10 +1,11 @@
 ---
-title: 'Gleamにマクロは必要なのか？'
-description: 'Gleamとマクロに関する考察'
-pubDate: 'Nov 15 2024'
-emoji: '🦊'
-tags: ["gleam"]
-published: true
+title: Gleamにマクロは必要なのか？
+description: Gleamとマクロに関する考察
+pubDate: Nov 15 2024
+emoji: 🦊
+tags:
+  - gleam
+draft: false
 ---
 
 「Gleamにマクロは必要か？」

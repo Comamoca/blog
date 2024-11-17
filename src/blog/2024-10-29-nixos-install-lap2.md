@@ -1,10 +1,10 @@
 ---
-title: '2周目のNixOS'
-description: '2度目のNixOSインストールバトルで詰まりがちな部分のメモ'
-pubDate: 'Oct 29 2024'
-emoji: '🦊'
+title: 2周目のNixOS
+description: 2度目のNixOSインストールバトルで詰まりがちな部分のメモ
+pubDate: Oct 29 2024
+emoji: 🦊
 tags: []
-published: true
+draft: false
 ---
 
 NixOSをもう一度インストールする機会があったのでその際詰った部分の個人的メモ。

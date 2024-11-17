@@ -1,10 +1,11 @@
 ---
-title: '好きなJS API/ライブラリ発表ドラゴン'
-description: '個人的に気に入っているJSライブラリを挙げてみる'
-pubDate: 'Nov 17 2024'
-emoji: '🦊'
-tags: ["javascript"]
-published: false
+title: 好きなJS API/ライブラリ発表ドラゴン
+description: 個人的に気に入っているJSライブラリを挙げてみる
+pubDate: Nov 17 2024
+emoji: 🦊
+tags:
+  - javascript
+draft: true
 ---
 
 前こんなポストをしたらなんかめちゃくちゃ通知来た。

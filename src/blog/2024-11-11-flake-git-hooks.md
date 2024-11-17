@@ -1,10 +1,10 @@
 ---
-title: 'Nixで秘密鍵のお漏らしを阻止する'
-description: 'Flakeでクレデンシャルを漏らさない仕組みを作る話'
-pubDate: 'Nov 11 2024'
-emoji: '🦊'
+title: Nixで秘密鍵のお漏らしを阻止する
+description: Flakeでクレデンシャルを漏らさない仕組みを作る話
+pubDate: Nov 11 2024
+emoji: 🦊
 tags: []
-published: true
+draft: false
 ---
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">秘密鍵pushする事故自分も何回かやってるし、pre-commitとsecretlintとNixで秘密鍵pushできないようにするやつやるか</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1853308840948961696?ref_src=twsrc%5Etfw">November 4, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

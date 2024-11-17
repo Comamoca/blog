@@ -1,10 +1,14 @@
 ---
-title: 'CLとNixのプロジェクトテンプレートをリリースした話'
-description: 'イマドキCommon Lispのプロジェクト構成について'
-pubDate: 'Oct 16 2024'
-emoji: '🦊'
-tags: ["common lisp", "lisp", "nix", "release"]
-published: true
+title: CLとNixのプロジェクトテンプレートをリリースした話
+description: イマドキCommon Lispのプロジェクト構成について
+pubDate: Oct 16 2024
+emoji: 🦊
+tags:
+  - common lisp
+  - lisp
+  - nix
+  - release
+draft: false
 ---
 
 脱腸の痛みに耐えながら深夜テンションで書いてるので誤字・脱字やしっちゃかめっちゃかな記述があるかもしれません。

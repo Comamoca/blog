@@ -1,9 +1,9 @@
 ---
-title: '11-12 Gleam Weekly'
-description: 'Gleam Weeklyの内容を勝手に解説していきます。'
-pubDate: 'June 8 2024'
-emoji: '🦊'
-published: true
+title: 11-12 Gleam Weekly
+description: Gleam Weeklyの内容を勝手に解説していきます。
+pubDate: June 8 2024
+emoji: 🦊
+draft: false
 ---
 
 Gleam Weeklyの11と12がリリースされたので勝手に解説していきます。

@@ -1,10 +1,11 @@
 ---
-title: 'LiveCDの部屋の陰謀論と政治思想を削除したサイトを公開した'
-description: 'LiveCDのミラーサイトを公開した話'
-pubDate: 'Oct 18 2024'
-emoji: '🦊'
-tags: ["release"]
-published: false
+title: LiveCDの部屋の陰謀論と政治思想を削除したサイトを公開した
+description: LiveCDのミラーサイトを公開した話
+pubDate: Oct 18 2024
+emoji: 🦊
+tags:
+  - release
+draft: true
 ---
 
 こちらになります。

@@ -1,9 +1,9 @@
 ---
-title: 'ゴリラ.vimに行ってきた'
-description: 'ゴリラ.vimに行ってきたのでその話'
-pubDate: 'Feb 23 2024'
-emoji: '🦊'
-published: true
+title: ゴリラ.vimに行ってきた
+description: ゴリラ.vimに行ってきたのでその話
+pubDate: Feb 23 2024
+emoji: 🦊
+draft: false
 ---
 
 もう 3 月になってしまいますが、2/10 に開催された「ゴリラ.vim #30 ~

@@ -1,9 +1,9 @@
 ---
-title: 'issue9-10 Gleam Weekly'
-description: 'Gleam Weeklyの内容を勝手に解説していきます。'
-pubDate: 'May 30 2024'
-emoji: '🦊'
-published: true
+title: issue9-10 Gleam Weekly
+description: Gleam Weeklyの内容を勝手に解説していきます。
+pubDate: May 30 2024
+emoji: 🦊
+draft: false
 ---
 
 早いものでもう10回目ですね。

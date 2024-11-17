@@ -1,10 +1,10 @@
 ---
-title: 'Neovimでmoonbitを書こう'
-description: 'Neovimでmoonbitを書く設定について'
-pubDate: 'Oct 6 2024'
-emoji: '🦊'
+title: Neovimでmoonbitを書こう
+description: Neovimでmoonbitを書く設定について
+pubDate: Oct 6 2024
+emoji: 🦊
 tags: []
-published: true
+draft: false
 ---
 
 moonbitもくもく会でNeovimのmoonbit設定を書いたので共有してみる。

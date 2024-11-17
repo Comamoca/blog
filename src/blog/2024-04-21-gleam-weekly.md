@@ -1,10 +1,11 @@
 ---
-title: 'issue5 Gleam Weekly'
-description: 'Gleam Weeklyの内容を勝手に解説していきます。'
-pubDate: 'Apr 21 2024'
-tag: ["gleamweekly"]
-emoji: '🦊'
-published: true
+title: issue5 Gleam Weekly
+description: Gleam Weeklyの内容を勝手に解説していきます。
+pubDate: Apr 21 2024
+tag:
+  - gleamweekly
+emoji: 🦊
+draft: false
 ---
 
 投稿をサボっていたせいで詰っているので連続で投稿します。

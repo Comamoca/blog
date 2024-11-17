@@ -1,9 +1,9 @@
 ---
-title: 'Nixを始めてから一週間経った'
-description: 'Nixについての現時点での雑感'
-pubDate: 'Sep 8 2024'
-emoji: '🦊'
-published: true
+title: Nixを始めてから一週間経った
+description: Nixについての現時点での雑感
+pubDate: Sep 8 2024
+emoji: 🦊
+draft: false
 ---
 
 Nixを始めてから一週間経ったので雑感とか書いていく。
