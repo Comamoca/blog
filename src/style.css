@@ -16,3 +16,8 @@ body {
 .twitter-tweet {
   @apply mx-auto;
 }
+
+span.shiki {
+  border-radius: 0.25rem;
+  padding-bottom: 0.125rem;
+}
