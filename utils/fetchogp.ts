@@ -33,7 +33,7 @@ export async function fetchOGInfo(
     };
 
     if (is.Undefined(resp) || useCahce) {
-      console.log(red(`=> ${_url.origin}: Unused cache.`));
+      logger.debug(`=> ${_url.origin}: Unused cache.`);
 
       const resp = await fetch(_url, {
         headers: isJSR
@@ -49,7 +49,7 @@ export async function fetchOGInfo(
 
       return resp;
     } else {
-      console.log(green(`=> ${_url.origin}: Using cache.`));
+      logger.debug(`=> ${_url.origin}: Using cache.`);
 
       return resp;
     }
