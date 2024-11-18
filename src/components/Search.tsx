@@ -12,8 +12,8 @@ export default function () {
         </div>
       </label>
       <input type="checkbox" id="pagefind_modal" className="modal-toggle" />
-      <div className="modal" role="dialog">
-        <div className="modal-box">
+      <div className="modal modal-bottom sm:modal-middle" role="dialog">
+        <div className="modal-box max-h-96">
           <div className="flex flex-col h-dvh py-5">
             <div id="search" className="mx-3"></div>
           </div>
