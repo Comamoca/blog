@@ -8,6 +8,7 @@ import pagefind from "lume/plugins/pagefind.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import postcss from "lume/plugins/postcss.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
+import nano from "npm:cssnano";
 import checkUrls from "lume/plugins/check_urls.ts";
 import mdx from "lume/plugins/mdx.ts";
 import minify_html from "lume/plugins/minify_html.ts";
@@ -151,6 +152,10 @@ site.use(jsx());
 site.use(mdx());
 site.use(tailwindcss({ options: tailwindOptions }));
 site.use(postcss());
+
+if (RELEASE) {
+  site.hooks.addPostcssPlugin(nano);
+}
 
 site.ignore(
   "README.md",
