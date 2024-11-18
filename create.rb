@@ -58,7 +58,7 @@ description: ''
 pubDate: '#{us_date(day)}'
 emoji: '🦊'
 tags: []
-draft: false
+draft: true
 ---
 EOF
 
