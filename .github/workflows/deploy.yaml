@@ -21,15 +21,3 @@ jobs:
         run: |
           nix develop --command deno task build-pages
           nix develop --command wrangler pages deploy ./_site --project-name=blog --commit-dirty=true
-      # - uses: denoland/setup-deno@v2
-      #   with:
-      #     deno-version: v2.x
-      # - run: |
-      #     env RELEASE=1 deno task build
-      # - name: Publish to Cloudflare Pages
-      #   uses: cloudflare/wrangler-action@v3
-      #   id: wrangler
-      #   with:
-      #     apiToken: ${{ secrets.CF_TOKEN }}
-      #     accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      #     command: pages deploy ./_site --project-name=blog --commit-dirty=true
