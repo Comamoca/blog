@@ -34,7 +34,7 @@ export default async function ({ search }: Lume.Data, helpers: Lume.Helpers) {
           <PostCard
             title="全ての投稿"
             description="全ての投稿はこちらから"
-            slug="/all"
+            slug="/all/1"
           />
         </div>
       </div>
