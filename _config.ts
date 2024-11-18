@@ -161,7 +161,6 @@ site.ignore(
   "README.md",
   "README.ja.md",
   "src-old",
-  "content/blog",
   "components",
   "textlint-prh.yml",
   "CHANGELOG.md",
