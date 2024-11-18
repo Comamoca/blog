@@ -58,6 +58,7 @@
     "npm:@types/react@*": "18.3.12",
     "npm:@types/react@18.3.12": "18.3.12",
     "npm:autoprefixer@10.4.20": "10.4.20_postcss@8.4.47",
+    "npm:cssnano@*": "5.1.15_postcss@8.4.47",
     "npm:daisyui@latest": "4.12.14",
     "npm:estree-walker@3.0.3": "3.0.3",
     "npm:he@*": "1.2.0",
