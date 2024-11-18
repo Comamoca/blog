@@ -25,7 +25,7 @@ export default async function ({ search }: Lume.Data, helpers: Lume.Helpers) {
 
   return (
     <>
-      <div className="mx-8 text-lg md:mx-auto">
+      <div className="mx-8 text-lg md:mx-auto h-screen">
         <div className="my-10 flex justify-center">
           <Logo />
         </div>
