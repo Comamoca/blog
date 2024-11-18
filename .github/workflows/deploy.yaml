@@ -17,14 +17,12 @@ jobs:
         env:
           RELEASE: 1
         run: |
-          nix develop --impure
-          deno task build-pages
-      - run: nix develop -c deploy
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-      - run: |
-          env RELEASE=1 deno task build
+          nix develop --command deno task build-pages
+      # - uses: denoland/setup-deno@v2
+      #   with:
+      #     deno-version: v2.x
+      # - run: |
+      #     env RELEASE=1 deno task build
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         id: wrangler
