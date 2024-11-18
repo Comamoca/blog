@@ -5,7 +5,7 @@
   "tasks": {
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
     "prebuild": "deno task lume",
-    "build": "env RELEASE=1 deno task lume",
+    "build": "deno task lume",
     "serve": "deno task lume -s",
     "deploy": "env RELEASE=1 deno task lume --location https://comamoca.dev; wrangler pages deploy ./_site --project-name=blog --commit-dirty=true",
     "download-fonts": "deno run -A ./scripts/downloadFonts.ts"
