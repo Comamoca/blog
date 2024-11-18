@@ -121,6 +121,7 @@
               just
               nushell
               git-secrets
+              unar
             ];
 
             LD_LIBRARY_PATH = libPath;
