@@ -35,7 +35,8 @@ export async function fetchOGInfo(
     if (is.Undefined(resp) || useCahce) {
       logger.debug(`=> ${_url.origin}: Unused cache.`);
 
-      const resp = await fetch(_url, {
+      const req = new Request(_url);
+      const resp = await fetch(req, {
         headers: isJSR
           ? {
             ...header,
