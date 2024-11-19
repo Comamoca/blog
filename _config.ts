@@ -66,7 +66,6 @@ const site = lume({
 if (RELEASE) {
   // NOTE: Got error when with use esbuild and pagefind plugin.
   // site.use(esbuild());
-  site.use(pagefind());
   site.use(sitemap());
   site.use(minify_html());
   site.use(brotli());
@@ -155,6 +154,7 @@ site.use(postcss());
 
 if (RELEASE) {
   site.hooks.addPostcssPlugin(nano);
+  site.use(pagefind());
 }
 
 site.ignore(
