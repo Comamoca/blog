@@ -23,6 +23,17 @@ export default function (
           {children}
           <Footer />
         </body>
+        {/*HACK: デプロイ時にPagefindのスクリプトが実行されないため追加した*/}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+const elem = document.getElementById('search')
+
+if (elem) {
+    if (element.children.length === 0) {
+        new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/pagefind/","baseUrl":"/"});}`,
+          }}
+        />
       </html>
     </>
   );
