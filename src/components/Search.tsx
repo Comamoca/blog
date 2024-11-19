@@ -7,13 +7,15 @@ export default function () {
         htmlFor="pagefind_modal"
         className="text-gray-500 hover:text-gray-700 py-1 border-gray-500 mx-3"
       >
-        <div className="w-3 w-10">
-          <Search />
+        <div className="mx-3 py-1">
+          <div className="w-3 w-10">
+            <Search />
+          </div>
         </div>
       </label>
       <input type="checkbox" id="pagefind_modal" className="modal-toggle" />
       <div className="modal modal-bottom sm:modal-middle" role="dialog">
-        <div className="modal-box max-h-96">
+        <div className="modal-box">
           <div className="flex flex-col h-dvh py-5">
             <div id="search" className="mx-3"></div>
           </div>
