@@ -13,19 +13,17 @@ import Search from "./Search.tsx";
 
 const HeaderLink = ({ href, title, Child }) => {
   return (
-    <li>
-      <a
-        href={href}
-        className="text-gray-500 hover:text-gray-700 py-1 border-gray-500"
-        title={title}
-      >
-        <div className={"mx-3"}>
-          <div className="w-3 w-10">
-            <Child />
-          </div>
+    <a
+      href={href}
+      className="text-gray-500 hover:text-gray-700 py-1 border-gray-500"
+      title={title}
+    >
+      <div className={"mx-3"}>
+        <div className="w-3 w-10">
+          <Child />
         </div>
-      </a>
-    </li>
+      </div>
+    </a>
   );
 };
 
@@ -53,9 +51,11 @@ export default function Header() {
   return (
     <>
       <div className="flex m-3 sm:flex-row-reverse">
-        <ul className="list-none flex items-center mx-auto md:m-2">
-          {links.map((child) => child)}
-        </ul>
+        <nav>
+          <ul className="list-none flex items-center mx-auto md:m-2">
+            {links.map((child, idx) => <li key={idx}>{child}</li>)}
+          </ul>
+        </nav>
       </div>
     </>
   );
