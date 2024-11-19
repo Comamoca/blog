@@ -19,7 +19,5 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          nix develop --command deno run -A npm:pagefind --site _site
           nix develop --command deno task build-pages
-
           nix develop --command wrangler pages deploy ./_site --project-name=blog --commit-dirty=true
