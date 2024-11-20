@@ -76,7 +76,7 @@ if (RELEASE) {
 
   site.use(feed({
     output: "api/feed.xml",
-    query: "posts order=desc",
+    query: "posts",
     info: {
       title: SITE_TITLE,
       description: SITE_DESCRIPTION,
