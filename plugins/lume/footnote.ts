@@ -3,8 +3,6 @@ import { is } from "jsr:@core/unknownutil";
 
 export default function () {
   return (site: Site) => {
-    console.log("footer plugin");
-
     site.process([".html"], (pages) => {
       for (const page of pages) {
         const { document } = page;
@@ -24,7 +22,6 @@ export default function () {
           "[data-footnote-backref]",
         );
         footnotesBackref.forEach((a) => {
-          console.log("==> Change textContent");
           a.textContent = "↩︎";
         });
 
