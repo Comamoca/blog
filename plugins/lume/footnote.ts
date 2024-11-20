@@ -33,12 +33,18 @@ export default function () {
         footnotesElements.forEach((ol) => {
           const li = ol.querySelectorAll("li");
           li.forEach((node) => {
-            node.classList.add("!my-1");
+            node.setAttribute(
+              "style",
+              "margin-top: 0.25rem; margin-bottom: 0.25rem;",
+            );
           });
 
           const p = ol.querySelectorAll("p");
           p.forEach((node) => {
-            node.classList.add("!my-1");
+            node.setAttribute(
+              "style",
+              "margin-top: 0.25rem; margin-bottom: 0.25rem;",
+            );
           });
         });
       }
