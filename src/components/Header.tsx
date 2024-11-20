@@ -51,11 +51,9 @@ export default function Header() {
   return (
     <>
       <div className="flex m-3 sm:flex-row-reverse">
-        <nav>
-          <ul className="list-none flex items-center mx-auto md:m-2">
-            {links.map((child, idx) => <li key={idx}>{child}</li>)}
-          </ul>
-        </nav>
+        <div className="list-none flex items-stretch mx-auto">
+          {links.map((child, idx) => <li key={idx}>{child}</li>)}
+        </div>
       </div>
     </>
   );

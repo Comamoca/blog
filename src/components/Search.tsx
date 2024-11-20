@@ -2,15 +2,13 @@ import { Search } from "https://esm.sh/lucide-react@0.455.0";
 
 export default function () {
   return (
-    <>
+    <div className="mx-3">
       <label
         htmlFor="pagefind_modal"
-        className="text-gray-500 hover:text-gray-700 py-1 border-gray-500 mx-3"
+        className="text-gray-500 hover:text-gray-700 py-1 border-gray-500"
       >
-        <div className="mx-3 py-1">
-          <div className="w-3 w-10">
-            <Search />
-          </div>
+        <div className="w-3 w-10">
+          <Search />
         </div>
       </label>
       <input type="checkbox" id="pagefind_modal" className="modal-toggle" />
@@ -22,6 +20,6 @@ export default function () {
         </div>
         <label className="modal-backdrop" htmlFor="pagefind_modal">Close</label>
       </div>
-    </>
+    </div>
   );
 }
