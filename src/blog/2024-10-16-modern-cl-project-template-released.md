@@ -46,7 +46,7 @@ Lispを使う知見はあまりなく、これまでは手当たり次第調べ�
 ## cl-projectの存在
 
 Common
-Lispで新しいプロジェクトを作成する際は[cl-project](https://github.com/fukamachi/cl-project)を使うのが一般的だと思うのですが、このツールは****自分が調べた限りだとpackage-inferred-systemに対応していません**。
+Lispで新しいプロジェクトを作成する際は[cl-project](https://github.com/fukamachi/cl-project)を使うのが一般的だと思うのですが、このツールは**自分が調べた限りだとpackage-inferred-systemに対応していません**。
 
 また、最近個人的に流行している[Nix](https://nixos.org/)にも対応してません。
 
