@@ -35,6 +35,9 @@ import remark from "lume/plugins/remark.ts";
 import rehypeShikiFromHighlighter from "npm:@shikijs/rehype/core";
 import linkcard from "./plugins/linkcard.ts";
 
+// Lume plugin
+import footnote from "./plugins/lume/footnote.ts";
+
 // Shiki theme
 import mocha from "npm:@catppuccin/vscode/themes/mocha.json" with {
   type: "json",
@@ -133,9 +136,6 @@ site.use(metas());
 site.use(remark({
   remarkPlugins: RELEASE ? [linkcard] : [],
   rehypePlugins: [
-    // [remarkRehype, {
-    //   footnoteLabel: "脚注",
-    // }],
     [
       rehypeShikiFromHighlighter,
       highlighter,
@@ -149,6 +149,8 @@ site.use(remark({
 
 site.use(jsx());
 site.use(mdx());
+
+site.use(footnote());
 site.use(tailwindcss({ options: tailwindOptions }));
 site.use(postcss());
 
