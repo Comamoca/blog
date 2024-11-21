@@ -68,7 +68,7 @@ end
 type = ARGV[0]
 
 if type == "diary"
-  is_yesterday = Readline.readline("Do you want to specify yesterday as the date? (y/N) >")
+  is_yesterday = Readline.readline("Do you want to specify yesterday(#{$yesterday}) as the date? (y/N) >")
 
   if is_yesterday == "y"
     diary_slug = "#{isodate($yesterday)}-diary"
