@@ -4,6 +4,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
 import PostList from "./components/PostList.tsx";
 import Logo from "./components/Logo.tsx";
 
+export const title = SITE_TITLE;
 export const layout = "layouts/main.tsx";
 export const openGraphLayout = "layouts/mainOgImage.tsx";
 export const metas = {
@@ -11,7 +12,7 @@ export const metas = {
   description: SITE_DESCRIPTION,
 };
 
-export default async function ({ search }: Lume.Data, helpers: Lume.Helpers) {
+export default function ({ search }: Lume.Data, helpers: Lume.Helpers) {
   const pages = search.pages("posts")
     .filter((page) => basename(page.url).indexOf("-diary") == -1)
     .sort((a, b) => {
