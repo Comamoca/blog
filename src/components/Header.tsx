@@ -6,6 +6,7 @@ import {
   Rss,
   Twitter,
   User,
+  Waypoints,
 } from "https://esm.sh/lucide-react@0.455.0";
 import Search from "./Search.tsx";
 
@@ -32,6 +33,7 @@ const links = [
   <Search />,
   <HeaderLink href="/diary/1" title="Diary" Child={NotepadText} />,
   <HeaderLink href="/me" title="Me" Child={User} />,
+  <HeaderLink href="/hub" title="Hub" Child={Waypoints} />,
   <HeaderLink href="/info" title="Infomation" Child={Info} />,
   <HeaderLink href="/api/feed.xml" title="RSS" Child={Rss} />,
   <HeaderLink
@@ -50,7 +52,7 @@ const links = [
 export default function Header() {
   return (
     <>
-      <div className="flex m-3 sm:flex-row-reverse">
+      <div className="flex m-3 mt-5 sm:flex-row-reverse">
         <div className="list-none flex items-stretch mx-auto">
           {links.map((child, idx) => <li key={idx}>{child}</li>)}
         </div>
