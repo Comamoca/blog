@@ -51,6 +51,7 @@ const highlighter = await createHighlighter({
     "js",
     "ts",
     "nix",
+    "py",
     "sh",
     "lua",
     "viml",
@@ -169,7 +170,8 @@ site.ignore(
   "node_modules",
 );
 
-site.copy("./public", ".");
-site.copy("./assets", ".");
+site.copy("./public");
+site.copy("./assets");
+site.copy("./images", "images");
 
 export default site;
