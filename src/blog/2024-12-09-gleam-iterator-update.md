@@ -7,7 +7,7 @@ tags: []
 draft: false
 ---
 
-この記事は[Gleamアドベントカレンダー](https://qiita.com/advent-calendar/2024/gleam)日目の記事です。
+この記事は[Gleamアドベントカレンダー](https://qiita.com/advent-calendar/2024/gleam)9日目の記事です。
 
 久しぶりのGleamネタです。
 
