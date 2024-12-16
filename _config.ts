@@ -171,7 +171,7 @@ site.ignore(
 );
 
 site.copy("./public");
-site.copy("./assets");
 site.copy("./images", "images");
+site.copy("./well-known", ".well-known");
 
 export default site;
