@@ -23,7 +23,7 @@ export default function (
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap@1.1.0">
+          <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap@1.1.1">
           </script>
           <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap-view@1.3.4">
           </script>
@@ -58,6 +58,10 @@ export default function (
                   <a className="btn" href="https://ko-fi.com/comamoca">
                     ko-fi ☕
                   </a>
+                  <script type="text/javascript">
+                    kofiwidget2.init('Ko-fi', '#d1c092',
+                    'K3K6XMGWW');kofiwidget2.draw();
+                  </script>
                   <a
                     className="btn"
                     href="https://github.com/sponsors/Comamoca"
