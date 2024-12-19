@@ -7,7 +7,8 @@ export default {
     "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
   ],
   safelist: [
-    "justify-around",
+    "grid-cols-2",
+    "gap-2",
   ],
   theme: {
     extend: {
