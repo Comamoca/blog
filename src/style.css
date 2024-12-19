@@ -21,3 +21,8 @@ span.shiki {
   border-radius: 0.25rem;
   padding-bottom: 0.125rem;
 }
+
+/* HACK: リリースビルドで何故か消えているのでゴリ押し */
+.justify-around {
+  justify-content: space-around;
+}
