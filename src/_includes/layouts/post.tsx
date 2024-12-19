@@ -64,38 +64,40 @@ export default function (
                   {children}
                 </article>
                 <hr className="w-4/6 h-1 mx-auto my-2 bg-gray-100 border-0 rounded my-10" />
-                <div className="flex justify-around py-5">
-                  <a className="btn" href="https://ko-fi.com/comamoca">
-                    ko-fi ☕
-                  </a>
-                  <script type="text/javascript">
-                    kofiwidget2.init('Ko-fi', '#d1c092',
-                    'K3K6XMGWW');kofiwidget2.draw();
-                  </script>
+                <div className="flex justify-center grid grid-cols-2 md:grid-cols-4 gap-2 py-5">
+                  {/* justify-around */}
                   <a
-                    className="btn"
+                    className="btn btn-sm md:btn-md"
+                    href="https://ko-fi.com/comamoca"
+                  >
+                    <span className="text-xs md:text-base">ko-fi ☕</span>
+                  </a>
+                  <a
+                    className="btn btn-sm md:btn-md"
                     href="https://github.com/sponsors/Comamoca"
                   >
-                    GitHub Sponsors 🐙
+                    <span className="text-xs md:text-base">
+                      GitHub Sponsors 🐙
+                    </span>
                   </a>
-                  <div className="space-x-2">
-                    <button
-                      className="btn"
-                      data-npub={npub}
-                      data-relays="wss://relay.damus.io,wss://relay.snort.social,wss://nostr.wine,wss://relay.nostr.band"
-                    >
-                      Zap Me ⚡️
-                    </button>
-                    <button
-                      className="btn"
-                      data-title=""
-                      data-nzv-id={npub}
-                      data-zap-color-mode="true"
-                      data-relay-urls="wss://relay.nostr.band,wss://relay.damus.io,wss://nos.lol,wss://nostr.bitcoiner.social,wss://relay.nostr.wirednet.jp,wss://yabu.me"
-                    >
-                      View zaps 👀
-                    </button>
-                  </div>
+
+                  <button
+                    className="btn btn-sm md:btn-md"
+                    data-npub={npub}
+                    data-relays="wss://relay.damus.io,wss://relay.snort.social,wss://nostr.wine,wss://relay.nostr.band"
+                  >
+                    <span className="text-xs md:text-base">Zap Me ⚡️</span>
+                  </button>
+
+                  <button
+                    className="btn btn-sm md:btn-md"
+                    data-title=""
+                    data-nzv-id={npub}
+                    data-zap-color-mode="true"
+                    data-relay-urls="wss://relay.nostr.band,wss://relay.damus.io,wss://nos.lol,wss://nostr.bitcoiner.social,wss://relay.nostr.wirednet.jp,wss://yabu.me"
+                  >
+                    <span className="text-xs md:text-base">View zaps 👀</span>
+                  </button>
                 </div>
               </div>
             </div>
