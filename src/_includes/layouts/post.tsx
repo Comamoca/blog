@@ -8,6 +8,9 @@ export default function (
 ) {
   const { title, children, pubDate, emoji, content } = data;
 
+  const npub =
+    "npub1f0xqy2qs5lhl2u035qszfne6sdw8jkh3px6we2c3u3gxy2v3g8tsvkn2qr";
+
   return (
     <>
       <html lang="ja">
@@ -20,7 +23,9 @@ export default function (
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <script src="https://embed.zenn.studio/js/listen-embed-event.js">
+          <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap@1.1.0">
+          </script>
+          <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap-view@1.3.4">
           </script>
         </head>
         <body>
@@ -44,10 +49,40 @@ export default function (
             </div>
             <hr className="w-4/6 h-1 mx-auto my-2 bg-gray-100 border-0 rounded my-10" />
             <div className="mt-12 flex justify-center">
-              <div className="flex justify-center mx-10">
+              <div className="flex flex-col justify-center mx-10">
                 <article className="max-w-xs md:max-w-3xl prose md:prose-lg prose-ul:list-disc">
                   {children}
                 </article>
+                <hr className="w-4/6 h-1 mx-auto my-2 bg-gray-100 border-0 rounded my-10" />
+                <div className="flex justify-around p-5">
+                  <a className="btn" href="https://ko-fi.com/comamoca">
+                    ko-fi ☕
+                  </a>
+                  <a
+                    className="btn"
+                    href="https://github.com/sponsors/Comamoca"
+                  >
+                    GitHub Sponsors 🐙
+                  </a>
+                  <div className="space-x-2">
+                    <button
+                      className="btn"
+                      data-npub={npub}
+                      data-relays="wss://relay.damus.io,wss://relay.snort.social,wss://nostr.wine,wss://relay.nostr.band"
+                    >
+                      Zap Me ⚡️
+                    </button>
+                    <button
+                      className="btn"
+                      data-title=""
+                      data-nzv-id={npub}
+                      data-zap-color-mode="true"
+                      data-relay-urls="wss://relay.nostr.band,wss://relay.damus.io,wss://nos.lol,wss://nostr.bitcoiner.social,wss://relay.nostr.wirednet.jp,wss://yabu.me"
+                    >
+                      View zaps 👀
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </main>
