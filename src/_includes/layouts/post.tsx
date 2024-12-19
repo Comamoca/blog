@@ -32,7 +32,7 @@ export default function (
           {/* NOTE: 暫定的に修正したものを使う。mergeされたら消す。*/}
           <script
             defer
-            src="https://raw.githubusercontent.com/Comamoca/nostr-zap/refs/heads/build/dist/main.js"
+            src="https://rawcdn.githack.com/Comamoca/nostr-zap/refs/heads/build/dist/main.js"
           >
           </script>
           <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap-view@1.3.4">
