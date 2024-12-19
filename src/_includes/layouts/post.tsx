@@ -54,35 +54,33 @@ export default function (
                   {children}
                 </article>
                 <hr className="w-4/6 h-1 mx-auto my-2 bg-gray-100 border-0 rounded my-10" />
-                <div className="flex justify-center">
-                  <div className="flex space-x-10 py-5">
-                    <a className="btn" href="https://ko-fi.com/comamoca">
-                      ko-fi ☕
-                    </a>
-                    <a
+                <div className="flex justify-around py-5">
+                  <a className="btn" href="https://ko-fi.com/comamoca">
+                    ko-fi ☕
+                  </a>
+                  <a
+                    className="btn"
+                    href="https://github.com/sponsors/Comamoca"
+                  >
+                    GitHub Sponsors 🐙
+                  </a>
+                  <div className="space-x-2">
+                    <button
                       className="btn"
-                      href="https://github.com/sponsors/Comamoca"
+                      data-npub={npub}
+                      data-relays="wss://relay.damus.io,wss://relay.snort.social,wss://nostr.wine,wss://relay.nostr.band"
                     >
-                      GitHub Sponsors 🐙
-                    </a>
-                    <div className="space-x-2">
-                      <button
-                        className="btn"
-                        data-npub={npub}
-                        data-relays="wss://relay.damus.io,wss://relay.snort.social,wss://nostr.wine,wss://relay.nostr.band"
-                      >
-                        Zap Me ⚡️
-                      </button>
-                      <button
-                        className="btn"
-                        data-title=""
-                        data-nzv-id={npub}
-                        data-zap-color-mode="true"
-                        data-relay-urls="wss://relay.nostr.band,wss://relay.damus.io,wss://nos.lol,wss://nostr.bitcoiner.social,wss://relay.nostr.wirednet.jp,wss://yabu.me"
-                      >
-                        View zaps 👀
-                      </button>
-                    </div>
+                      Zap Me ⚡️
+                    </button>
+                    <button
+                      className="btn"
+                      data-title=""
+                      data-nzv-id={npub}
+                      data-zap-color-mode="true"
+                      data-relay-urls="wss://relay.nostr.band,wss://relay.damus.io,wss://nos.lol,wss://nostr.bitcoiner.social,wss://relay.nostr.wirednet.jp,wss://yabu.me"
+                    >
+                      View zaps 👀
+                    </button>
                   </div>
                 </div>
               </div>
