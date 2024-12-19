@@ -3,7 +3,7 @@ title: 'メカニカルキーボードと自分'
 description: 'メカニカルキーボードって良くないですか？'
 pubDate: 'Nov 26 2024'
 emoji: '🦊'
-tags: []
+tags: ["gadget", "keyboard", "poem"]
 ---
 
 勢いで書いたので色々めちゃくちゃかもしれない...
