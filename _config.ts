@@ -76,7 +76,7 @@ if (RELEASE) {
   site.use(gzip());
 
   site.use(feed({
-    output: "api/feed.xml",
+    output: ["api/feed.xml", "api/feed.json"],
     query: "posts",
     info: {
       title: SITE_TITLE,
