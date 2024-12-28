@@ -94,7 +94,7 @@ async function cardLinkElement(url) {
             ${name}
           </span>
         </div>
-        <div class="shrink w-[156px]">
+        <div class="shrink">
         ${image}
         </div>
       </a>
