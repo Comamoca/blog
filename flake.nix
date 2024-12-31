@@ -2,7 +2,8 @@
   description = "A basic flake to with flake-parts";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/master";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default";
@@ -47,7 +48,7 @@
               };
               prh = {
                 rulePaths = [
-                  #"${pkgs.textlint-rule-prh}/lib/node_modules/textlint-rule-prh/node_modules/prh/prh-rules/media/WEB+DB_PRESS.yml"
+                  "${pkgs.textlint-rule-prh}/lib/node_modules/textlint-rule-prh/node_modules/prh/prh-rules/media/WEB+DB_PRESS.yml"
                   "${pkgs.textlint-rule-prh}/lib/node_modules/textlint-rule-prh/node_modules/prh/prh-rules/media/techbooster.yml"
                 ];
               };
@@ -94,10 +95,10 @@
           devShells.default = pkgs.mkShell {
             inputsFrom = [ config.pre-commit.devShell ];
             packages = with pkgs; [
-              (textlint.withPackages [
-                textlint-rule-preset-ja-technical-writing
-                textlint-rule-prh
-              ])
+              # (textlint.withPackages [
+              #   textlint-rule-preset-ja-technical-writing
+              #   textlint-rule-prh
+              # ])
 
               # For sharp
               vips
@@ -108,14 +109,13 @@
 
               # ruby
               ruby_3_4
-              rubyPackages.thor
-              rubyPackages.prism
+              rubyPackages_3_4.thor
 
               nil
               lua-language-server
               efm-langserver
               nodePackages_latest.typescript-language-server
-              ruby-lsp
+              # ruby-lsp
               tailwindcss-language-server
 
               just
@@ -127,8 +127,8 @@
             LD_LIBRARY_PATH = libPath;
 
             shellHook = ''
-              unlink .textlintrc
-              ln -s ${textlintrc} .textlintrc 
+              # unlink .textlintrc
+              # ln -s ${textlintrc} .textlintrc 
 
               ${pkgs.git-secrets}/bin/git-secrets --add '''^[a-z]{4}-[a-z]{4}-[a-z]{4}-[a-z0-9]{4}$'
             '';
