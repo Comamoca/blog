@@ -59,6 +59,7 @@ const highlighter = await createHighlighter({
     "lisp",
     "yaml",
     "gleam",
+    "clojure",
   ],
 });
 
