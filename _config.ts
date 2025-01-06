@@ -58,6 +58,7 @@ const highlighter = await createHighlighter({
     "rust",
     "lisp",
     "yaml",
+    "elisp",
     "gleam",
     "clojure",
   ],
