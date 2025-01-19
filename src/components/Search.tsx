@@ -1,4 +1,4 @@
-import { Search } from "https://esm.sh/lucide-react@0.455.0";
+import { Search } from "lucide-react";
 
 export default function () {
   return (

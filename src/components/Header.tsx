@@ -7,7 +7,7 @@ import {
   Twitter,
   User,
   Waypoints,
-} from "https://esm.sh/lucide-react@0.455.0";
+} from "lucide-react";
 import Search from "./Search.tsx";
 
 // const iconSize = "30";
