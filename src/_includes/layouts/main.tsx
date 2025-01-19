@@ -3,10 +3,10 @@ import Header from "../../components/Header.tsx";
 import Footer from "../../components/Footer.tsx";
 import { SITE_TITLE } from "../../consts.ts";
 
-export default function (
+export default (
   { title, children }: Lume.Data,
   helpers: Lume.Helpers,
-) {
+) => {
   return (
     <>
       <html lang="ja">
@@ -33,4 +33,4 @@ if (elem) {if (elem.children.length === 0) {new PagefindUI({"element":"#search",
       </html>
     </>
   );
-}
+};
