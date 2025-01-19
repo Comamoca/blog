@@ -3448,6 +3448,7 @@
   },
   "workspace": {
     "dependencies": [
+      "npm:@types/react@*",
       "npm:lucide-react@*",
       "npm:react@*"
     ]
