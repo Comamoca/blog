@@ -48,6 +48,7 @@ const RELEASE = Deno.env.get("RELEASE");
 const highlighter = await createHighlighter({
   themes: [mocha],
   langs: [
+    "v",
     "js",
     "ts",
     "nix",
@@ -58,6 +59,7 @@ const highlighter = await createHighlighter({
     "rust",
     "lisp",
     "yaml",
+    "scala",
     "elisp",
     "gleam",
     "clojure",
