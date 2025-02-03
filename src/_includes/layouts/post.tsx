@@ -23,17 +23,7 @@ export default function (
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          {
-            /*
-	  <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap@1.1.1">
-          </script>
-	  */
-          }
-          {/* NOTE: 暫定的に修正したものを使う。mergeされたら消す。*/}
-          <script
-            defer
-            src="https://rawcdn.githack.com/Comamoca/nostr-zap/refs/heads/build/dist/main.js"
-          >
+          <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap@latest">
           </script>
           <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap-view@1.3.4">
           </script>
