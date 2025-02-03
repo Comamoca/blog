@@ -3,7 +3,7 @@ title: 'Common LispでNostrプロトコルを実装している話'
 description: '実装中に詰まったこととか'
 pubDate: 'Dec 25 2024'
 emoji: 🦊
-tags: []
+tags: ["commonlisp", "nostr"]
 draft: false
 ---
 
