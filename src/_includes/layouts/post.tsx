@@ -48,7 +48,7 @@ export default function (
                   <Twemoji emoji={emoji} />
                 </div>
                 {/*  md:text-2xl md:text-4xl md:mx-auto */}
-                <h1 className="text-xl mx-10 md:text-3xl md:mx-auto">
+                <h1 className="text-xl mx-auto md:text-3xl">
                   {title}
                 </h1>
                 <div className="flex flex-col mt-3 mx-auto">
