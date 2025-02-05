@@ -1,6 +1,17 @@
 import Twemoji from "../../components/Twemoji.tsx";
 import Header from "../../components/Header.tsx";
 import Footer from "../../components/Footer.tsx";
+import { format, parse } from "date-fns";
+import ja from "date-fns/locale/ja";
+
+function yymmdd(date: string): string {
+  if (typeof date === "undefined") {
+    return "";
+  }
+
+  const datetime = parse(date, "MMM d yyyy", new Date());
+  return format(datetime, "yyyy年M月d日", { locale: ja });
+}
 
 export default function (
   data: Lume.Data,
@@ -44,6 +55,7 @@ export default function (
                 <div className="flex flex-col mt-3 mx-auto">
                   {/* <FormattedDate date={pubDate} /> */}
                   {/* <spam className="md:ml-2">読み終わるまでの目安 約{minitesRead}分</spam> */}
+                  <spam>{yymmdd(pubDate)}</spam>
                 </div>
               </div>
             </div>
