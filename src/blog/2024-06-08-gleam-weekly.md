@@ -1,7 +1,7 @@
 ---
 title: 11-12 Gleam Weekly
 description: Gleam Weeklyの内容を勝手に解説していきます。
-pubDate: June 8 2024
+pubDate: Jun 8 2024
 emoji: 🦊
 draft: false
 ---
