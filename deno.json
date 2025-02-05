@@ -1,5 +1,6 @@
 {
   "imports": {
+    "date-fns": "npm:date-fns",
     "lume/": "https://deno.land/x/lume@v2.5.0/",
     "lucide-react": "npm:lucide-react"
   },
