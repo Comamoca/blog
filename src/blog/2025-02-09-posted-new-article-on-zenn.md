@@ -11,7 +11,7 @@ draft: false
 
 https://zenn.dev/comamoca/articles/2025-02-09-start-to-use-nix-flake-by-one-file
 
-この記事は初の前編Emacsで執筆した記事なので、そのあたりの感想とか書いていきます。
+この記事は初の全編Emacsで執筆した記事なので、そのあたりの感想とか書いていきます。
 
 ## なんで最近記事を書いてなかったのか
 
