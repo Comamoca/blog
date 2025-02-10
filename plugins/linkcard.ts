@@ -86,7 +86,7 @@ async function cardLinkElement(url) {
         class="!no-underline flex w-full bg-white rounded-lg border border-gray-200 shadow hover:bg-gray-100"
         title="Link Card"
       >
-        <div class="flex grow flex-col basis-7/12">
+        <div class="flex grow flex-col md:pr-32">
           <span class="!text-xs md:!text-base px-3 pt-2 py-0 h-20 !mt-0 !mb-0 font-bold tracking-tight text-gray-900 overflow-hidden text-ellipsis">
             ${title}
           </span>
