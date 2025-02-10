@@ -75,7 +75,7 @@ async function cardLinkElement(url) {
     if (is.Undefined(og.image)) {
       return "";
     } else {
-      return `<img class="object-cover rounded-tr-lg rounded-br-lg h-full m-0 md:!mt-0" src="${og.image}" />`;
+      return `<img class="object-scale-down basis-4/12 rounded-tr-lg rounded-br-lg h-full m-0 md:!mt-0" src="${og.image}" />`;
     }
   })();
 
@@ -86,7 +86,7 @@ async function cardLinkElement(url) {
         class="!no-underline flex w-full bg-white rounded-lg border border-gray-200 shadow hover:bg-gray-100"
         title="Link Card"
       >
-        <div class="flex grow flex-col md:pr-32">
+        <div class="flex grow flex-col">
           <span class="!text-xs md:!text-base px-3 pt-2 py-0 h-20 !mt-0 !mb-0 font-bold tracking-tight text-gray-900 overflow-hidden text-ellipsis">
             ${title}
           </span>
@@ -94,9 +94,7 @@ async function cardLinkElement(url) {
             ${name}
           </span>
         </div>
-        <div class="shrink">
         ${image}
-        </div>
       </a>
     </div>
      `;
