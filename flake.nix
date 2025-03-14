@@ -38,6 +38,23 @@
 
           libPath = pkgs.lib.makeLibraryPath ([ stdenv.cc.cc.lib ]);
 
+          fonts = stdenv.mkDerivation {
+            pname = "noto-cjk";
+            version = "2.003";
+            src = pkgs.fetchzip {
+              name = "noto-cjk";
+              url = "https://github.com/notofonts/noto-cjk/releases/download/Sans2.004/06_NotoSansCJKjp.zip";
+              hash = "sha256-QoAXVSotR8fOLtGe87O2XHuz8nNQrTBlydo5QY/LMRo=";
+              stripRoot = false;
+            };
+
+            buildPhase = ''
+              mkdir -p $out/bin
+
+              cp NotoSansCJKjp-Bold.otf $out/bin
+            '';
+          };
+
           textlintrc = (pkgs.formats.json { }).generate "textlintrc" {
             filters = { };
             rules = {
@@ -127,8 +144,15 @@
             LD_LIBRARY_PATH = libPath;
 
             shellHook = ''
-              # unlink .textlintrc
-              # ln -s ${textlintrc} .textlintrc 
+              rm -r ./fonts
+              mkdir -p ./fonts/noto-fonts
+
+              unlink .textlintrc
+              # ln -s ${textlintrc} .textlintrc
+              ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Bold.otf
+              ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Black.otf
+              ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Regular.otf
+
 
               ${pkgs.git-secrets}/bin/git-secrets --add '''^[a-z]{4}-[a-z]{4}-[a-z]{4}-[a-z0-9]{4}$'
             '';
