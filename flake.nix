@@ -79,6 +79,14 @@
               git secrets --scan
             '';
           };
+
+          deno-test = pkgs.writeShellApplication {
+            name = "deno-test";
+            runtimeInputs = [ pkgs.deno ];
+            text = ''
+              deno test --allow-read
+            '';
+          };
         in
         {
           treefmt = {
@@ -101,6 +109,13 @@
                   enable = true;
                   name = "git-secrets";
                   entry = "${git-secrets'}/bin/git-secrets";
+                  language = "system";
+                  types = [ "text" ];
+                };
+                deno-test = {
+                  enable = false;
+                  name = "deno-test";
+                  entry = "${deno-test}/bin/deno-test";
                   language = "system";
                   types = [ "text" ];
                 };
@@ -131,7 +146,7 @@
               nil
               lua-language-server
               efm-langserver
-              nodePackages_latest.typescript-language-server
+              # nodePackages_latest.typescript-language-server
               # ruby-lsp
               tailwindcss-language-server
 

@@ -5,6 +5,7 @@
     "jsr:@core/unknownutil@*": "4.3.0",
     "jsr:@davidbonnet/astring@1.8.6": "1.8.6",
     "jsr:@libs/xml@6.0.3": "6.0.3",
+    "jsr:@std/assert@*": "1.0.11",
     "jsr:@std/bytes@^1.0.3": "1.0.4",
     "jsr:@std/cli@1.0.10": "1.0.10",
     "jsr:@std/cli@1.0.8": "1.0.8",
@@ -21,7 +22,9 @@
     "jsr:@std/fmt@1.0.4": "1.0.4",
     "jsr:@std/fmt@^1.0.3": "1.0.4",
     "jsr:@std/fmt@^1.0.4": "1.0.4",
+    "jsr:@std/front-matter@*": "1.0.5",
     "jsr:@std/front-matter@1.0.5": "1.0.5",
+    "jsr:@std/fs@*": "1.0.9",
     "jsr:@std/fs@1.0.6": "1.0.6",
     "jsr:@std/fs@1.0.9": "1.0.9",
     "jsr:@std/fs@^1.0.6": "1.0.9",
@@ -29,6 +32,7 @@
     "jsr:@std/html@1.0.3": "1.0.3",
     "jsr:@std/html@^1.0.3": "1.0.3",
     "jsr:@std/http@1.0.12": "1.0.12",
+    "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/io@0.225": "0.225.0",
     "jsr:@std/json@1": "1.0.1",
     "jsr:@std/jsonc@1.0.1": "1.0.1",
@@ -44,6 +48,7 @@
     "jsr:@std/streams@^1.0.8": "1.0.8",
     "jsr:@std/toml@1.0.2": "1.0.2",
     "jsr:@std/toml@^1.0.1": "1.0.2",
+    "jsr:@std/yaml@*": "1.0.5",
     "jsr:@std/yaml@1.0.5": "1.0.5",
     "jsr:@std/yaml@^1.0.5": "1.0.5",
     "npm:@catppuccin/vscode@*": "3.16.0",
@@ -113,6 +118,12 @@
     "@libs/xml@6.0.3": {
       "integrity": "85506d5c61b0110d26dbb02059ce5a543226c3501fccbc7692e2ba4921f95567"
     },
+    "@std/assert@1.0.11": {
+      "integrity": "2461ef3c368fe88bc60e186e7744a93112f16fd110022e113a0849e94d1c83c1",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
     "@std/bytes@1.0.4": {
       "integrity": "11a0debe522707c95c7b7ef89b478c13fb1583a7cfb9a85674cd2cc2e3a28abc"
     },
@@ -177,6 +188,9 @@
         "jsr:@std/path@^1.0.8",
         "jsr:@std/streams@^1.0.8"
       ]
+    },
+    "@std/internal@1.0.5": {
+      "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
     },
     "@std/io@0.225.0": {
       "integrity": "c1db7c5e5a231629b32d64b9a53139445b2ca640d828c26bf23e1c55f8c079b3"
