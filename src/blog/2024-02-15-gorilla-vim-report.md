@@ -1,7 +1,7 @@
 ---
 title: ゴリラ.vimに行ってきた
 description: ゴリラ.vimに行ってきたのでその話
-pubDate: Feb 23 2024
+pubDate: Feb 15 2024
 emoji: 🦊
 draft: false
 ---
