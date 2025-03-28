@@ -8,6 +8,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
+    deno-overlay.url = "github:haruki7049/deno-overlay";
   };
 
   outputs =
@@ -18,6 +19,7 @@
       treefmt-nix,
       flake-parts,
       git-hooks-nix,
+      ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
@@ -28,6 +30,7 @@
 
       perSystem =
         {
+          self,
           config,
           pkgs,
           system,
@@ -82,21 +85,36 @@
 
           deno-test = pkgs.writeShellApplication {
             name = "deno-test";
-            runtimeInputs = [ pkgs.deno ];
+            runtimeInputs = [ pkgs.deno."2.2.5" ];
             text = ''
-              deno test --allow-read
+              deno test --allow-read --no-prompt
             '';
           };
         in
         {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [
+              inputs.deno-overlay.overlays.deno-overlay
+            ];
+            config = { };
+          };
+
           treefmt = {
             projectRootFile = "flake.nix";
             programs = {
               nixfmt.enable = true;
-              deno.enable = true;
+              deno = {
+                enable = true;
+              };
               rufo.enable = true;
             };
-            settings.formatter = { };
+            settings.formatter = {
+              deno = {
+                command = "${pkgs.deno."2.2.5"}/bin/deno";
+                options = [ "fmt" ];
+              };
+            };
           };
 
           pre-commit = {
@@ -135,7 +153,9 @@
               # For sharp
               vips
 
-              deno
+              # deno."1.28.0"
+              deno."2.2.5"
+
               bun
               wrangler
 
