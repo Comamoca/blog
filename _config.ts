@@ -63,6 +63,7 @@ const highlighter = await createHighlighter({
     "elisp",
     "gleam",
     "clojure",
+    "ssh-config",
   ],
 });
 
