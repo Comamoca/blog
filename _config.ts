@@ -39,9 +39,9 @@ import linkcard from "./plugins/linkcard.ts";
 import footnote from "./plugins/lume/footnote.ts";
 
 // Shiki theme
-import mocha from "npm:@catppuccin/vscode/themes/mocha.json" with {
-  type: "json",
-};
+// import mocha from "npm:@catppuccin/vscodethemes/mocha.json" with {
+//  type: "json",
+// };
 
 const RELEASE = Deno.env.get("RELEASE");
 
