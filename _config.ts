@@ -46,7 +46,7 @@ import mocha from "npm:@catppuccin/vscode/themes/mocha.json" with {
 const RELEASE = Deno.env.get("RELEASE");
 
 const highlighter = await createHighlighter({
-  themes: [mocha],
+  themes: ["catppuccin-mocha"],
   langs: [
     "v",
     "js",
