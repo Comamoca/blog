@@ -176,14 +176,15 @@
               unar
             ];
 
-            LD_LIBRARY_PATH = libPath;
+            LD_LIBRARY_PATH = "${libPath}/lib";
 
             shellHook = ''
               rm -r ./fonts
               mkdir -p ./fonts/noto-fonts
 
               unlink .textlintrc
-              # ln -s ${textlintrc} .textlintrc
+              ln -s ${textlintrc} .textlintrc
+
               ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Bold.otf
               ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Black.otf
               ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Regular.otf
