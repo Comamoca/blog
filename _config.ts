@@ -20,7 +20,7 @@ import filter_pages from "lume/plugins/filter_pages.ts";
 import base_path from "lume/plugins/base_path.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 
-import tailwindOptions from "./tailwind.config.js";
+// import tailwindOptions from "./tailwind.config.js";
 
 import { createHighlighter } from "npm:shiki";
 import {
@@ -37,11 +37,6 @@ import linkcard from "./plugins/linkcard.ts";
 
 // Lume plugin
 import footnote from "./plugins/lume/footnote.ts";
-
-// Shiki theme
-// import mocha from "npm:@catppuccin/vscodethemes/mocha.json" with {
-//  type: "json",
-// };
 
 const RELEASE = Deno.env.get("RELEASE");
 
@@ -157,7 +152,7 @@ site.use(jsx());
 site.use(mdx());
 
 site.use(footnote());
-site.use(tailwindcss({ options: tailwindOptions }));
+// site.use(tailwindcss({ options: tailwindOptions }));
 site.use(postcss());
 
 if (RELEASE) {
