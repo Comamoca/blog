@@ -158,7 +158,7 @@
 
               # deno."1.28.0"
               # deno."2.2.5"
-
+              deno
               bun
               wrangler
 
