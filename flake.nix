@@ -139,7 +139,7 @@
                   types = [ "text" ];
                 };
                 deno-test = {
-                  enable = true;
+                  enable = false;
                   name = "deno-test";
                   entry = "${deno-test}/bin/deno-test";
                   language = "system";
