@@ -19,10 +19,8 @@ const HeaderLink = ({ href, title, Child }) => {
       className="text-gray-500 hover:text-gray-700 py-1 border-gray-500"
       title={title}
     >
-      <div className={"mx-3"}>
-        <div className="w-3 w-10">
-          <Child />
-        </div>
+      <div className="mx-3 w-3 w-10">
+        <Child />
       </div>
     </a>
   );
