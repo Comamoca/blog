@@ -41,6 +41,13 @@
 
           libPath = pkgs.lib.makeLibraryPath ([ stdenv.cc.cc.lib ]);
 
+          wrangler-pkgs = import (builtins.fetchTarball {
+            url = "https://github.com/NixOS/nixpkgs/archive/21808d22b1cda1898b71cf1a1beb524a97add2c4.tar.gz";
+            sha256 = "sha256:0v2z6jphhbk1ik7fqhlfnihcyff5np9wb3pv19j9qb9mpildx0cg";
+          }) { inherit system; };
+
+          wrangler = wrangler-pkgs.wrangler;
+
           fonts = stdenv.mkDerivation {
             pname = "noto-cjk";
             version = "2.003";
@@ -50,12 +57,6 @@
               hash = "sha256-QoAXVSotR8fOLtGe87O2XHuz8nNQrTBlydo5QY/LMRo=";
               stripRoot = false;
             };
-
-            wrangler-pkgs = import (builtins.fetchTarball {
-              url = "https://github.com/NixOS/nixpkgs/archive/21808d22b1cda1898b71cf1a1beb524a97add2c4.tar.gz";
-            }) { };
-
-            wrangler = wrangler-pkgs.wrangler;
 
             buildPhase = ''
               mkdir -p $out/bin
