@@ -39,7 +39,8 @@
         let
           stdenv = pkgs.stdenv;
 
-          libPath = pkgs.lib.makeLibraryPath ([ stdenv.cc.cc.lib ]);
+          # libPath = pkgs.lib.makeLibraryPath (pkgs.lib.getLib stdenv.cc.cc);
+          # libPath = "${pkgs.lib.getLib stdenv.cc.cc}"/lib;
 
           wrangler-pkgs = import (builtins.fetchTarball {
             url = "https://github.com/NixOS/nixpkgs/archive/21808d22b1cda1898b71cf1a1beb524a97add2c4.tar.gz";
@@ -92,20 +93,21 @@
 
           deno-test = pkgs.writeShellApplication {
             name = "deno-test";
-            runtimeInputs = [ pkgs.deno."2.2.5" ];
+            # runtimeInputs = [ pkgs.deno."2.2.5" ];
+            runtimeInputs = [ pkgs.deno ];
             text = ''
               deno test --allow-read --no-prompt
             '';
           };
         in
         {
-          _module.args.pkgs = import inputs.nixpkgs {
-            inherit system;
-            overlays = [
-              inputs.deno-overlay.overlays.deno-overlay
-            ];
-            config = { };
-          };
+          # _module.args.pkgs = import inputs.nixpkgs {
+          #   inherit system;
+          #   overlays = [
+          #     inputs.deno-overlay.overlays.deno-overlay
+          #   ];
+          #   config = { };
+          # };
 
           treefmt = {
             projectRootFile = "flake.nix";
@@ -118,7 +120,8 @@
             };
             settings.formatter = {
               deno = {
-                command = "${pkgs.deno."2.2.5"}/bin/deno";
+                # command = "${pkgs.deno."2.2.5"}/bin/deno";
+                command = "${pkgs.deno}/bin/deno";
                 options = [ "fmt" ];
               };
             };
@@ -157,11 +160,11 @@
               #   textlint-rule-prh
               # ])
 
-              # For sharp
               vips
+              stdenv.cc.cc
 
               # deno."1.28.0"
-              deno."2.2.5"
+              # deno."2.2.5"
 
               bun
               wrangler
@@ -186,13 +189,16 @@
               wrangler
             ];
 
-            LD_LIBRARY_PATH = "${libPath}/lib";
+            # LD_LIBRARY_PATH = "${libPath}/lib";
+            # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
+
+            LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc ]}";
 
             shellHook = ''
               rm -r ./fonts
               mkdir -p ./fonts/noto-fonts
 
-              unlink .textlintrc
+              # unlink .textlintrc
               ln -s ${textlintrc} .textlintrc
 
               ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Bold.otf
