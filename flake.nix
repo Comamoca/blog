@@ -8,7 +8,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
-    deno-overlay.url = "github:haruki7049/deno-overlay";
+    # deno-overlay.url = "github:haruki7049/deno-overlay";
   };
 
   outputs =
@@ -93,7 +93,6 @@
 
           deno-test = pkgs.writeShellApplication {
             name = "deno-test";
-            # runtimeInputs = [ pkgs.deno."2.2.5" ];
             runtimeInputs = [ pkgs.deno ];
             text = ''
               deno test --allow-read --no-prompt
@@ -120,7 +119,6 @@
             };
             settings.formatter = {
               deno = {
-                # command = "${pkgs.deno."2.2.5"}/bin/deno";
                 command = "${pkgs.deno}/bin/deno";
                 options = [ "fmt" ];
               };
