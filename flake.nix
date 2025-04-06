@@ -95,7 +95,7 @@
             name = "deno-test";
             runtimeInputs = [ pkgs.deno ];
             text = ''
-              deno test --allow-read --no-prompt
+              ${pkgs.deno}/bin/deno test --allow-read --no-prompt
             '';
           };
         in
