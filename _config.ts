@@ -141,7 +141,7 @@ site.use(remark({
       rehypeShikiFromHighlighter,
       highlighter,
       {
-        themes: { light: "Catppuccin Mocha", dark: "Catppuccin Mocha" },
+        themes: { light: "catppuccin-mocha", dark: "catppuccin-mocha" },
         inline: "tailing-curly-colon",
       },
     ],
