@@ -117,12 +117,7 @@
               };
               rufo.enable = true;
             };
-            settings.formatter = {
-              deno = {
-                command = "${pkgs.deno}/bin/deno";
-                options = [ "fmt" ];
-              };
-            };
+            settings.formatter = { };
           };
 
           pre-commit = {
