@@ -174,6 +174,9 @@
               nushell
               git-secrets
               unar
+
+              # deploy
+              wrangler
             ];
 
             LD_LIBRARY_PATH = "${libPath}/lib";
