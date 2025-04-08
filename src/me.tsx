@@ -1,5 +1,5 @@
 import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
-import BaseHead from "./components/BaseHead.tsx";
+import BaseHead from "./_components/BaseHead.tsx";
 
 export const title = "About Me";
 export const layout = "layouts/main.tsx";

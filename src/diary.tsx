@@ -1,8 +1,8 @@
 import { basename } from "jsr:@std/path";
-import PostList from "./components/PostList.tsx";
-import Logo from "./components/Logo.tsx";
+import PostList from "./_components/PostList.tsx";
+import Logo from "./_components/Logo.tsx";
 import { SITE_DESCRIPTION } from "./consts.ts";
-import Twemoji from "./components/Twemoji.tsx";
+import Twemoji from "./_components/Twemoji.tsx";
 
 export const title = "すべての日報";
 export const layout = "layouts/main.tsx";

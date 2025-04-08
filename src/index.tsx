@@ -1,8 +1,8 @@
 import { basename } from "jsr:@std/path";
-import PostCard from "./components/PostCard.tsx";
+import PostCard from "./_components/PostCard.tsx";
 import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
-import PostList from "./components/PostList.tsx";
-import Logo from "./components/Logo.tsx";
+import PostList from "./_components/PostList.tsx";
+import Logo from "./_components/Logo.tsx";
 
 export const title = SITE_TITLE;
 export const layout = "layouts/main.tsx";

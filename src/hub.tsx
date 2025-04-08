@@ -1,6 +1,6 @@
 import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
-import BaseHead from "./components/BaseHead.tsx";
-import PostCard from "./components/PostCard.tsx";
+import BaseHead from "./_components/BaseHead.tsx";
+import PostCard from "./_components/PostCard.tsx";
 
 export const title = "Hub";
 export const layout = "layouts/main.tsx";

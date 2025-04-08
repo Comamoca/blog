@@ -1,8 +1,8 @@
 import { basename } from "jsr:@std/path";
 import { SITE_TITLE } from "./consts.ts";
-import PostList from "./components/PostList.tsx";
-import Logo from "./components/Logo.tsx";
-import Twemoji from "./components/Twemoji.tsx";
+import PostList from "./_components/PostList.tsx";
+import Logo from "./_components/Logo.tsx";
+import Twemoji from "./_components/Twemoji.tsx";
 
 export const layout = "layouts/main.tsx";
 export const openGraphLayout = "layouts/mainOgImage.tsx";
