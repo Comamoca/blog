@@ -91,13 +91,13 @@
             '';
           };
 
-          # deno-test = pkgs.writeShellApplication {
-          #   name = "deno-test";
-          #   runtimeInputs = [ pkgs.deno ];
-          #   text = ''
-          #     ${pkgs.deno}/bin/deno test --allow-read --no-prompt
-          #   '';
-          # };
+          deno-test = pkgs.writeShellApplication {
+            name = "deno-test";
+            runtimeInputs = [ pkgs.deno ];
+            text = ''
+              ${pkgs.deno}/bin/deno test --allow-read --no-prompt
+            '';
+          };
         in
         {
           # _module.args.pkgs = import inputs.nixpkgs {
@@ -133,13 +133,13 @@
                   language = "system";
                   types = [ "text" ];
                 };
-                # deno-test = {
-                #   enable = true;
-                #   name = "deno-test";
-                #   entry = "${deno-test}/bin/deno-test";
-                #   language = "system";
-                #   types = [ "text" ];
-                # };
+                deno-test = {
+                  enable = true;
+                  name = "deno-test";
+                  entry = "${deno-test}/bin/deno-test";
+                  language = "system";
+                  types = [ "text" ];
+                };
               };
             };
           };
