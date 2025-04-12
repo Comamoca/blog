@@ -1,10 +1,10 @@
-import Twemoji from "../../components/Twemoji.tsx";
-import Header from "../../components/Header.tsx";
-import Footer from "../../components/Footer.tsx";
+// import Twemoji from "../../components/Twemoji.tsx";
+// import Header from "../../components/Header.tsx";
+// import Footer from "../../components/Footer.tsx";
 import { SITE_TITLE } from "../../consts.ts";
 
 export default (
-  { title, children }: Lume.Data,
+  { title, children, comp }: Lume.Data,
   helpers: Lume.Helpers,
 ) => {
   return (
@@ -19,9 +19,9 @@ export default (
           />
         </head>
         <body>
-          <Header />
+          <comp.Header />
           {children}
-          <Footer />
+          <comp.Footer />
         </body>
         {/*HACK: デプロイ時にPagefindのスクリプトが実行されないため追加した*/}
         <script
