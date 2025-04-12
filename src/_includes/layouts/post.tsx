@@ -1,6 +1,6 @@
-import Twemoji from "../../components/Twemoji.tsx";
-import Header from "../../components/Header.tsx";
-import Footer from "../../components/Footer.tsx";
+import Twemoji from "../../_components/Twemoji.tsx";
+import Header from "../../_components/Header.tsx";
+import Footer from "../../_components/Footer.tsx";
 import { format, parse } from "date-fns";
 import ja from "date-fns/locale/ja";
 
