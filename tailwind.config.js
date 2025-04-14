@@ -4,7 +4,8 @@ import daisyui from "npm:daisyui@latest";
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
+    "./src/**/*.{astro,html,js,jsx,md,ts,tsx}",
+    "./_site/**/*.{html,js}",
   ],
   safelist: [
     "grid-cols-2",
