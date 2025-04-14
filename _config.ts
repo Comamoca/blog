@@ -191,7 +191,7 @@ site.use(jsx());
 site.use(mdx());
 
 site.use(footnote());
-site.use(tailwindcss(tailwindOptions));
+site.use(tailwindcss({ options: tailwindOptions }));
 site.use(postcss());
 
 if (RELEASE) {
