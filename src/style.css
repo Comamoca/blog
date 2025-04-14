@@ -1,5 +1,9 @@
+/* @import "tailwindcss"; */
 /* Font import */
 @import url("https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap");
+
+@plugin "tailwindcss/typography";
+@plugin "daisyui";
 
 @tailwind base;
 @tailwind components;
