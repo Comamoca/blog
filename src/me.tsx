@@ -1,5 +1,5 @@
 import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
-import BaseHead from "./_components/BaseHead.tsx";
+// import BaseHead from "./_components/BaseHead.tsx";
 
 export const title = "About Me";
 export const layout = "layouts/main.tsx";
@@ -26,10 +26,10 @@ const links: Array<{ link: string; name: string }> = [
   { link: "https://wakatime.com/@Comamoca", name: "Wakatime" },
 ];
 
-export default function () {
+export default function ({ comp }) {
   return (
     <>
-      <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+      <comp.BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 
       <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" />
       <img
