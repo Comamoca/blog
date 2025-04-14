@@ -8,6 +8,8 @@ import pagefind from "lume/plugins/pagefind.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import postcss from "lume/plugins/postcss.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
+import typography from "npm:@tailwindcss/typography";
+import daisyui from "npm:daisyui@4.5.0";
 import nano from "npm:cssnano";
 import checkUrls from "lume/plugins/check_urls.ts";
 import mdx from "lume/plugins/mdx.ts";
@@ -61,6 +63,43 @@ const highlighter = await createHighlighter({
     "ssh-config",
   ],
 });
+
+const tailwindOptions = {
+  content: [
+    "./src/**/*.{astro,js,jsx,md,mdx,svelte,ts,tsx,vue}",
+    "./_site/**/*.html",
+  ],
+  safelist: [
+    "grid-cols-2",
+    "gap-2",
+  ],
+  theme: {
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            "code": {
+              "border-radius": "0.25rem",
+              "background-color": "rgb(226 232 240)",
+              "padding-left": "0.25rem",
+              "padding-right": "0.25rem",
+              "padding-top": "0.125rem",
+              "padding-bottom": "0.125rem",
+            },
+            "code::before": {
+              content: "none",
+            },
+            "code::after": {
+              content: "none",
+            },
+          },
+        },
+      }),
+    },
+  },
+  // plugins: [typography, daisyui],
+  plugins: [typography, daisyui],
+};
 
 const site = lume({
   src: "./src",
@@ -152,7 +191,7 @@ site.use(jsx());
 site.use(mdx());
 
 site.use(footnote());
-// site.use(tailwindcss({ options: tailwindOptions }));
+site.use(tailwindcss(tailwindOptions));
 site.use(postcss());
 
 if (RELEASE) {
