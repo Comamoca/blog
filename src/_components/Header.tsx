@@ -28,7 +28,7 @@ const HeaderLink = ({ href, title, Child }) => {
 
 const links = [
   <HeaderLink href="/" title="Home" Child={Home} />,
-  <Search />,
+  // <Search />,
   <HeaderLink href="/diary/1" title="Diary" Child={NotepadText} />,
   <HeaderLink href="/me" title="Me" Child={User} />,
   <HeaderLink href="/hub" title="Hub" Child={Waypoints} />,
