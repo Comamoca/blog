@@ -31,7 +31,7 @@ export default function ({ search }: Lume.Data, helpers: Lume.Helpers) {
           <Logo />
         </div>
         <div className="flex md:items-center flex-col gap-6 grid-cols-4">
-          <PostList pages={pages.slice(0, 3)} />
+          <PostList pages={pages.slice(0, 5)} />
           <PostCard
             title="全ての投稿"
             description="全ての投稿はこちらから"
