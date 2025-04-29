@@ -1,8 +1,8 @@
 export default function PostCard(props) {
   const { title, description, slug, isDiary } = props;
   const style = isDiary
-    ? "flex flex-grow border(t gray-200) w-full max-w-sm md:min-w-10"
-    : "flex flex-grow border(t gray-200) w-full max-w-md md:min-w-10";
+    ? "flex flex-grow border(t gray-200) w-full max-w-sm md:max-w-3xl"
+    : "flex flex-grow border(t gray-200) w-full max-w-md md:max-w-3xl";
 
   return (
     <div className={style}>
