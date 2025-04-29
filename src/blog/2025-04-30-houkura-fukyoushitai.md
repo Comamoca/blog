@@ -4,7 +4,7 @@ description: '聞いて欲しい。'
 pubDate: 'Apr 30 2025 '
 emoji: 🦊
 tags: ["shinycolors", "houkura"]
-draft: true
+draft: false
 ---
 
 聞いて欲しい。
