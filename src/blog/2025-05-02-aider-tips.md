@@ -83,7 +83,7 @@ read:
 ```
 
 ここに`.aiderrules`を追加することで疑似的にclineっぽい挙動が可能。
-これについては(https://github.com/Aider-AI/aider/issues/1293)[issue]にも書いてある。
+これについては[issue](https://github.com/Aider-AI/aider/issues/1293)にも書いてある。
 
 プロジェクト構造を変更した後に更新し忘れる事がままあるので、「.aiderrulesの内容と現在のプロジェクトを比較し、異なっている箇所を列挙してください」
 みたいなプロンプトを定期的に実行したほうが良いかもしれない。
