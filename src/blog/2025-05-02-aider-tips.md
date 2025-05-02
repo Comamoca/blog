@@ -63,7 +63,7 @@ Emacsを使っている。理由は便利だから。
 
 みたいな感じ。
 
-使用できるコマンドは[In-chat commands](https://aider.chat/docs/usage/commands.html)に書いてある。
+使用できるコマンドは [In-chat commands](https://aider.chat/docs/usage/commands.html) に書いてある。
 
 ## 設定
 
