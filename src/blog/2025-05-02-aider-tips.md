@@ -114,7 +114,7 @@ aiderは自動的にlint, format,
 
 ## Tips
 
-(https://aider.chat/docs/usage/tips.html)[ドキュメント]に書いてあるTipsについて。
+[ドキュメント](https://aider.chat/docs/usage/tips.html)に書いてあるTipsについて。
 
 ### 目標を段階的に分割する
 
