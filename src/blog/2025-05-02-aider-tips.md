@@ -26,8 +26,6 @@ Geminiは性能がイマイチな印象が結構あると思うけど、実際�
 
 Flashはとにかく応答が速いけど、かなりアホの子なので`weak-model`として使うと良さそう。
 
-5/2現在`Gemini 2.0 Flash (Image Generation) Experimental`
-
 ### エディタ
 
 Emacsを使っている。理由は便利だから。
@@ -52,18 +50,16 @@ Emacsを使っている。理由は便利だから。
 チャット内でコマンドを使うことでエージェントに的確な指事を行える。
 コマンドは`/`から始まる。
 
-- /chat
-チャットモード
+- /chat チャットモード
 
-- /archtect
-アーキテクトモード
+- /archtect アーキテクトモード
 
-- /run
-コマンド実行
+- /run コマンド実行
 
 みたいな感じ。
 
-使用できるコマンドは [In-chat commands](https://aider.chat/docs/usage/commands.html) に書いてある。
+使用できるコマンドは
+[In-chat commands](https://aider.chat/docs/usage/commands.html) に書いてある。
 
 ## 設定
 
