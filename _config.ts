@@ -195,26 +195,25 @@ site.use(footnote());
 site.use(tailwindcss({ options: tailwindOptions }));
 site.use(postcss());
 
+site.copy("./public");
+site.copy("./well-known", ".well-known");
+
 if (RELEASE) {
   site.hooks.addPostcssPlugin(nano);
   site.use(pagefind());
   site.use(transformImages({
     cache: false,
   }));
+} else {
+  site.use(transformImages());
 }
 
 site.ignore(
   "README.md",
   "README.ja.md",
-  "src-old",
-  "components",
   "textlint-prh.yml",
   "CHANGELOG.md",
   "node_modules",
 );
-
-site.copy("./images", "images");
-site.copy("./public");
-site.copy("./well-known", ".well-known");
 
 export default site;
