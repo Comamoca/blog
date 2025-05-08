@@ -11,18 +11,18 @@ draft: false
 
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5D8TpfKvwzKTtXSab3NHwf?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/39ax9hrC2eEkclukurGmpq?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<br/>
 
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/39ax9hrC2eEkclukurGmpq?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
 聞きましたね？
 
 では良さを語っていきたいと思います。
 
-
 ## 怪盗Vを見逃すな
+
 最近シャニソンに追加された楽曲です。そう**つまりライブ映像があります。**
 曲とセットでライブ映像が見れるって最高ですね。
-
 
 曲調としては戦隊ものって感じでアップテンポな感じです。
 ライブ映像だとないですが、後ろで爆発エフェクトが被っても納得です。というか曲中花火上がってますし。
@@ -36,15 +36,13 @@ draft: false
 特にチョコ先の「ぶいっ！」がかわいくて好き。
 
 ## 裸足じゃいられない
-泣き曲です。
-これの歌詞読みながら朝の4時に泣いていた異常一般成人男性は私です。
+
+泣き曲です。 これの歌詞読みながら朝の4時に泣いていた異常一般成人男性は私です。
 だってさぁ歌詞が！歌詞が良いのよこれ！
 
 いくつか引用すると
 
-> 勇敢にストーリーメイカー
-> 大胆にスニーカーライナー
-> 解き放った一筆描いてこう
+> 勇敢にストーリーメイカー 大胆にスニーカーライナー 解き放った一筆描いてこう
 > 走ってゆこう
 
 (裸足じゃイラレナイ 作詞/作曲: ats-(Blue Bird's Nest) 2024年)
@@ -53,9 +51,7 @@ draft: false
 まるで放クラが夕方の土手を走ってゆくような情景が浮かんできますね。泣きました。
 「解き放った一筆」って歌詞から走りながら指で線を描く様子が連想できて、それはきっと先頭を走っている果穂ちゃんが指を伸ばして走ってるからだろうなぁ...なんて想像してます。
 
-> 逆光のカーテン開いて
-> 感情がブレながら
-> 思い切って　飛び込む景色は
+> 逆光のカーテン開いて 感情がブレながら 思い切って　飛び込む景色は
 > 裸足ではいられない
 
 (裸足じゃイラレナイ 作詞/作曲: ats-(Blue Bird's Nest) 2024年)
@@ -66,9 +62,7 @@ draft: false
 そこにタイトルにもある裸足ではいられないが加わることで、より急いで飛び出そうとしてるようなワクワク感が伝わってくるなぁと。
 しかも裸足じゃないって事は遠くに行くって事なので、ワクワク感がより一層強調されてるように感じる。
 
-
-> 向き合う一歩で　ズキンと痛んで気付けること
-> きっと　ずっと　たくさんあるね
+> 向き合う一歩で　ズキンと痛んで気付けること きっと　ずっと　たくさんあるね
 
 (裸足じゃイラレナイ 作詞/作曲: ats-(Blue Bird's Nest) 2024年)
 
@@ -79,13 +73,10 @@ draft: false
 
 この曲を放クラ自身の曲って解釈で見直すと、**最初に引用いたサビとかすごく良くないですか？**
 
-
 次は2番サビのこれ。
 
-> 晴天のナーバスランナー
-> 涙腺とスパークリングウォーター
-> 弾けそうな　胸にきゅっと沁みる
-> こぼれてく
+> 晴天のナーバスランナー 涙腺とスパークリングウォーター
+> 弾けそうな　胸にきゅっと沁みる こぼれてく
 
 (裸足じゃイラレナイ 作詞/作曲: ats-(Blue Bird's Nest) 2024年)
 
@@ -93,9 +84,7 @@ draft: false
 「涙腺とスパークリングウォーター」っていう組み合わせがすごく良くて、スパークリングウォーターの刺激が沁みる悲しさと
 ただ悲しいだけじゃない青春特有の爽やかさがよく表われていると思う。
 
-> 成長は順番じゃない
-> 感情が増えてくんだ
-> 眩しくって　透した　手のひら
+> 成長は順番じゃない 感情が増えてくんだ 眩しくって　透した　手のひら
 > 掴むにはまだ早い
 
 (裸足じゃイラレナイ 作詞/作曲: ats-(Blue Bird's Nest) 2024年)
@@ -107,14 +96,14 @@ draft: false
 前の2行を踏まえると、**一緒にいる人が成長するのを待っているように見える。**すごくあったかいですね。いつか手を掴めるようになって欲しい。
 
 > 踏み出す一歩で　もしかして君が迷っているなら
-> ずっと　ずっと　ここにいるから　負けるなガンバレ
-> You ready？ Go！
+> ずっと　ずっと　ここにいるから　負けるなガンバレ You ready？ Go！
 
 泣きました。さっきからずっと泣いてんな...
 
 ここまでストレートな励まし久々に聞いたかもしれない。
 この歌詞で聴き手の背中を押している側の歌って事が分かって、それって放クラの事で、
-最後の「You ready？ Go！」は一番サビでも出てきたけど、それはずっと聴き手の事を待ってくれてたんだなってのがここで分かって、
+最後の「You ready？
+Go！」は一番サビでも出てきたけど、それはずっと聴き手の事を待ってくれてたんだなってのがここで分かって、
 心にあったかいものが沁みわたってくる。
 
 ---
