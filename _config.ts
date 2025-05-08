@@ -21,6 +21,7 @@ import toml from "lume/plugins/toml.ts";
 import filter_pages from "lume/plugins/filter_pages.ts";
 import base_path from "lume/plugins/base_path.ts";
 import esbuild from "lume/plugins/esbuild.ts";
+import transformImages from "lume/plugins/transform_images.ts";
 
 // import tailwindOptions from "./tailwind.config.js";
 
@@ -197,6 +198,9 @@ site.use(postcss());
 if (RELEASE) {
   site.hooks.addPostcssPlugin(nano);
   site.use(pagefind());
+  site.use(transformImages({
+    cache: false,
+  }));
 }
 
 site.ignore(
@@ -209,8 +213,8 @@ site.ignore(
   "node_modules",
 );
 
-site.copy("./public");
 site.copy("./images", "images");
+site.copy("./public");
 site.copy("./well-known", ".well-known");
 
 export default site;
