@@ -21,7 +21,7 @@ https://playground.gleam.run/
 
 Gleam Playgroundにアクセスするとこんな画面になるはずです。
 
-![](/images/2024-12-10-gleam-playground.png)
+![](/img/2024-12-10-gleam-playground.png)
 
 では、`"Hello, Joe!"`の箇所を`"Hello, Gleam!"`と書き換えてみてください。
 

@@ -21,6 +21,7 @@ import toml from "lume/plugins/toml.ts";
 import filter_pages from "lume/plugins/filter_pages.ts";
 import base_path from "lume/plugins/base_path.ts";
 import esbuild from "lume/plugins/esbuild.ts";
+import transformImages from "lume/plugins/transform_images.ts";
 
 // import tailwindOptions from "./tailwind.config.js";
 
@@ -194,23 +195,25 @@ site.use(footnote());
 site.use(tailwindcss({ options: tailwindOptions }));
 site.use(postcss());
 
+site.copy("./public");
+site.copy("./well-known", ".well-known");
+
 if (RELEASE) {
   site.hooks.addPostcssPlugin(nano);
   site.use(pagefind());
+  site.use(transformImages({
+    cache: false,
+  }));
+} else {
+  site.use(transformImages());
 }
 
 site.ignore(
   "README.md",
   "README.ja.md",
-  "src-old",
-  "components",
   "textlint-prh.yml",
   "CHANGELOG.md",
   "node_modules",
 );
-
-site.copy("./public");
-site.copy("./images", "images");
-site.copy("./well-known", ".well-known");
 
 export default site;

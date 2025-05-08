@@ -13,7 +13,7 @@ draft: false
 
 最近またGleamを書いているのですが、標準ライブラリのドキュメントを見ていたらあることに気が付きました。
 
-![](/images/2024-12-09-gleam-iterator.png)
+![](/img/2024-12-09-gleam-iterator.png)
 
 Deprecated...!?
 
