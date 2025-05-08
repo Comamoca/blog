@@ -1,0 +1,3 @@
+transformImages:
+  resize: [200]
+  format: [png, webp]
