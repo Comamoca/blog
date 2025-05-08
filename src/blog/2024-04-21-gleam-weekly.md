@@ -47,7 +47,7 @@ https://codeberg.org/Pi-Cla/gling
 
 すべての単語を`gl`で始まるようにするジョークプログラムです。
 
-![](https://r2.comamoca.dev/gling.png)
+![](https://r2.comamoca.dev/gling.webp)
 
 ## Even more great Gleam stuff
 

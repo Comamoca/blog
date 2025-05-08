@@ -77,7 +77,7 @@ pub fn main() {
 
 [Playground](https://playground.gleam.run/#N4IgbgpgTgzglgewHYgFwEYA0IDGyAuES+aIcAtgA4JT4AEA5gDYQCG5A9IgDpK+UBXAEZ0AZkjrlWcJAAoAlHWC86dFvXIwGdALx1u4CnVZIAJnQhScMAyv0S6iAHSUoM/EzmaG83gF8QPyA===)
 
-![](/img/2024-12-11-gleam-fold.png)
+![](/img/2024-12-11-gleam-fold.webp)
 
 なお、`fold`関数は`gleam/list`のみならず先日紹介した`gleam/yielder`モジュールにも実装されています。
 こちらは遅延評価されるため、大きなリストを扱う処理に適しています。

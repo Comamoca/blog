@@ -27,7 +27,7 @@ curl https://jsr.io/@std/assert
 これを解決するには、acceptヘッダーを指定してやる必要がある。
 
 ```sh
-curl https://jsr.io/@std/assert -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+curl https://jsr.io/@std/assert -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/.webp,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
 ```
 
 このブログでも、linkcardの取得時にoriginがJSRの場合のみこのヘッダーを付加してリクエストを飛ばす処理が含まれている。
@@ -38,7 +38,7 @@ const resp = await fetch(req, {
     ? {
       ...header,
       "accept":
-        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/.webp,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
     }
     : header,
   signal: AbortSignal.timeout(timeout),

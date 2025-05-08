@@ -100,7 +100,7 @@ Vimmer とか集めてもくもく会出来たりしたら良いなぁなんて�
 の方にも浸ってますが、いろんな話題でわちゃわちゃしていて**ほぼ
 vim-jp**みたいな雰囲気があります。
 
-![](https://r2.comamoca.dev/Screenshot%202024-02-23%20at%2012-48-21%20iris.png)\
+![](https://r2.comamoca.dev/Screenshot%202024-02-23%20at%2012-48-21%20iris.webp)\
 [参照](https://iris.to/note18mkhuc072ughs902vfjtggcc5sf7czaugrdykztsrcr6m35ck4jqs6yecd)
 
 また、Vim コミュニティと Nostr

@@ -89,8 +89,8 @@ https://gleamtours.com/lustre-tutorial/introduction/welcome-to-lustre/
 対話的なLustreのチュートリアルサイトが公開されています。
 Runボタンを押すと実際のページが見られるので気軽にLustreをいじれます。
 
-[![Image from Gyazo](https://i.gyazo.com/66ebb795fca84a2d8bd28fd9a494e2c6.png)](https://gyazo.com/66ebb795fca84a2d8bd28fd9a494e2c6)
-[![Image from Gyazo](https://i.gyazo.com/bad3dd753cf5b722c08dd2ec14ec14d6.png)](https://gyazo.com/bad3dd753cf5b722c08dd2ec14ec14d6)
+[![Image from Gyazo](https://i.gyazo.com/66ebb795fca84a2d8bd28fd9a494e2c6.webp)](https://gyazo.com/66ebb795fca84a2d8bd28fd9a494e2c6)
+[![Image from Gyazo](https://i.gyazo.com/bad3dd753cf5b722c08dd2ec14ec14d6.webp)](https://gyazo.com/bad3dd753cf5b722c08dd2ec14ec14d6)
 
 #### Bravo - 2.3.0
 
