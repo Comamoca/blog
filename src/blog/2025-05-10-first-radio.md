@@ -4,7 +4,7 @@ description: 'スペースで喋った'
 pubDate: 'May 10 2025'
 emoji: 🦊
 tags: ["radio"]
-draft: true
+draft: false
 ---
 
 「ただ30分話すだけ」という配信をスペースでやった。
