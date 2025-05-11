@@ -1,3 +1,0 @@
-transformImages:
-  resize: [200]
-  format: webp
