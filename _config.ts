@@ -195,6 +195,9 @@ site.use(footnote());
 site.use(tailwindcss({ options: tailwindOptions }));
 site.use(postcss());
 
+site.loadAssets([".png"]);
+
+// site.copy("/img")
 site.copy("./public");
 site.copy("./well-known", ".well-known");
 
