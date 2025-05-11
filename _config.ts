@@ -22,6 +22,7 @@ import filter_pages from "lume/plugins/filter_pages.ts";
 import base_path from "lume/plugins/base_path.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import transformImages from "lume/plugins/transform_images.ts";
+import picture from "lume/plugins/picture.ts";
 
 // import tailwindOptions from "./tailwind.config.js";
 
@@ -204,10 +205,12 @@ site.copy("./well-known", ".well-known");
 if (RELEASE) {
   site.hooks.addPostcssPlugin(nano);
   site.use(pagefind());
+  site.use(picture());
   site.use(transformImages({
     cache: false,
   }));
 } else {
+  site.use(picture());
   site.use(transformImages());
 }
 

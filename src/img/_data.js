@@ -4,5 +4,5 @@ export const transformImages = {
 };
 
 export function url(page) {
-  return page.src.entry.path;
+  return `${page.src.path}-500w${page.src.ext}`;
 }
