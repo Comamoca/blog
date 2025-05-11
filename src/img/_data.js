@@ -1,5 +1,5 @@
 export const transformImages = {
-  resize: [200],
+  resize: [500],
   format: "webp",
 };
 
