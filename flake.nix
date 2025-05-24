@@ -148,10 +148,10 @@
           devShells.default = pkgs.mkShell {
             inputsFrom = [ config.pre-commit.devShell ];
             packages = with pkgs; [
-              # (textlint.withPackages [
-              #   textlint-rule-preset-ja-technical-writing
-              #   textlint-rule-prh
-              # ])
+              (textlint.withPackages [
+                textlint-rule-preset-ja-technical-writing
+                textlint-rule-prh
+              ])
 
               vips
               stdenv.cc.cc
@@ -172,6 +172,7 @@
               # nodePackages_latest.typescript-language-server
               # ruby-lsp
               tailwindcss-language-server
+              marksman
 
               just
               nushell

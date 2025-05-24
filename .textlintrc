@@ -1,11 +1,1 @@
-{
-    "rules": {
-	"preset-ja-technical-writing": false,
-	"spellcheck-tech-word": false,
-	"preset-japanese": true,
-	"prh": {
-            "rulePaths" :["textlint-prh.yml"]
-        }
-    }
-}
-
+/nix/store/14pxys5d83y278cwwaqanasm1s9sb0qz-textlintrc
