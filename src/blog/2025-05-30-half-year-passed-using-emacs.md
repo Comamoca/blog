@@ -158,11 +158,9 @@ https://github.com/manateelazycat/lsp-bridge/blob/69d1eb8509fbb72d2a3db241f0f187
 
 ## 補完UI
 
-:::message
 LSPではlsp-bridgeを使っている流れでacm.elを使っているが、その他の補完ではcorfuを使っていた。
 
 しかし、acm.elには後述するtempelに対応する実装が含まれているため全てacm.elに寄せてしまうかもしれない。
-:::
 
 corfuはちょうどverticoがポップアップUIになったかのような挙動をする。
 と言うより、両者は内部的に同じロジックを共有している。
