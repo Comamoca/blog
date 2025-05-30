@@ -8,7 +8,7 @@ draft: false
 ---
 
 本記事はVim駅伝の5/30の記事になります。\
-前回は5/26のSirasagi62さんによる[忘れっぽいNeovim使いに贈るtoggle-cheatsheet.nvimの紹介](https://zenn.dev/sirasagi62/articles/309b7044c6d0da)でした。
+前回は5/28のSirasagi62さんによる[忘れっぽいNeovim使いに贈るtoggle-cheatsheet.nvimの紹介](https://zenn.dev/sirasagi62/articles/309b7044c6d0da)でした。
 
 ---
 
