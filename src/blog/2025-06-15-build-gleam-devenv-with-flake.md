@@ -17,7 +17,7 @@ devenvはFlakeで開発環境を構築する際に非常に便利なモジュー
 もしJavaScriptの開発環境が欲しかったら[JavaScript](https://devenv.sh/supported-languages/javascript/)を参考にJavaScript
 Runtimeを適宜追加してください。
 
-```
+```flake
 {
   description = "An simple flake for create gleam develop environment.";
 
