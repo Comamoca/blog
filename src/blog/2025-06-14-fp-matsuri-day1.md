@@ -3,7 +3,7 @@ title: '関数型まつり Day1'
 description: '関数型まつり一日目に行ってきた。'
 pubDate: 'Jun 14 2025'
 emoji: 🦊
-tags: ["event"]
+tags: ["event", "fp-matsuri"]
 draft: false
 ---
 
