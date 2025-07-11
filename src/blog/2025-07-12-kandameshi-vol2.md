@@ -4,7 +4,7 @@ description: '神田メシの2回目を開催した話'
 pubDate: 'Jul 12 2025'
 emoji: 🦊
 tags: ["kanda-meshi"]
-draft: true
+draft: false
 ---
 
 ![](/img/2025-07-12-035043.png)
