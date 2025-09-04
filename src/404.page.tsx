@@ -24,9 +24,8 @@ export default function () {
           404 Page Not Found
         </h1>
 
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+        <script>
+          {`
 const random = Math.floor(Math.random() * 16777215).toString(16)
 const img = document.getElementById("img")
 
@@ -39,9 +38,8 @@ svgURL.pathname += "/" + svgName
 
 console.log(svgURL)
 img.src = svgURL
-`,
-          }}
-        />
+`}
+        </script>
       </main>
     </>
   );

@@ -18,8 +18,7 @@
       "lume/types.ts"
     ],
     "jsx": "react-jsx",
-    "jsxImportSource": "npm:react",
-    "jsxImportSourceTypes": "npm:@types/react"
+    "jsxImportSource": "npm:react"
   },
   "nodeModulesDir": "auto",
   "fmt": {

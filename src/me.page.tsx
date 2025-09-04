@@ -77,16 +77,14 @@ export default async function ({ comp }) {
         </article>
       </main>
 
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
+      <script>
+        {`
   const buttons = document.querySelectorAll('[data-confetti-button]');
 
   buttons.forEach((button) => {
     button.addEventListener('click', () => confetti());
-  });`,
-        }}
-      />
+  });`}
+      </script>
     </>
   );
 }

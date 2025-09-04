@@ -80,7 +80,7 @@
     "npm:date-fns@*": "4.1.0",
     "npm:estree-walker@3.0.3": "3.0.3",
     "npm:ico-endec@0.1.6": "0.1.6",
-    "npm:lucide-react@*": "0.487.0_react@18.3.1",
+    "npm:lucide-react@*": "0.539.0_react@19.1.1",
     "npm:markdown-it-attrs@4.3.1": "4.3.1_markdown-it@14.1.0",
     "npm:markdown-it-deflist@3.0.0": "3.0.0",
     "npm:markdown-it@14.1.0": "14.1.0",
@@ -1450,10 +1450,10 @@
     "lru-cache@10.4.3": {
       "integrity": "sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ=="
     },
-    "lucide-react@0.487.0_react@18.3.1": {
-      "integrity": "sha512-aKqhOQ+YmFnwq8dWgGjOuLc8V1R9/c/yOd+zDY4+ohsR2Jo05lSGc3WsstYPIzcTpeosN7LoCkLReUUITvaIvw==",
+    "lucide-react@0.539.0_react@19.1.1": {
+      "integrity": "sha512-VVISr+VF2krO91FeuCrm1rSOLACQUYVy7NQkzrOty52Y8TlTPcXcMdQFj9bYzBgXbWCiywlwSZ3Z8u6a+6bMlg==",
       "dependencies": [
-        "react"
+        "react@19.1.1"
       ]
     },
     "markdown-extensions@2.0.0": {
@@ -2440,7 +2440,7 @@
       "integrity": "sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==",
       "dependencies": [
         "loose-envify",
-        "react",
+        "react@18.3.1",
         "scheduler"
       ]
     },
@@ -2449,6 +2449,9 @@
       "dependencies": [
         "loose-envify"
       ]
+    },
+    "react@19.1.1": {
+      "integrity": "sha512-w8nqGImo45dmMIfljjMwOGtbmC/mk4CMYhWIicdSflH91J9TyCyczcPFXJzrZ/ZXcgGRFeP6BU0BEJTw6tZdfQ=="
     },
     "read-cache@1.0.0": {
       "integrity": "sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==",
@@ -3441,7 +3444,6 @@
   },
   "workspace": {
     "dependencies": [
-      "npm:@types/react@*",
       "npm:date-fns@*",
       "npm:lucide-react@*",
       "npm:react@*"
