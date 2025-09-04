@@ -12,6 +12,7 @@ export default (
       <html lang="ja">
         <head>
           {/*<BaseHead title={title} description={description} />*/}
+          <meta charset="UTF-8" />
           <link rel="stylesheet" href="/style.css" />
           <meta
             name="viewport"

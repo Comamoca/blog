@@ -74,6 +74,7 @@ const tailwindOptions = {
   safelist: [
     "grid-cols-2",
     "gap-2",
+    "p-3",
   ],
   theme: {
     extend: {

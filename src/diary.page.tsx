@@ -12,8 +12,8 @@ export const metas = {
   description: SITE_DESCRIPTION,
 };
 
-export default function* (
-  { search, paginate }: Lume.Data,
+export default async function* (
+  { search, paginate, comp }: Lume.Data,
   helpers: Lume.Helpers,
 ) {
   const pages = search.pages("posts")
@@ -40,14 +40,14 @@ export default function* (
         <>
           <div className="flex justify-center flex-col">
             <div className="mt-7 mx-auto">
-              <Logo />
+              <comp.Logo />
             </div>
             <h2 className="flex justify-center mt-5 mb-5 text-xl md:text-2xl">
               すべての日報
             </h2>
           </div>
           <div className="mx-8 flex md:items-center flex-col gap-6 grid-cols-4">
-            <PostList pages={page.results} isDiary={true} />
+            <comp.PostList pages={page.results} isDiary={true} />
             <div className="inline-flex flex-row justify-center py-1">
               {page.pagination.previous
                 ? (
@@ -60,7 +60,7 @@ export default function* (
                 )
                 : (
                   <span className="pt-1 text-xl">
-                    <Twemoji emoji="🦊" size={10} />
+                    <comp.Twemoji emoji="🦊" size={10} />
                   </span>
                 )}
 
@@ -77,7 +77,7 @@ export default function* (
                 )
                 : (
                   <span className="pt-1 text-xl">
-                    <Twemoji emoji="🦊" size={10} />
+                    <comp.Twemoji emoji="🦊" size={10} />
                   </span>
                 )}
             </div>
