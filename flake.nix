@@ -8,7 +8,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
-    # deno-overlay.url = "github:haruki7049/deno-overlay";
+    deno-overlay.url = "github:haruki7049/deno-overlay";
   };
 
   outputs =
@@ -38,6 +38,8 @@
         }:
         let
           stdenv = pkgs.stdenv;
+          deno-latest-version = "2.4.5";
+          deno = pkgs.deno."${deno-latest-version}";
 
           # libPath = pkgs.lib.makeLibraryPath (pkgs.lib.getLib stdenv.cc.cc);
           # libPath = "${pkgs.lib.getLib stdenv.cc.cc}"/lib;
@@ -93,20 +95,20 @@
 
           deno-test = pkgs.writeShellApplication {
             name = "deno-test";
-            runtimeInputs = [ pkgs.deno ];
+            runtimeInputs = [ deno ];
             text = ''
-              ${pkgs.deno}/bin/deno test --allow-read --no-prompt
+              ${deno}/bin/deno test --allow-read --no-prompt
             '';
           };
         in
         {
-          # _module.args.pkgs = import inputs.nixpkgs {
-          #   inherit system;
-          #   overlays = [
-          #     inputs.deno-overlay.overlays.deno-overlay
-          #   ];
-          #   config = { };
-          # };
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [
+              inputs.deno-overlay.overlays.deno-overlay
+            ];
+            config = { };
+          };
 
           treefmt = {
             projectRootFile = "flake.nix";
@@ -114,6 +116,7 @@
               nixfmt.enable = true;
               deno = {
                 enable = true;
+                package = deno;
               };
               rufo.enable = true;
             };
@@ -157,7 +160,7 @@
               stdenv.cc.cc
 
               # deno."1.28.0"
-              # deno."2.2.5"
+              # deno."2.4.5"
               deno
               bun
               wrangler
