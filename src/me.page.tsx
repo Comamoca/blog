@@ -2,6 +2,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
 // import BaseHead from "./_components/BaseHead.tsx";
 
 export const title = "About Me";
+export const url = "/me";
 export const layout = "layouts/main.tsx";
 export const openGraphLayout = "layouts/mainOgImage.tsx";
 export const metas = {
@@ -26,7 +27,7 @@ const links: Array<{ link: string; name: string }> = [
   { link: "https://wakatime.com/@Comamoca", name: "Wakatime" },
 ];
 
-export default function ({ comp }) {
+export default async function ({ comp }) {
   return (
     <>
       <comp.BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
@@ -76,16 +77,14 @@ export default function ({ comp }) {
         </article>
       </main>
 
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
+      <script>
+        {`
   const buttons = document.querySelectorAll('[data-confetti-button]');
 
   buttons.forEach((button) => {
     button.addEventListener('click', () => confetti());
-  });`,
-        }}
-      />
+  });`}
+      </script>
     </>
   );
 }

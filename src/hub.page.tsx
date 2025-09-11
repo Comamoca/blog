@@ -3,6 +3,7 @@ import BaseHead from "./_components/BaseHead.tsx";
 import PostCard from "./_components/PostCard.tsx";
 
 export const title = "Hub";
+export const url = "/hub";
 export const layout = "layouts/main.tsx";
 export const openGraphLayout = "layouts/mainOgImage.tsx";
 export const metas = {
@@ -56,11 +57,11 @@ const resources: Array<HubLink> = [
   // },
 ];
 
-export default function () {
+export default async function ({ comp }: Lume.Data) {
   return (
     <>
-      <BaseHead title={title} description={SITE_DESCRIPTION} />
-      <main className="mt-5">
+      <comp.BaseHead title={title} description={SITE_DESCRIPTION} />
+      <main className="mt-5 mx-8 md:mx-auto">
         <div className="flex flex-col justify-center">
           <h2 className="text-3xl md:text-4xl px-auto mx-auto">
             Hub
@@ -69,18 +70,16 @@ export default function () {
           <p className="p-10 mx-auto">
             自分が書いた情報やテンプレートなど、自身がよく引用するリソースの一覧です。
           </p>
-          <ul className="flex flex-col justify-center mx-10 md:mx-auto">
-            {resources.map((item) => {
-              return (
-                <div className="p-3">
-                  <PostCard
-                    slug={item.link}
-                    title={item.title}
-                    description={item.description}
-                  />
-                </div>
-              );
-            })}
+          <ul className="flex flex-col justify-center md:mx-auto">
+            {resources.map((item) => (
+              <div className="p-3">
+                <comp.PostCard
+                  slug={item.link.toString()}
+                  title={item.title}
+                  description={item.description}
+                />
+              </div>
+            ))}
           </ul>
         </div>
       </main>

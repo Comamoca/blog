@@ -1,4 +1,4 @@
-export default function Twemoji({ emoji, size = 20 }) {
+export default async function Twemoji({ emoji, size = 20 }) {
   const url = new URL("https://emoji2svg.deno.dev");
   url.pathname += `api/${emoji}`;
 

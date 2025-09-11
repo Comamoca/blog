@@ -1,4 +1,4 @@
-export default function (props) {
+export default async function (props) {
   const { title, description } = props;
   return (
     <>

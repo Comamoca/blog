@@ -2,6 +2,7 @@ import { SITE_DESCRIPTION } from "./consts.ts";
 
 export const layout = "layouts/main.tsx";
 export const openGraphLayout = "layouts/mainOgImage.tsx";
+export const url = "/404.html";
 
 export const title = "Page Not Found";
 export const metas = {
@@ -23,9 +24,8 @@ export default function () {
           404 Page Not Found
         </h1>
 
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+        <script>
+          {`
 const random = Math.floor(Math.random() * 16777215).toString(16)
 const img = document.getElementById("img")
 
@@ -38,9 +38,8 @@ svgURL.pathname += "/" + svgName
 
 console.log(svgURL)
 img.src = svgURL
-`,
-          }}
-        />
+`}
+        </script>
       </main>
     </>
   );

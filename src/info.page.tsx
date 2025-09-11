@@ -3,6 +3,7 @@ import { SITE_DESCRIPTION } from "./consts.ts";
 export const layout = "layouts/post.tsx";
 export const templateEngine = "jsx";
 export const openGraphLayout = "layouts/postOgImage.tsx";
+export const url = "/info";
 
 export const title = "このブログについて";
 export const emoji = "❓";

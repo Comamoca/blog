@@ -1,8 +1,10 @@
 {
   "imports": {
     "date-fns": "npm:date-fns",
-    "lume/": "https://deno.land/x/lume@v2.5.3/",
-    "lucide-react": "npm:lucide-react"
+    // "lume/": "https://deno.land/x/lume@v2.5.3/",
+    "lume/": "https://deno.land/x/lume@v3.0.1/",
+    "lume/jsx-runtime": "https://deno.land/x/ssx@v0.1.12/jsx-runtime.ts",
+    "daisyui": "npm:daisyui@5.1.10"
   },
   "tasks": {
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
@@ -18,16 +20,21 @@
       "lume/types.ts"
     ],
     "jsx": "react-jsx",
-    "jsxImportSource": "npm:react",
-    "jsxImportSourceTypes": "npm:@types/react"
+    "jsxImportSource": "lume"
   },
   "nodeModulesDir": "auto",
+  "unstable": ["temporal"],
   "fmt": {
     "exclude": [
       "_site",
       "_cache",
       "node_modules",
       "_broken_links.json"
+    ]
+  },
+  "lint": {
+    "plugins": [
+      "https://deno.land/x/lume@v3.0.1/lint.ts"
     ]
   }
 }
