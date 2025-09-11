@@ -6,7 +6,7 @@ interface HeaderLinkProps {
   children: any;
 }
 
-const HeaderLink = ({ href, title, children }: HeaderLinkProps) => {
+const HeaderLink = async ({ href, title, children }: HeaderLinkProps) => {
   return (
     <a
       href={href}

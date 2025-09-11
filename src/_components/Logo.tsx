@@ -1,6 +1,6 @@
 import { SITE_TITLE } from "../consts.ts";
 
-export default function () {
+export default async function () {
   return (
     <>
       <div className="flex flex-grow justify-center w-max">

@@ -5,7 +5,7 @@ interface PostCardProps {
   isDiary?: boolean;
 }
 
-export default function PostCard(props: PostCardProps) {
+export default async function PostCard(props: PostCardProps) {
   const { title, description, slug, isDiary } = props;
   const style = isDiary
     ? "flex flex-grow border(t gray-200) w-full max-w-sm md:max-w-3xl"

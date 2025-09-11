@@ -8,8 +8,6 @@ import pagefind from "lume/plugins/pagefind.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import postcss from "lume/plugins/postcss.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
-import typography from "npm:@tailwindcss/typography";
-import daisyui from "npm:daisyui@4.5.0";
 import nano from "npm:cssnano";
 import checkUrls from "lume/plugins/check_urls.ts";
 import mdx from "lume/plugins/mdx.ts";
@@ -23,8 +21,7 @@ import base_path from "lume/plugins/base_path.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import transformImages from "lume/plugins/transform_images.ts";
 import picture from "lume/plugins/picture.ts";
-
-// import tailwindOptions from "./tailwind.config.js";
+import { isString } from "jsr:@core/unknownutil/is/string";
 
 import { createHighlighter } from "npm:shiki";
 import {
@@ -101,7 +98,6 @@ const tailwindOptions = {
     },
   },
   // plugins: [typography, daisyui],
-  plugins: [typography, daisyui],
 };
 
 const site = lume({
@@ -169,10 +165,6 @@ if (RELEASE) {
       ],
     },
   }));
-
-  // site.use(base_path());
-  // site.use(toml());
-  // site.use(filter_pages());
 }
 
 site.use(metas());
@@ -194,26 +186,29 @@ site.use(jsx());
 site.use(mdx());
 
 site.use(footnote());
-site.use(tailwindcss({ options: tailwindOptions }));
+site.use(tailwindcss());
 site.use(postcss());
 
-site.loadAssets([".png"]);
+// Add stylesheet for tailwindcss
+site.add("style.css");
 
-// site.copy("/img")
+site.add([".png"]);
+
+site.copy("/img");
 site.copy("./public");
 site.copy("./well-known", ".well-known");
 
 if (RELEASE) {
   site.hooks.addPostcssPlugin(nano);
   site.use(pagefind());
-  site.use(picture());
   site.use(transformImages({
     cache: false,
   }));
 } else {
-  site.use(picture());
   site.use(transformImages());
 }
+
+site.use(picture());
 
 site.ignore(
   "README.md",

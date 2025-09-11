@@ -1,4 +1,4 @@
-export default function Search() {
+export default async function Search() {
   return (
     <div className="mx-3">
       <label

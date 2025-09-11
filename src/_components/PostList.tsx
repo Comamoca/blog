@@ -11,7 +11,7 @@ interface PostListProps {
   isDiary?: boolean;
 }
 
-export default function PostList(
+export default async function PostList(
   { comp, pages = [], helpers, isDiary }: PostListProps,
 ) {
   return (

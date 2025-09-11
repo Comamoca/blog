@@ -64,7 +64,7 @@ export default function (
               <div className="flex flex-col justify-center mx-10">
                 <article
                   className="max-w-xs md:max-w-3xl prose md:prose-lg prose-ul:list-disc"
-                  transform-images="webp 500@2"
+                  transform-images="webp png 500@2"
                 >
                   {children}
                 </article>
