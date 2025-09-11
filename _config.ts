@@ -11,17 +11,16 @@ import tailwindcss from "lume/plugins/tailwindcss.ts";
 import nano from "npm:cssnano";
 import checkUrls from "lume/plugins/check_urls.ts";
 import mdx from "lume/plugins/mdx.ts";
-import minify_html from "lume/plugins/minify_html.ts";
+// import minify_html from "lume/plugins/minify_html.ts";
 import { ogImages } from "lume/plugins/og_images.ts";
 import metas from "lume/plugins/metas.ts";
 import { read } from "lume/core/utils/read.ts";
-import toml from "lume/plugins/toml.ts";
-import filter_pages from "lume/plugins/filter_pages.ts";
-import base_path from "lume/plugins/base_path.ts";
-import esbuild from "lume/plugins/esbuild.ts";
+// import toml from "lume/plugins/toml.ts";
+// import filter_pages from "lume/plugins/filter_pages.ts";
+// import base_path from "lume/plugins/base_path.ts";
+// import esbuild from "lume/plugins/esbuild.ts";
 import transformImages from "lume/plugins/transform_images.ts";
 import picture from "lume/plugins/picture.ts";
-import { isString } from "jsr:@core/unknownutil/is/string";
 
 import { createHighlighter } from "npm:shiki";
 import {
@@ -63,42 +62,18 @@ const highlighter = await createHighlighter({
   ],
 });
 
-const tailwindOptions = {
-  content: [
-    "./src/**/*.{astro,js,jsx,md,mdx,svelte,ts,tsx,vue}",
-    "./_site/**/*.html",
-  ],
-  safelist: [
-    "grid-cols-2",
-    "gap-2",
-    "p-3",
-  ],
-  theme: {
-    extend: {
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            "code": {
-              "border-radius": "0.25rem",
-              "background-color": "rgb(226 232 240)",
-              "padding-left": "0.25rem",
-              "padding-right": "0.25rem",
-              "padding-top": "0.125rem",
-              "padding-bottom": "0.125rem",
-            },
-            "code::before": {
-              content: "none",
-            },
-            "code::after": {
-              content: "none",
-            },
-          },
-        },
-      }),
-    },
-  },
-  // plugins: [typography, daisyui],
-};
+// const tailwindOptions = {
+//   content: [
+//     "./src/**/*.{astro,js,jsx,md,mdx,svelte,ts,tsx,vue}",
+//     "./_site/**/*.html",
+//   ],
+//   safelist: [
+//     "grid-cols-2",
+//     "gap-2",
+//     "p-3",
+//   ],
+//   plugins: [daisyui],
+// };
 
 const site = lume({
   src: "./src",
@@ -109,7 +84,7 @@ if (RELEASE) {
   // NOTE: Got error when with use esbuild and pagefind plugin.
   // site.use(esbuild());
   site.use(sitemap());
-  site.use(minify_html());
+  // site.use(minify_html());
   site.use(brotli());
   site.use(gzip());
 

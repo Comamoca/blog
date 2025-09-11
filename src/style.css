@@ -2,12 +2,9 @@
 /* Font import */
 @import url("https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap");
 
-@plugin "tailwindcss/typography";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @plugin "daisyui";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 body {
   font-family: "Sawarabi Gothic", sans-serif;
@@ -27,18 +24,24 @@ span.shiki {
 }
 
 @theme {
+  --radius-sm: 0.25rem;
+  --color-slate-200: rgb(226 232 240);
+  --spacing-1: 0.25rem;
+  --spacing-0_5: 0.125rem;
+}
+
+@layer base {
   code {
-    border-radius: 0.25rem;
-    background-color: rgb(226 232 240);
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-    padding-top: 0.125rem;
-    padding-bottom: 0.125rem;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-slate-200);
+    padding-left: var(--spacing-1);
+    padding-right: var(--spacing-1);
+    padding-top: var(--spacing-0_5);
+    padding-bottom: var(--spacing-0_5);
   }
-  code::before {
-    content: "none";
-  }
+
+  code::before,
   code::after {
-    content: "none";
+    content: none;
   }
 }
