@@ -1,7 +1,7 @@
 ---
-title: '転職(したい)エントリ'
-description: '転職(したい)経緯とか希望する企業像とか'
-pubDate: 'Aug 17 2025'
+title: "転職(したい)エントリ"
+description: "転職(したい)経緯とか希望する企業像とか"
+pubDate: "Aug 17 2025"
 emoji: 🦊
 tags: ["job"]
 draft: false
@@ -87,6 +87,7 @@ Code(Pro)を使っているのですが、正直めちゃくちゃ便利なの�
 
 https://discord.com/users/comamoca
 
-8/17追記:  
+8/17追記:
+
 - 転職理由の箇所を変更しました。
 - 「來ず」を「来ず」に修正しました。

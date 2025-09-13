@@ -1,7 +1,7 @@
 ---
-title: '「ただ30分喋るだけ」ってのをやった'
-description: 'スペースで喋った'
-pubDate: 'May 10 2025'
+title: "「ただ30分喋るだけ」ってのをやった"
+description: "スペースで喋った"
+pubDate: "May 10 2025"
 emoji: 🦊
 tags: ["radio"]
 draft: false
@@ -9,7 +9,7 @@ draft: false
 
 「ただ30分話すだけ」という配信をスペースでやった。
 
-<blockquote class="twitter-tweet"><p lang="zxx" dir="ltr"><a href="https://t.co/vmraAcEdbR">https://t.co/vmraAcEdbR</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1921013369626108267?ref_src=twsrc%5Etfw">May 10, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+<blockquote class="twitter-tweet"><p lang="zxx" dir="ltr"><a href="https://t.co/vmraAcEdbR">https://t.co/vmraAcEdbR</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1921013369626108267?ref_src=twsrc%5Etfw">May 10, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 ## コンセプト
 

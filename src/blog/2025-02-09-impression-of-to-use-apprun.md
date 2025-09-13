@@ -1,7 +1,7 @@
 ---
-title: 'AppRunを使った所感'
-description: 'さくらインターネットでβ版になってるAppRunの話'
-pubDate: 'Feb 9 2025'
+title: "AppRunを使った所感"
+description: "さくらインターネットでβ版になってるAppRunの話"
+pubDate: "Feb 9 2025"
 emoji: 🦊
 tags: ["paas", "infra", "sakura-internet"]
 draft: false

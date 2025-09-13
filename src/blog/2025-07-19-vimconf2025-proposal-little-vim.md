@@ -1,7 +1,7 @@
 ---
-title: 'Little Vim'
-description: 'VimConf 2025 Smallのプロポーザルです。'
-pubDate: 'Jul 19 2025'
+title: "Little Vim"
+description: "VimConf 2025 Smallのプロポーザルです。"
+pubDate: "Jul 19 2025"
 emoji: 🦊
 tags: ["vimconf", "proposal"]
 draft: false

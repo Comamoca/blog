@@ -1,7 +1,7 @@
 ---
-title: 'フルスタックLustreアプリケーションに可能性を感じている'
-description: 'CloudflareがGleam普及の鍵かもしれない'
-pubDate: 'Aug 16 2025'
+title: "フルスタックLustreアプリケーションに可能性を感じている"
+description: "CloudflareがGleam普及の鍵かもしれない"
+pubDate: "Aug 16 2025"
 emoji: 🦊
 tags: ["gleam"]
 draft: false

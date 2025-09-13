@@ -1,7 +1,7 @@
 ---
-title: '1ファイルから始めるNix Flakeって記事を書いた'
-description: '記事の裏話的なやつとか'
-pubDate: 'Feb 9 2025'
+title: "1ファイルから始めるNix Flakeって記事を書いた"
+description: "記事の裏話的なやつとか"
+pubDate: "Feb 9 2025"
 emoji: 🦊
 tags: ["article"]
 draft: false

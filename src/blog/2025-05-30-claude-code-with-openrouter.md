@@ -1,7 +1,7 @@
 ---
-title: 'OpenRouterとNixOSでclaude codeを使う'
-description: 'OpenRouterのモデルでclaude codeを使う方法'
-pubDate: 'May 30 2025'
+title: "OpenRouterとNixOSでclaude codeを使う"
+description: "OpenRouterのモデルでclaude codeを使う方法"
+pubDate: "May 30 2025"
 emoji: 🦊
 tags: ["ai", "claude code"]
 draft: true

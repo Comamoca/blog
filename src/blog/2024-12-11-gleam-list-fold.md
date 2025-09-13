@@ -1,7 +1,7 @@
 ---
-title: 'gleam/listのfoldは便利'
-description: 'gleam/listのfoldの使い方について'
-pubDate: 'Dec 11 2024'
+title: "gleam/listのfoldは便利"
+description: "gleam/listのfoldの使い方について"
+pubDate: "Dec 11 2024"
 emoji: 🦊
 tags: []
 draft: false

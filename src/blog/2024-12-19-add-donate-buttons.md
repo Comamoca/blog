@@ -1,7 +1,7 @@
 ---
-title: 'ブログに寄付ボタンを設置してみた話'
-description: '寄付ボタンとNostrについて'
-pubDate: 'Dec 19 2024'
+title: "ブログに寄付ボタンを設置してみた話"
+description: "寄付ボタンとNostrについて"
+pubDate: "Dec 19 2024"
 emoji: 🦊
 tags: ["release", "nostr"]
 draft: false

@@ -1,7 +1,7 @@
 ---
-title: '神田メシvol.2を開催しました'
-description: '神田メシの2回目を開催した話'
-pubDate: 'Jul 12 2025'
+title: "神田メシvol.2を開催しました"
+description: "神田メシの2回目を開催した話"
+pubDate: "Jul 12 2025"
 emoji: 🦊
 tags: ["kanda-meshi"]
 draft: false

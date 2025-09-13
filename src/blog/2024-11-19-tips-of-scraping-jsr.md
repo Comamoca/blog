@@ -1,8 +1,8 @@
 ---
-title: 'JSRをスクレイピングする時のコツ'
-description: 'JSRをfetchする時はヘッダーに気を付けよう'
-pubDate: 'Nov 19 2024'
-emoji: '🦊'
+title: "JSRをスクレイピングする時のコツ"
+description: "JSRをfetchする時はヘッダーに気を付けよう"
+pubDate: "Nov 19 2024"
+emoji: "🦊"
 tags: ["tips"]
 draft: false
 ---

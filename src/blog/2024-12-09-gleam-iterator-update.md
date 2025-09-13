@@ -1,7 +1,7 @@
 ---
 title: gleam/iteratorが非推奨になった話
-description: 'gleam/iteratorはv0.44.0から非推奨になりました。'
-pubDate: 'Dec 9 2024'
+description: "gleam/iteratorはv0.44.0から非推奨になりました。"
+pubDate: "Dec 9 2024"
 emoji: 🦊
 tags: []
 draft: false

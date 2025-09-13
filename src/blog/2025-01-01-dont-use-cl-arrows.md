@@ -1,7 +1,7 @@
 ---
-title: 'cl-arrowsは使わない方が良い話'
-description: 'cl-arrowsはライセンスが明示されていないので、代わりにarrowsを使おう'
-pubDate: 'Jan 1 2025'
+title: "cl-arrowsは使わない方が良い話"
+description: "cl-arrowsはライセンスが明示されていないので、代わりにarrowsを使おう"
+pubDate: "Jan 1 2025"
 emoji: 🦊
 tags: ["commonlisp"]
 draft: false

@@ -1,7 +1,7 @@
 ---
-title: 'Gleamには公式のPlaygroundがある'
-description: '実は最近新しくリリースされたって話'
-pubDate: 'Dec 10 2024'
+title: "Gleamには公式のPlaygroundがある"
+description: "実は最近新しくリリースされたって話"
+pubDate: "Dec 10 2024"
 emoji: 🦊
 tags: []
 draft: false

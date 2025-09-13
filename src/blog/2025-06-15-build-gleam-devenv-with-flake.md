@@ -1,7 +1,7 @@
 ---
-title: 'Nix FlakeでGleam v1.11.1の開発環境を構築する'
-description: 'Nix Flakeで最新のGleamを使った開発環境を作成する方法'
-pubDate: 'Jun 15 2025'
+title: "Nix FlakeでGleam v1.11.1の開発環境を構築する"
+description: "Nix Flakeで最新のGleamを使った開発環境を作成する方法"
+pubDate: "Jun 15 2025"
 emoji: 🦊
 tags: ["gleam", "nix", "flake", "tips"]
 draft: false
