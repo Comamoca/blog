@@ -11,16 +11,16 @@ import tailwindcss from "lume/plugins/tailwindcss.ts";
 import nano from "npm:cssnano";
 import checkUrls from "lume/plugins/check_urls.ts";
 import mdx from "lume/plugins/mdx.ts";
-// import minify_html from "lume/plugins/minify_html.ts";
-import { ogImages } from "lume/plugins/og_images.ts";
+import minifyHTML from "lume/plugins/minify_html.ts";
+import openGraphImages from "lume/plugins/og_images.ts";
 import metas from "lume/plugins/metas.ts";
-import { read } from "lume/core/utils/read.ts";
 // import toml from "lume/plugins/toml.ts";
 // import filter_pages from "lume/plugins/filter_pages.ts";
 // import base_path from "lume/plugins/base_path.ts";
 // import esbuild from "lume/plugins/esbuild.ts";
 import transformImages from "lume/plugins/transform_images.ts";
 import picture from "lume/plugins/picture.ts";
+import { readFile } from "node:fs/promises";
 
 import { createHighlighter } from "npm:shiki";
 import {
@@ -110,32 +110,22 @@ if (RELEASE) {
     input: "./public/favicon.svg",
   }));
 
-  site.use(ogImages({
-    cache: true,
-    satori: {
+  site.use(openGraphImages({
+    options: {
       width: 1200,
       height: 600,
       fonts: [
         {
-          name: "NotoSansJPBlack",
-          weight: 900,
-          style: "normal",
-          data: await read("./fonts/noto-fonts/NotoSansCJKjp-Black.otf", true),
-        },
-        {
-          name: "NotoSansJPBold",
-          weight: 800,
-          style: "normal",
-          data: await read("./fonts/noto-fonts/NotoSansCJKjp-Bold.otf", true),
-        },
-        {
           name: "NotoSansJP",
-          weight: 600,
+          data: await readFile("./fonts/noto-fonts/NotoSansCJKjp-Regular.otf"),
+          weight: 400,
           style: "normal",
-          data: await read(
-            "./fonts/noto-fonts/NotoSansCJKjp-Regular.otf",
-            true,
-          ),
+        },
+        {
+          name: "Noto Sans JP ",
+          data: await readFile("./fonts/noto-fonts/NotoSansCJKjp-Bold.otf"),
+          weight: 700,
+          style: "normal",
         },
       ],
     },
@@ -179,11 +169,11 @@ if (RELEASE) {
   site.use(transformImages({
     cache: false,
   }));
+  site.use(minifyHTML());
 } else {
   site.use(transformImages());
+  site.use(picture());
 }
-
-site.use(picture());
 
 site.ignore(
   "README.md",

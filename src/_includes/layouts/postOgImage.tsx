@@ -32,9 +32,9 @@ export default function ({ title, description }) {
         <div
           style={{
             fontSize: 55, // fontSizeを45にすると大きくスタイルが崩れる
-            padding: 40,
+            padding: "40",
             flexGrow: 2,
-            fontFamily: "NotoSansJPBlack",
+            fontFamily: "Noto Sans JP",
           }}
         >
           {title}
@@ -42,7 +42,7 @@ export default function ({ title, description }) {
         <div style={{ display: "flex", paddingBottom: 48 }}>
           <div style={{ display: "flex", flexGrow: 2, paddingLeft: 40 }}>
             <img
-              src="https://avatars.githubusercontent.com/u/93137338?v=4"
+              src="https://r2.comamoca.dev/icon.png"
               width={80}
               height={80}
               style={{ borderRadius: 9999 }}
@@ -64,7 +64,7 @@ export default function ({ title, description }) {
               fontSize: 40,
               paddingTop: 20,
               paddingRight: 30,
-              fontFamily: "NotoSansJPBold",
+              fontFamily: "NotoSansJP",
             }}
           >
             かわいい駆動生活。
