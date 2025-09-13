@@ -146,7 +146,7 @@ export function metas() {
       addMeta(
         document,
         "name",
-        "twitter:og",
+        "twitter:image",
         image || icon,
       );
 
