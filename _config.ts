@@ -116,13 +116,13 @@ if (RELEASE) {
       height: 600,
       fonts: [
         {
-          name: "NotoSansJP",
+          name: "NotoSansJP Regular",
           data: await readFile("./fonts/noto-fonts/NotoSansCJKjp-Regular.otf"),
           weight: 400,
           style: "normal",
         },
         {
-          name: "Noto Sans JP ",
+          name: "NotoSansJP Bold",
           data: await readFile("./fonts/noto-fonts/NotoSansCJKjp-Bold.otf"),
           weight: 700,
           style: "normal",
@@ -159,21 +159,18 @@ site.add("style.css");
 
 site.add([".png"]);
 
-site.copy("/img");
 site.copy("./public");
 site.copy("./well-known", ".well-known");
 
 if (RELEASE) {
   site.hooks.addPostcssPlugin(nano);
   site.use(pagefind());
-  site.use(transformImages({
-    cache: false,
-  }));
   site.use(minifyHTML());
-} else {
-  site.use(transformImages());
-  site.use(picture());
 }
+
+site.use(picture());
+site.use(transformImages());
+site.add("img");
 
 site.ignore(
   "README.md",

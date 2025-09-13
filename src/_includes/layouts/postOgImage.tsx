@@ -34,7 +34,7 @@ export default function ({ title, description }) {
             fontSize: 55, // fontSizeを45にすると大きくスタイルが崩れる
             padding: "40",
             flexGrow: 2,
-            fontFamily: "Noto Sans JP",
+            fontFamily: "NotoSansJP Regular",
           }}
         >
           {title}
@@ -53,7 +53,7 @@ export default function ({ title, description }) {
                 fontWeight: 600,
                 paddingLeft: 20,
                 paddingTop: 10,
-                fontFamily: "NotoSansJP",
+                fontFamily: "NotoSansJP Bold",
               }}
             >
               Comamoca
@@ -64,7 +64,7 @@ export default function ({ title, description }) {
               fontSize: 40,
               paddingTop: 20,
               paddingRight: 30,
-              fontFamily: "NotoSansJP",
+              fontFamily: "NotoSansJP Bold",
             }}
           >
             かわいい駆動生活。
