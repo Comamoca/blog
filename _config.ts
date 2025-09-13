@@ -13,7 +13,7 @@ import checkUrls from "lume/plugins/check_urls.ts";
 import mdx from "lume/plugins/mdx.ts";
 import minifyHTML from "lume/plugins/minify_html.ts";
 import openGraphImages from "lume/plugins/og_images.ts";
-import metas from "lume/plugins/metas.ts";
+// import metas from "lume/plugins/metas.ts";
 // import toml from "lume/plugins/toml.ts";
 // import filter_pages from "lume/plugins/filter_pages.ts";
 // import base_path from "lume/plugins/base_path.ts";
@@ -34,6 +34,7 @@ import {
 import remark from "lume/plugins/remark.ts";
 import rehypeShikiFromHighlighter from "npm:@shikijs/rehype/core";
 import linkcard from "./plugins/linkcard.ts";
+import metas from "./plugins/metas.ts";
 
 // Lume plugin
 import footnote from "./plugins/lume/footnote.ts";
@@ -61,19 +62,6 @@ const highlighter = await createHighlighter({
     "ssh-config",
   ],
 });
-
-// const tailwindOptions = {
-//   content: [
-//     "./src/**/*.{astro,js,jsx,md,mdx,svelte,ts,tsx,vue}",
-//     "./_site/**/*.html",
-//   ],
-//   safelist: [
-//     "grid-cols-2",
-//     "gap-2",
-//     "p-3",
-//   ],
-//   plugins: [daisyui],
-// };
 
 const site = lume({
   src: "./src",
@@ -132,7 +120,6 @@ if (RELEASE) {
   }));
 }
 
-site.use(metas());
 site.use(remark({
   remarkPlugins: RELEASE ? [linkcard] : [],
   rehypePlugins: [
@@ -171,6 +158,7 @@ if (RELEASE) {
 site.use(picture());
 site.use(transformImages());
 site.add("img");
+site.use(metas());
 
 site.ignore(
   "README.md",
