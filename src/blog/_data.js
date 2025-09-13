@@ -1,5 +1,5 @@
 import { format } from "jsr:@std/datetime/format";
-import { join } from "jsr:@std/path/join";
+import { TWITTER_USERNAME } from "../consts.ts";
 
 export const tags = ["posts"];
 
@@ -8,6 +8,9 @@ export const templateEngine = "md";
 export const openGraphLayout = "layouts/postOgImage.tsx";
 export const metas = {
   description: "=description",
+  title: "=title",
+  type: "article",
+  twitter: TWITTER_USERNAME,
 };
 
 // export const layout = "layouts/post.vto"

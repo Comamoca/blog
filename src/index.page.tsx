@@ -1,5 +1,5 @@
 import { basename } from "jsr:@std/path";
-import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
+import { SITE_DESCRIPTION, SITE_TITLE, TWITTER_USERNAME } from "./consts.ts";
 
 export const title = SITE_TITLE;
 export const url = "/";
@@ -8,6 +8,7 @@ export const openGraphLayout = "layouts/mainOgImage.tsx";
 export const metas = {
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
+  twitter: TWITTER_USERNAME,
 };
 
 export default async function (
