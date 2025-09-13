@@ -64,7 +64,9 @@
             buildPhase = ''
               mkdir -p $out/bin
 
+              cp NotoSansCJKjp-Regular.otf $out/bin
               cp NotoSansCJKjp-Bold.otf $out/bin
+              cp NotoSansCJKjp-Black.otf $out/bin
             '';
           };
 
@@ -198,9 +200,9 @@
                             [ -f .textlintrc ] && rm .textlintrc
                             ln -s ${textlintrc} .textlintrc
 
+                            ln -s ${fonts}/bin/NotoSansCJKjp-Regular.otf ./fonts/noto-fonts/NotoSansCJKjp-Regular.otf
                             ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Bold.otf
-                            ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Black.otf
-                            ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Regular.otf
+                            ln -s ${fonts}/bin/NotoSansCJKjp-Black.otf ./fonts/noto-fonts/NotoSansCJKjp-Black.otf
 
 
                             ${pkgs.git-secrets}/bin/git-secrets --add '^[a-z]{4}-[a-z]{4}-[a-z]{4}-[a-z0-9]{4}$'
