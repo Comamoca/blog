@@ -5,7 +5,7 @@ export default async function Search() {
         htmlFor="pagefind_modal"
         className="text-gray-500 hover:text-gray-700 py-1 border-gray-500"
       >
-        <div className="w-3 w-10">
+        <div className="w-3 md:w-10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -36,7 +36,7 @@ export default async function Search() {
           </div>
           <div
             id="search"
-            className="mx-3 sm:mx-6 md:mx-10 lg:mx-20 xl:mx-40"
+            className="mx-3 md:mx-10"
           >
           </div>
         </div>
