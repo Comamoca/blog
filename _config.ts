@@ -21,6 +21,8 @@ import metas from "lume/plugins/metas.ts";
 import transformImages from "lume/plugins/transform_images.ts";
 import picture from "lume/plugins/picture.ts";
 import { readFile } from "node:fs/promises";
+import { basename } from "jsr:@std/path";
+import { expandGlob } from "jsr:@std/fs";
 
 import { createHighlighter } from "npm:shiki";
 import {
@@ -38,6 +40,20 @@ import linkcard from "./plugins/linkcard.ts";
 
 // Lume plugin
 import footnote from "./plugins/lume/footnote.ts";
+
+// For RSS lastBuildDate
+// TODO: 同日に複数の記事が投稿された場合にも対応する
+async function getLatestPostDate() {
+  const globPost = "./src/blog/*.md";
+
+  const entries = await Array.fromAsync(expandGlob(globPost));
+  const sorted = entries.map((entry) => basename(entry.path))
+    .map((name) => name.slice(0, 10))
+    .map((dateStr) => new Date(dateStr))
+    .sort((a, b) => -(a.getTime()) - (b.getTime()));
+
+  return sorted[0];
+}
 
 const RELEASE = Deno.env.get("RELEASE");
 
@@ -72,23 +88,8 @@ if (RELEASE) {
   // NOTE: Got error when with use esbuild and pagefind plugin.
   // site.use(esbuild());
   site.use(sitemap());
-  // site.use(minify_html());
   site.use(brotli());
   site.use(gzip());
-
-  site.use(feed({
-    output: ["api/feed.xml", "api/feed.json"],
-    query: "posts",
-    info: {
-      title: SITE_TITLE,
-      description: SITE_DESCRIPTION,
-      published: new Date(),
-      lang: "ja",
-      generator: true,
-      authorName: AUTHOR,
-      authorUrl: SITE_URL,
-    },
-  }));
 
   site.use(checkUrls({
     output: "_broken_links.json",
@@ -119,6 +120,31 @@ if (RELEASE) {
     },
   }));
 }
+
+// RSS feed - enabled in both dev and production modes
+site.use(feed({
+  output: ["api/feed.xml", "api/feed.json"],
+  query: "posts",
+  info: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    lang: "ja",
+    generator: true,
+    authorName: AUTHOR,
+    authorUrl: SITE_URL,
+    published: await getLatestPostDate(),
+  },
+  items: {
+    title: "=title",
+    description: "=extract",
+    published: "=date",
+    updated: undefined,
+    content: "=content",
+    authorName: AUTHOR,
+    authorUrl: `${SITE_URL}/me`,
+    image: "=cover",
+  },
+}));
 
 site.use(remark({
   remarkPlugins: RELEASE ? [linkcard] : [],
