@@ -1,7 +1,7 @@
 ---
 title: "「怪盗Vと見逃すな」と「裸足じゃイラレナイ」を聞いて欲しい"
 description: "聞いて欲しい。"
-pubDate: "Apr 30 2025 "
+pubDate: "Apr 30 2025"
 emoji: 🦊
 tags: ["shinycolors", "houkura"]
 draft: false

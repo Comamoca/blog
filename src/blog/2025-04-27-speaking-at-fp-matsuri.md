@@ -1,7 +1,7 @@
 ---
 title: "関数型まつりで登壇するって話"
 description: "関数型まつり2日目に登壇します"
-pubDate: "Apr 27 2025 "
+pubDate: "Apr 27 2025"
 emoji: 🦊
 tags: ["release", "event", "fp-matsuri"]
 draft: false

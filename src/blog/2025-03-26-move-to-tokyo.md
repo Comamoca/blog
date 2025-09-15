@@ -1,7 +1,7 @@
 ---
 title: "4月から東京に住むって話"
 description: "4月から東京に住むことになりました。"
-pubDate: "Mar 26 2025 "
+pubDate: "Mar 26 2025"
 emoji: 🦊
 tags: ["release"]
 draft: false

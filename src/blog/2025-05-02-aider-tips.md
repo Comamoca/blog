@@ -1,7 +1,7 @@
 ---
 title: "aiderを使っている"
 description: "aiderを使ってみての実戦よりな知見をまとめてみる"
-pubDate: "May 2 2025 "
+pubDate: "May 2 2025"
 emoji: 🦊
 tags: []
 draft: false
