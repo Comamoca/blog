@@ -68,6 +68,7 @@ const highlighter = await createHighlighter({
     "py",
     "sh",
     "lua",
+    "html",
     "viml",
     "rust",
     "lisp",
