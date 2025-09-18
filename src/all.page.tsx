@@ -23,7 +23,7 @@ export default async function* (
       const dateA = new Date(a.pubDate);
       const dateB = new Date(b.pubDate);
 
-      return (dateA - dateB) * -1;
+      return dateB.getTime() - dateA.getTime();
     });
 
   const options = {

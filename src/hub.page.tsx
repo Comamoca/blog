@@ -72,13 +72,13 @@ export default async function ({ comp }: Lume.Data) {
           </p>
           <ul className="flex flex-col justify-center md:mx-auto">
             {resources.map((item) => (
-              <div className="p-3">
+              <li className="py-3">
                 <comp.PostCard
                   slug={item.link.toString()}
                   title={item.title}
                   description={item.description}
                 />
-              </div>
+              </li>
             ))}
           </ul>
         </div>

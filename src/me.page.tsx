@@ -27,7 +27,7 @@ const links: Array<{ link: string; name: string }> = [
   { link: "https://wakatime.com/@Comamoca", name: "Wakatime" },
 ];
 
-export default async function ({ comp }) {
+export default async function ({ comp }: Lume.Data) {
   return (
     <>
       <comp.BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
