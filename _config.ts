@@ -13,6 +13,7 @@ import checkUrls from "lume/plugins/check_urls.ts";
 import mdx from "lume/plugins/mdx.ts";
 import minifyHTML from "lume/plugins/minify_html.ts";
 import openGraphImages from "lume/plugins/og_images.ts";
+import extractDate from "lume/plugins/extract_date.ts";
 import metas from "lume/plugins/metas.ts";
 // import toml from "lume/plugins/toml.ts";
 // import filter_pages from "lume/plugins/filter_pages.ts";
@@ -185,6 +186,7 @@ site.use(picture());
 site.use(transformImages());
 site.add("img");
 site.use(metas());
+site.use(extractDate({ remove: false }));
 
 site.ignore(
   "README.md",
