@@ -2,7 +2,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
 // import BaseHead from "./_components/BaseHead.tsx";
 
 export const title = "About Me";
-export const url = "/me";
+export const url = "/me.html";
 export const layout = "layouts/main.tsx";
 export const openGraphLayout = "layouts/mainOgImage.tsx";
 export const metas = {
