@@ -19,3 +19,6 @@ https://nixos.org/manual/nixpkgs/stable/#function-library-lib.sources.cleanSourc
 https://nixos.org/manual/nixpkgs/stable/#function-library-lib.sources.cleanSourceWith
 
 という訳で、今後Nixでsrc指定する時は`cleanSource`を使ってみようかなという話でした。
+
+追記:
+[@kuu](https://github.com/kuuote/)さん曰く、Flakeを使っているならsrcは自動的にcleanSource相当の処理が適用されるらしいです。ありがとうございます。
