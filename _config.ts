@@ -21,9 +21,12 @@ import metas from "lume/plugins/metas.ts";
 // import esbuild from "lume/plugins/esbuild.ts";
 import transformImages from "lume/plugins/transform_images.ts";
 import picture from "lume/plugins/picture.ts";
+import { is } from "jsr:@core/unknownutil";
 import { readFile } from "node:fs/promises";
 import { basename } from "jsr:@std/path";
 import { expandGlob } from "jsr:@std/fs";
+import { groupBy } from "jsr:@es-toolkit/es-toolkit";
+import { format } from "date-fns";
 
 import { createHighlighter } from "npm:shiki";
 import {
@@ -48,12 +51,24 @@ async function getLatestPostDate() {
   const globPost = "./src/blog/*.md";
 
   const entries = await Array.fromAsync(expandGlob(globPost));
+  const articleDate = entries.map((entry) => basename(entry.path))
+    .map((name) => name.slice(0, 10));
   const sorted = entries.map((entry) => basename(entry.path))
     .map((name) => name.slice(0, 10))
     .map((dateStr) => new Date(dateStr))
     .sort((a, b) => -(a.getTime()) - (b.getTime()));
 
-  return sorted[0];
+  const now = new Date();
+  const today = format(now, "yyyy-MM-dd");
+
+  const grouped = groupBy(articleDate, (item) => item);
+  const todayPost = grouped[today];
+
+  if (!is.Undefined(todayPost) && todayPost.length > 1) {
+    return new Date();
+  } else {
+    return sorted[0];
+  }
 }
 
 const RELEASE = Deno.env.get("RELEASE");

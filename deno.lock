@@ -4,6 +4,7 @@
     "jsr:@b-fuze/deno-dom@*": "0.1.56",
     "jsr:@core/unknownutil@*": "4.3.0",
     "jsr:@davidbonnet/astring@1.8.6": "1.8.6",
+    "jsr:@es-toolkit/es-toolkit@*": "1.39.10",
     "jsr:@luca/esbuild-deno-loader@0.11.1": "0.11.1",
     "jsr:@minify-html/deno@0.16.4": "0.16.4",
     "jsr:@std/assert@*": "1.0.13",
@@ -101,6 +102,9 @@
     },
     "@davidbonnet/astring@1.8.6": {
       "integrity": "98b4914c8863cdf8c0ff83bb5c528caa67a8dca6020ad6234113499f00583e3a"
+    },
+    "@es-toolkit/es-toolkit@1.39.10": {
+      "integrity": "8757072a13aa64b3b349ba2b9d7d22fbe7ea6f138506c6cd2222d767cd79918f"
     },
     "@luca/esbuild-deno-loader@0.11.1": {
       "integrity": "dc020d16d75b591f679f6b9288b10f38bdb4f24345edb2f5732affa1d9885267",
