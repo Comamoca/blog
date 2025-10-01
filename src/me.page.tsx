@@ -47,15 +47,17 @@ export default async function ({ comp }: Lume.Data) {
                 Comamoca
               </h5>
               <p className="font-normal text-gray-700">
-                わんだふる〜！ 好きな言語は
+                わんだふる〜！
 
                 <ul>
-                  <li>Go</li>
+                  <li>Gleam</li>
+                  <li>Common Lisp</li>
+                  <li>Nix</li>
+                  <li>Deno</li>
                   <li>Nim</li>
-                  <li>Rust</li>
                 </ul>
 
-                Elixirは勉強中です。
+                が好きです。 普段はNixOSとEmacsでコードを書いています。
 
                 <h3>Links</h3>
 
