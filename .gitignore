@@ -34,3 +34,5 @@ _broken_links.json
 log.txt
 
 .textlintrc
+
+flycheck_*
