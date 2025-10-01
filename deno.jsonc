@@ -1,6 +1,6 @@
 {
   "imports": {
-    "date-fns": "npm:date-fns",
+    "date-fns": "npm:date-fns@4.1.0",
     "lume/": "https://deno.land/x/lume@v3.0.1/",
     "lume/jsx-runtime": "https://deno.land/x/ssx@v0.1.12/jsx-runtime.ts",
     "daisyui": "npm:daisyui@5.1.10"
