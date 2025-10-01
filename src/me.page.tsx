@@ -57,7 +57,8 @@ export default async function ({ comp }: Lume.Data) {
                   <li>Nim</li>
                 </ul>
 
-                が好きです。 普段はNixOSとEmacsでコードを書いています。
+                が好きです。 <br>
+                普段はNixOSとEmacsでコードを書いています。
 
                 <h3>Links</h3>
 
