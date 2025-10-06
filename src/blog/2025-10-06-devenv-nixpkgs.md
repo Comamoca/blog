@@ -18,7 +18,7 @@ devenvは[devenv-nixpkgs](https://github.com/cachix/devenv-nixpkgs)を前提に�
 
 いつものように`nix flake init`でテンプレートを引っ張ってきた時に、こんなエラーが発生した。
 
-````
+```
 … while calling the 'derivationStrict' builtin
   at <nix/derivation-internal.nix>:37:12:
     36|
