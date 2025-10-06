@@ -31,6 +31,7 @@ export default async function ({ comp }: Lume.Data) {
   return (
     <>
       <comp.BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
       <img
         src="https://r2.comamoca.dev/icon.png"
         className="mx-auto h-32 w-32 rounded-full md:mb-6 mt-8 md:mt-2"
@@ -55,7 +56,7 @@ export default async function ({ comp }: Lume.Data) {
                   <li>Nim</li>
                 </ul>
 
-                が好きです。 <br>
+                が好きです。 <br/>
                 普段はNixOSとEmacsでコードを書いています。
 
                 <h3>Links</h3>
