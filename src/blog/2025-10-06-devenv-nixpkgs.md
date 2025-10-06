@@ -38,7 +38,7 @@ devenvは[devenv-nixpkgs](https://github.com/cachix/devenv-nixpkgs)を前提に�
 (stack trace truncated; use '--show-trace' to show the full, detailed trace)
 
 error: 'erlang-ls' has been removed as it has been archived upstream. Consider using 'erlang-language-platform' instead
-```'
+```
 
 パッケージがrenameされたという旨のエラーなのだけど、これは2つの要素によって発生した。
 
@@ -52,4 +52,3 @@ error: 'erlang-ls' has been removed as it has been archived upstream. Consider u
 
 これはcachixがdevenv向けに提供しているnixpkgsで、devenvはこれを前提にflakeを吐いているらしかった。
 普通にdevenv.nixを使用しているユーザーは出会さないけど、flakeからdevenvを使用しているユーザーはnixpkgsをNixOSの方に向けていることが多いと思うので、今後も遭遇する可能性はあるなと思った。
-````
