@@ -132,6 +132,26 @@
         "type": "github"
       }
     },
+    "mcp-servers-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1761353572,
+        "narHash": "sha256-xwb0r+j5WTdxgqBCIiOe5xXd7z/Q4muSJOz0XjNYKNA=",
+        "owner": "natsukium",
+        "repo": "mcp-servers-nix",
+        "rev": "4acf9abdf9f17318aabc358349871c8c4daba869",
+        "type": "github"
+      },
+      "original": {
+        "owner": "natsukium",
+        "repo": "mcp-servers-nix",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1729265718,
@@ -216,6 +236,7 @@
         "deno-overlay": "deno-overlay",
         "flake-parts": "flake-parts_2",
         "git-hooks-nix": "git-hooks-nix",
+        "mcp-servers-nix": "mcp-servers-nix",
         "nixpkgs": "nixpkgs_3",
         "systems": "systems",
         "treefmt-nix": "treefmt-nix_2"

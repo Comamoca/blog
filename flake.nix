@@ -9,6 +9,10 @@
     systems.url = "github:nix-systems/default";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
     deno-overlay.url = "github:haruki7049/deno-overlay";
+    mcp-servers-nix = {
+      url = "github:natsukium/mcp-servers-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -33,6 +37,7 @@
           self,
           config,
           pkgs,
+          lib,
           system,
           ...
         }:
@@ -106,6 +111,11 @@
         {
           _module.args.pkgs = import inputs.nixpkgs {
             inherit system;
+            config.allowUnfreePredicate =
+              pkg:
+              builtins.elem (lib.getName pkg) [
+                "claude-code"
+              ];
             overlays = [
               inputs.deno-overlay.overlays.deno-overlay
             ];
@@ -150,64 +160,79 @@
           };
 
           # When execute `nix develop`, you go in shell installed nil.
-          devShells.default = pkgs.mkShell {
-            inputsFrom = [ config.pre-commit.devShell ];
-            packages = with pkgs; [
-              (textlint.withPackages [
-                textlint-rule-preset-ja-technical-writing
-                textlint-rule-prh
-              ])
+          devShells.default =
+            let
+              mcp-config = inputs.mcp-servers-nix.lib.mkConfig pkgs {
+                programs = {
+                  playwright.enable = true;
+                };
+              };
+            in
+            pkgs.mkShell {
+              inputsFrom = [ config.pre-commit.devShell ];
+              packages = with pkgs; [
+                (textlint.withPackages [
+                  textlint-rule-preset-ja-technical-writing
+                  textlint-rule-prh
+                ])
 
-              vips
-              stdenv.cc.cc
+                vips
+                stdenv.cc.cc
 
-              # deno."1.28.0"
-              # deno."2.4.5"
-              deno
-              bun
-              wrangler
+                # deno."1.28.0"
+                # deno."2.4.5"
+                deno
+                bun
+                wrangler
 
-              # ruby
-              ruby_3_4
-              rubyPackages_3_4.thor
+                # ruby
+                ruby_3_4
+                rubyPackages_3_4.thor
 
-              nil
-              lua-language-server
-              efm-langserver
-              # nodePackages_latest.typescript-language-server
-              # ruby-lsp
-              tailwindcss-language-server
-              marksman
+                nil
+                lua-language-server
+                efm-langserver
+                # nodePackages_latest.typescript-language-server
+                # ruby-lsp
+                tailwindcss-language-server
+                marksman
 
-              just
-              nushell
-              git-secrets
-              unar
+                just
+                nushell
+                git-secrets
+                unar
 
-              # deploy
-              wrangler
-            ];
+                # deploy
+                wrangler
 
-            # LD_LIBRARY_PATH = "${libPath}/lib";
-            # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
+                claude-code
+              ];
 
-            LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc ]}";
+              # LD_LIBRARY_PATH = "${libPath}/lib";
+              # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
 
-            shellHook = ''
-              	      [ -e ./fonts ] && rm -r ./fonts
-                            mkdir -p ./fonts/noto-fonts
+              LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc ]}";
 
-                            [ -f .textlintrc ] && rm .textlintrc
-                            ln -s ${textlintrc} .textlintrc
+              shellHook = ''
+                	      [ -e ./fonts ] && rm -r ./fonts
+                              mkdir -p ./fonts/noto-fonts
 
-                            ln -s ${fonts}/bin/NotoSansCJKjp-Regular.otf ./fonts/noto-fonts/NotoSansCJKjp-Regular.otf
-                            ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Bold.otf
-                            ln -s ${fonts}/bin/NotoSansCJKjp-Black.otf ./fonts/noto-fonts/NotoSansCJKjp-Black.otf
+                              [ -f .textlintrc ] && rm .textlintrc
+                              ln -s ${textlintrc} .textlintrc
+
+                              ln -s ${fonts}/bin/NotoSansCJKjp-Regular.otf ./fonts/noto-fonts/NotoSansCJKjp-Regular.otf
+                              ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Bold.otf
+                              ln -s ${fonts}/bin/NotoSansCJKjp-Black.otf ./fonts/noto-fonts/NotoSansCJKjp-Black.otf
 
 
-                            ${pkgs.git-secrets}/bin/git-secrets --add '^[a-z]{4}-[a-z]{4}-[a-z]{4}-[a-z0-9]{4}$'
-            '';
-          };
+                              ${pkgs.git-secrets}/bin/git-secrets --add '^[a-z]{4}-[a-z]{4}-[a-z]{4}-[a-z0-9]{4}$'
+
+                  if [ -L ".mcp.json" ]; then
+                    unlink .mcp.json
+                  fi
+                  ln -sf ${mcp-config} .mcp.json
+              '';
+            };
         };
     };
 }
