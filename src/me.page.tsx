@@ -41,7 +41,7 @@ export default async function ({ comp }: Lume.Data) {
       <main>
         <h1 className="text-2xl md:text-4xl text-center my-4">About Me</h1>
         <article className="prose flex justify-center mx-auto">
-          <div className="border(t gray-200) w-96 m-3 p-4">
+          <div className="border-t border-gray-200 w-96 m-3 p-4">
             <div className="block p-4 bg-white rounded-lg border border-gray-200 shadow md:p-6">
               <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Comamoca
@@ -93,16 +93,17 @@ export default async function ({ comp }: Lume.Data) {
         </article>
       </main>
 
-      <script>
+      <script
         dangerouslySetInnerHTML={{
           __html: `
       const buttons = document.querySelectorAll('[data-confetti-button]');
-      console.log(buttons )
+      console.log(buttons);
       buttons.forEach((button) => {
         button.addEventListener('click', () => confetti());
       });
     `,
         }}
+      >
       </script>
     </>
   );
