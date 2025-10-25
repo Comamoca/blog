@@ -31,7 +31,8 @@ export default async function ({ comp }: Lume.Data) {
   return (
     <>
       <comp.BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js">
+      </script>
       <img
         src="https://r2.comamoca.dev/icon.png"
         className="mx-auto h-32 w-32 rounded-full md:mb-6 mt-8 md:mt-2"
@@ -46,18 +47,31 @@ export default async function ({ comp }: Lume.Data) {
                 Comamoca
               </h5>
               <p className="font-normal text-gray-700">
-                わんだふる〜！
-
-                <ul>
-                  <li>Gleam</li>
-                  <li>Common Lisp</li>
-                  <li>Nix</li>
-                  <li>Deno</li>
-                  <li>Nim</li>
-                </ul>
-
-                が好きです。 <br/>
+                Gleamが好きです。 <br />
                 普段はNixOSとEmacsでコードを書いています。
+
+                <h3>趣味</h3>
+                U149がきっかけでかれこれ3年くらいアイドルマスターを追っていて、主に学マスとシャニマスメインでやっています。
+                <div className="not-prose pt-2">
+                  担当アイドル:
+
+                  <div className="mt-2">
+                    <ul className="list-disc pl-5">
+                      <li className="py-0">小宮果穂</li>
+                      <li className="py-0">橘ありす</li>
+                      <li className="py-0">月村手毬</li>
+                      <li className="py-0">花海佑芽</li>
+                    </ul>
+                  </div>
+
+                  <div className="mt-2">
+                    担当ユニット:
+                    <ul className="list-disc pl-5">
+                      <li className="py-0">放クラ</li>
+                      <li className="py-0">Nightmare(学マス)</li>
+                    </ul>
+                  </div>
+                </div>
 
                 <h3>Links</h3>
 
@@ -80,12 +94,15 @@ export default async function ({ comp }: Lume.Data) {
       </main>
 
       <script>
-        {`
-  const buttons = document.querySelectorAll('[data-confetti-button]');
-
-  buttons.forEach((button) => {
-    button.addEventListener('click', () => confetti());
-  });`}
+        dangerouslySetInnerHTML={{
+          __html: `
+      const buttons = document.querySelectorAll('[data-confetti-button]');
+      console.log(buttons )
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => confetti());
+      });
+    `,
+        }}
       </script>
     </>
   );
