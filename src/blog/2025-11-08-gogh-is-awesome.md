@@ -1,6 +1,6 @@
 ---
 title: "goghってアプリが良さそうな話"
-description: ""
+description: "全てがちょうど良いと思ってる。"
 pubDate: "Nov 8 2025"
 emoji: 🦊
 tags: ["app"]
