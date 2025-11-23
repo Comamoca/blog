@@ -19,9 +19,10 @@ export const metas = {
 export function url(page) {
   const usDate = page.data.pubDate;
   const yymmdd = format(new Date(usDate), "yyyy-MM-dd");
+  const basename = page.data.basename;
 
-  // console.log(`./${yymmdd}-${page.data.basename}/`)
+  // ファイル名から日付部分を除去してタイトル部分のみを取得
+  const slugTitle = basename.replace(/^\d{4}-\d{2}-\d{2}-/, "");
 
-  // return join(yymmdd, page.data.url);
-  return `./${yymmdd}-${page.data.basename}/`;
+  return `./${yymmdd}-${slugTitle}/`;
 }
