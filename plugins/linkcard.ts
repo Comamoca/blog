@@ -4,9 +4,9 @@ import { toASCII } from "node:punycode";
 import { is } from "jsr:@core/unknownutil";
 import { logger } from "../utils/logger.ts";
 
-export default function linkcard(options) {
-  return async (tree) => {
-    const transformers: Array<Record<string, unknown>> = [];
+export default function linkcard(options?: any) {
+  return async (tree: any) => {
+    const transformers: Array<() => Promise<void>> = [];
 
     visit(tree, "paragraph", (paragraphNode, idx) => {
       if (paragraphNode.children.length !== 1) {
@@ -56,7 +56,7 @@ function genURL(urlStr: string) {
   return url;
 }
 
-async function cardLinkElement(url) {
+async function cardLinkElement(url: any) {
   const _url = new URL(url);
   const og = await fetchOGInfo(url);
 
@@ -75,7 +75,9 @@ async function cardLinkElement(url) {
     if (is.Undefined(og.image)) {
       return "";
     } else {
-      return `<img class="object-scale-down basis-4/12 rounded-tr-lg rounded-br-lg h-full m-0 md:!mt-0" src="${og.image}" />`;
+      // Use direct img tag for external URLs to avoid Lume's picture plugin transformation
+      // Add transform-images="" to prevent image processing by Lume plugins
+      return `<img class="object-scale-down basis-4/12 rounded-tr-lg rounded-br-lg h-full m-0 md:!mt-0" src="${og.image}" alt="OGP image" transform-images="" />`;
     }
   })();
 

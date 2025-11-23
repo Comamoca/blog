@@ -72,6 +72,39 @@ async function getLatestPostDate() {
 }
 
 const RELEASE = Deno.env.get("RELEASE");
+const DISABLE_LINKCARD = Deno.env.get("DISABLE_LINKCARD");
+
+// Link card configuration interface
+interface LinkCardConfig {
+  enabled?: boolean;
+  debugMode?: boolean;
+  developmentMode?: boolean;
+}
+
+// Enhanced link card configuration
+function configureLinkCard(linkCardConfig?: LinkCardConfig): any[] {
+  const isDisabledByEnv = DISABLE_LINKCARD !== undefined;
+  const isDisabledByConfig = linkCardConfig?.enabled === false;
+
+  // Environment variables take precedence for backwards compatibility
+  if (isDisabledByEnv) {
+    return []; // disabled
+  }
+
+  // Check config object
+  if (isDisabledByConfig) {
+    return []; // disabled
+  }
+
+  // Enable by default or when explicitly enabled
+  const debugMode = linkCardConfig?.debugMode || false;
+  const configToPass = { debugMode };
+
+  return [linkcard];
+}
+
+// Configure linkcard - enable by default in both dev and production
+const linkCardPlugins = configureLinkCard();
 
 const highlighter = await createHighlighter({
   themes: ["catppuccin-mocha"],
@@ -164,7 +197,7 @@ site.use(feed({
 }));
 
 site.use(remark({
-  remarkPlugins: RELEASE ? [linkcard] : [],
+  remarkPlugins: linkCardPlugins,
   rehypePlugins: [
     [
       rehypeShikiFromHighlighter,
