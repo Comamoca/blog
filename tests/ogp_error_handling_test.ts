@@ -1,4 +1,7 @@
-import { assertEquals, assertExists } from "https://deno.land/std@0.210.0/assert/mod.ts";
+import {
+  assertEquals,
+  assertExists,
+} from "https://deno.land/std@0.210.0/assert/mod.ts";
 import * as v from "npm:valibot";
 
 // Define the OGP schema
@@ -15,32 +18,32 @@ type OGInfo = v.InferOutput<typeof OGInfoSchema>;
 // Mock function to simulate fetchOGInfo with error handling
 async function mockFetchOGInfo(
   url: string,
-  mockResponse?: { html?: string; error?: Error }
+  mockResponse?: { html?: string; error?: Error },
 ): Promise<OGInfo | null> {
   try {
     if (mockResponse?.error) {
       throw mockResponse.error;
     }
-    
+
     const html = mockResponse?.html || "";
-    
+
     // Parse mock HTML for OG data
     const ogInfo: Record<string, unknown> = {
-      siteTitle: "Default Site Title"
+      siteTitle: "Default Site Title",
     };
-    
-    if (html.includes('og:title')) {
+
+    if (html.includes("og:title")) {
       ogInfo.title = "Mock Title";
     }
-    
-    if (html.includes('og:image')) {
+
+    if (html.includes("og:image")) {
       ogInfo.image = "https://example.com/image.jpg";
     }
-    
-    if (html.includes('og:site_name')) {
+
+    if (html.includes("og:site_name")) {
       ogInfo.name = "Mock Site";
     }
-    
+
     // This should throw validation error if required fields are missing
     return v.parse(OGInfoSchema, ogInfo);
   } catch (error) {
@@ -53,32 +56,36 @@ Deno.test("OGP Error Handling", async (t) => {
   await t.step("should handle validation errors gracefully", async () => {
     // Test case where siteTitle is missing (current error scenario)
     const result = await mockFetchOGInfo("https://example.com", {
-      html: '<meta property="og:title" content="Test" />'
+      html: '<meta property="og:title" content="Test" />',
     });
-    
+
     // Current implementation throws error, target implementation should return null
-    assertEquals(result?.siteTitle, "Default Site Title", "Should provide default siteTitle");
+    assertEquals(
+      result?.siteTitle,
+      "Default Site Title",
+      "Should provide default siteTitle",
+    );
   });
 
   await t.step("should handle network timeouts", async () => {
     const timeoutError = new Error("Timeout");
     timeoutError.name = "TimeoutError";
-    
+
     const result = await mockFetchOGInfo("https://example.com", {
-      error: timeoutError
+      error: timeoutError,
     });
-    
+
     assertEquals(result, null, "Should return null for timeout errors");
   });
 
   await t.step("should handle network errors", async () => {
     const networkError = new Error("Network error");
     networkError.name = "NetworkError";
-    
+
     const result = await mockFetchOGInfo("https://example.com", {
-      error: networkError
+      error: networkError,
     });
-    
+
     assertEquals(result, null, "Should return null for network errors");
   });
 
@@ -89,14 +96,18 @@ Deno.test("OGP Error Handling", async (t) => {
       <meta property="og:image" content="https://example.com/image.jpg" />
       <meta property="og:site_name" content="Example Site" />
     `;
-    
+
     const result = await mockFetchOGInfo("https://example.com", {
-      html: validHtml
+      html: validHtml,
     });
-    
+
     assertExists(result, "Should return valid OGP data");
     assertEquals(result.title, "Mock Title", "Should parse OG title");
-    assertEquals(result.image, "https://example.com/image.jpg", "Should parse OG image");
+    assertEquals(
+      result.image,
+      "https://example.com/image.jpg",
+      "Should parse OG image",
+    );
     assertEquals(result.name, "Mock Site", "Should parse OG site name");
   });
 });

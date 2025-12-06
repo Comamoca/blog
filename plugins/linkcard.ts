@@ -29,13 +29,20 @@ export default function linkcard(options?: any) {
         const url = genURL(urls[0]);
 
         transformers.push(async () => {
-          const cardHTML = await cardLinkElement(url);
-          const node = {
-            type: "html",
-            value: cardHTML,
-          };
+          try {
+            const cardHTML = await cardLinkElement(url);
+            const node = {
+              type: "html",
+              value: cardHTML,
+            };
 
-          tree.children.splice(idx, 1, node);
+            tree.children.splice(idx, 1, node);
+          } catch (error) {
+            logger.error(
+              `[LinkCard] Failed to generate card for URL: ${url}, error: ${error.message}`,
+            );
+            // Keep original text node if linkcard generation fails
+          }
         });
       });
     });
@@ -43,6 +50,7 @@ export default function linkcard(options?: any) {
     try {
       await Promise.all(transformers.map((t) => t()));
     } catch (e) {
+      logger.error(`[LinkCard] Error during transformation: ${e.message}`);
       console.log("[ LinkCard ] Got Error", e);
     }
 
@@ -51,9 +59,14 @@ export default function linkcard(options?: any) {
 }
 
 function genURL(urlStr: string) {
-  const url = new URL(urlStr);
-  url.hostname = toASCII(url.hostname);
-  return url;
+  try {
+    const url = new URL(urlStr);
+    url.hostname = toASCII(url.hostname);
+    return url;
+  } catch (error) {
+    logger.error(`[LinkCard] Invalid URL: ${urlStr}, error: ${error.message}`);
+    throw new Error(`Invalid URL: ${urlStr}`);
+  }
 }
 
 async function cardLinkElement(url: any) {

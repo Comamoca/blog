@@ -1,4 +1,7 @@
-import { assertEquals, assertExists } from "https://deno.land/std@0.210.0/assert/mod.ts";
+import {
+  assertEquals,
+  assertExists,
+} from "https://deno.land/std@0.210.0/assert/mod.ts";
 
 // Mock DOM Parser for testing HTML generation
 class MockDOMParser {
@@ -14,7 +17,7 @@ class MockDOMParser {
                 if (attr === "property") return "og:title";
                 if (attr === "content") return "Test Article Title";
                 return null;
-              }
+              },
             },
             {
               hasAttribute: (attr: string) => attr === "property",
@@ -22,7 +25,7 @@ class MockDOMParser {
                 if (attr === "property") return "og:image";
                 if (attr === "content") return "https://example.com/image.jpg";
                 return null;
-              }
+              },
             },
             {
               hasAttribute: (attr: string) => attr === "property",
@@ -30,12 +33,12 @@ class MockDOMParser {
                 if (attr === "property") return "og:site_name";
                 if (attr === "content") return "Example Site";
                 return null;
-              }
-            }
+              },
+            },
           ];
         }
         return [];
-      }
+      },
     };
   }
 }
@@ -44,7 +47,7 @@ class MockDOMParser {
 function generateLinkCardHTML(ogData: any, url: string): string {
   const title = ogData.title || ogData.siteTitle;
   const name = new URL(url).origin;
-  const image = ogData.image 
+  const image = ogData.image
     ? `<img class="object-scale-down basis-4/12 rounded-tr-lg rounded-br-lg h-full m-0 md:!mt-0" src="${ogData.image}" />`
     : "";
 
@@ -75,89 +78,170 @@ Deno.test("LinkCard Layout Verification", async (t) => {
       title: "Test Article",
       siteTitle: "Test Site",
       image: "https://example.com/image.jpg",
-      name: "Example Site"
+      name: "Example Site",
     };
-    
+
     const html = generateLinkCardHTML(ogData, "https://example.com");
-    
+
     // Basic structure checks
-    assertEquals(html.includes('<div class="flex flex-grow'), true, "Should have main flex container");
-    assertEquals(html.includes('href="https://example.com"'), true, "Should have correct URL link");
-    assertEquals(html.includes('title="Link Card"'), true, "Should have Link Card title attribute");
+    assertEquals(
+      html.includes('<div class="flex flex-grow'),
+      true,
+      "Should have main flex container",
+    );
+    assertEquals(
+      html.includes('href="https://example.com"'),
+      true,
+      "Should have correct URL link",
+    );
+    assertEquals(
+      html.includes('title="Link Card"'),
+      true,
+      "Should have Link Card title attribute",
+    );
   });
 
-  await t.step("should apply correct TailwindCSS classes for responsive design", () => {
-    const ogData = {
-      title: "Test Article",
-      siteTitle: "Test Site"
-    };
-    
-    const html = generateLinkCardHTML(ogData, "https://example.com");
-    
-    // TailwindCSS responsive classes
-    assertEquals(html.includes("md:!text-base"), true, "Should have responsive text size");
-    assertEquals(html.includes("md:max-w-full"), true, "Should have responsive max width");
-    assertEquals(html.includes("md:min-w-10"), true, "Should have responsive min width");
-    assertEquals(html.includes("hover:bg-gray-100"), true, "Should have hover effects");
-  });
+  await t.step(
+    "should apply correct TailwindCSS classes for responsive design",
+    () => {
+      const ogData = {
+        title: "Test Article",
+        siteTitle: "Test Site",
+      };
+
+      const html = generateLinkCardHTML(ogData, "https://example.com");
+
+      // TailwindCSS responsive classes
+      assertEquals(
+        html.includes("md:!text-base"),
+        true,
+        "Should have responsive text size",
+      );
+      assertEquals(
+        html.includes("md:max-w-full"),
+        true,
+        "Should have responsive max width",
+      );
+      assertEquals(
+        html.includes("md:min-w-10"),
+        true,
+        "Should have responsive min width",
+      );
+      assertEquals(
+        html.includes("hover:bg-gray-100"),
+        true,
+        "Should have hover effects",
+      );
+    },
+  );
 
   await t.step("should handle image display correctly", () => {
     const ogDataWithImage = {
       title: "Test Article",
       siteTitle: "Test Site",
-      image: "https://example.com/image.jpg"
+      image: "https://example.com/image.jpg",
     };
-    
-    const htmlWithImage = generateLinkCardHTML(ogDataWithImage, "https://example.com");
-    assertEquals(htmlWithImage.includes('<img class="object-scale-down basis-4/12'), true, "Should include image with correct classes");
-    assertEquals(htmlWithImage.includes('src="https://example.com/image.jpg"'), true, "Should have correct image src");
+
+    const htmlWithImage = generateLinkCardHTML(
+      ogDataWithImage,
+      "https://example.com",
+    );
+    assertEquals(
+      htmlWithImage.includes('<img class="object-scale-down basis-4/12'),
+      true,
+      "Should include image with correct classes",
+    );
+    assertEquals(
+      htmlWithImage.includes('src="https://example.com/image.jpg"'),
+      true,
+      "Should have correct image src",
+    );
 
     const ogDataWithoutImage = {
       title: "Test Article",
-      siteTitle: "Test Site"
+      siteTitle: "Test Site",
     };
-    
-    const htmlWithoutImage = generateLinkCardHTML(ogDataWithoutImage, "https://example.com");
-    assertEquals(htmlWithoutImage.includes('<img'), false, "Should not include image when not available");
+
+    const htmlWithoutImage = generateLinkCardHTML(
+      ogDataWithoutImage,
+      "https://example.com",
+    );
+    assertEquals(
+      htmlWithoutImage.includes("<img"),
+      false,
+      "Should not include image when not available",
+    );
   });
 
   await t.step("should handle text overflow with ellipsis", () => {
     const ogData = {
       title: "Very Long Article Title That Should Be Truncated With Ellipsis",
-      siteTitle: "Test Site"
+      siteTitle: "Test Site",
     };
-    
+
     const html = generateLinkCardHTML(ogData, "https://example.com");
-    
-    assertEquals(html.includes("overflow-hidden"), true, "Should have overflow hidden");
-    assertEquals(html.includes("text-ellipsis"), true, "Should have text ellipsis");
-    assertEquals(html.includes("whitespace-nowrap"), true, "Should prevent text wrapping for domain");
+
+    assertEquals(
+      html.includes("overflow-hidden"),
+      true,
+      "Should have overflow hidden",
+    );
+    assertEquals(
+      html.includes("text-ellipsis"),
+      true,
+      "Should have text ellipsis",
+    );
+    assertEquals(
+      html.includes("whitespace-nowrap"),
+      true,
+      "Should prevent text wrapping for domain",
+    );
   });
 
   await t.step("should generate accessible markup", () => {
     const ogData = {
       title: "Test Article",
-      siteTitle: "Test Site"
+      siteTitle: "Test Site",
     };
-    
+
     const html = generateLinkCardHTML(ogData, "https://example.com");
-    
-    assertEquals(html.includes('title="Link Card"'), true, "Should have title attribute for accessibility");
-    assertEquals(html.includes('href="https://example.com"'), true, "Should have proper href for navigation");
-    assertEquals(html.includes('class="!no-underline'), true, "Should remove default link underline");
+
+    assertEquals(
+      html.includes('title="Link Card"'),
+      true,
+      "Should have title attribute for accessibility",
+    );
+    assertEquals(
+      html.includes('href="https://example.com"'),
+      true,
+      "Should have proper href for navigation",
+    );
+    assertEquals(
+      html.includes('class="!no-underline'),
+      true,
+      "Should remove default link underline",
+    );
   });
 
   await t.step("should maintain proper aspect ratio and sizing", () => {
     const ogData = {
       title: "Test Article",
       siteTitle: "Test Site",
-      image: "https://example.com/image.jpg"
+      image: "https://example.com/image.jpg",
     };
-    
+
     const html = generateLinkCardHTML(ogData, "https://example.com");
-    
+
     assertEquals(html.includes("h-20"), true, "Should have fixed height");
-    assertEquals(html.includes("max-w-md"), true, "Should have maximum width constraint");
-    assertEquals(html.includes("basis-4/12"), true, "Should have proper image flex basis");
+    assertEquals(
+      html.includes("max-w-md"),
+      true,
+      "Should have maximum width constraint",
+    );
+    assertEquals(
+      html.includes("basis-4/12"),
+      true,
+      "Should have proper image flex basis",
+    );
   });
 });

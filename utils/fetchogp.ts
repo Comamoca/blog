@@ -6,11 +6,11 @@ import { basename, join } from "jsr:@std/path";
 import { logger } from "../utils/logger.ts";
 
 export const OGInfoSchema = v.object({
-  url: v.union([v.string(), v.undefined()]),
+  url: v.optional(v.string()),
   siteTitle: v.string(),
-  title: v.union([v.string(), v.undefined()]),
-  image: v.union([v.string(), v.undefined()]),
-  name: v.union([v.string(), v.undefined()]),
+  title: v.optional(v.string()),
+  image: v.optional(v.string()),
+  name: v.optional(v.string()),
 });
 
 export type OGInfo = v.InferOutput<typeof OGInfoSchema>;
@@ -20,7 +20,7 @@ export async function fetchOGInfo(
   timeout = 10000,
 ): Promise<OGInfo> {
   try {
-    const useCahce = !is.Undefined(Deno.env.get("NO_CACHE"));
+    const useCahce = is.Undefined(Deno.env.get("NO_CACHE"));
 
     const cache = await caches.open("fetchOgp");
     const _url = new URL(url);
@@ -33,7 +33,7 @@ export async function fetchOGInfo(
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
       };
 
-      if (is.Undefined(resp) || useCahce) {
+      if (is.Undefined(resp) || !useCahce) {
         logger.debug(`=> ${_url.origin}: Unused cache.`);
 
         const req = new Request(_url);
