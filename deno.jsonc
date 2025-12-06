@@ -12,7 +12,8 @@
     "serve": "deno task lume -s",
     "deploy": "env RELEASE=1 deno task lume --location https://comamoca.dev; wrangler pages deploy ./_site --project-name=blog --commit-dirty=true",
     "build-pages": "deno run -A ./scripts/downloadFonts.ts && deno task lume",
-    "download-fonts": "deno run -A ./scripts/downloadFonts.ts"
+    "download-fonts": "deno run -A ./scripts/downloadFonts.ts",
+    "test": "deno test --allow-all"
   },
   "compilerOptions": {
     "types": [

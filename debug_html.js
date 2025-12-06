@@ -2,7 +2,7 @@
 function generateLinkCardHTML(ogData, url) {
   const title = ogData.title || ogData.siteTitle;
   const name = new URL(url).origin;
-  const image = ogData.image 
+  const image = ogData.image
     ? `<img class="object-scale-down basis-4/12 rounded-tr-lg rounded-br-lg h-full m-0 md:!mt-0" src="${ogData.image}" />`
     : "";
 
@@ -31,13 +31,19 @@ const ogData = {
   title: "Test Article",
   siteTitle: "Test Site",
   image: "https://example.com/image.jpg",
-  name: "Example Site"
+  name: "Example Site",
 };
 
 const html = generateLinkCardHTML(ogData, "https://example.com");
 console.log("Generated HTML:");
 console.log(html);
 console.log("\nChecking specific assertions:");
-console.log("Has main flex container:", html.includes('<div class="flex flex-grow'));
-console.log("Has correct URL link:", html.includes('<a href="https://example.com"'));
+console.log(
+  "Has main flex container:",
+  html.includes('<div class="flex flex-grow'),
+);
+console.log(
+  "Has correct URL link:",
+  html.includes('<a href="https://example.com"'),
+);
 console.log("Has title attribute:", html.includes('title="Link Card"'));
