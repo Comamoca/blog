@@ -1,7 +1,7 @@
 ---
-title: 'シャニ螺旋に行ってきた'
-description: '100点満点中412点でした'
-pubDate: 'Oct 29 2025'
+title: "シャニ螺旋に行ってきた"
+description: "100点満点中412点でした"
+pubDate: "Oct 29 2025"
 emoji: 🦊
 tags: ["idolmaster", "shinycolors", "report"]
 draft: true
@@ -27,7 +27,5 @@ https://damichele.jp/
 8thもここで食べてから行こうかなと考えています。
 
 ### 会場
-
-
 
 ## Day2

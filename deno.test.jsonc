@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow-env": true,
+    "allow-read": true,
+    "allow-net": false
+  }
+}

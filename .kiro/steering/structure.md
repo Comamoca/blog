@@ -20,6 +20,7 @@
 ## Source Directory Structure (`src/`)
 
 ### Component Organization
+
 ```
 src/
 ├── _components/           # Reusable React components (TSX)
@@ -34,6 +35,7 @@ src/
 ```
 
 ### Layout Templates
+
 ```
 src/_includes/
 └── layouts/
@@ -44,6 +46,7 @@ src/_includes/
 ```
 
 ### Page Components
+
 ```
 src/
 ├── index.page.tsx        # Homepage
@@ -56,6 +59,7 @@ src/
 ```
 
 ### Content Organization
+
 ```
 src/
 ├── blog/                 # Blog post markdown files
@@ -67,6 +71,7 @@ src/
 ```
 
 ### Shared Code
+
 ```
 src/
 ├── consts.ts             # Site constants and configuration
@@ -85,6 +90,7 @@ plugins/
 ## Utility and Script Organization
 
 ### Utilities (`utils/`)
+
 ```
 utils/
 ├── logger.ts             # Logging utilities
@@ -92,12 +98,14 @@ utils/
 ```
 
 ### Scripts (`scripts/`)
+
 ```
 scripts/
 └── downloadFonts.ts      # Font downloading for OG image generation
 ```
 
 ### Tools (`tools/`)
+
 ```
 tools/
 └── migrate_meta.ts       # Metadata migration utilities
@@ -106,27 +114,33 @@ tools/
 ## File Naming Conventions
 
 ### Component Files
+
 - **Components**: PascalCase TSX files (e.g., `PostCard.tsx`)
 - **Pages**: kebab-case with `.page.tsx` suffix (e.g., `diary.page.tsx`)
 - **Layouts**: kebab-case TSX files in `_includes/layouts/`
 
 ### Content Files
+
 - **Blog Posts**: `YYYY-MM-DD-title.md` format
 - **Diary Entries**: `YYYY-MM-DD-diary.md` format
 - **Data Files**: `_data.js` for directory-specific metadata
 
 ### Configuration Files
+
 - **TypeScript**: `.ts` extension for utilities and types
-- **Configuration**: Descriptive names (e.g., `_config.ts`, `tailwind.config.js`)
+- **Configuration**: Descriptive names (e.g., `_config.ts`,
+  `tailwind.config.js`)
 
 ## Import Organization
 
 ### Component Imports
+
 - **Relative imports** for local components and utilities
 - **Absolute imports** for external dependencies via Deno's import system
 - **Type imports** separated using TypeScript's `import type` syntax
 
 ### Lume Plugin System
+
 - **Built-in plugins**: Imported from Lume core
 - **Custom plugins**: Imported from local `plugins/` directory
 - **Configuration**: Centralized in `_config.ts`
@@ -134,24 +148,29 @@ tools/
 ## Key Architectural Principles
 
 ### Component Architecture
-- **Async Components**: All components are async functions due to Lume v3 requirements
+
+- **Async Components**: All components are async functions due to Lume v3
+  requirements
 - **Single Responsibility**: Each component handles one specific UI concern
 - **Composition**: Complex layouts built through component composition
 - **Type Safety**: Full TypeScript integration for props and state
 
 ### Content Architecture
+
 - **Markdown-First**: Content authored in Markdown with frontmatter
 - **Date-Based Organization**: Posts organized chronologically by filename
 - **Metadata Separation**: Directory-specific metadata in `_data.js` files
 - **Asset Co-location**: Images stored alongside content when possible
 
 ### Build Architecture
+
 - **Static Generation**: All content pre-rendered at build time
 - **Plugin-Based**: Extensible through Lume's plugin system
 - **Environment-Aware**: Different optimizations for development vs production
 - **Type-Safe Configuration**: Configuration files use TypeScript for validation
 
 ### Development Patterns
+
 - **Hot Reload**: Fast development with automatic rebuilds
 - **Task-Based Workflow**: Common operations encapsulated in Deno tasks
 - **Content Workflows**: Streamlined content creation through Just commands
@@ -160,14 +179,18 @@ tools/
 ## Data Flow Patterns
 
 ### Content Processing
+
 1. **Markdown Files** → Lume processing → **Static HTML**
 2. **Component Logic** → SSX rendering → **Generated markup**
 3. **Asset Files** → Optimization plugins → **Optimized assets**
 4. **Configuration** → Build pipeline → **Site generation**
 
 ### Search Integration
+
 1. **Content** → Pagefind indexing → **Search index**
 2. **User Query** → Client-side search → **Results display**
 3. **Static Generation** → Search component → **Search interface**
 
-This structure supports efficient development, content management, and deployment while maintaining clear separation of concerns and scalability for future growth.
+This structure supports efficient development, content management, and
+deployment while maintaining clear separation of concerns and scalability for
+future growth.
