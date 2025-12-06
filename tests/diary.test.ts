@@ -13,11 +13,12 @@ type FrontMatter = {
   draft: boolean;
 };
 
-const postFiles = await Array.fromAsync(expandGlob("./src/blog/*.md"));
+Deno.test("Blog post date validation", async () => {
+  const postFiles = await Array.fromAsync(expandGlob("./src/blog/*.md"));
 
-postFiles
-  .filter((entry) => entry.name.startsWith("flycheck_") == false)
-  .map(async (file) => {
+  for (const file of postFiles) {
+    if (file.name.startsWith("flycheck_")) continue;
+
     const content = await Deno.readTextFile(file.path);
     const frontMatterText = extract(content).frontMatter;
     const frontMatter = parseYaml(frontMatterText) as FrontMatter;
@@ -40,4 +41,5 @@ postFiles
       parsedPubDate,
       `slug date and pubDate does not match. Please check frontMatter and slug at ${file.path}`,
     );
-  });
+  }
+});
