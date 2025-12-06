@@ -225,9 +225,22 @@ site.add([".png"]);
 site.copy("./public");
 site.copy("./well-known", ".well-known");
 
+// Always enable pagefind for search functionality
+site.use(pagefind({
+  indexing: {
+    excludeSelectors: [
+      "[data-pagefind-ignore]",
+    ],
+    rootSelector: "main, body",
+  },
+  ui: {
+    showImages: false,
+    excerptLength: 30,
+  },
+}));
+
 if (RELEASE) {
   site.hooks.addPostcssPlugin(nano);
-  site.use(pagefind());
   site.use(minifyHTML());
 }
 
