@@ -3,7 +3,7 @@
     "date-fns": "npm:date-fns@4.1.0",
     "lume/": "https://deno.land/x/lume@v3.0.1/",
     "lume/jsx-runtime": "https://deno.land/x/ssx@v0.1.12/jsx-runtime.ts",
-    "daisyui": "npm:daisyui@5.1.10"
+    "daisyui": "npm:daisyui@5.5.8"
   },
   "tasks": {
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
@@ -12,7 +12,8 @@
     "serve": "deno task lume -s",
     "deploy": "env RELEASE=1 deno task lume --location https://comamoca.dev; wrangler pages deploy ./_site --project-name=blog --commit-dirty=true",
     "build-pages": "deno run -A ./scripts/downloadFonts.ts && deno task lume",
-    "download-fonts": "deno run -A ./scripts/downloadFonts.ts"
+    "download-fonts": "deno run -A ./scripts/downloadFonts.ts",
+    "test": "deno test --allow-all"
   },
   "compilerOptions": {
     "types": [

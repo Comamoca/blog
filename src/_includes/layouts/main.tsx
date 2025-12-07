@@ -22,10 +22,23 @@ export default (
         <comp.Header />
         {children}
         <comp.Footer />
-        {/*HACK: デプロイ時にPagefindのスクリプトが実行されないため追加した*/}
+        <script src="/pagefind/pagefind-ui.js"></script>
         <script>
-          {`const elem = document.getElementById('search')
-        if (elem) {if (elem.children.length === 0) {new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/pagefind/","baseUrl":"/"});}}}`}
+          {`window.addEventListener('DOMContentLoaded', (event) => {
+            const searchElem = document.getElementById('search');
+            if (searchElem && !searchElem.hasChildNodes()) {
+              new PagefindUI({
+                element: "#search",
+                showImages: false,
+                excerptLength: 30,
+                showEmptyFilters: true,
+                showSubResults: false,
+                resetStyles: true,
+                bundlePath: "/pagefind/",
+                baseUrl: "/"
+              });
+            }
+          });`}
         </script>
       </body>
     </html>

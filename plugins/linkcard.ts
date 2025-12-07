@@ -4,9 +4,9 @@ import { toASCII } from "node:punycode";
 import { is } from "jsr:@core/unknownutil";
 import { logger } from "../utils/logger.ts";
 
-export default function linkcard(options) {
-  return async (tree) => {
-    const transformers: Array<Record<string, unknown>> = [];
+export default function linkcard(options?: any) {
+  return async (tree: any) => {
+    const transformers: Array<() => Promise<void>> = [];
 
     visit(tree, "paragraph", (paragraphNode, idx) => {
       if (paragraphNode.children.length !== 1) {
@@ -29,13 +29,20 @@ export default function linkcard(options) {
         const url = genURL(urls[0]);
 
         transformers.push(async () => {
-          const cardHTML = await cardLinkElement(url);
-          const node = {
-            type: "html",
-            value: cardHTML,
-          };
+          try {
+            const cardHTML = await cardLinkElement(url);
+            const node = {
+              type: "html",
+              value: cardHTML,
+            };
 
-          tree.children.splice(idx, 1, node);
+            tree.children.splice(idx, 1, node);
+          } catch (error) {
+            logger.error(
+              `[LinkCard] Failed to generate card for URL: ${url}, error: ${error.message}`,
+            );
+            // Keep original text node if linkcard generation fails
+          }
         });
       });
     });
@@ -43,6 +50,7 @@ export default function linkcard(options) {
     try {
       await Promise.all(transformers.map((t) => t()));
     } catch (e) {
+      logger.error(`[LinkCard] Error during transformation: ${e.message}`);
       console.log("[ LinkCard ] Got Error", e);
     }
 
@@ -51,12 +59,17 @@ export default function linkcard(options) {
 }
 
 function genURL(urlStr: string) {
-  const url = new URL(urlStr);
-  url.hostname = toASCII(url.hostname);
-  return url;
+  try {
+    const url = new URL(urlStr);
+    url.hostname = toASCII(url.hostname);
+    return url;
+  } catch (error) {
+    logger.error(`[LinkCard] Invalid URL: ${urlStr}, error: ${error.message}`);
+    throw new Error(`Invalid URL: ${urlStr}`);
+  }
 }
 
-async function cardLinkElement(url) {
+async function cardLinkElement(url: any) {
   const _url = new URL(url);
   const og = await fetchOGInfo(url);
 
@@ -75,7 +88,9 @@ async function cardLinkElement(url) {
     if (is.Undefined(og.image)) {
       return "";
     } else {
-      return `<img class="object-scale-down basis-4/12 rounded-tr-lg rounded-br-lg h-full m-0 md:!mt-0" src="${og.image}" />`;
+      // Use direct img tag for external URLs to avoid Lume's picture plugin transformation
+      // Add transform-images="" to prevent image processing by Lume plugins
+      return `<img class="object-scale-down basis-4/12 rounded-tr-lg rounded-br-lg h-full m-0 md:!mt-0" src="${og.image}" alt="OGP image" transform-images="" />`;
     }
   })();
 

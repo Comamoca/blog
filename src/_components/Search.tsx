@@ -31,13 +31,17 @@ export default async function Search() {
       />
       <div className="modal modal-bottom sm:modal-middle" role="dialog">
         <div className="modal-box">
-          <div className="flex flex-col h-dvh py-5">
-            <div id="search" className="mx-3"></div>
-          </div>
-          <div
-            id="search"
-            className="mx-3 md:mx-10"
-          >
+          <div className="flex flex-col h-96">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-bold">検索</h3>
+              <label
+                htmlFor="pagefind_modal"
+                className="btn btn-sm btn-circle btn-ghost"
+              >
+                ✕
+              </label>
+            </div>
+            <div id="search" className="flex-1"></div>
           </div>
         </div>
         <label className="modal-backdrop" htmlFor="pagefind_modal">Close</label>

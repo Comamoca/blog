@@ -27,7 +27,7 @@ export default async function (
     });
 
   return (
-    <div className="mx-8 text-lg md:mx-auto">
+    <div className="mx-8 text-lg md:mx-auto" data-pagefind-ignore>
       <div className="my-10 flex justify-center">
         <comp.Logo />
       </div>
