@@ -36,3 +36,6 @@ log.txt
 .textlintrc
 
 flycheck_*
+
+.mcp.json
+.pre-commit-config.yaml
