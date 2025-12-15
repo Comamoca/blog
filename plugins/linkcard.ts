@@ -76,7 +76,7 @@ async function cardLinkElement(url: any) {
   logger.debug(`{ url: ${url}, data: ${JSON.stringify(og)} }`);
 
   const name = _url.origin;
-  const title = (() => {
+  const rawTitle = (() => {
     if (is.Undefined(og.title)) {
       return og.siteTitle;
     } else {
@@ -84,13 +84,18 @@ async function cardLinkElement(url: any) {
     }
   })();
 
+  // Limit title length to prevent layout issues with image width
+  const title = rawTitle && rawTitle.length > 60
+    ? rawTitle.substring(0, 15) + "..."
+    : rawTitle;
+
   const image = (() => {
     if (is.Undefined(og.image)) {
       return "";
     } else {
       // Use direct img tag for external URLs to avoid Lume's picture plugin transformation
       // Add transform-images="" to prevent image processing by Lume plugins
-      return `<img class="object-scale-down basis-4/12 rounded-tr-lg rounded-br-lg h-full m-0 md:!mt-0" src="${og.image}" alt="OGP image" transform-images="" />`;
+      return `<img class="object-cover rounded-tr-lg rounded-br-lg h-full w-20 !m-0" src="${og.image}" alt="OGP image" transform-images="" />`;
     }
   })();
 
