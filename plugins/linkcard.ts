@@ -76,7 +76,7 @@ async function cardLinkElement(url: any) {
   logger.debug(`{ url: ${url}, data: ${JSON.stringify(og)} }`);
 
   const name = _url.origin;
-  const rawTitle = (() => {
+  const title = (() => {
     if (is.Undefined(og.title)) {
       return og.siteTitle;
     } else {
@@ -84,23 +84,18 @@ async function cardLinkElement(url: any) {
     }
   })();
 
-  // Limit title length to prevent layout issues with image width
-  const title = rawTitle && rawTitle.length > 60
-    ? rawTitle.substring(0, 15) + "..."
-    : rawTitle;
-
   const image = (() => {
     if (is.Undefined(og.image)) {
       return "";
     } else {
       // Use direct img tag for external URLs to avoid Lume's picture plugin transformation
       // Add transform-images="" to prevent image processing by Lume plugins
-      return `<img class="object-cover rounded-tr-lg rounded-br-lg h-full w-20 !m-0" src="${og.image}" alt="OGP image" transform-images="" />`;
+      return `<img class="object-cover rounded-tr-lg rounded-br-lg h-full w-50 !m-0" src="${og.image}" alt="OGP image" transform-images="" />`;
     }
   })();
 
   return `
-    <div class="flex flex-grow border(t gray-200) w-full h-20 max-w-md md:min-w-10">
+    <div class="flex justify-center border(t gray-200) h-25 mx-10">
       <a
         href="${url}"
         class="!no-underline flex w-full bg-white rounded-lg border border-gray-200 shadow hover:bg-gray-100"

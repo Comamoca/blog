@@ -151,8 +151,8 @@ if (RELEASE) {
 
   site.use(openGraphImages({
     options: {
-      width: 1200,
-      height: 600,
+      width: 1600,
+      height: 800,
       fonts: [
         {
           name: "NotoSansJP Regular",

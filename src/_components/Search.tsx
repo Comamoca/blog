@@ -3,7 +3,7 @@ export default async function Search() {
     <div className="mx-3">
       <label
         htmlFor="pagefind_modal"
-        className="text-gray-500 hover:text-gray-700 py-1 border-gray-500"
+        className="text-gray-500 hover:text-gray-700 py-1 border-gray-500 cursor-pointer"
       >
         <div className="w-3 md:w-10">
           <svg
@@ -13,9 +13,9 @@ export default async function Search() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="lucide lucide-search"
           >
             <circle cx="11" cy="11" r="8" />
@@ -27,7 +27,7 @@ export default async function Search() {
       <input
         type="checkbox"
         id="pagefind_modal"
-        className="modal-toggle hidden"
+        className="modal-toggle"
       />
       <div className="modal modal-bottom sm:modal-middle" role="dialog">
         <div className="modal-box">
