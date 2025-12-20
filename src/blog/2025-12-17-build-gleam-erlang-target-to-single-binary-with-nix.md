@@ -20,7 +20,7 @@ https://nix.dev/manual/nix/2.24/command-ref/new-cli/nix3-bundle
 例えば、以下のコマンドを実行すると単一のPython 3.14バイナリが生成されます。
 
 ```sh
-nix bundle --bundler github:ralismark/nix-appimage nixpkgs#python314
+nix bundle nixpkgs#python314
 ```
 
 ## bundler
