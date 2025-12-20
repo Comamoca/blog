@@ -95,7 +95,7 @@ async function cardLinkElement(url: any) {
   })();
 
   return `
-    <div class="flex justify-center border(t gray-200) h-25 mx-10">
+  <div class="flex justify-center border(t gray-200) h-15 md:h-25 mx-5 md:mx-10">
       <a
         href="${url}"
         class="!no-underline flex w-full bg-white rounded-lg border border-gray-200 shadow hover:bg-gray-100"
