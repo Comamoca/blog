@@ -22,21 +22,23 @@ export default (
         <comp.Header />
         {children}
         <comp.Footer />
-        <script src="/pagefind/pagefind-ui.js"></script>
-        <script>
+        <script src="/pagefind/pagefind-ui.js" data-cfasync="false"></script>
+        <script data-cfasync="false">
           {`window.addEventListener('DOMContentLoaded', (event) => {
             const searchElem = document.getElementById('search');
-            if (searchElem && !searchElem.hasChildNodes()) {
-              new PagefindUI({
-                element: "#search",
-                showImages: false,
-                excerptLength: 30,
-                showEmptyFilters: true,
-                showSubResults: false,
-                resetStyles: true,
-                bundlePath: "/pagefind/",
-                baseUrl: "/"
-              });
+            if (searchElem) {
+              if (!searchElem.hasChildNodes()) {
+                new PagefindUI({
+                  element: "#search",
+                  showImages: false,
+                  excerptLength: 30,
+                  showEmptyFilters: true,
+                  showSubResults: false,
+                  resetStyles: true,
+                  bundlePath: "/pagefind/",
+                  baseUrl: "/"
+                });
+              }
             }
           });`}
         </script>
