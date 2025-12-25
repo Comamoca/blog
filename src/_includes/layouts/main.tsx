@@ -24,9 +24,9 @@ export default (
         <comp.Footer />
         <script src="/pagefind/pagefind-ui.js" data-cfasync="false"></script>
         <script data-cfasync="false">
-          {`window.addEventListener('DOMContentLoaded', (event) => {
+          {`function initializePagefind() {
             const searchElem = document.getElementById('search');
-            if (searchElem) {
+            if (searchElem && typeof PagefindUI !== 'undefined') {
               if (!searchElem.hasChildNodes()) {
                 new PagefindUI({
                   element: "#search",
@@ -39,8 +39,21 @@ export default (
                   baseUrl: "/"
                 });
               }
+            } else if (typeof PagefindUI === 'undefined') {
+              // Retry after a short delay if PagefindUI is not yet loaded
+              setTimeout(initializePagefind, 100);
             }
-          });`}
+          }
+
+          window.addEventListener('DOMContentLoaded', initializePagefind);
+          
+          // Also try to initialize immediately in case DOMContentLoaded already fired
+          if (document.readyState === 'loading') {
+            // Document still loading, DOMContentLoaded will fire
+          } else {
+            // Document already loaded, initialize immediately
+            initializePagefind();
+          }`}
         </script>
       </body>
     </html>
