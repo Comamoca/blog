@@ -39,6 +39,7 @@
           pkgs,
           lib,
           system,
+          git-hooks,
           ...
         }:
         let
@@ -92,14 +93,6 @@
             };
           };
 
-          git-secrets' = pkgs.writeShellApplication {
-            name = "git-secrets";
-            runtimeInputs = [ pkgs.git-secrets ];
-            text = ''
-              git secrets --scan
-            '';
-          };
-
           deno-test = pkgs.writeShellApplication {
             name = "deno-test";
             runtimeInputs = [ deno ];
@@ -145,13 +138,10 @@
             settings = {
               hooks = {
                 treefmt.enable = true;
-                ripsecrets.enable = true;
-                git-secrets = {
+                gitleaks = {
                   enable = true;
-                  name = "git-secrets";
-                  entry = "${git-secrets'}/bin/git-secrets";
+                  entry = "${pkgs.gitleaks}/bin/gitleaks protect --staged";
                   language = "system";
-                  types = [ "text" ];
                 };
                 deno-test = {
                   enable = true;
