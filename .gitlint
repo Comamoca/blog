@@ -1,0 +1,12 @@
+[general]
+contrib = contrib-title-conventional-commits
+ignore=B6
+ignore-merge-commits=true
+ignore-fixup-commits=true
+ignore-squash-commits=true
+
+[title-max-length]
+line-length = 72
+
+[contrib-title-conventional-commits]
+types = feat, fix, docs, style, refactor, perf, test, chore, build, ci, revert
