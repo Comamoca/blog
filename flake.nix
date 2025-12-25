@@ -137,12 +137,17 @@
             check.enable = true;
             settings = {
               hooks = {
-                treefmt.enable = true;
+                treefmt = {
+                  enable = true;
+                  language = "system";
+                  pass_filenames = false;
+                };
                 gitleaks = {
                   enable = true;
                   entry = "${pkgs.gitleaks}/bin/gitleaks protect --staged";
                   language = "system";
                 };
+                gitlint.enable = true;
                 deno-test = {
                   enable = true;
                   name = "deno-test";
