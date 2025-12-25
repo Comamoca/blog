@@ -3,7 +3,7 @@
     "date-fns": "npm:date-fns@4.1.0",
     "lume/": "https://deno.land/x/lume@v3.0.1/",
     "lume/jsx-runtime": "https://deno.land/x/ssx@v0.1.12/jsx-runtime.ts",
-    "daisyui": "npm:daisyui@5.5.8"
+    "daisyui": "npm:daisyui@5.5.14"
   },
   "tasks": {
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",

@@ -60,8 +60,8 @@
     "npm:@types/node@*": "24.2.0",
     "npm:autoprefixer@10.4.21": "10.4.21_postcss@8.5.3",
     "npm:cssnano@*": "7.1.1_postcss@8.5.6",
-    "npm:daisyui@*": "5.5.8",
-    "npm:daisyui@5.5.8": "5.5.8",
+    "npm:daisyui@*": "5.5.14",
+    "npm:daisyui@5.5.14": "5.5.14",
     "npm:date-fns@*": "4.1.0",
     "npm:date-fns@4.1.0": "4.1.0",
     "npm:estree-walker@3.0.3": "3.0.3",
@@ -967,8 +967,8 @@
         "css-tree@2.2.1"
       ]
     },
-    "daisyui@5.5.8": {
-      "integrity": "sha512-6psL9jIEOFOw68V10j/BKCWcRgx8dh81mmNxShr+g7HDM6UHNoPharlp9zq/PQkHNuGU1ZQsajR3HgpvavbRKQ=="
+    "daisyui@5.5.14": {
+      "integrity": "sha512-L47rvw7I7hK68TA97VB8Ee0woHew+/ohR6Lx6Ah/krfISOqcG4My7poNpX5Mo5/ytMxiR40fEaz6njzDi7cuSg=="
     },
     "date-fns@4.1.0": {
       "integrity": "sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg=="
@@ -2973,7 +2973,7 @@
   },
   "workspace": {
     "dependencies": [
-      "npm:daisyui@5.5.8",
+      "npm:daisyui@5.5.14",
       "npm:date-fns@4.1.0"
     ]
   }
