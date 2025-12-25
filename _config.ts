@@ -231,7 +231,7 @@ site.use(pagefind({
     excludeSelectors: [
       "[data-pagefind-ignore]",
     ],
-    rootSelector: "main, body",
+    rootSelector: "main",
   },
   ui: {
     showImages: false,
