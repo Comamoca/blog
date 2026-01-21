@@ -12,16 +12,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v27
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: cachix/cachix-action@v14
-        with:
-          name: comamoca-blog
-          # signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+
       - name: Build & Deploy
         env:
           RELEASE: 1
