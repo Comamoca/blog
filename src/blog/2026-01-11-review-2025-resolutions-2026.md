@@ -177,6 +177,8 @@ https://imas-db.jp/song/event/cinderella_cg_fes_oustars_stage2.html
 
 #### ありすP打ち上げ
 
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">打ち上げなのでいちごサワー飲んでる<br>ありすPの方がいちごのぬいぐるみくださって感謝…！ <a href="https://t.co/h9cIX5nVrw">pic.twitter.com/h9cIX5nVrw</a></p>&mdash; こまもか🦊@シャニ∞th両日 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1994766664727236821?ref_src=twsrc%5Etfw">November 29, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 Day1の後はありすPの打ち上げに行った。
 こういうのは初めてだったのだけど、参加者はみんなアイマスが好きなのでめちゃくちゃ盛り上がれて良かった...
 シャニPもいて、アルスト担当してる人に「この前『薄桃色にこんがらがって』読んだんですよ...」って話したら全てを理解してただ頷いていたのが印象的だった。
