@@ -1,6 +1,6 @@
 ---
 title: "1月の月報"
-description: "今月の月報をお届けします。"
+description: "太陽キッス！太陽キッスッッッッッ！！"
 pubDate: "Jan 22 2026"
 emoji: 🦊
 tags: ["report"]
@@ -81,7 +81,5 @@ TrySailではadrenaline!!!のコール楽しかったし、最後のReoNaさん�
 
 ずっとやりたいと思ってたので、2月に一度できれば良いなと思っている。
 Gleamでサーバーを作るハンズオンをやる方向で資料とか構成を考えている。
-
-### 
 
 [^1]: [@ratie_dev](https://x.com/ratie_dev)
