@@ -8,7 +8,7 @@ latest-diary:
   $EDITOR $(fd '\-diary\.md$'  ./src/blog/ -e md | sort -r | head -n 1)
 
 diary:
-  ruby create.rb diary
+  create diary
 
 new:
-  ruby create.rb
+  create

@@ -105,6 +105,28 @@
               ${deno}/bin/deno test --allow-env --allow-read --no-prompt
             '';
           };
+
+          ruby' = pkgs.ruby_3_4.withPackages (ps: [
+            ps.thor
+          ]);
+
+          create = pkgs.stdenv.mkDerivation {
+            pname = "create";
+            version = "1.0";
+
+            src = ./create.rb;
+            dontUnpack = true;
+
+            nativeBuildInputs = [
+              pkgs.makeWrapper
+            ];
+
+            installPhase = ''
+              mkdir -p $out/bin
+              makeWrapper ${ruby'}/bin/ruby $out/bin/create \
+                --add-flags $src
+            '';
+          };
         in
         {
           _module.args.pkgs = import inputs.nixpkgs {
@@ -185,10 +207,6 @@
                 bun
                 wrangler
 
-                # ruby
-                ruby_3_4
-                rubyPackages_3_4.thor
-
                 nil
                 lua-language-server
                 efm-langserver
@@ -206,6 +224,7 @@
                 wrangler
 
                 claude-code
+                create
               ];
 
               # LD_LIBRARY_PATH = "${libPath}/lib";
