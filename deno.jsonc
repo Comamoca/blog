@@ -1,15 +1,24 @@
 {
   "imports": {
     "date-fns": "npm:date-fns@4.1.0",
-    "lume/": "https://deno.land/x/lume@v3.0.1/",
-    "lume/jsx-runtime": "https://deno.land/x/ssx@v0.1.12/jsx-runtime.ts",
+    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.4/",
+    "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts",
     "daisyui": "npm:daisyui@5.5.14"
   },
   "tasks": {
-    "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
+    "lume": {
+      "description": "Run Lume command",
+      "command": "deno run -A lume/cli.ts"
+    },
     "prebuild": "deno task lume",
-    "build": "deno task lume",
-    "serve": "deno task lume -s",
+    "build": {
+      "description": "Build the site for production",
+      "command": "deno task lume"
+    },
+    "serve": {
+      "description": "Run and serve the site for development",
+      "command": "deno task lume -s"
+    },
     "deploy": "env RELEASE=1 deno task lume --location https://comamoca.dev; wrangler pages deploy ./_site --project-name=blog --commit-dirty=true",
     "build-pages": "deno run -A ./scripts/downloadFonts.ts && deno task lume",
     "download-fonts": "deno run -A ./scripts/downloadFonts.ts",
@@ -23,7 +32,10 @@
     "jsxImportSource": "lume"
   },
   "nodeModulesDir": "auto",
-  "unstable": ["temporal"],
+  "unstable": [
+    "temporal",
+    "fmt-component"
+  ],
   "fmt": {
     "exclude": [
       "_site",
@@ -34,7 +46,13 @@
   },
   "lint": {
     "plugins": [
-      "https://deno.land/x/lume@v3.0.1/lint.ts"
-    ]
-  }
+      "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.4/lint.ts"
+    ],
+    "rules": {
+      "exclude": [
+        "no-import-prefix"
+      ]
+    }
+  },
+  "lock": false
 }
