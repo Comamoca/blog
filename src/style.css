@@ -47,3 +47,25 @@ span.shiki {
     content: none;
   }
 }
+
+/* Autolink headings */
+.anchor-link {
+  @apply opacity-0 mr-2 text-base-content/50 no-underline transition-opacity;
+}
+
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  @apply opacity-100;
+}
+
+.anchor-link:hover {
+  @apply text-primary;
+}
+
+.anchor-icon {
+  @apply font-mono;
+}

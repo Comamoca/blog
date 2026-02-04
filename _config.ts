@@ -39,6 +39,8 @@ import {
 // Remark
 import remark from "lume/plugins/remark.ts";
 import rehypeShikiFromHighlighter from "npm:@shikijs/rehype/core";
+import rehypeSlug from "npm:rehype-slug";
+import rehypeAutolinkHeadings from "npm:rehype-autolink-headings";
 import linkcard from "./plugins/linkcard.ts";
 // import metas from "./plugins/metas.ts";
 
@@ -199,6 +201,23 @@ site.use(feed({
 site.use(remark({
   remarkPlugins: linkCardPlugins,
   rehypePlugins: [
+    rehypeSlug,
+    [
+      rehypeAutolinkHeadings,
+      {
+        behavior: "prepend",
+        properties: {
+          className: ["anchor-link"],
+          ariaLabel: "このセクションへのリンク",
+        },
+        content: {
+          type: "element",
+          tagName: "span",
+          properties: { className: ["anchor-icon"] },
+          children: [{ type: "text", value: "#" }],
+        },
+      },
+    ],
     [
       rehypeShikiFromHighlighter,
       highlighter,
