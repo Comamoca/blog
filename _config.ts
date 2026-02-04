@@ -138,8 +138,8 @@ if (RELEASE) {
   // NOTE: Got error when with use esbuild and pagefind plugin.
   // site.use(esbuild());
   site.use(sitemap());
-  site.use(brotli());
-  site.use(gzip());
+  // site.use(brotli());
+  // site.use(gzip());
 
   site.use(checkUrls({
     output: "_broken_links.json",
