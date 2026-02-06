@@ -32,8 +32,17 @@ jobs:
       - name: Build & Deploy
         env:
           RELEASE: 1
+          LUME_NOCACHE: true
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           nix develop --command deno task build
-          nix develop --command wrangler pages deploy ./_site --project-name=blog --commit-dirty=true
+          nix develop --command wrangler pages deploy ./_site --project-name=blog --commit-dirty=tru
+
+      - name: Cache transformed images
+        uses: actions/cache@v5
+        with:
+          path: |
+            _cache
+          # 後で変える
+          key: ${{ hashFiles('deno.lock') }}
