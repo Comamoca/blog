@@ -40,7 +40,6 @@ jobs:
       - name: Build & Deploy
         env:
           RELEASE: 1
-          LUME_NOCACHE: true
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
