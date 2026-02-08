@@ -34,8 +34,11 @@ jobs:
         with:
           path: |
             _cache
-          # 後で変える
-          key: ${{ hashFiles('deno.lock') }}
+          key: images-${{ hashFiles('src/img/**') }}-v1
+
+      - name: Clean image metadata
+        run: |
+          nix develop --command exiftool -all= -overwrite_original src/img/*.png || true
 
       - name: Build & Deploy
         env:
@@ -44,4 +47,4 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           nix develop --command deno task build
-          nix develop --command wrangler pages deploy ./_site --project-name=blog --commit-dirty=tru
+          nix develop --command wrangler pages deploy ./_site --project-name=blog --commit-dirty=true
