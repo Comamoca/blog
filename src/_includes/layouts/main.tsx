@@ -17,6 +17,12 @@ export default (
           name="viewport"
           content="width=device-width, initial-scale=1.0"
         />
+        <script
+          defer
+          src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"
+          data-cfasync="false"
+        >
+        </script>
       </head>
       <body>
         <comp.Header />
