@@ -8,26 +8,26 @@ export const layout = "layouts/main.tsx";
 export const openGraphLayout = "layouts/mainOgImage.tsx";
 export const metas = {
   title: SITE_TITLE,
-  description: "全ての投稿はこちらから",
+  description: "全ての技術記事はこちらから",
 };
 
 export default async function* (
   { search, paginate, comp }: Lume.Data,
   helpers: Lume.Helpers,
 ) {
-  const pages = search.pages("posts")
-    .filter((page) => basename(page.url).indexOf("-diary") == -1)
-    .sort((a, b) => {
-      // Sort articles by `pubDate`
+  const pages = search.pages("posts tech");
+  // .filter((page) => basename(page.url).indexOf("-diary") == -1)
+  // .sort((a, b) => {
+  //   // Sort articles by `pubDate`
 
-      const dateA = new Date(a.pubDate);
-      const dateB = new Date(b.pubDate);
+  //   const dateA = new Date(a.pubDate);
+  //   const dateB = new Date(b.pubDate);
 
-      return dateB.getTime() - dateA.getTime();
-    });
+  //   return dateB.getTime() - dateA.getTime();
+  // });
 
   const options = {
-    url: (n: number) => `/all/${n}/`,
+    url: (n: number) => `/tech/${n}/`,
     size: 10,
   };
 

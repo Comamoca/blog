@@ -34,6 +34,11 @@ export default async function (
       <div className="flex md:items-center flex-col gap-6 grid-cols-4">
         <comp.PostList pages={pages.slice(0, 8)} />
         <comp.PostCard
+          title="全ての技術記事"
+          description="全ての技術記事はこちらから"
+          slug="/tech/1"
+        />
+        <comp.PostCard
           title="全ての投稿"
           description="全ての投稿はこちらから"
           slug="/all/1"
