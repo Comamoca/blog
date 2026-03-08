@@ -3,7 +3,7 @@ import BaseHead from "./_components/BaseHead.tsx";
 import PostCard from "./_components/PostCard.tsx";
 
 export const title = "Hub";
-export const url = "/hub";
+export const url = "/hub.html";
 export const layout = "layouts/main.tsx";
 export const openGraphLayout = "layouts/mainOgImage.tsx";
 export const metas = {
