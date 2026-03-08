@@ -43,37 +43,11 @@ export default async function* (
           <div className="flex md:items-center flex-col gap-6 grid-cols-4">
             <comp.PostList pages={page.results} />
             <div className="inline-flex flex-row justify-center py-1">
-              {page.pagination.previous
-                ? (
-                  <a
-                    href={page.pagination.previous}
-                    className="btn text-xl px-4"
-                  >
-                    {page.pagination.page - 1}
-                  </a>
-                )
-                : (
-                  <span className="pt-1 text-xl">
-                    <comp.Twemoji emoji="🦊" size={10} />
-                  </span>
-                )}
-
-              <span className="my-auto mx-2">/</span>
-
-              {page.pagination.next
-                ? (
-                  <a
-                    href={page.pagination.next}
-                    className="btn text-xl px-4"
-                  >
-                    {page.pagination.page + 1}
-                  </a>
-                )
-                : (
-                  <span className="pt-1 text-xl">
-                    <comp.Twemoji emoji="🦊" size={10} />
-                  </span>
-                )}
+              {[...paginate(pages, options)].map((p, i) => (
+                <a key={i} href={p.url} className="my-auto mx-2 btn">
+                  {i + 1}
+                </a>
+              ))}
             </div>
           </div>
         </div>
