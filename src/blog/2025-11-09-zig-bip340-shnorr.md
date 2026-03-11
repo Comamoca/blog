@@ -3,7 +3,7 @@ title: "Zigは標準ライブラリだけでBIP340準拠のシュノア署名が
 description: "標準で済むのはシンプルにすごい"
 pubDate: "Nov 9 2025"
 emoji: 🦊
-tags: ["zig"]
+tags: ["tech", "zig"]
 draft: true
 ---
 

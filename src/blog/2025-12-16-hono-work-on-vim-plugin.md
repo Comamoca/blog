@@ -3,7 +3,7 @@ title: "HonoをVimプラグインにしちゃおう"
 description: "HonoをVimで使う方法を紹介します。"
 pubDate: "Dec 16 2025"
 emoji: 🦊
-tags: ["hono", "gleam"]
+tags: ["tech", "hono", "gleam"]
 draft: false
 ---
 

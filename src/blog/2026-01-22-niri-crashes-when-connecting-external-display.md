@@ -3,7 +3,7 @@ title: "Niriで外部ディスプレイを繋ぐとクラッシュする問題"
 description: "根本の解決はしてないけどワークアラウンドを見つけたのでとりあえず共有"
 pubDate: "Jan 22 2026"
 emoji: "🦊"
-tags: ["niri", "wayland", "linux"]
+tags: ["tech", "niri", "wayland", "linux"]
 draft: false
 ---
 

@@ -3,7 +3,7 @@ title: "SSGがしんどくなってきたかも"
 description: "そろそろLumeから別のシステムに切り替えるかも"
 pubDate: "Feb 4 2026"
 emoji: 🦊
-tags: ["poem", "deno", "lume", "duckdb", "gleam", "hinoto"]
+tags: ["tech", "deno", "lume", "duckdb", "gleam", "hinoto"]
 draft: false
 ---
 

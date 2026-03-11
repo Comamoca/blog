@@ -3,7 +3,7 @@ title: "Nixのsrc指定にはcleanSourceが良さそう"
 description: "Nixのsrcを指定する時はpkgs.lib.cleanSourceを使うのが良さそう"
 pubDate: "Sep 27 2025"
 emoji: 🦊
-tags: ["nix"]
+tags: ["tech", "nix"]
 draft: false
 ---
 

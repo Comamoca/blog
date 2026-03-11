@@ -3,7 +3,7 @@ title: "NixでGleam(Erlang)をシングルバイナリにする"
 description: "nix bundleコマンドを使ってあらゆるパッケージをシングルバイナリにできる"
 pubDate: "Dec 17 2025"
 emoji: 🦊
-tags: ["nix", "gleam"]
+tags: ["tech", "nix", "gleam"]
 draft: false
 ---
 

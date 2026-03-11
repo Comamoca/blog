@@ -3,7 +3,7 @@ title: "devnevは独自のnixpkgsを持っている"
 description: "普段は意識しないけど、エラー発生時に意識する必要があるかもしれない"
 pubDate: "Oct 6 2025"
 emoji: 🦊
-tags: ["nix", "devenv"]
+tags: ["tech", "nix", "devenv"]
 draft: false
 ---
 

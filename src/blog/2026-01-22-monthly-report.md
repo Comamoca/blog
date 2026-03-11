@@ -3,7 +3,7 @@ title: "1月の月報"
 description: "太陽キッス！太陽キッスッッッッッ！！"
 pubDate: "Jan 22 2026"
 emoji: 🦊
-tags: ["report"]
+tags: ["monthly", "report"]
 draft: false
 ---
 

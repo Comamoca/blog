@@ -3,7 +3,7 @@ title: "2025年の振り返りと2026年の目標"
 description: "去年の感想と今年の目標について"
 pubDate: "Jan 11 2026"
 emoji: 🦊
-tags: []
+tags: ["poem"]
 draft: false
 ---
 
