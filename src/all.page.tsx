@@ -34,8 +34,9 @@ export default async function* (
       url: page.url,
       content: (
         <div className="mx-8 text-lg md:mx-auto">
-          <div className="my-10 flex justify-center">
+          <div className="my-8 flex flex-col justify-center">
             <comp.Logo />
+            <div className="text-center mt-2">全ての記事</div>
           </div>
           <div className="flex md:items-center flex-col gap-6 grid-cols-4">
             <comp.PostList pages={page.results} />
