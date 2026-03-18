@@ -39,3 +39,7 @@ flycheck_*
 
 .mcp.json
 .pre-commit-config.yaml
+
+.lustre/
+
+build/
