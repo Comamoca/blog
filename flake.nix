@@ -93,19 +93,6 @@
             };
           };
 
-          deno-test = pkgs.writeShellApplication {
-            name = "deno-test";
-            runtimeInputs = [ deno ];
-            text = ''
-              # Pre-cache dependencies to avoid network issues during build
-              if ! ${deno}/bin/deno cache tests/*.ts 2>/dev/null; then
-                echo "Warning: Could not cache test dependencies, skipping deno test in offline environment"
-                exit 0
-              fi
-              ${deno}/bin/deno test --allow-env --allow-read --no-prompt
-            '';
-          };
-
           ruby' = pkgs.ruby_3_4.withPackages (ps: [
             ps.thor
           ]);
@@ -170,13 +157,6 @@
                   language = "system";
                 };
                 gitlint.enable = true;
-                deno-test = {
-                  enable = true;
-                  name = "deno-test";
-                  entry = "${deno-test}/bin/deno-test";
-                  language = "system";
-                  types = [ "text" ];
-                };
               };
             };
           };
