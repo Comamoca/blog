@@ -1,8 +1,5 @@
 import { basename } from "jsr:@std/path";
 import { SITE_TITLE } from "./consts.ts";
-import PostList from "./_components/PostList.tsx";
-import Logo from "./_components/Logo.tsx";
-import Twemoji from "./_components/Twemoji.tsx";
 
 export const layout = "layouts/main.tsx";
 export const openGraphLayout = "layouts/mainOgImage.tsx";
@@ -37,8 +34,9 @@ export default async function* (
       url: page.url,
       content: (
         <div className="mx-8 text-lg md:mx-auto">
-          <div className="my-10 flex justify-center">
+          <div className="my-8 flex flex-col justify-center">
             <comp.Logo />
+            <div className="text-center mt-2">全ての記事</div>
           </div>
           <div className="flex md:items-center flex-col gap-6 grid-cols-4">
             <comp.PostList pages={page.results} />
