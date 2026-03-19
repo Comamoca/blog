@@ -4,7 +4,7 @@ description: "案外他のツールで代用できそうだった"
 pubDate: "Mar 19 2026"
 emoji: 🦊
 tags: ["tech", "nix", "devenv"]
-draft: true
+draft: false
 ---
 
 devenvを使うのをやめたいと思ってるので、その理由と今後の対応とかを書いてみる。
