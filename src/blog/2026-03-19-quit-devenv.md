@@ -33,6 +33,16 @@ moduleで、実はこっちの方が対応しているサービスが多い。
 
 ### バージョン指定
 
+2026/3/19 追記:
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">悲しいことにNix package versionsは更新が途絶えてます...<br>今だと<a href="https://t.co/4YLbyGloPr">https://t.co/4YLbyGloPr</a>で調べると良いかと思います<br><br>↓ここで紹介している、nix-versionsというツールも良さげです<br>CLIにてパッケージバージョンごとのNixpkgのリビジョンを検索できます<a href="https://t.co/71ngM90B1G">https://t.co/71ngM90B1G</a></p>&mdash; ryu (@ryu_trifolium) <a href="https://twitter.com/ryu_trifolium/status/2034448525535416802?ref_src=twsrc%5Etfw">March 19, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+[@ryu](https://x.com/ryu_trifolium)さんがNix package
+versionsの更新が停止していることを教えてくださった。ありがとうございます。
+代替としては[nix-versions](https://github.com/vic/nix-versions)が良さそう。
+
+追記終わり
+
 直接指定する。
 ただ、楽をする方法があって、[Nix package versions](https://lazamar.co.uk/nix-versions/)を使う。(nixpkgs
 ukとかで検索すると出てくる)
