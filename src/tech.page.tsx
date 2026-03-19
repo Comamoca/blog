@@ -5,14 +5,14 @@ export const layout = "layouts/main.tsx";
 export const openGraphLayout = "layouts/mainOgImage.tsx";
 export const metas = {
   title: SITE_TITLE,
-  description: "全ての記事はこちらから",
+  description: "全ての技術記事はこちらから",
 };
 
 export default async function* (
   { search, paginate, comp }: Lume.Data,
   helpers: Lume.Helpers,
 ) {
-  const pages = search.pages("posts")
+  const pages = search.pages("posts tech")
     .filter((page) => basename(page.url).indexOf("-diary") == -1)
     .sort((a, b) => {
       // Sort articles by `pubDate`
@@ -24,19 +24,19 @@ export default async function* (
     });
 
   const options = {
-    url: (n: number) => `/all/${n}/`,
+    url: (n: number) => `/tech/${n}/`,
     size: 10,
   };
 
   for (const page of paginate(pages, options)) {
     yield {
-      title: "全ての記事",
+      title: "全ての技術記事",
       url: page.url,
       content: (
         <div className="mx-8 text-lg md:mx-auto">
           <div className="my-8 flex flex-col justify-center">
             <comp.Logo />
-            <div className="text-center mt-2">全ての記事</div>
+            <div className="text-center mt-2">全ての技術記事</div>
           </div>
           <div className="flex md:items-center flex-col gap-6 grid-cols-4">
             <comp.PostList pages={page.results} />
