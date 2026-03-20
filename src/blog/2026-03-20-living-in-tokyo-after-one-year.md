@@ -92,8 +92,9 @@ draft: false
 - とにかく行け
 - 上京したメリットと家賃の元を取る勢いでイベントに参加しろ
 - 参加するにあたっての注意点は全部書いたけど、読む前にとりあえずイベント参加を申し込め
-- https://comamoca.dev/blog/2025-09-04-go-to-the-event/
 - さっさと申し込め
+
+https://comamoca.dev/blog/2025-09-04-go-to-the-event/
 
 ## 電気消し忘れ問題
 
