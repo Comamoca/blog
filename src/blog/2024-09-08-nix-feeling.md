@@ -3,6 +3,7 @@ title: Nixを始めてから一週間経った
 description: Nixについての現時点での雑感
 pubDate: Sep 8 2024
 emoji: 🦊
+tags: ["tech", "nix"]
 draft: false
 ---
 

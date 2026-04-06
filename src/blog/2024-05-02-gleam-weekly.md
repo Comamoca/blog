@@ -5,6 +5,7 @@ pubDate: May 2 2024
 tag:
   - gleamweekly
 emoji: 🦊
+tags: ["tech", "gleam"]
 draft: false
 ---
 

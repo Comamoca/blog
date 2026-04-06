@@ -3,6 +3,7 @@ title: ゴリラ.vimに行ってきた
 description: ゴリラ.vimに行ってきたのでその話
 pubDate: Feb 15 2024
 emoji: 🦊
+tags: ["tech", "event"]
 draft: false
 ---
 

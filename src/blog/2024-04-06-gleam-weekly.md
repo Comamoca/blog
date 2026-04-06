@@ -3,6 +3,7 @@ title: 4/6 Gleam Weekly
 description: Gleam Weeklyの内容を勝手に解説していきます。
 pubDate: Apr 6 2024
 emoji: 🦊
+tags: ["tech", "gleam"]
 draft: false
 ---
 

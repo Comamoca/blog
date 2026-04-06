@@ -3,6 +3,7 @@ title: 3/22 Gleam Weekly
 description: Gleam Weeklyの内容を解説していきます。
 pubDate: Mar 22 2024
 emoji: 🦊
+tags: ["tech", "gleam", "gleam-weekly"]
 draft: false
 ---
 

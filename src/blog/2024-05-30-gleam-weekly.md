@@ -3,6 +3,7 @@ title: issue9-10 Gleam Weekly
 description: Gleam Weeklyの内容を勝手に解説していきます。
 pubDate: May 30 2024
 emoji: 🦊
+tags: ["tech", "gleam"]
 draft: false
 ---
 

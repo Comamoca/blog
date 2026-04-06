@@ -3,6 +3,7 @@ title: 甲斐国もくもく会に行ってきた
 description: 甲斐国もくもく会に行ってきた話
 pubDate: Apr 1 2024
 emoji: 🦊
+tags: ["tech", "ai"]
 draft: false
 ---
 
