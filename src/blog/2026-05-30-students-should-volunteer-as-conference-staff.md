@@ -134,6 +134,11 @@ https://fortee.jp/2025fp-matsuri/proposal/e9df1f36-cf2f-4a85-aa36-4e07ae742a69
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">YAPC::Tokyo 2026の「トークプロポーザル募集開始お知らせ 登録フォーム」を作成しました！<br><br>メールアドレスを登録いただくと、後日CfPを開始した際にご連絡いたします。<br><br>応募に興味のある方、迷っているけど情報が欲しいという方、ぜひご登録ください！ <a href="https://x.com/hashtag/yapcjapan?src=hash&amp;ref_src=twsrc%5Etfw">#yapcjapan</a><a href="https://t.co/hhOV5rNBmb">https://t.co/hhOV5rNBmb</a></p>&mdash; yapcjapan (@yapcjapan) <a href="https://x.com/yapcjapan/status/2059092776487412212?ref_src=twsrc%5Etfw">May 26, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
+5/31追記:
+関数型まつりにて当日スタッフの募集が始まったそうです。興味のある方はぜひ！
+
+https://blog.fp-matsuri.org/entry/2026/05/31/131337
+
 [^1]: 主に大学生を想定していますが、中学生や高校生が来ても良いと思っています。実際Hono
     Conf2025では高校生の方がキーノートで登壇しています。現地で見ましたが面白かったし自分も頑張らなきゃなと思いましたね...
 
