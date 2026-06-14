@@ -44,12 +44,12 @@ draft: false
 
 以下のスライドはOSSに関する話題ですが、ツイートが多くの人に注目された時(いわゆる「バズった」)に同じ内容のリプが異なる人から大量に届きます。
 
-<iframe class="speakerdeck-iframe" style="border: 0px; background: padding-box rgba(0, 0, 0, 0.1); margin: 0px; padding: 0px; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 100%; height: auto; aspect-ratio: 560 / 315;" frameborder="0" src="https://speakerdeck.com/player/fac3c8cacd8f480eb533c5fca3b72afd" title="OSS開発者の憂鬱" allowfullscreen="true" allow="web-share" data-ratio="1.7777777777777777"></iframe>
+<iframe class="speakerdeck-iframe" style="border: 0px; background: padding-box rgba(0, 0, 0, 0.1); margin: 0px; padding: 0px; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 100%; height: auto; aspect-ratio: 560 / 315;" frameborder="0" src="https://speakerdeck.com/player/fac3c8cacd8f480eb533c5fca3b72afd?slide=77" title="OSS開発者の憂鬱" allowfullscreen="true" allow="web-share" data-ratio="1.7777777777777777"></iframe>
 
 バズったことがある人は分かると思うのですが、これが**結構消耗する**んですよね。
 なので基本バズりそうなツイートは通知が埋められる前に速攻ミュートしちゃうんですが、後から見返してみて良いと思ったツイートには返信したりしてます。
 
-まぁこのムーブにが不誠実に見えるかもしれないんですが、そもそも他者にリプをする自由が存在するなら「リプに反応しない自由」も認められるべきなんですよね。
+まぁこのムーブが不誠実に見えるかもしれないんですが、そもそも他者にリプをする自由が存在するなら「リプに反応しない自由」も認められるべきなんですよね。
 なので僕がリプをした時に反応がなくてもあまり気にしないですし、僕の中では十分筋が通った行動をしているという認識ではいます。
 
 ### ネガティブな話題を極力ツイートしない
@@ -63,7 +63,8 @@ draft: false
 - 恋愛
 - 金
 
-特に政治に関しては以前「政治家のアカウントに罵詈雑言をリプしない方が良いと思う」という趣旨のツイートをしたら**†界隈†の人**からフルボッコにされたので、投票報告以外はしないことにしてます。
+特に政治に関しては以前「政治家のアカウントに罵詈雑言をリプしない方が良いと思う」という趣旨のツイートをしたら
+**†界隈†の人** からフルボッコにされたので、投票報告以外はしないことにしてます。
 
 SNSにおける政治の議論が忌避される現状に関しては思うものもありますが、そもそもTwitterという話題のコンテキストが落ちやすいプラットフォームで公平に議論できるものでもないので、現状しないに越したことはないとも思っています。
 
