@@ -3,7 +3,7 @@ title: "Twitterを収益化します"
 description: "収益はイベントの開催費とかOSSの寄付とか僕の日本酒代になる予定です"
 pubDate: "Jun 14 2026"
 emoji: 🦊
-tags: []
+tags: ["report"]
 draft: false
 ---
 
