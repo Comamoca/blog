@@ -1,5 +1,6 @@
 import { basename } from "jsr:@std/path";
 import { SITE_TITLE } from "./consts.ts";
+import { buildPageLinks } from "../utils/paginate.ts";
 
 export const layout = "layouts/main.tsx";
 export const openGraphLayout = "layouts/mainOgImage.tsx";
@@ -29,6 +30,17 @@ export default async function* (
   };
 
   for (const page of paginate(pages, options)) {
+    const current = page.pagination.page;
+    const totalPages = page.pagination.totalPages;
+    const allPages = paginate(pages, options);
+
+    const pageLinks = buildPageLinks(current, totalPages).map((link) => {
+      if ("omitted" in link) {
+        return { omitted: true };
+      }
+      return allPages[link.page - 1];
+    });
+
     yield {
       title: "全ての記事",
       url: page.url,
@@ -40,32 +52,31 @@ export default async function* (
           </div>
           <div className="flex md:items-center flex-col gap-6 grid-cols-4">
             <comp.PostList pages={page.results} />
-            <div className="inline-flex flex-row justify-center py-1">
+          </div>
+          <div className="flex justify-center pt-3 md:pt-5">
+            <div className="mx-auto flex-row">
               <a
-                key="prev"
                 href={page.pagination.previous}
-                className="my-auto mx-2 btn sm:btn-sm"
+                className="my-auto mx-2 btn btn-sm md:btn-lg"
               >
-                前へ
+                {"前へ"}
               </a>
-              <span className="my-auto mx-2 text-sm">
-                {page.pagination.page}
-              </span>
+              {pageLinks.map((p: any, i: number) => (
+                <a
+                  key={i}
+                  href={p.url}
+                  className="my-auto mx-2 btn btn-sm md:btn-lg"
+                >
+                  {p.omitted ? "…" : p.pagination.page}
+                </a>
+              ))}
               <a
-                key="next"
                 href={page.pagination.next}
-                className="my-auto mx-2 btn sm:btn-sm"
+                className="my-auto mx-2 btn btn-sm md:btn-lg"
               >
-                次へ
+                {"後へ"}
               </a>
             </div>
-          </div>
-          <div className="hidden md:inline-flex flex-row justify-center py-1">
-            {[...paginate(pages, options)].map((p, i) => (
-              <a key={i} href={p.url} className="my-auto mx-2 btn sm:btn-sm">
-                {i + 1}
-              </a>
-            ))}
           </div>
         </div>
       ),
