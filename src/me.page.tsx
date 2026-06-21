@@ -33,13 +33,16 @@ export default async function ({ comp }: Lume.Data) {
       </script>
       <img
         src="https://r2.comamoca.dev/icon.png"
-        className="mx-auto h-32 w-32 rounded-full md:mb-6 mt-8 md:mt-2"
+        className="mx-auto h-32 w-32 rounded-full md:mb-1 mt-8 md:mt-5"
       />
+      <p className="text-center text-gray-400 italic text-sm">
+        99e5be86-ac10-4698-a38b-3f8db4b91e0d
+      </p>
 
       <main>
         <h1 className="text-2xl md:text-4xl text-center my-4">About Me</h1>
         <article className="prose flex justify-center mx-auto">
-          <div className="border-t border-gray-200 w-96 m-3 p-4">
+          <div className="border-t border-gray-200 w-140 m-3 p-4">
             <div className="block p-4 bg-white rounded-lg border border-gray-200 shadow md:p-6">
               <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Comamoca
