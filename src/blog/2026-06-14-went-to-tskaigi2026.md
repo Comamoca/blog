@@ -4,7 +4,7 @@ description: "今年はスタッフとして参加しました"
 pubDate: "Jun 14 2026"
 emoji: 🦊
 tags: ["poem", "conference"]
-draft: false
+draft: true
 ---
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">2日間お疲れ様でした！<br>また来年会いましょう！<a href="https://x.com/hashtag/TSKaigi?src=hash&amp;ref_src=twsrc%5Etfw">#TSKaigi</a> <a href="https://t.co/tTz4CVSMWm">pic.twitter.com/tTz4CVSMWm</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://x.com/Comamoca_/status/2058166850723426464?ref_src=twsrc%5Etfw">May 23, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
