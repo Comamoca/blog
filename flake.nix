@@ -97,14 +97,6 @@
             name = "deno-test";
             runtimeInputs = [ deno ];
             text = ''
-              # Native npm modules (e.g. sharp) need libstdc++ etc. even
-              # when the hook runs outside the dev shell (e.g. from magit)
-              export LD_LIBRARY_PATH="${
-                pkgs.lib.makeLibraryPath [
-                  pkgs.stdenv.cc.cc.lib
-                  pkgs.zlib
-                ]
-              }''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
               # Pre-cache dependencies to avoid network issues during build
               if ! ${deno}/bin/deno cache tests/*.ts 2>/dev/null; then
                 echo "Warning: Could not cache test dependencies, skipping deno test in offline environment"
