@@ -1,0 +1,100 @@
+// Vendored from https://github.com/lumeland/lume/blob/main/plugins/git_date.ts
+// because the git_date plugin was introduced after the pinned Lume v3.1.4.
+// Sets each page's `date` to its last Git modification time, so RSS item
+// pubDate values carry real timestamps instead of filename-derived midnights.
+import { merge } from "lume/core/utils/object.ts";
+import { normalizePath } from "lume/core/utils/path.ts";
+import { join } from "lume/deps/path.ts";
+import { log } from "lume/core/utils/log.ts";
+
+import type Site from "lume/core/site.ts";
+
+export interface Options {
+  /** The variable name used to save the value */
+  varName?: string;
+}
+
+export const defaults = {
+  varName: "date",
+} satisfies Options;
+
+export function gitDate(userOptions?: Options) {
+  const options = merge(defaults, userOptions);
+  const { varName } = options;
+  let cache: Map<string, string>;
+
+  return (site: Site) => {
+    site.addEventListener("beforeBuild", () => {
+      cache = getLastModified(site.src());
+    });
+
+    site.preprocess((pages) => {
+      for (const page of pages) {
+        const date = cache.get(site.src(page.sourcePath));
+
+        if (date === undefined) {
+          continue;
+        }
+
+        page.data[varName] = new Date(date);
+      }
+    });
+  };
+}
+
+export default gitDate;
+
+/**
+ * Thanks to https://meiert.com/blog/eleventy-git-last-modified/
+ */
+function getLastModified(path: string): Map<string, string> {
+  const dates = new Map<string, string>();
+  const toplevel = gitCommand("rev-parse", "--show-toplevel");
+
+  if (!toplevel) {
+    return dates;
+  }
+
+  const str = gitCommand("log", "--format=DATE:%ci", "--name-only", "--", path);
+
+  if (!str) {
+    return dates;
+  }
+
+  let currentDate: string | undefined;
+  for (const line of str.split("\n")) {
+    const text = line.trim();
+
+    if (text.startsWith("DATE:")) {
+      currentDate = text.slice(5).trim();
+      continue;
+    }
+
+    if (text && currentDate) {
+      const path = normalizePath(join(toplevel, text));
+      // First commits, last modification
+      if (!dates.has(path)) {
+        dates.set(path, currentDate);
+      }
+    }
+  }
+
+  return dates;
+}
+
+const decoder = new TextDecoder();
+
+function gitCommand(...args: string[]): string {
+  const { code, stderr, stdout } = new Deno.Command("git", {
+    args,
+    stdout: "piped",
+    stderr: "piped",
+  }).outputSync();
+
+  if (code !== 0) {
+    log.error(`[git_date plugin] Git error: ${decoder.decode(stderr)}`);
+    return "";
+  }
+
+  return decoder.decode(stdout).trim();
+}
