@@ -217,6 +217,7 @@
 
                 just
                 nushell
+                git
                 git-secrets
                 unar
 
