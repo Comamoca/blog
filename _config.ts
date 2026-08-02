@@ -21,12 +21,9 @@ import metas from "lume/plugins/metas.ts";
 // import esbuild from "lume/plugins/esbuild.ts";
 import transformImages from "lume/plugins/transform_images.ts";
 import picture from "lume/plugins/picture.ts";
-import { is } from "jsr:@core/unknownutil";
 import { readFile } from "node:fs/promises";
-import { basename } from "jsr:@std/path";
-import { expandGlob } from "jsr:@std/fs";
-import { groupBy } from "jsr:@es-toolkit/es-toolkit";
-import { format } from "date-fns";
+import gitDate from "./plugins/lume/git_date.ts";
+import { getLatestGitCommitDate } from "./plugins/git_commit_date.ts";
 
 import { createHighlighter } from "npm:shiki";
 import {
@@ -44,32 +41,6 @@ import linkcard from "./plugins/linkcard.ts";
 
 // Lume plugin
 import footnote from "./plugins/lume/footnote.ts";
-
-// For RSS lastBuildDate
-// TODO: 同日に複数の記事が投稿された場合にも対応する
-async function getLatestPostDate() {
-  const globPost = "./src/blog/*.md";
-
-  const entries = await Array.fromAsync(expandGlob(globPost));
-  const articleDate = entries.map((entry) => basename(entry.path))
-    .map((name) => name.slice(0, 10));
-  const sorted = entries.map((entry) => basename(entry.path))
-    .map((name) => name.slice(0, 10))
-    .map((dateStr) => new Date(dateStr))
-    .sort((a, b) => -(a.getTime()) - (b.getTime()));
-
-  const now = new Date();
-  const today = format(now, "yyyy-MM-dd");
-
-  const grouped = groupBy(articleDate, (item) => item);
-  const todayPost = grouped[today];
-
-  if (!is.Undefined(todayPost) && todayPost.length > 1) {
-    return new Date();
-  } else {
-    return sorted[0];
-  }
-}
 
 const RELEASE = Deno.env.get("RELEASE");
 const DISABLE_LINKCARD = Deno.env.get("DISABLE_LINKCARD");
@@ -172,6 +143,7 @@ if (RELEASE) {
 }
 
 // RSS feed - enabled in both dev and production modes
+site.use(gitDate({ varName: "date" }));
 site.use(feed({
   output: ["api/feed.xml", "api/feed.json"],
   query: "posts",
@@ -182,7 +154,7 @@ site.use(feed({
     generator: true,
     authorName: AUTHOR,
     authorUrl: SITE_URL,
-    published: await getLatestPostDate(),
+    published: getLatestGitCommitDate(),
   },
   items: {
     title: "=title",
