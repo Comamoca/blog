@@ -102,7 +102,7 @@
                 echo "Warning: Could not cache test dependencies, skipping deno test in offline environment"
                 exit 0
               fi
-              ${deno}/bin/deno test --allow-env --allow-read --no-prompt
+              ${deno}/bin/deno test --allow-env --allow-read --allow-run --allow-write --no-prompt
             '';
           };
 

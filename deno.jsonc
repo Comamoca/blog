@@ -5,6 +5,9 @@
     "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts",
     "daisyui": "npm:daisyui@5.5.20"
   },
+  "test": {
+    "include": ["tests/"]
+  },
   "tasks": {
     "lume": {
       "description": "Run Lume command",
