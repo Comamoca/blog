@@ -81,3 +81,39 @@ Deno.test("RSS feed item pubDate includes time", () => {
     "at least one pubDate must include a non-midnight time component",
   );
 });
+
+// Every item's pubDate day must match the date embedded in its URL, which is
+// derived from the filename. This guards against git commit dates leaking
+// into pubDates and re-flooding old posts as "new" on RSS readers.
+Deno.test("RSS feed item pubDate day matches its URL date", () => {
+  const itemMatches = [
+    ...feedXml.matchAll(/<item>([\s\S]*?)<\/item>/g),
+  ];
+  assert(itemMatches.length > 0, "feed.xml must contain items");
+
+  let checked = 0;
+  for (const item of itemMatches) {
+    const url = item[1].match(/<link>([^<]*)<\/link>/)?.[1];
+    const pubDate = item[1].match(/<pubDate>([^<]*)<\/pubDate>/)?.[1];
+    if (!url || !pubDate) {
+      continue;
+    }
+
+    // URL is built from pubDate (see src/blog/_data.js), so extract the date
+    // from the URL path: /blog/2026-08-02-i-no-sumika/
+    const urlDate = url.match(/\/blog\/(\d{4}-\d{2}-\d{2})-/)?.[1];
+    assert(
+      urlDate,
+      `URL ${url} must contain a YYYY-MM-DD date`,
+    );
+
+    const pubDateDay = new Date(pubDate).toISOString().slice(0, 10);
+    assert(
+      pubDateDay === urlDate,
+      `pubDate ${pubDate} must match URL date ${urlDate} for ${url}`,
+    );
+    checked++;
+  }
+
+  assert(checked > 0, "at least one item must have both URL and pubDate");
+});

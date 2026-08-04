@@ -1,13 +1,21 @@
-// Vendored from https://github.com/lumeland/lume/blob/main/plugins/git_date.ts
-// because the git_date plugin was introduced after the pinned Lume v3.1.4.
-// Sets each page's `date` to its last Git modification time, so RSS item
-// pubDate values carry real timestamps instead of filename-derived midnights.
+// Combines the publication date derived from the filename with the time of
+// the first git commit that added the file.
+//
+// Why not use commit dates directly? The git history of this repo contains
+// large bulk imports (e.g. posts published in March are committed in June),
+// so commit dates do not reflect actual publication dates. Using them as
+// the post date makes old posts look "new" again, which floods RSS readers.
+//
+// Why not use the filename date alone? Filename dates are midnights, so
+// when several posts are published on the same day they all share the same
+// timestamp and RSS readers only deliver the first one as "new".
+//
+// The filename date provides the stable day, the first-commit time provides
+// a distinct time-of-day per post without ever moving the post to a
+// different day.
 import { merge } from "lume/core/utils/object.ts";
-import { normalizePath } from "lume/core/utils/path.ts";
-import { join } from "lume/deps/path.ts";
-import { log } from "lume/core/utils/log.ts";
-
 import type Site from "lume/core/site.ts";
+import { getFileFirstCommitDate } from "../git_commit_date.ts";
 
 export interface Options {
   /** The variable name used to save the value */
@@ -21,80 +29,37 @@ export const defaults = {
 export function gitDate(userOptions?: Options) {
   const options = merge(defaults, userOptions);
   const { varName } = options;
-  let cache: Map<string, string>;
 
   return (site: Site) => {
-    site.addEventListener("beforeBuild", () => {
-      cache = getLastModified(site.src());
-    });
-
     site.preprocess((pages) => {
       for (const page of pages) {
-        const date = cache.get(site.src(page.sourcePath));
+        const sourcePath = site.src(page.sourcePath);
+        const firstCommit = getFileFirstCommitDate(sourcePath);
 
-        if (date === undefined) {
+        if (!firstCommit) {
           continue;
         }
 
-        page.data[varName] = new Date(date);
+        // Only replace the time-of-day: keep the day from the filename.
+        const existingDate = page.data[varName];
+        const existing = existingDate instanceof Date
+          ? existingDate
+          : new Date(existingDate);
+
+        if (Number.isNaN(existing.getTime())) {
+          continue;
+        }
+
+        const combined = new Date(existing);
+        combined.setUTCHours(
+          firstCommit.getUTCHours(),
+          firstCommit.getUTCMinutes(),
+          firstCommit.getUTCSeconds(),
+        );
+        page.data[varName] = combined;
       }
     });
   };
 }
 
 export default gitDate;
-
-/**
- * Thanks to https://meiert.com/blog/eleventy-git-last-modified/
- */
-function getLastModified(path: string): Map<string, string> {
-  const dates = new Map<string, string>();
-  const toplevel = gitCommand("rev-parse", "--show-toplevel");
-
-  if (!toplevel) {
-    return dates;
-  }
-
-  const str = gitCommand("log", "--format=DATE:%ci", "--name-only", "--", path);
-
-  if (!str) {
-    return dates;
-  }
-
-  let currentDate: string | undefined;
-  for (const line of str.split("\n")) {
-    const text = line.trim();
-
-    if (text.startsWith("DATE:")) {
-      currentDate = text.slice(5).trim();
-      continue;
-    }
-
-    if (text && currentDate) {
-      const path = normalizePath(join(toplevel, text));
-      // First commits, last modification
-      if (!dates.has(path)) {
-        dates.set(path, currentDate);
-      }
-    }
-  }
-
-  return dates;
-}
-
-const decoder = new TextDecoder();
-
-function gitCommand(...args: string[]): string {
-  const { code, stderr, stdout } = new Deno.Command("git", {
-    args,
-    stdout: "piped",
-    stderr: "piped",
-  }).outputSync();
-
-  if (code !== 0) {
-    log.error(`[git_date plugin] Git error: ${decoder.decode(stderr)}`);
-    return "";
-  }
-
-  return decoder.decode(stdout).trim();
-}

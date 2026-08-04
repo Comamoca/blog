@@ -17,6 +17,10 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v6
+        with:
+          # RSS dates come from git commit times, so the full history
+          # (not a shallow clone) is required for correct pubDates.
+          fetch-depth: 0
       - uses: nixbuild/nix-quick-install-action@v35
       # - uses: cachix/install-nix-action@v31
       #   with:
