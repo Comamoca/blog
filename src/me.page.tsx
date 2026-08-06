@@ -86,7 +86,7 @@ export default async function ({ comp }: Lume.Data) {
             <img
               data-confetti-button
               width="70"
-              src="https://emoji2svg.deno.dev/api/🎉"
+              src="https://emoji2svg.comamoca.dev/🎉"
               alt="party popper emoji button"
               className="mx-auto border rounded p-5"
             />

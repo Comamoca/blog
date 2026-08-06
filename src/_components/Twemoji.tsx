@@ -1,5 +1,5 @@
 export default async function Twemoji({ emoji, size = 20 }) {
-  const url = new URL("https://emoji2svg.deno.dev");
+  const url = new URL("https://emoji2svg.comamoca.dev/");
   url.pathname += `api/${emoji}`;
 
   const style = `size-${size} md:size-${size + 8}`;
