@@ -26,7 +26,8 @@ features
 
 - `typescript-clojure-intro` -
   TypeScriptユーザーに贈るClojure入門という記事を書く (Phase: initialized)
-- `linkcard-fix` - リンクカードが表示されていない問題の修正 (Phase: initialized)
+- `linkcard-fix` - リンクカードが表示されていない問題の修正 (Phase:
+  implementation-completed)
 
 ## Development Guidelines
 
@@ -153,36 +154,50 @@ just latest-diary
 
 ```
 src/
-├── _components/          # Reusable React components (TSX)
+├── _components/          # Reusable components (TSX)
 │   ├── Header.tsx       # Main site header with navigation
 │   ├── PostList.tsx     # Blog post listing component
 │   ├── PostCard.tsx     # Individual post preview card
-│   └── Search.tsx       # Site search functionality
+│   ├── Search.tsx       # Site search functionality
+│   ├── Footer.tsx       # Footer component
+│   ├── BaseHead.tsx     # HTML head component
+│   ├── Logo.tsx         # Site logo
+│   └── Twemoji.tsx      # Twemoji component
 ├── _includes/           # Layout templates
-│   └── layouts/        # Page layout templates
-├── blog/               # Blog post markdown files
-├── img/                # Image assets
-└── *.page.tsx          # Page components (index, 404, etc.)
+│   └── layouts/         # Page layout templates (main, post, OG images)
+├── blog/                # Blog post markdown files
+├── img/                 # Image assets
+├── public/              # Static files copied as-is
+├── well-known/          # .well-known directory content
+└── *.page.tsx           # Page components (index, 404, diary, etc.)
 
 plugins/
-├── lume/               # Custom Lume plugins
-└── linkcard.ts         # External link card generation
+├── lume/                # Custom Lume plugins
+│   ├── footnote.ts      # Custom footnote processing
+│   └── git_date.ts      # Git commit date extraction
+├── linkcard.ts          # External link card generation
+└── git_commit_date.ts   # Latest git commit date helper
+
+scripts/
+└── downloadFonts.ts     # Font download script
 
 _config.ts              # Main Lume configuration
+create.rb               # Blog post creation script
 ```
 
 ### Key Technologies
 
 - **Framework**: Lume v3 (Deno static site generator)
 - **Styling**: TailwindCSS v4 + DaisyUI v5
-- **Components**: React TSX with SSX runtime
+- **Components**: TSX with Lume's JSX runtime (SSX)
 - **Deployment**: Cloudflare Pages
 - **Fonts**: Noto Sans CJK for Japanese support
+- **Syntax highlighting**: Shiki (catppuccin-mocha theme)
 
 ### Component Architecture
 
-All components in `src/_components/` are **async functions** due to Lume v3
-migration requirements. When creating new components:
+Components in `src/_components/` are referenced via `comp.Header` syntax in
+layouts. When creating new components:
 
 ```tsx
 export default async function MyComponent() {
@@ -202,14 +217,12 @@ export default async function MyComponent() {
 
 - `_config.ts`: Main Lume configuration with plugins and build settings
 - `deno.jsonc`: Deno configuration with tasks and imports
-- `tailwind.config.js`: TailwindCSS configuration
 
 ### Environment-Specific Behavior
 
 The `RELEASE` environment variable controls production features:
 
-- When `RELEASE=1`: Enables minification, compression, SEO plugins, OG image
-  generation
+- When `RELEASE=1`: Enables minification, SEO plugins, OG image generation
 - Development: Simplified build with faster reload times
 
 ## Custom Features
@@ -229,8 +242,14 @@ The `RELEASE` environment variable controls production features:
 ### Search Functionality
 
 - Uses Pagefind for client-side search
-- Automatically indexes all content during production builds
+- Automatically indexes all content
 - Search component in `src/_components/Search.tsx`
+
+### Link Cards
+
+- External link preview generation via `plugins/linkcard.ts`
+- Uses Remark plugin processing
+- Can be disabled with `DISABLE_LINKCARD` environment variable
 
 ## Development Notes
 
@@ -253,6 +272,7 @@ Custom plugins are located in `plugins/` directory:
 
 - `linkcard.ts`: Generates preview cards for external links
 - `plugins/lume/footnote.ts`: Custom footnote processing
+- `plugins/lume/git_date.ts`: Git commit date extraction for RSS feed
 
 ## Deployment
 
@@ -264,7 +284,7 @@ The site is automatically deployed to Cloudflare Pages. The build process:
 
 Production builds include additional optimizations:
 
-- HTML/CSS minification
-- Brotli and Gzip compression
+- HTML minification
 - Automatic sitemap and RSS feed generation
 - Image optimization and responsive picture generation
+- Broken link checking (output to `_broken_links.json`)
