@@ -55,10 +55,6 @@ jobs:
             _cache
           key: images-${{ hashFiles('src/img/**') }}-v1
 
-      - name: Clean image metadata
-        run: |
-          nix develop --command exiftool -all= -overwrite_original src/img/*.png || true
-
       - name: Build & Deploy
         env:
           RELEASE: 1
