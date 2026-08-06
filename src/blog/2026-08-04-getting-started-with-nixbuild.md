@@ -1,6 +1,6 @@
 ---
 title: nixbuildのススメ
-description: "重いnixのビルドはnixbuildに押し付けよう"
+description: "重いNixのビルドはnixbuildに押し付けよう"
 pubDate: "Aug 4 2026"
 emoji: 🦊
 tags: ["tech", "nix", "nixbuild"]
