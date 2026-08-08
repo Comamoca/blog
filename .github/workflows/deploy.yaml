@@ -16,7 +16,7 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           # RSS dates come from git commit times, so the full history
           # (not a shallow clone) is required for correct pubDates.
