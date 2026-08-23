@@ -1,4 +1,27 @@
 /**
+ * Builds the environment for a git subprocess rooted at `cwd`.
+ *
+ * `Deno.Command` merges `env` into the parent environment and cannot unset
+ * variables, so an inherited GIT_DIR (git exports it as an absolute path
+ * inside hook processes) would make `git log` succeed even when `cwd` points
+ * outside a repository. Overriding GIT_DIR/GIT_WORK_TREE with values derived
+ * from the explicit `cwd` keeps that argument authoritative: inside a
+ * repository it resolves as usual, elsewhere git fails and callers fall back.
+ */
+function gitCommandEnv(cwd: string): Record<string, string> {
+  let root = cwd;
+  try {
+    root = Deno.realPathSync(cwd);
+  } catch {
+    // Unresolvable cwd — leave it as-is and let git fail gracefully.
+  }
+  return {
+    GIT_DIR: `${root}/.git`,
+    GIT_WORK_TREE: root,
+  };
+}
+
+/**
  * Returns the timestamp of the first commit that added a given file.
  * Used to fill in the time-of-day component of a post's published date,
  * so multiple posts published on the same day still get distinct times
@@ -19,6 +42,7 @@ export function getFileFirstCommitDate(
     const command = new Deno.Command("git", {
       args: ["log", "--diff-filter=A", "-1", "--format=%ct", "--", filePath],
       cwd,
+      env: gitCommandEnv(cwd),
       stdout: "piped",
       stderr: "piped",
     });
@@ -50,6 +74,7 @@ export function getLatestGitCommitDate(cwd: string = Deno.cwd()): Date {
     const command = new Deno.Command("git", {
       args: ["log", "-1", "--format=%ct"],
       cwd,
+      env: gitCommandEnv(cwd),
       stdout: "piped",
       stderr: "piped",
     });
