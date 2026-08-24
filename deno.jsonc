@@ -25,6 +25,7 @@
     "deploy": "env RELEASE=1 deno task lume --location https://comamoca.dev; wrangler pages deploy ./_site --project-name=blog --commit-dirty=true",
     "build-pages": "deno run -A ./scripts/downloadFonts.ts && deno task lume",
     "download-fonts": "deno run -A ./scripts/downloadFonts.ts",
+    "extract-tags": "deno run -A ./scripts/extractTags.ts",
     "test": "deno test --allow-all"
   },
   "compilerOptions": {
