@@ -5,6 +5,7 @@
     # nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/master";
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    llm-agents.url = "github:numtide/llm-agents.nix";
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
@@ -23,6 +24,7 @@
       treefmt-nix,
       flake-parts,
       git-hooks-nix,
+      llm-agents,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -138,12 +140,14 @@
               ];
             overlays = [
               inputs.deno-overlay.overlays.deno-overlay
+              inputs.llm-agents.overlays.shared-nixpkgs
             ];
             config = { };
           };
 
           treefmt = {
             projectRootFile = "flake.nix";
+            settings.excludes = [ ".commandcode/**" ];
             programs = {
               nixfmt.enable = true;
               deno = {
@@ -175,6 +179,8 @@
                   name = "deno-test";
                   entry = "${deno-test}/bin/deno-test";
                   language = "system";
+                  # tests/ 配下の変更時のみ実行(全コミットでフルテストが走るのを防ぐ)
+                  files = "^tests/";
                   types = [ "text" ];
                 };
               };
@@ -185,8 +191,9 @@
           devShells.default =
             let
               mcp-config = inputs.mcp-servers-nix.lib.mkConfig pkgs {
+                settings.servers = { };
                 programs = {
-                  playwright.enable = true;
+                  # playwright.enable = true;
                 };
               };
             in
@@ -224,7 +231,11 @@
                 # deploy
                 wrangler
 
-                claude-code
+                # llm-agents.claude-code
+                # llm-agents.agent-browser
+                llm-agents.packages.x86_64-linux.claude-code
+                llm-agents.packages.x86_64-linux.agent-browser
+
                 create
               ];
 
