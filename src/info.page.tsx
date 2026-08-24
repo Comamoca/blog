@@ -74,6 +74,20 @@ export default function () {
         SIL Open Font License, Version 1.1
       </ul>
 
+      <h2>絵文字</h2>
+      <p>
+        当サイトの絵文字は<a href="https://github.com/twitter/twemoji">
+          Twemoji
+        </a>のグラフィックをSVGに変換して使用しています。
+      </p>
+      <p>
+        Twemoji graphicsは Copyright Twitter, Inc and other contributors
+        が権利を保有し、
+        <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          Creative Commons Attribution 4.0 International License
+        </a>の下で提供されています。
+      </p>
+
       <h2>OGP画像の背景について</h2>
       <p>
         当サイトで設定しているOGP画像の背景には、<a href="https://discord.com/invite/sgSdejpp3Z">
