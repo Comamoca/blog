@@ -4,7 +4,7 @@ description: "ZennとかQiitaとかの代わりにこっち見てたりする"
 pubDate: "Aug 24 2026"
 emoji: 🦊
 tags: ["prose"]
-draft: true
+draft: false
 ---
 
 「みんなAIの話ばかりしてて面白くない」とよく聞くようになった。
