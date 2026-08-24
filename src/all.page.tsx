@@ -57,7 +57,7 @@ export default async function* (
             <div className="flex flex-row flex-wrap items-center justify-center gap-1 sm:gap-2">
               <a
                 href={page.pagination.previous ?? undefined}
-                className="btn btn-sm md:btn-lg"
+                className="btn btn-xs md:btn-lg"
               >
                 {"前へ"}
               </a>
@@ -65,14 +65,14 @@ export default async function* (
                 <a
                   key={i}
                   href={p.url}
-                  className="btn btn-sm md:btn-lg"
+                  className="btn btn-xs md:btn-lg"
                 >
                   {p.omitted ? "…" : p.pagination.page}
                 </a>
               ))}
               <a
                 href={page.pagination.next ?? undefined}
-                className="btn btn-sm md:btn-lg"
+                className="btn btn-xs md:btn-lg"
               >
                 {"後へ"}
               </a>

@@ -59,7 +59,7 @@ export default async function* (
                 <a
                   key={i}
                   href={p.url}
-                  className="btn btn-sm md:btn-lg"
+                  className="btn btn-xs md:btn-lg"
                 >
                   {p.omitted ? "…" : p.pagination.page}
                 </a>
