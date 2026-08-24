@@ -54,10 +54,10 @@ export default async function* (
             <comp.PostList pages={page.results} />
           </div>
           <div className="flex justify-center pt-3 md:pt-5">
-            <div className="mx-auto flex-row">
+            <div className="flex flex-row flex-wrap items-center justify-center gap-1 sm:gap-2">
               <a
-                href={page.pagination.previous}
-                className="my-auto mx-2 btn btn-sm md:btn-lg"
+                href={page.pagination.previous ?? undefined}
+                className="btn btn-xs md:btn-lg"
               >
                 {"前へ"}
               </a>
@@ -65,14 +65,14 @@ export default async function* (
                 <a
                   key={i}
                   href={p.url}
-                  className="my-auto mx-2 btn btn-sm md:btn-lg"
+                  className="btn btn-xs md:btn-lg"
                 >
                   {p.omitted ? "…" : p.pagination.page}
                 </a>
               ))}
               <a
-                href={page.pagination.next}
-                className="my-auto mx-2 btn btn-sm md:btn-lg"
+                href={page.pagination.next ?? undefined}
+                className="btn btn-xs md:btn-lg"
               >
                 {"後へ"}
               </a>
