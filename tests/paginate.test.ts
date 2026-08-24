@@ -11,25 +11,17 @@ Deno.test("buildPageLinks - small pages", () => {
 });
 
 Deno.test("buildPageLinks - near start", () => {
-  assertEquals(simplify(buildPageLinks(1, 10)), [1, 2, 3, 4, 5, "...", 10]);
-  assertEquals(simplify(buildPageLinks(2, 10)), [1, 2, 3, 4, 5, "...", 10]);
+  assertEquals(simplify(buildPageLinks(1, 10)), [1, 2, "...", 9, 10]);
+  assertEquals(simplify(buildPageLinks(2, 10)), [1, 2, "...", 9, 10]);
 });
 
 Deno.test("buildPageLinks - middle", () => {
-  assertEquals(simplify(buildPageLinks(5, 10)), [
-    1,
-    "...",
-    4,
-    5,
-    6,
-    "...",
-    10,
-  ]);
+  assertEquals(simplify(buildPageLinks(5, 10)), [1, "...", 5, "...", 10]);
 });
 
 Deno.test("buildPageLinks - near end", () => {
-  assertEquals(simplify(buildPageLinks(9, 10)), [1, "...", 6, 7, 8, 9, 10]);
-  assertEquals(simplify(buildPageLinks(10, 10)), [1, "...", 6, 7, 8, 9, 10]);
+  assertEquals(simplify(buildPageLinks(9, 10)), [1, 2, "...", 9, 10]);
+  assertEquals(simplify(buildPageLinks(10, 10)), [1, 2, "...", 9, 10]);
 });
 
 Deno.test("buildPageLinks - edge cases", () => {
