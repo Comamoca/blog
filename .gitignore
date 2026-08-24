@@ -43,3 +43,8 @@ flycheck_*
 
 .playwright-mcp/
 .wt/
+
+# editor / agent session state
+.commandcode/
+.omo/
+docs/
