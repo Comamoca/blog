@@ -2,26 +2,12 @@ export type PageLink =
   | { page: number }
   | { omitted: true };
 
-/** 0 は省略（...）を表す */
+/** モバイルで一行に収めるため、現在ページと両端のみ表示する。隣接移動は前へ/後へボタンが担う */
 function paginationPages(current: number, totalPages: number): number[] {
-  if (totalPages <= 7) {
+  if (totalPages <= 5) {
     return Array.from({ length: totalPages }, (_, i) => i + 1);
   }
-  if (current < 5) {
-    return [1, 2, 3, 4, 5, 0, totalPages];
-  }
-  if (current > totalPages - 4) {
-    return [
-      1,
-      0,
-      totalPages - 4,
-      totalPages - 3,
-      totalPages - 2,
-      totalPages - 1,
-      totalPages,
-    ];
-  }
-  return [1, 0, current - 1, current, current + 1, 0, totalPages];
+  return [...new Set([1, current, totalPages])].sort((a, b) => a - b);
 }
 
 export function buildPageLinks(
@@ -31,12 +17,13 @@ export function buildPageLinks(
   const rawPages = paginationPages(current, totalPages);
 
   const pageLinks: PageLink[] = [];
+  let prev = 0;
   for (const p of rawPages) {
-    if (p === 0) {
+    if (p - prev > 1) {
       pageLinks.push({ omitted: true });
-    } else {
-      pageLinks.push({ page: p });
     }
+    pageLinks.push({ page: p });
+    prev = p;
   }
 
   return pageLinks;
