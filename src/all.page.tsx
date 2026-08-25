@@ -54,10 +54,13 @@ export default async function* (
             <comp.PostList pages={page.results} />
           </div>
           <div className="flex justify-center pt-3 md:pt-5">
-            <div className="flex flex-row flex-wrap items-center justify-center gap-1 sm:gap-2">
+            <nav
+              aria-label="ページ送り"
+              className="grid w-full max-w-md md:max-w-3xl md:px-4 grid-flow-col auto-cols-fr gap-1 sm:gap-2"
+            >
               <a
                 href={page.pagination.previous ?? undefined}
-                className="btn btn-xs md:btn-lg"
+                className="btn btn-sm px-1.5 md:btn-lg md:px-4"
               >
                 {"前へ"}
               </a>
@@ -65,18 +68,18 @@ export default async function* (
                 <a
                   key={i}
                   href={p.url}
-                  className="btn btn-xs md:btn-lg"
+                  className="btn btn-sm px-1.5 md:btn-lg md:px-4"
                 >
                   {p.omitted ? "…" : p.pagination.page}
                 </a>
               ))}
               <a
                 href={page.pagination.next ?? undefined}
-                className="btn btn-xs md:btn-lg"
+                className="btn btn-sm px-1.5 md:btn-lg md:px-4"
               >
                 {"後へ"}
               </a>
-            </div>
+            </nav>
           </div>
         </div>
       ),

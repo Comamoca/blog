@@ -43,8 +43,13 @@ flycheck_*
 
 .playwright-mcp/
 .wt/
+<<<<<<< HEAD
 
 # editor / agent session state
 .commandcode/
 .omo/
 docs/
+.wt/.omo/
+=======
+.omo/
+>>>>>>> 4dd1d92 (chore: fix .omo ignore pattern split across lines)

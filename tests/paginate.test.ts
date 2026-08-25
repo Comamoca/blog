@@ -11,17 +11,17 @@ Deno.test("buildPageLinks - small pages", () => {
 });
 
 Deno.test("buildPageLinks - near start", () => {
-  assertEquals(simplify(buildPageLinks(1, 10)), [1, 2, "...", 9, 10]);
-  assertEquals(simplify(buildPageLinks(2, 10)), [1, 2, "...", 9, 10]);
+  assertEquals(simplify(buildPageLinks(1, 10)), [1, 2, 10]);
+  assertEquals(simplify(buildPageLinks(2, 10)), [1, 2, 3, 10]);
 });
 
 Deno.test("buildPageLinks - middle", () => {
-  assertEquals(simplify(buildPageLinks(5, 10)), [1, "...", 5, "...", 10]);
+  assertEquals(simplify(buildPageLinks(5, 10)), [1, 4, 5, 6, 10]);
 });
 
 Deno.test("buildPageLinks - near end", () => {
-  assertEquals(simplify(buildPageLinks(9, 10)), [1, 2, "...", 9, 10]);
-  assertEquals(simplify(buildPageLinks(10, 10)), [1, 2, "...", 9, 10]);
+  assertEquals(simplify(buildPageLinks(9, 10)), [1, 8, 9, 10]);
+  assertEquals(simplify(buildPageLinks(10, 10)), [1, 9, 10]);
 });
 
 Deno.test("buildPageLinks - edge cases", () => {
@@ -89,21 +89,12 @@ Deno.test("buildPageLinks - no out of range values", () => {
   }
 });
 
-Deno.test("buildPageLinks - omitted has gaps", () => {
-  const result = buildPageLinks(5, 10);
-
-  for (let i = 0; i < result.length; i++) {
-    if ("omitted" in result[i]) {
-      assert(i > 0, "Omitted should not be first");
-      assert(i < result.length - 1, "Omitted should not be last");
-
-      const prevPage = result[i - 1] as { page: number };
-      const nextPage = result[i + 1] as { page: number };
-
-      assert(
-        nextPage.page - prevPage.page > 1,
-        "Omitted should only appear when there's a gap > 1",
-      );
-    }
+Deno.test("buildPageLinks - window format has no omissions", () => {
+  for (const current of [1, 2, 5, 9, 10]) {
+    const result = buildPageLinks(current, 10);
+    assert(
+      result.every((r) => "page" in r),
+      `Should not contain omissions (current=${current})`,
+    );
   }
 });
