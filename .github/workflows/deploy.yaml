@@ -47,6 +47,9 @@ jobs:
             ~/.deno
             ~/.cache/deno
           key: ${{ hashFiles('deno.lock') }}
+          key: deno-${{ hashFiles('deno.lock') }}
+          restore-keys: |
+            deno-
 
       - name: Cache transformed images
         uses: actions/cache@v6
@@ -54,6 +57,8 @@ jobs:
           path: |
             _cache
           key: images-${{ hashFiles('src/img/**') }}-v1
+          restore-keys: |
+            images-
 
       - name: Build & Deploy
         env:
