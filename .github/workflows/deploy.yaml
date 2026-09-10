@@ -46,7 +46,6 @@ jobs:
           path: |
             ~/.deno
             ~/.cache/deno
-          key: ${{ hashFiles('deno.lock') }}
           key: deno-${{ hashFiles('deno.lock') }}
           restore-keys: |
             deno-
