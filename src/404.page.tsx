@@ -1,7 +1,7 @@
 import { SITE_DESCRIPTION } from "./consts.ts";
 
 export const layout = "layouts/main.tsx";
-export const openGraphLayout = "layouts/mainOgImage.tsx";
+export const ogLayout = "main";
 export const url = "/404.html";
 
 export const title = "Page Not Found";

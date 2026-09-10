@@ -3,7 +3,7 @@ import { SITE_TITLE } from "./consts.ts";
 import { buildPageLinks } from "../utils/paginate.ts";
 
 export const layout = "layouts/main.tsx";
-export const openGraphLayout = "layouts/mainOgImage.tsx";
+export const ogLayout = "main";
 export const metas = {
   title: SITE_TITLE,
   description: "全ての技術記事はこちらから",

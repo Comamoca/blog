@@ -4,6 +4,8 @@
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/master";
+    # gleam用 (og workerはGleam >= 1.14を要求。rootのnixpkgsピンは古いため)
+    nixpkgs-latest.url = "github:NixOS/nixpkgs/nixos-unstable";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     llm-agents.url = "github:numtide/llm-agents.nix";
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -190,6 +192,10 @@
           # When execute `nix develop`, you go in shell installed nil.
           devShells.default =
             let
+              # gleam/nodejsはoverlay (deno-overlay / llm-agents) 非適用の
+              # クリーンなnixpkgsから取得する (overlay適用下では評価が壊れるため)
+              clean-pkgs = import inputs.nixpkgs { inherit system; };
+              latest-pkgs = import inputs.nixpkgs-latest { inherit system; };
               mcp-config = inputs.mcp-servers-nix.lib.mkConfig pkgs {
                 settings.servers = { };
                 programs = {
@@ -213,6 +219,8 @@
                 deno
                 bun
                 wrangler
+                latest-pkgs.gleam
+                clean-pkgs.nodejs
 
                 nil
                 lua-language-server

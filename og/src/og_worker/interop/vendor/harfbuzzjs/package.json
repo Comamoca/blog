@@ -1,0 +1,7 @@
+{
+  "name": "harfbuzzjs",
+  "version": "0.10.0-workers-shim",
+  "description": "wrangler alias用のharfbuzzjs shadow package。workerdでemscriptenのself.location参照による初期化失敗を回避する (instantiateWasmフックで静的importしたwasmを渡す)",
+  "type": "module",
+  "main": "./index.mjs"
+}

@@ -4,7 +4,7 @@ import { SITE_DESCRIPTION, SITE_TITLE, TWITTER_USERNAME } from "./consts.ts";
 export const title = SITE_TITLE;
 export const url = "/";
 export const layout = "layouts/main.tsx";
-export const openGraphLayout = "layouts/mainOgImage.tsx";
+export const ogLayout = "main";
 export const metas = {
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,

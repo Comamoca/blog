@@ -23,6 +23,10 @@
       "command": "deno task lume -s"
     },
     "deploy": "env RELEASE=1 deno task lume --location https://comamoca.dev; wrangler pages deploy ./_site --project-name=blog --commit-dirty=true",
+    "deploy-og": {
+      "description": "Build and deploy the OG image Worker (og.comamoca.dev)",
+      "command": "cd og && npm ci && gleam build --no-print-progress && wrangler deploy"
+    },
     "build-pages": "deno run -A ./scripts/downloadFonts.ts && deno task lume",
     "download-fonts": "deno run -A ./scripts/downloadFonts.ts",
     "extract-tags": "deno run -A ./scripts/extractTags.ts",

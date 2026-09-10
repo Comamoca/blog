@@ -2,7 +2,7 @@ import { SITE_DESCRIPTION } from "./consts.ts";
 
 export const layout = "layouts/post.tsx";
 export const templateEngine = "jsx";
-export const openGraphLayout = "layouts/postOgImage.tsx";
+export const ogLayout = "post";
 export const url = "/info.html";
 
 export const title = "このブログについて";

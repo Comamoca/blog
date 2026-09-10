@@ -1,0 +1,6 @@
+{
+  "name": "og-wasm-shims",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pre-compiled js-to-wasm shim modules for harfbuzzjs addFunction on Workers"
+}
