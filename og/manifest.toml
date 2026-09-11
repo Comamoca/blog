@@ -21,6 +21,7 @@ packages = [
   { name = "hinoto", version = "0.0.1", build_tools = ["gleam"], requirements = ["gleam_erlang", "gleam_http", "gleam_javascript", "gleam_stdlib", "mist"], source = "git", repo = "https://github.com/Comamoca/hinoto", commit = "d2252f27dfba04fb25ca4e7252eb2e8c3e9a9f87" },
   { name = "houdini", version = "1.2.1", build_tools = ["gleam"], requirements = [], otp_app = "houdini", source = "hex", outer_checksum = "6F8AC2F12974567FB744BEA66AC93CEB76AAEA19AD28564623F76CDA9BC26A85" },
   { name = "hpack_erl", version = "0.3.0", build_tools = ["rebar3"], requirements = [], otp_app = "hpack", source = "hex", outer_checksum = "D6137D7079169D8C485C6962DFE261AF5B9EF60FBC557344511C1E65E3D95FB0" },
+  { name = "koishi", version = "1.0.2", build_tools = ["gleam"], requirements = ["gleam_javascript", "gleam_stdlib", "lustre"], otp_app = "koishi", source = "hex", outer_checksum = "F4B6D8B47BDADC6E64B4CC077FDCC4B1044C6720F10F6E32EC07146625C6BCCE" },
   { name = "logging", version = "1.5.0", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "logging", source = "hex", outer_checksum = "BC5F18CE5DD9686100229FE5409BDC3DD5C46D5A7DF2F804AD2D8F0DD6C5060E" },
   { name = "lustre", version = "5.7.1", build_tools = ["gleam"], requirements = ["exception", "gleam_erlang", "gleam_json", "gleam_otp", "gleam_stdlib", "houdini"], otp_app = "lustre", source = "hex", outer_checksum = "663A2D1A3458914CA537A42AC07E601DD3FD85415EBDAF4717F2DFF6E86F90F9" },
   { name = "mist", version = "6.0.3", build_tools = ["gleam"], requirements = ["exception", "gleam_erlang", "gleam_http", "gleam_otp", "gleam_stdlib", "glisten", "gramps", "hpack_erl", "logging"], otp_app = "mist", source = "hex", outer_checksum = "1B07F321D5FA0CB162D81496F2DE96AEB6EF8980F4F38230A4CC3F849497E020" },
@@ -32,4 +33,5 @@ gleam_javascript = { version = ">= 0.8.0 and < 2.0.0" }
 gleam_stdlib = { version = ">= 1.0.0 and < 2.0.0" }
 gleeunit = { version = ">= 1.0.0 and < 2.0.0" }
 hinoto = { git = "https://github.com/Comamoca/hinoto", ref = "main" }
+koishi = { version = ">= 1.0.2 and < 2.0.0" }
 lustre = { version = ">= 4.0.0 and < 6.0.0" }

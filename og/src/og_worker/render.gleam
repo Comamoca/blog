@@ -1,17 +1,18 @@
 //// OGP画像の描画パイプライン。
-//// OgpRequest → Lustre HTML → komeiji (SVG) → resvg-wasm (PNG)
+//// OgpRequest → Lustre element → koishi (SVG) → resvg-wasm (PNG)
 
 import gleam/bit_array
 import gleam/javascript/promise.{type Promise}
-import lustre/element
+import gleam/list
+import koishi
+import koishi/lustre as koishi_lustre
 import og_worker/assets.{Assets}
 import og_worker/card
-import og_worker/komeiji
 import og_worker/png
 import og_worker/request.{type OgpRequest}
 
 pub type RenderError {
-  /// HTML→SVG変換の失敗 (komeiji)
+  /// HTML→SVG変換の失敗 (koishi)
   Svg(String)
   /// SVG→PNG描画の失敗 (resvg)
   Render(String)
@@ -20,6 +21,10 @@ pub type RenderError {
 const image_width = 1200
 
 const image_height = 600
+
+const font_family = "Noto Sans JP"
+
+const font_weights = [400, 700]
 
 pub fn render_og(
   req: OgpRequest,
@@ -32,17 +37,31 @@ pub fn render_og(
       background_data_uri: png_data_uri(background_png),
       icon_data_uri: png_data_uri(icon_png),
     )
-  let markup = element.to_string(card.render(req, image_assets))
-  use svg_result <- promise.await(komeiji.html_to_svg(
-    markup,
-    fonts,
-    image_width,
-    image_height,
+  let options =
+    koishi.Options(
+      width: image_width,
+      height: image_height,
+      fonts: to_koishi_fonts(fonts),
+      debug: False,
+    )
+  use svg_result <- promise.await(koishi_lustre.to_svg(
+    card.render(req, image_assets),
+    options,
   ))
   case svg_result {
-    Error(message) -> promise.resolve(Error(Svg(message)))
+    Error(koishi.SatoriError(message)) -> promise.resolve(Error(Svg(message)))
     Ok(svg) -> render_svg(svg, fonts)
   }
+}
+
+fn to_koishi_fonts(fonts: List(BitArray)) -> List(koishi.Font) {
+  list.index_map(fonts, fn(data, index) {
+    let weight = case list.drop(font_weights, index) {
+      [w, ..] -> w
+      [] -> 400
+    }
+    koishi.Font(font_family, data, weight, koishi.NormalStyle)
+  })
 }
 
 fn render_svg(

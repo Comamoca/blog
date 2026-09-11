@@ -1,5 +1,5 @@
 //// OGPカードのLustre element (旧 postOgImage.tsx / mainOgImage.tsx の移植)。
-//// このHTMLがkomeiji (HTML→satori VDOM) への入力となる。
+//// このelementがkoishi (Lustre element→satori VDOM) への入力となる。
 
 import gleam/option.{None, Some}
 import lustre/attribute
