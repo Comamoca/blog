@@ -9,9 +9,9 @@ import og_worker/render
 import og_worker/request.{Main, OgpRequest, Post}
 import og_worker/test_support.{load_file_bytes, setup_resvg, sha256_hex}
 
-const golden_post_sha256 = "51a637d81e64ac8f8ec2c5de4452036ae6e817a378c86ce825dab3ce1be0480f"
+const golden_post_sha256 = "3de6b16126da9644b7695b1b11e1371847ab83a0a675edac904df9152f60ef62"
 
-const golden_main_sha256 = "85de0553fb5ba9bff7441e4333d01e12d52944969410808014cc42840dce9b65"
+const golden_main_sha256 = "adcade370cc11a7b249d8fd927e0c36ab27aecfd388324f47380dacc9fb745d2"
 
 pub fn render_post_card_golden_test() -> Promise(Nil) {
   setup_resvg()
