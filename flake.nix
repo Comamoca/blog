@@ -131,6 +131,84 @@
                 --add-flags $src
             '';
           };
+
+          # OG Worker (og/) 用フォント。design.md「フォント戦略」の通り、
+          # Noto Sans CJK JP フルOTF (~16MB×2) をブログ記事のtitle/description
+          # コーパス+基本的な仮名/半角全角/約物レンジでサブセットする。
+          # `nix build .#og-fonts` で単体生成できる他、devShells.default の
+          # shellHook / CIの test-og ジョブから og/static/fonts/ へ配置される
+          # (gitにはコミットしない。ブログ記事が増えたら再ビルドで自動追随する)
+          ogFonts =
+            let
+              clean-pkgs' = import inputs.nixpkgs { inherit system; };
+              subsetter = clean-pkgs'.python3.withPackages (ps: [ ps.fonttools ]);
+              # 実描画に載る固定文字列 (og_worker/card.gleam の site_title 等) と
+              # golden/komeijiテストの固定入力。ブログ本文のコーパスだけでは
+              # 拾えない文字を保証する
+              extraCorpus = pkgs.writeText "og-fonts-extra-corpus.txt" ''
+                かわいい駆動生活。
+                GleamとCloudflare WorkersでOG画像を動的生成する
+                LustreでHTMLを組み立て、komeijiでSVGに変換し、resvg-wasmでPNGへ描画します。この説明文は折り返しの確認用にやや長めにしています。日本語のテキストがカードの幅に収まることを確認してください。
+                こんにちは
+                説明
+                Gleam入門
+                説明文
+                無視されるタイトル
+                a<b&c>
+                &amp;
+                0123456789
+                og.comamoca.dev
+                comamoca.dev
+              '';
+            in
+            pkgs.stdenv.mkDerivation {
+              pname = "og-fonts";
+              version = "1.0";
+
+              src = ./src/blog;
+              dontUnpack = true;
+
+              buildPhase = ''
+                runHook preBuild
+
+                mkdir -p $out
+
+                # 記事のtitle/descriptionフロントマターを抽出してコーパスにする
+                # (og_metas/card.gleamが実際にレンダリングするテキストはこの2フィールドのみ)
+                for f in $src/*.md; do
+                  awk "
+                    /^---\$/ { fm = !fm; next }
+                    fm && /^(title|description):/ {
+                      sub(/^(title|description):[ \t]*/, \"\");
+                      print
+                    }
+                  " "$f" >> corpus.txt
+                done
+                cat ${extraCorpus} >> corpus.txt
+
+                for weight in Regular Bold; do
+                  ${subsetter}/bin/pyftsubset ${fonts}/bin/NotoSansCJKjp-$weight.otf \
+                    --text-file=corpus.txt \
+                    --unicodes="U+0020-007E,U+00A0-00FF,U+2000-206F,U+3000-303F,U+3040-309F,U+30A0-30FF,U+FF00-FFEF" \
+                    --output-file=$out/NotoSansJP-$weight.ttf \
+                    --layout-features='*' \
+                    --glyph-names \
+                    --symbol-cmap \
+                    --legacy-cmap \
+                    --notdef-glyph \
+                    --notdef-outline \
+                    --recommended-glyphs \
+                    --name-legacy \
+                    --recalc-bounds \
+                    --recalc-timestamp \
+                    --canonical-order
+                done
+
+                runHook postBuild
+              '';
+
+              installPhase = "true";
+            };
         in
         {
           _module.args.pkgs = import inputs.nixpkgs {
@@ -263,6 +341,10 @@
                               ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Bold.otf
                               ln -s ${fonts}/bin/NotoSansCJKjp-Black.otf ./fonts/noto-fonts/NotoSansCJKjp-Black.otf
 
+                              [ -e ./og/static/fonts ] && rm -r ./og/static/fonts
+                              mkdir -p ./og/static/fonts
+                              ln -s ${ogFonts}/NotoSansJP-Regular.ttf ./og/static/fonts/NotoSansJP-Regular.ttf
+                              ln -s ${ogFonts}/NotoSansJP-Bold.ttf ./og/static/fonts/NotoSansJP-Bold.ttf
 
                               ${pkgs.git-secrets}/bin/git-secrets --add '^[a-z]{4}-[a-z]{4}-[a-z]{4}-[a-z0-9]{4}$'
 
@@ -273,83 +355,7 @@
               '';
             };
 
-          # OG Worker (og/) 用フォント。design.md「フォント戦略」の通り、
-          # Noto Sans CJK JP フルOTF (~16MB×2) をブログ記事のtitle/description
-          # コーパス+基本的な仮名/半角全角/約物レンジでサブセットし、
-          # og/static/fonts/ にコミットする素材を生成する
-          # (`nix build .#og-fonts` → 結果を og/static/fonts/ にコピー)。
-          # ブログ記事が増えたら再実行してコーパスを更新する。
-          packages.og-fonts =
-            let
-              clean-pkgs = import inputs.nixpkgs { inherit system; };
-              subsetter = clean-pkgs.python3.withPackages (ps: [ ps.fonttools ]);
-              # 実描画に載る固定文字列 (og_worker/card.gleam の site_title 等) と
-              # golden/komeijiテストの固定入力。ブログ本文のコーパスだけでは
-              # 拾えない文字を保証する
-              extraCorpus = pkgs.writeText "og-fonts-extra-corpus.txt" ''
-                かわいい駆動生活。
-                GleamとCloudflare WorkersでOG画像を動的生成する
-                LustreでHTMLを組み立て、komeijiでSVGに変換し、resvg-wasmでPNGへ描画します。この説明文は折り返しの確認用にやや長めにしています。日本語のテキストがカードの幅に収まることを確認してください。
-                こんにちは
-                説明
-                Gleam入門
-                説明文
-                無視されるタイトル
-                a<b&c>
-                &amp;
-                0123456789
-                og.comamoca.dev
-                comamoca.dev
-              '';
-            in
-            pkgs.stdenv.mkDerivation {
-              pname = "og-fonts";
-              version = "1.0";
-
-              src = ./src/blog;
-              dontUnpack = true;
-
-              buildPhase = ''
-                runHook preBuild
-
-                mkdir -p $out
-
-                # 記事のtitle/descriptionフロントマターを抽出してコーパスにする
-                # (og_metas/card.gleamが実際にレンダリングするテキストはこの2フィールドのみ)
-                for f in $src/*.md; do
-                  awk "
-                    /^---\$/ { fm = !fm; next }
-                    fm && /^(title|description):/ {
-                      sub(/^(title|description):[ \t]*/, \"\");
-                      print
-                    }
-                  " "$f" >> corpus.txt
-                done
-                cat ${extraCorpus} >> corpus.txt
-
-                for weight in Regular Bold; do
-                  ${subsetter}/bin/pyftsubset ${fonts}/bin/NotoSansCJKjp-$weight.otf \
-                    --text-file=corpus.txt \
-                    --unicodes="U+0020-007E,U+00A0-00FF,U+2000-206F,U+3000-303F,U+3040-309F,U+30A0-30FF,U+FF00-FFEF" \
-                    --output-file=$out/NotoSansJP-$weight.ttf \
-                    --layout-features='*' \
-                    --glyph-names \
-                    --symbol-cmap \
-                    --legacy-cmap \
-                    --notdef-glyph \
-                    --notdef-outline \
-                    --recommended-glyphs \
-                    --name-legacy \
-                    --recalc-bounds \
-                    --recalc-timestamp \
-                    --canonical-order
-                done
-
-                runHook postBuild
-              '';
-
-              installPhase = "true";
-            };
+          packages.og-fonts = ogFonts;
 
           # Minimal shell for CI builds: only what `deno task build` and
           # `wrangler pages deploy` need, so CI doesn't pay for editor

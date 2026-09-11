@@ -44,6 +44,9 @@ flycheck_*
 .playwright-mcp/
 .wt/
 
+# og worker用フォント (nix build .#og-fonts / devShellのshellHookで生成)
+/og/static/fonts/
+
 # editor / agent session state
 .commandcode/
 .omo/

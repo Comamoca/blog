@@ -38,20 +38,32 @@ jobs:
     if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.og == 'true'
     runs-on: ubuntu-latest
     name: Test OG worker
-    defaults:
-      run:
-        working-directory: og
     steps:
       - uses: actions/checkout@v7
+      - uses: nixbuild/nix-quick-install-action@v35
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      # og_worker/router.gleam のASSETS bindingとgleam testの
+      # test_support.load_file_bytes が参照する og/static/fonts/*.ttf は
+      # gitにコミットせず、flake.nixの packages.og-fonts (pyftsubsetで
+      # ブログ記事コーパスからサブセット生成) をここでビルドして配置する
+      - name: Build & place OG fonts (nix)
+        run: |
+          nix build .#og-fonts -o og-fonts-result
+          mkdir -p og/static/fonts
+          cp og-fonts-result/*.ttf og/static/fonts/
       - uses: erlef/setup-beam@v1
         with:
           otp-version: "29"
           gleam-version: "1.18.1"
           rebar3-version: "3"
-      - run: gleam deps download
-      - run: npm ci
-      - run: gleam test
-      - run: gleam format --check src test
+      - working-directory: og
+        run: gleam deps download
+      - working-directory: og
+        run: npm ci
+      - working-directory: og
+        run: gleam test
+      - working-directory: og
+        run: gleam format --check src test
 
   deploy:
     needs: [changes, test-og]
