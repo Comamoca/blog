@@ -3,7 +3,7 @@ import { SITE_DESCRIPTION } from "./consts.ts";
 
 export const title = "すべての日報";
 export const layout = "layouts/main.tsx";
-export const openGraphLayout = "layouts/mainOgImage.tsx";
+export const ogLayout = "main";
 export const metas = {
   title: "=title",
   description: SITE_DESCRIPTION,

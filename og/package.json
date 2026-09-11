@@ -1,0 +1,12 @@
+{
+  "name": "og_worker-og-worker",
+  "private": true,
+  "type": "module",
+  "description": "wrangler/node bundle and test dependencies for the og_worker Gleam project",
+  "dependencies": {
+    "@resvg/resvg-wasm": "^2.6.2",
+    "satori": "^0.33.4",
+    "og-wasm-shims": "file:./shims",
+    "@comamoca/komeiji": "^0.1.1"
+  }
+}

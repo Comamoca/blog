@@ -1,0 +1,25 @@
+name = "blog-og"
+main = "build/dev/javascript/og_worker/index.js"
+compatibility_date = "2024-09-25"
+# satoriの依存harfbuzzjsがnode builtins (fs) を参照するため必要
+compatibility_flags = ["nodejs_compat"]
+
+# 本番: og.comamoca.dev カスタムドメイン (初回デプロイ時にDNSレコード自動作成)
+routes = [{ pattern = "og.comamoca.dev", custom_domain = true }]
+
+# キャッシュはCloudflare側 (cache-controlヘッダ) で行うため、ワーカー内
+# Cache APIはデフォルト無効 (x-cache: BYPASS)。有効化する場合は以下を有効にする:
+# [vars]
+# OG_CACHE_API = "1"
+
+# satoriの依存harfbuzzjs (emscripten) はworkerで self.location.href を読み
+# 初期化に失敗するため、静的wasm importするshadow packageへ差し替える
+[alias]
+harfbuzzjs = "./src/og_worker/interop/vendor/harfbuzzjs"
+
+[build]
+command = "gleam build --no-print-progress"
+
+[assets]
+directory = "./static"
+binding = "ASSETS"
