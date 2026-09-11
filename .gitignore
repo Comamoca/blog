@@ -28,7 +28,7 @@ direnv
 _site
 _cache
 
-fonts
+/fonts
 _broken_links.json
 
 log.txt
@@ -43,13 +43,12 @@ flycheck_*
 
 .playwright-mcp/
 .wt/
-<<<<<<< HEAD
+
+# og worker用フォント (nix build .#og-fonts / devShellのshellHookで生成)
+/og/static/fonts/
 
 # editor / agent session state
 .commandcode/
 .omo/
 docs/
 .wt/.omo/
-=======
-.omo/
->>>>>>> 4dd1d92 (chore: fix .omo ignore pattern split across lines)

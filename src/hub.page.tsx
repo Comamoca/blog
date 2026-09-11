@@ -3,7 +3,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
 export const title = "Hub";
 export const url = "/hub.html";
 export const layout = "layouts/main.tsx";
-export const openGraphLayout = "layouts/mainOgImage.tsx";
+export const ogLayout = "main";
 export const metas = {
   title: "=title",
   description: SITE_DESCRIPTION,

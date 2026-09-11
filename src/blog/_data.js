@@ -5,7 +5,7 @@ export const tags = ["posts"];
 
 export const layout = "layouts/post.tsx";
 export const templateEngine = "md";
-export const openGraphLayout = "layouts/postOgImage.tsx";
+export const ogLayout = "post";
 export const metas = {
   description: "=description",
   title: "=title",

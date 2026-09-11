@@ -3,13 +3,77 @@ on:
   push:
     branches:
       - "main"
+  # og/ への変更を含むPRでは、デプロイせずテストのみ実行する
+  pull_request:
+    paths:
+      - "og/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  # og/ 配下に変更があったかを検出する (test-og / OG Workerデプロイの条件に使う)
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      og: ${{ steps.filter.outputs.og }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            og:
+              - "og/**"
+
+  # OG Worker (og/) のテスト。og/ に変更があるPR/pushでのみ実行される
+  # (旧 og/.github/workflows/test.yml を統合。サブディレクトリのworkflowは
+  #  GitHub Actionsが読まないためルートに移した)
+  test-og:
+    needs: changes
+    if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.og == 'true'
+    runs-on: ubuntu-latest
+    name: Test OG worker
+    steps:
+      - uses: actions/checkout@v7
+      - uses: nixbuild/nix-quick-install-action@v35
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      # og_worker/router.gleam のASSETS bindingとgleam testの
+      # test_support.load_file_bytes が参照する og/static/fonts/*.ttf は
+      # gitにコミットせず、flake.nixの packages.og-fonts (pyftsubsetで
+      # ブログ記事コーパスからサブセット生成) をここでビルドして配置する
+      - name: Build & place OG fonts (nix)
+        run: |
+          nix build .#og-fonts -o og-fonts-result
+          mkdir -p og/static/fonts
+          cp og-fonts-result/*.ttf og/static/fonts/
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: "29"
+          gleam-version: "1.18.1"
+          rebar3-version: "3"
+      - working-directory: og
+        run: gleam deps download
+      - working-directory: og
+        run: npm ci
+      - working-directory: og
+        run: gleam test
+      - working-directory: og
+        run: gleam format --check src test
+
   deploy:
+    needs: [changes, test-og]
+    # test-og は og/ 変更時のみ走るので、skippedでもデプロイは続行させる。
+    # ogテストが失敗してもブログ本体のデプロイは止めない
+    # (OG Workerのデプロイのみテスト合格をゲートにする)
+    if: >-
+      always() &&
+      github.event_name != 'pull_request' &&
+      needs.changes.result == 'success'
     runs-on: ubuntu-latest
     name: Deploy
     permissions:
@@ -59,7 +123,7 @@ jobs:
           restore-keys: |
             images-
 
-      - name: Build & Deploy
+      - name: Build & Deploy blog
         env:
           RELEASE: 1
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -67,3 +131,15 @@ jobs:
         run: |
           nix develop .#ci --command deno task build
           nix develop .#ci --command wrangler pages deploy ./_site --project-name=blog --commit-dirty=true
+
+      # OG Workerはog/に変更がある場合のみデプロイ (手動実行時は常にデプロイ)
+      # deploy-og は gleam/npm を使うため、それらを含まない .#ci ではなく
+      # デフォルトのdevShellを使う
+      - name: Deploy OG worker
+        if: >-
+          (github.event_name == 'workflow_dispatch' || needs.changes.outputs.og == 'true') &&
+          needs.test-og.result == 'success'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: nix develop --command deno task deploy-og

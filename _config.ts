@@ -12,7 +12,6 @@ import nano from "npm:cssnano";
 import checkUrls from "lume/plugins/check_urls.ts";
 import mdx from "lume/plugins/mdx.ts";
 import minifyHTML from "lume/plugins/minify_html.ts";
-import openGraphImages from "lume/plugins/og_images.ts";
 import extractDate from "lume/plugins/extract_date.ts";
 import metas from "lume/plugins/metas.ts";
 // import toml from "lume/plugins/toml.ts";
@@ -21,7 +20,6 @@ import metas from "lume/plugins/metas.ts";
 // import esbuild from "lume/plugins/esbuild.ts";
 import transformImages from "lume/plugins/transform_images.ts";
 import picture from "lume/plugins/picture.ts";
-import { readFile } from "node:fs/promises";
 import gitDate from "./plugins/lume/git_date.ts";
 import { getLatestGitCommitDate } from "./plugins/git_commit_date.ts";
 
@@ -41,6 +39,7 @@ import linkcard from "./plugins/linkcard.ts";
 
 // Lume plugin
 import footnote from "./plugins/lume/footnote.ts";
+import { ogMetas } from "./plugins/og_metas.ts";
 
 const RELEASE = Deno.env.get("RELEASE");
 const DISABLE_LINKCARD = Deno.env.get("DISABLE_LINKCARD");
@@ -127,26 +126,8 @@ if (RELEASE) {
     input: "./public/favicon.svg",
   }));
 
-  site.use(openGraphImages({
-    options: {
-      width: 1200,
-      height: 600,
-      fonts: [
-        {
-          name: "NotoSansJP Regular",
-          data: await readFile("./fonts/noto-fonts/NotoSansCJKjp-Regular.otf"),
-          weight: 400,
-          style: "normal",
-        },
-        {
-          name: "NotoSansJP Bold",
-          data: await readFile("./fonts/noto-fonts/NotoSansCJKjp-Bold.otf"),
-          weight: 700,
-          style: "normal",
-        },
-      ],
-    },
-  }));
+  // OGP画像はビルド時に生成せず、og.comamoca.dev のWorkerへ動的生成を委譲する
+  site.use(ogMetas());
 }
 
 // RSS feed - enabled in both dev and production modes

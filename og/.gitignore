@@ -1,0 +1,6 @@
+*.beam
+*.ez
+/build
+/node_modules
+/.wrangler
+erl_crash.dump
