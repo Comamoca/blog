@@ -43,6 +43,11 @@ import { ogMetas } from "./plugins/og_metas.ts";
 
 const RELEASE = Deno.env.get("RELEASE");
 const DISABLE_LINKCARD = Deno.env.get("DISABLE_LINKCARD");
+// Broken-link checking walks every internal/external link on every post and
+// is slow (network I/O per link). It's opt-in so normal deploy builds don't
+// pay for it; run it explicitly (e.g. a scheduled/manual workflow) with
+// CHECK_URLS=1.
+const CHECK_URLS = Deno.env.get("CHECK_URLS");
 
 // Link card configuration interface
 interface LinkCardConfig {
@@ -111,9 +116,11 @@ if (RELEASE) {
   // site.use(brotli());
   // site.use(gzip());
 
-  site.use(checkUrls({
-    output: "_broken_links.json",
-  }));
+  if (CHECK_URLS) {
+    site.use(checkUrls({
+      output: "_broken_links.json",
+    }));
+  }
 
   site.use(favicon({
     input: "./public/favicon.svg",

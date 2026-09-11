@@ -98,7 +98,18 @@ jobs:
           path: |
             ~/.deno
             ~/.cache/deno
-          key: ${{ hashFiles('deno.lock') }}
+          key: deno-${{ hashFiles('deno.lock') }}
+          restore-keys: |
+            deno-
+
+      - name: Cache transformed images
+        uses: actions/cache@v6
+        with:
+          path: |
+            _cache
+          key: images-${{ hashFiles('src/img/**') }}-v1
+          restore-keys: |
+            images-
 
       - name: Build & Deploy blog
         env:
@@ -106,10 +117,12 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          nix develop --command deno task build
-          nix develop --command wrangler pages deploy ./_site --project-name=blog --commit-dirty=true
+          nix develop .#ci --command deno task build
+          nix develop .#ci --command wrangler pages deploy ./_site --project-name=blog --commit-dirty=true
 
       # OG Workerはog/に変更がある場合のみデプロイ (手動実行時は常にデプロイ)
+      # deploy-og は gleam/npm を使うため、それらを含まない .#ci ではなく
+      # デフォルトのdevShellを使う
       - name: Deploy OG worker
         if: >-
           (github.event_name == 'workflow_dispatch' || needs.changes.outputs.og == 'true') &&
