@@ -134,7 +134,12 @@
 
           # OG Worker (og/) 用フォント。design.md「フォント戦略」の通り、
           # Noto Sans CJK JP フルOTF (~16MB×2) をブログ記事のtitle/description
-          # コーパス+基本的な仮名/半角全角/約物レンジでサブセットする。
+          # コーパス+og/の実描画ソース/テスト+基本的な仮名/半角全角/約物レンジで
+          # サブセットする。
+          # さらに JIS X 0208 (第1・第2水準) の漢字全字 (og/data/jisx0208-kanji.txt)
+          # を常に含める。コーパスだけだと、記事を追加してもWorkerが再デプロイされる
+          # までその記事のtitle/descriptionの未知の漢字が豆腐 (□) になる
+          # (例: 2026-09-11の記事の「既」)
           # `nix build .#og-fonts` で単体生成できる他、devShells.default の
           # shellHook / CIの test-og ジョブから og/static/fonts/ へ配置される
           # (gitにはコミットしない。ブログ記事が増えたら再ビルドで自動追随する)
@@ -142,24 +147,6 @@
             let
               clean-pkgs' = import inputs.nixpkgs { inherit system; };
               subsetter = clean-pkgs'.python3.withPackages (ps: [ ps.fonttools ]);
-              # 実描画に載る固定文字列 (og_worker/card.gleam の site_title 等) と
-              # golden/komeijiテストの固定入力。ブログ本文のコーパスだけでは
-              # 拾えない文字を保証する
-              extraCorpus = pkgs.writeText "og-fonts-extra-corpus.txt" ''
-                かわいい駆動生活。
-                GleamとCloudflare WorkersでOG画像を動的生成する
-                LustreでHTMLを組み立て、komeijiでSVGに変換し、resvg-wasmでPNGへ描画します。この説明文は折り返しの確認用にやや長めにしています。日本語のテキストがカードの幅に収まることを確認してください。
-                こんにちは
-                説明
-                Gleam入門
-                説明文
-                無視されるタイトル
-                a<b&c>
-                &amp;
-                0123456789
-                og.comamoca.dev
-                comamoca.dev
-              '';
             in
             pkgs.stdenv.mkDerivation {
               pname = "og-fonts";
@@ -174,7 +161,7 @@
                 mkdir -p $out
 
                 # 記事のtitle/descriptionフロントマターを抽出してコーパスにする
-                # (og_metas/card.gleamが実際にレンダリングするテキストはこの2フィールドのみ)
+                # (カードに載る記事由来のテキストはこの2フィールドのみ)
                 for f in $src/*.md; do
                   awk "
                     /^---\$/ { fm = !fm; next }
@@ -184,7 +171,14 @@
                     }
                   " "$f" >> corpus.txt
                 done
-                cat ${extraCorpus} >> corpus.txt
+                # 実描画に載る固定文字列 (og_worker/card.gleam の site_title) と
+                # golden/koishiテストの固定入力。記事コーパスだけでは拾えない文字を
+                # 保証する。手書きリストはコードと乖離するためソース/テストを直接食わせる
+                cat ${./og/src/og_worker/card.gleam} >> corpus.txt
+                find ${./og/test} -name '*.gleam' | LC_ALL=C sort | xargs cat >> corpus.txt
+                # JIS X 0208の漢字全字 (第1・第2水準)。日常的な日本語の漢字を
+                # ほぼ網羅するので、記事追加だけで未知の漢字が豆腐になることを防ぐ
+                cat ${./og/data/jisx0208-kanji.txt} >> corpus.txt
 
                 for weight in Regular Bold; do
                   ${subsetter}/bin/pyftsubset ${fonts}/bin/NotoSansCJKjp-$weight.otf \

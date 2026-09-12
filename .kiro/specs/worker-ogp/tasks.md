@@ -33,8 +33,9 @@
 -
   3. [ ] 描画パイプラインの実装
 - [x] 3.1 フォントサブセットの生成と読み込み
-  - pyftsubsetでNoto Sans CJK JP Regular/Boldをサブセット (~1MB/ウェイト)
-    しコミット
+  - pyftsubsetでNoto Sans CJK JP Regular/Boldをサブセット
+    (title/descriptionコーパス + JIS X 0208の漢字全字、~4.3MB/ウェイト)
+    し、`nix build .#og-fonts`で生成して`og/static/fonts/`に配置
   - ASSETS bindingからの読み込みとisolate内キャッシュ
   - _Requirements: 5.3_
 

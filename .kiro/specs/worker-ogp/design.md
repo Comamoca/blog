@@ -193,10 +193,19 @@ fn render_png(svg: String, fonts: List(BitArray), width: Int) -> BitArray
 ### フォント戦略
 
 - `pyftsubset` (fonttools) でNoto Sans CJK JPのRegular/Boldをサブセット
-  (ブログコーパス + 共用漢字セット、目標~1MB/ウェイト)
-  し、**リポジトリにコミット**して `og/static/fonts/` に配置
+  (ブログのtitle/descriptionコーパス + og/の実描画ソース/テスト + JIS X
+  0208の漢字全字。計~8.6MB、~4.3MB/ウェイト) し、`flake.nix`の
+  `packages.og-fonts` で生成して `og/static/fonts/` に配置
+  (gitにはコミットしない)
+- JIS X 0208を常に含めるのは、コーパスだけだと記事を追加してもWorkerが
+  再デプロイされるまでその記事のtitle/descriptionの未知の漢字が豆腐 (□) に
+  なるため。Workerのデプロイ条件は `.github/workflows/deploy.yaml` の `og`
+  paths-filter (og/**・src/blog/**・flake.nix・flake.lock) で
+  コーパス入力の変更を拾う
 - Workerは初回リクエスト時にASSETS bindingから読み込み、モジュール変数 (isolate)
-  にキャッシュ。 16MBフルOTFの配信・初期化を回避
+  にキャッシュ。フォントのサイズはisolateのメモリと初回fetchのみに影響し、
+  字形のパースは描画時に遅延されるため描画コストはサイズに依存しない
+  (391KB→4.3MBで初回~250ms/2回目以降~10msとほぼ不変)
 - フルOTF依存はビルドから完全になくなるが、`deno task download-fonts`は
   サブセット生成用の素材取得として維持
 
@@ -287,15 +296,15 @@ routes = [{ pattern = "og.comamoca.dev", custom_domain = true }]
 
 ## リスクと軽減策
 
-| リスク                             | 影響                              | 軽減策                                                                                |
-| ---------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------- |
-| komeijiが未公開・作成中            | 実装がブロックされ得る            | インターフェース契約 (HTML+fonts+images→SVG) を先に固定し、スタブでWorker側を先行開発 |
-| resvgの動的WASM禁止                | 初期化失敗                        | 静的import shim (既知パターン、上記コード参照)                                        |
-| URL長 (~1.5KB最悪)                 | クローラがURLをtruncateする可能性 | Card Validatorで実機確認。問題時は説明文の上限短縮                                    |
-| サブセットで字形欠落               | 豆腐 (□) 描画                     | コーパス+共用漢字でサブセット、ゴールデン画像テストで検出                             |
-| CJK改行品質                        | 見栄え劣化                        | komeijiの責務として契約に明記し、ゴールデンテストで検証                               |
-| スクリプトサイズ (Free 3MB gzip後) | デプロイ失敗                      | resvg wasm gzip後~1MB + Gleam JSで収まる見込み。デプロイ時に確認                      |
-| 旧URLの404                         | SNSキャッシュの古い参照           | 完全撤去の決定により許容                                                              |
+| リスク                             | 影響                              | 軽減策                                                                                         |
+| ---------------------------------- | --------------------------------- | ---------------------------------------------------------------------------------------------- |
+| komeijiが未公開・作成中            | 実装がブロックされ得る            | インターフェース契約 (HTML+fonts+images→SVG) を先に固定し、スタブでWorker側を先行開発          |
+| resvgの動的WASM禁止                | 初期化失敗                        | 静的import shim (既知パターン、上記コード参照)                                                 |
+| URL長 (~1.5KB最悪)                 | クローラがURLをtruncateする可能性 | Card Validatorで実機確認。問題時は説明文の上限短縮                                             |
+| サブセットで字形欠落               | 豆腐 (□) 描画                     | コーパスにJIS X 0208の漢字全字を常時追加。`og/test/font_coverage_test.gleam`が豆腐の衝突を検出 |
+| CJK改行品質                        | 見栄え劣化                        | komeijiの責務として契約に明記し、ゴールデンテストで検証                                        |
+| スクリプトサイズ (Free 3MB gzip後) | デプロイ失敗                      | resvg wasm gzip後~1MB + Gleam JSで収まる見込み。デプロイ時に確認                               |
+| 旧URLの404                         | SNSキャッシュの古い参照           | 完全撤去の決定により許容                                                                       |
 
 ## 設計決定ログ
 

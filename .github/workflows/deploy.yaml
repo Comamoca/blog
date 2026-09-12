@@ -3,17 +3,22 @@ on:
   push:
     branches:
       - "main"
-  # og/ への変更を含むPRでは、デプロイせずテストのみ実行する
+  # OG Workerのビルド入力 (og/・フォントのコーパス元・nix定義) に変更を含むPRでは、
+  # デプロイせずテストのみ実行する
   pull_request:
     paths:
       - "og/**"
+      - "src/blog/**"
+      - "flake.nix"
+      - "flake.lock"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  # og/ 配下に変更があったかを検出する (test-og / OG Workerデプロイの条件に使う)
+  # OG Worker (og/) のビルド入力に変更があったかを検出する
+  # (test-og / OG Workerデプロイの条件に使う)
   changes:
     runs-on: ubuntu-latest
     permissions:
@@ -28,11 +33,17 @@ jobs:
         with:
           filters: |
             og:
+              # Worker本体
               - "og/**"
+              # フォントのサブセット元コーパス (記事のtitle/description)
+              - "src/blog/**"
+              # ogFonts derivationとWorkerのビルド定義
+              - "flake.nix"
+              - "flake.lock"
 
-  # OG Worker (og/) のテスト。og/ に変更があるPR/pushでのみ実行される
-  # (旧 og/.github/workflows/test.yml を統合。サブディレクトリのworkflowは
-  #  GitHub Actionsが読まないためルートに移した)
+  # OG Worker (og/) のテスト。OG Workerのビルド入力に変更があるPR/pushでのみ
+  # 実行される (旧 og/.github/workflows/test.yml を統合。サブディレクトリの
+  # workflowはGitHub Actionsが読まないためルートに移した)
   test-og:
     needs: changes
     if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.og == 'true'
@@ -132,9 +143,11 @@ jobs:
           nix develop .#ci --command deno task build
           nix develop .#ci --command wrangler pages deploy ./_site --project-name=blog --commit-dirty=true
 
-      # OG Workerはog/に変更がある場合のみデプロイ (手動実行時は常にデプロイ)
+      # OG Workerはビルド入力 (og/・記事コーパス・nix定義) に変更がある場合のみ
+      # デプロイ (手動実行時は常にデプロイ)
       # deploy-og は gleam/npm を使うため、それらを含まない .#ci ではなく
-      # デフォルトのdevShellを使う
+      # デフォルトのdevShellを使う (devShellのshellHookが最新コーパスで
+      # サブセットしたフォントを og/static/fonts/ に配置する)
       - name: Deploy OG worker
         if: >-
           (github.event_name == 'workflow_dispatch' || needs.changes.outputs.og == 'true') &&
