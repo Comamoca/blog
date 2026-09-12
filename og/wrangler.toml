@@ -27,3 +27,6 @@ command = "gleam build --no-print-progress"
 [assets]
 directory = "./static"
 binding = "ASSETS"
+
+[cache]
+enabled = true
