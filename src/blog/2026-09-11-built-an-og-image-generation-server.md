@@ -23,7 +23,7 @@ OG画像は生成処理をworkersで実装する必要があるので見送っ�
 
 こんな感じでレンダリングされる。
 
-<img src="https://og.comamoca.dev/og.png?l=post&t=%E6%9C%80%E8%BF%91%E8%A6%8B%E3%81%A6%E3%82%8B%E6%8A%80%E8%A1%93%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6&d=Zenn%E3%81%A8%E3%81%8BQiita%E3%81%A8%E3%81%8B%E3%81%AE%E4%BB%A3%E3%82%8F%E3%82%8A%E3%81%AB%E3%81%93%E3%81%A3%E3%81%A1%E8%A6%8B%E3%81%A6%E3%81%9F%E3%82%8A%E3%81%99%E3%82%8B" />
+<img src="https://og.comamoca.dev/og.png?l=post&t=GleamでOG画像生成サーバーを作った&d=既にこのブログで動かしている" />
 
 ## 実装
 
