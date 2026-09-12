@@ -7,14 +7,13 @@ import gleam/option.{None, Some}
 import gleeunit/should
 import og_worker/render
 import og_worker/request.{Main, OgpRequest, Post}
-import og_worker/test_support.{load_file_bytes, setup_resvg, sha256_hex}
+import og_worker/test_support.{load_file_bytes, sha256_hex}
 
 const golden_post_sha256 = "3de6b16126da9644b7695b1b11e1371847ab83a0a675edac904df9152f60ef62"
 
 const golden_main_sha256 = "adcade370cc11a7b249d8fd927e0c36ab27aecfd388324f47380dacc9fb745d2"
 
 pub fn render_post_card_golden_test() -> Promise(Nil) {
-  setup_resvg()
   let fonts = [
     load_file_bytes("static/fonts/NotoSansJP-Regular.ttf"),
     load_file_bytes("static/fonts/NotoSansJP-Bold.ttf"),
@@ -37,7 +36,6 @@ pub fn render_post_card_golden_test() -> Promise(Nil) {
 }
 
 pub fn render_main_card_golden_test() -> Promise(Nil) {
-  setup_resvg()
   let fonts = [
     load_file_bytes("static/fonts/NotoSansJP-Regular.ttf"),
     load_file_bytes("static/fonts/NotoSansJP-Bold.ttf"),

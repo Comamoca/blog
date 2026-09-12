@@ -1,6 +1,6 @@
 name = "og_worker"
 version = "1.0.0"
-description = "OG image generation Worker for comamoca.dev (Lustre -> koishi -> SVG -> resvg-wasm -> PNG)"
+description = "OG image generation Worker for comamoca.dev (Lustre -> koishi (satori + resvg) -> PNG)"
 licences = ["MIT"]
 target = "javascript"
 
@@ -10,7 +10,7 @@ gleam_http = ">= 3.0.0 and < 5.0.0"
 gleam_javascript = ">= 0.8.0 and < 2.0.0"
 lustre = ">= 4.0.0 and < 6.0.0"
 hinoto = { git = "https://github.com/Comamoca/hinoto", ref = "main" }
-koishi = ">= 1.0.2 and < 2.0.0"
+koishi = ">= 1.0.4 and < 2.0.0"
 
 [dev_dependencies]
 gleeunit = ">= 1.0.0 and < 2.0.0"

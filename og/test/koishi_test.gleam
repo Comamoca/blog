@@ -82,8 +82,7 @@ pub fn card_html_escapes_special_chars_test() {
 // koishi: Lustre element → SVG
 
 pub fn koishi_lustre_converts_element_to_svg_test() -> Promise(Nil) {
-  let tree =
-    card.render(OgpRequest(Post, "こんにちは", Some("説明")), sample_assets())
+  let tree = card.render(OgpRequest(Post, "こんにちは", Some("説明")), sample_assets())
   use result <- promise.await(koishi_lustre.to_svg(tree, sample_options()))
   let assert Ok(svg) = result
   should.be_true(string.contains(svg, "<svg"))

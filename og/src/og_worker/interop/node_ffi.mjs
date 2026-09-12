@@ -9,16 +9,6 @@ import { BitArray } from "../../../prelude.mjs";
 const require = createRequire(import.meta.url);
 
 /**
- * resvg wasmをnode_modulesから解決してglobalに注入する。
- * @returns {undefined} Gleam Nil
- */
-export function setup_resvg() {
-  const wasmPath = require.resolve("@resvg/resvg-wasm/index_bg.wasm");
-  globalThis.__OG_WORKER_RESVG_WASM__ = new Uint8Array(readFileSync(wasmPath));
-  return undefined;
-}
-
-/**
  * @param {string} path - プロジェクトルート (og/) 相対パス
  * @returns {BitArray}
  */

@@ -14,8 +14,12 @@ routes = [{ pattern = "og.comamoca.dev", custom_domain = true }]
 
 # satoriの依存harfbuzzjs (emscripten) はworkerで self.location.href を読み
 # 初期化に失敗するため、静的wasm importするshadow packageへ差し替える
+# koishiのSVG→PNG変換が使うresvg-jsはネイティブ(napi)モジュールのため
+# workerdで読み込めない。同じresvgのwasmビルド(resvg-wasm)を公開する
+# shadow packageへ差し替える (初期化は src/index.js が行う)
 [alias]
 harfbuzzjs = "./src/og_worker/interop/vendor/harfbuzzjs"
+"@resvg/resvg-js" = "./src/og_worker/interop/vendor/resvg-js"
 
 [build]
 command = "gleam build --no-print-progress"

@@ -4,9 +4,10 @@
   "type": "module",
   "description": "wrangler/node bundle and test dependencies for the og_worker Gleam project",
   "dependencies": {
+    "@comamoca/komeiji": "^0.1.1",
+    "@resvg/resvg-js": "^2.6.2",
     "@resvg/resvg-wasm": "^2.6.2",
-    "satori": "^0.33.4",
     "og-wasm-shims": "file:./shims",
-    "@comamoca/komeiji": "^0.1.1"
+    "satori": "^0.33.4"
   }
 }

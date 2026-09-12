@@ -1,5 +1,5 @@
 //// OGP画像の描画パイプライン。
-//// OgpRequest → Lustre element → koishi (SVG) → resvg-wasm (PNG)
+//// OgpRequest → Lustre element → koishi (satori: SVG → resvg: PNG)
 
 import gleam/bit_array
 import gleam/javascript/promise.{type Promise}
@@ -8,11 +8,10 @@ import koishi
 import koishi/lustre as koishi_lustre
 import og_worker/assets.{Assets}
 import og_worker/card
-import og_worker/png
 import og_worker/request.{type OgpRequest}
 
 pub type RenderError {
-  /// HTML→SVG変換の失敗 (koishi)
+  /// HTML→SVG変換の失敗 (satori)
   Svg(String)
   /// SVG→PNG描画の失敗 (resvg)
   Render(String)
@@ -50,7 +49,7 @@ pub fn render_og(
   ))
   case svg_result {
     Error(koishi.SatoriError(message)) -> promise.resolve(Error(Svg(message)))
-    Ok(svg) -> render_svg(svg, fonts)
+    Ok(svg) -> render_png(svg)
   }
 }
 
@@ -64,14 +63,16 @@ fn to_koishi_fonts(fonts: List(BitArray)) -> List(koishi.Font) {
   })
 }
 
-fn render_svg(
-  svg: String,
-  fonts: List(BitArray),
-) -> Promise(Result(BitArray, RenderError)) {
-  use _ <- promise.await(png.ensure_init())
-  case png.render_png(svg, fonts, image_width) {
+/// satoriの出力SVGはテキストをパスへ変換済みなので、resvgはフォントを
+/// 必要としない (背景・アイコンもdata URIで埋め込み済み)。
+fn render_png(svg: String) -> Promise(Result(BitArray, RenderError)) {
+  use png_result <- promise.await(koishi.to_png(
+    svg,
+    koishi.PngOptions(width: image_width, height: 0, background: ""),
+  ))
+  case png_result {
     Ok(bits) -> promise.resolve(Ok(bits))
-    Error(message) -> promise.resolve(Error(Render(message)))
+    Error(koishi.PngError(message)) -> promise.resolve(Error(Render(message)))
   }
 }
 

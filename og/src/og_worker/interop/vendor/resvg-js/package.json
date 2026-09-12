@@ -1,0 +1,8 @@
+{
+  "name": "@resvg/resvg-js",
+  "version": "2.6.2-workers-shim",
+  "description": "wrangler alias用の@resvg/resvg-js shadow package。ネイティブモジュールはworkerdで読み込めないため、同じresvgのwasmビルド (resvg-wasm) を公開する",
+  "private": true,
+  "type": "module",
+  "main": "./index.mjs"
+}

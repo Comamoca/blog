@@ -1,11 +1,16 @@
+/**
+ * ローカルスモークテスト: ビルド済みworkerのmain()をnodeで直接叩く。
+ * (workerd特有の部分 = resvg-js shim / wasm static import / setup_env は
+ *  対象外。それは `wrangler dev` で確認する)
+ *
+ * 使い方: gleam build && node scripts/smoke.mjs
+ */
 import { readFileSync } from "node:fs";
-import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const require = createRequire(import.meta.url);
-const wasmPath = require.resolve("@resvg/resvg-wasm/index_bg.wasm", { paths: ["/home/coma/.ghq/github.com/Comamoca/blog.feat-worker-ogp/og"] });
-globalThis.__OG_WORKER_RESVG_WASM__ = new Uint8Array(readFileSync(wasmPath));
+const ogRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
-const ogRoot = "/home/coma/.ghq/github.com/Comamoca/blog.feat-worker-ogp/og";
 const { main } = await import(ogRoot + "/build/dev/javascript/og_worker/og_worker.mjs");
 
 const env = {
@@ -32,6 +37,7 @@ if (result instanceof Response) {
   console.log("headers:", [...result.headers]);
   const buf = await result.arrayBuffer();
   console.log("body bytes:", buf.byteLength);
+  console.log("png magic:", Buffer.from(buf.slice(0, 8)).toString("hex"));
 } else {
   console.dir(result, { depth: 6 });
 }
