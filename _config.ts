@@ -43,6 +43,11 @@ import { ogMetas } from "./plugins/og_metas.ts";
 
 const RELEASE = Deno.env.get("RELEASE");
 const DISABLE_LINKCARD = Deno.env.get("DISABLE_LINKCARD");
+// Link cards, git dates and the search index are all whole-site steps: they
+// run over every post on every rebuild, including the incremental rebuilds the
+// watch mode performs after each save. With 447 posts that put a single save
+// in watch mode at ~29s; gating them on RELEASE brings it down to ~4.5s.
+// Use `RELEASE=1 deno task serve` to preview a build with all three enabled.
 // Broken-link checking walks every internal/external link on every post and
 // is slow (network I/O per link). It's opt-in so normal deploy builds don't
 // pay for it; run it explicitly (e.g. a scheduled/manual workflow) with
@@ -78,8 +83,9 @@ function configureLinkCard(linkCardConfig?: LinkCardConfig): any[] {
   return [linkcard];
 }
 
-// Configure linkcard - enable by default in both dev and production
-const linkCardPlugins = configureLinkCard();
+// Configure linkcard - production only: it fetches OGP metadata for every
+// external link, so bare URLs stay plain links in the dev preview.
+const linkCardPlugins = RELEASE ? configureLinkCard() : [];
 
 const highlighter = await createHighlighter({
   themes: ["catppuccin-mocha"],
@@ -130,8 +136,13 @@ if (RELEASE) {
   site.use(ogMetas());
 }
 
-// RSS feed - enabled in both dev and production modes
-site.use(gitDate({ varName: "date" }));
+// RSS feed - enabled in both dev and production modes.
+// gitDate is production only: it spawns `git log` once per page. Without it
+// `date` keeps the filename date extractDate already provides, so the dev feed
+// just loses its per-post time-of-day.
+if (RELEASE) {
+  site.use(gitDate({ varName: "date" }));
+}
 site.use(feed({
   output: ["api/feed.xml", "api/feed.json"],
   query: "posts",
@@ -185,19 +196,22 @@ site.add([".png"]);
 site.copy("./public");
 site.copy("./well-known", ".well-known");
 
-// Always enable pagefind for search functionality
-site.use(pagefind({
-  indexing: {
-    excludeSelectors: [
-      "[data-pagefind-ignore]",
-    ],
-    rootSelector: "main",
-  },
-  ui: {
-    showImages: false,
-    excerptLength: 30,
-  },
-}));
+// Search indexing is production only: it re-initialises the pagefind binary on
+// every rebuild. The search modal still opens in dev, but stays empty.
+if (RELEASE) {
+  site.use(pagefind({
+    indexing: {
+      excludeSelectors: [
+        "[data-pagefind-ignore]",
+      ],
+      rootSelector: "main",
+    },
+    ui: {
+      showImages: false,
+      excerptLength: 30,
+    },
+  }));
+}
 
 if (RELEASE) {
   site.hooks.addPostcssPlugin(nano);
