@@ -18,8 +18,6 @@ import metas from "lume/plugins/metas.ts";
 // import filter_pages from "lume/plugins/filter_pages.ts";
 // import base_path from "lume/plugins/base_path.ts";
 // import esbuild from "lume/plugins/esbuild.ts";
-import transformImages from "lume/plugins/transform_images.ts";
-import picture from "lume/plugins/picture.ts";
 import gitDate from "./plugins/lume/git_date.ts";
 import { getLatestGitCommitDate } from "./plugins/git_commit_date.ts";
 
@@ -218,8 +216,6 @@ if (RELEASE) {
   site.use(minifyHTML());
 }
 
-site.use(picture());
-site.use(transformImages());
 site.add("img");
 site.use(metas());
 site.use(extractDate({ remove: false }));

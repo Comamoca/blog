@@ -209,7 +209,7 @@ export default async function MyComponent() {
 
 - Blog posts: Markdown files in `src/blog/` with frontmatter
 - Diary entries: Special posts with `-diary.md` suffix
-- Image assets: Stored in `src/img/` and auto-optimized in production
+- Image assets: Stored in `src/img/` and copied to the output as-is
 
 ## Configuration Files
 
@@ -264,7 +264,8 @@ The `RELEASE` environment variable controls production features:
 
 - Use Japanese as primary language with English support
 - Include proper frontmatter in all markdown files
-- Images should be optimized and stored in `src/img/`
+- Images are stored in `src/img/` and referenced as-is (no build-time
+  optimization/resizing)
 
 ### Plugin System
 
@@ -286,5 +287,4 @@ Production builds include additional optimizations:
 
 - HTML minification
 - Automatic sitemap and RSS feed generation
-- Image optimization and responsive picture generation
 - Broken link checking (output to `_broken_links.json`)
