@@ -88,9 +88,8 @@ async function cardLinkElement(url: any) {
     if (is.Undefined(og.image)) {
       return "";
     } else {
-      // Use direct img tag for external URLs to avoid Lume's picture plugin transformation
-      // Add transform-images="" to prevent image processing by Lume plugins
-      return `<img class="object-cover rounded-tr-lg rounded-br-lg h-full w-50 !m-0" src="${og.image}" alt="OGP image" transform-images="" />`;
+      // Use a direct img tag so the OGP image is served as-is.
+      return `<img class="object-cover rounded-tr-lg rounded-br-lg h-full w-50 !m-0" src="${og.image}" alt="OGP image" />`;
     }
   })();
 

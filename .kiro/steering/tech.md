@@ -20,8 +20,9 @@ distribution.
 - **Runtime**: Deno (JavaScript/TypeScript runtime)
 - **Build System**: Lume's integrated build pipeline
 - **Font Management**: Custom font downloading script for OG image generation
-- **Asset Optimization**: Built-in image optimization and responsive picture
-  generation
+- **Asset Optimization**: None by default — images in `src/img/` are copied
+  verbatim; Lume's `picture` / `transform_images` plugins are intentionally not
+  enabled
 - **Compression**: Brotli and Gzip compression for production builds
 
 ## Development Environment
@@ -107,8 +108,8 @@ nix develop
 
 ## Performance Optimizations
 
-- **Production Mode**: Minification, compression, and asset optimization
-- **Image Processing**: Automatic responsive image generation
+- **Production Mode**: Minification, compression, and CSS optimization
+- **Image Processing**: None; images are served as-is from `src/img/`
 - **Font Loading**: Strategic font loading for OG image generation
 - **Static Generation**: Pre-built HTML for optimal loading performance
 
