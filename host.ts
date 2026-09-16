@@ -398,6 +398,36 @@ export const host = {
       },
     };
 
+    // sitemap.xml: /404.html と /api/* を除く全ページURLを含む
+    // (現行 sitemap プラグインの出力を本番で確認して合わせた)。
+    const sitemapEntries = [
+      homeRoute,
+      ...articleRoutes,
+      ...allRoutes,
+      ...techRoutes,
+      ...diaryRoutes,
+      meRoute,
+      infoRoute,
+      hubRoute,
+    ].map((r) => r.path);
+
+    const sitemapRoute = {
+      path: "/sitemap.xml",
+      render: () => {
+        const lastmod = lastBuild.toISOString();
+        const body = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${
+          sitemapEntries.map((p) =>
+            `  <url><loc>${SITE_URL}${p}</loc><lastmod>${lastmod}</lastmod></url>`
+          ).join("\n")
+        }
+</urlset>
+`;
+        return { contentType: "application/xml", body };
+      },
+    };
+
     return [
       homeRoute,
       ...articleRoutes,
@@ -408,6 +438,7 @@ export const host = {
       infoRoute,
       hubRoute,
       notFoundRoute,
+      sitemapRoute,
       ...feedRoutes,
     ];
   },

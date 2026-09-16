@@ -119,29 +119,28 @@ jobs:
         uses: actions/cache@v6
         with:
           path: |
-            ~/.deno
-            ~/.cache/deno
-          key: deno-${{ hashFiles('deno.lock') }}
+            ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
           restore-keys: |
-            deno-
+            npm-
 
-      - name: Cache transformed images
-        uses: actions/cache@v6
-        with:
-          path: |
-            _cache
-          key: images-${{ hashFiles('src/img/**') }}-v1
-          restore-keys: |
-            images-
+      - name: Install dependencies
+        run: nix develop .#ci --command npm ci
+
+      - name: Run URL/feed compatibility tests
+        run: |
+          nix develop .#ci --command bash -c '
+            DISABLE_LINKCARD=1 npx vite build &&
+            BUILD_OUTPUT_DIR=dist deno test --allow-all tests/url_compat_test.ts tests/feed_compat_test.ts
+          '
 
       - name: Build & Deploy blog
         env:
-          RELEASE: 1
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          nix develop .#ci --command deno task build
-          nix develop .#ci --command wrangler pages deploy ./_site --project-name=blog --commit-dirty=true
+          nix develop .#ci --command npx vite build
+          nix develop .#ci --command wrangler pages deploy ./dist --project-name=blog --commit-dirty=true
 
       # OG Workerはビルド入力 (og/・記事コーパス・nix定義) に変更がある場合のみ
       # デプロイ (手動実行時は常にデプロイ)

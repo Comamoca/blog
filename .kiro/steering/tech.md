@@ -1,5 +1,11 @@
 # Technology Stack
 
+> **移行中**: `.kiro/specs/ox-content-migration/` に沿ってLumeからox-content
+> (Vite custom-host) への移行を実施中。`vite.config.ts` / `host.ts` / `ssg/`
+> が新パイプラインの実体で、記事・一覧・静的ページ・フィード・sitemapは実装済み。
+> Lume本体 (`_config.ts` / `plugins/`) は移行完了 (spec task 9.1) まで残す。
+> 以下の記述はLume前提のままなので、移行完了後にこのファイルごと更新する。
+
 ## Architecture
 
 **Static Site Generator Architecture**: Lume v3-based static site generation

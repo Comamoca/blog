@@ -31,7 +31,9 @@ features
 - `worker-ogp` - OGP画像生成をCloudflare Workersへ移行 (Phase:
   implementation-in-progress)
 - `ox-content-migration` - SSG基盤をLumeからox-contentへ移行し、URL互換性を
-  維持したままプレビュー反映を高速化する (Phase: tasks-generated / 承認待ち)
+  維持したままプレビュー反映を高速化する (Phase: implementation-in-progress。
+  記事/一覧/静的ページ/フィード/sitemapは実装・検証済み。検索機能の再実装、
+  実デプロイ、Lumeの撤去が残タスク)
 
 ## Development Guidelines
 

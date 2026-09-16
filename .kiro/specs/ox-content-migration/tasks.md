@@ -137,7 +137,7 @@
     date_published を照合する
   - _Requirements: 5.2, 5.6_
 
-- [ ] 6.4 `content:encoded` の方針決定
+- [x] 6.4 `content:encoded` の方針決定
   - 現行は本文に生の Markdown が入っている (既存の不具合と考えられる)
   - 完全一致を採るか、この機会に HTML へ修正するかを決める
   - 決定を design.md の設計決定ログへ追記する
@@ -152,16 +152,16 @@
     (閉じ波括弧が1つ多い) を解消する
   - _Requirements: 7.1, 7.4_
 
-- [ ] 7.2 OG画像メタタグ
+- [x] 7.2 OG画像メタタグ
   - `og_metas.ts` のURL生成ロジックを移植する
   - og.comamoca.dev への委譲と80字切り詰めの挙動を維持する
   - _Requirements: 7.2_
 
-- [ ] 7.3 sitemap.xml
+- [x] 7.3 sitemap.xml
   - 移行前と同じURL集合を含むことを 1.3 のテストで確認する
   - _Requirements: 7.3_
 
-- [ ] 7.4 既存の不正クラス名の修正
+- [x] 7.4 既存の不正クラス名の修正
   - `className="border(t gray-200)"` は Tailwind として無効
   - `post.tsx` / `Footer.tsx` / `linkcard.ts` の3箇所
   - 現行でも効いていないため挙動は変わらない
@@ -178,7 +178,7 @@
   - dev サーバー起動が5秒以内であること
   - _Requirements: 2.1, 2.3_
 
-- [ ] 8.3 CI の更新
+- [x] 8.3 CI の更新
   - URL照合テストをCIに組み込む
   - `deploy.yaml` のビルドコマンドを差し替える
   - paths フィルタに設定ファイルの変更を含める

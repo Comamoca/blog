@@ -283,7 +283,10 @@ pubDate / id / date_published を照合する。
 の使用でMarkdownレンダリングは23倍遅くなるが、絶対値は447記事で0.73秒であり、
 書き直しのコストとリスクに見合わない。
 
-**`content:encoded` の扱いは要判断** — 現行の本番フィードは本文に生の Markdown
-を入れている (`## 見出し` がそのまま配信されている) が、これは既存の不具合と
-考えられる。PoCでは正しくHTMLを出力しているため、現行と完全一致させるか、この
-機会に修正するかを実装前に決める必要がある。
+**`content:encoded` はHTMLで出力する (現行の生Markdown出力から修正する)** —
+現行の本番フィードは本文に生の Markdown を入れており (`## 見出し` がそのまま
+配信されている)、RSSリーダー上で見出し記法がテキストとして見える既存の不具合
+だった。ox-content実装では `renderMarkdown()` の結果 (linkcard/shiki適用済み
+HTML) をそのまま `content:encoded` / `content_html` に入れる。互換性回帰テスト
+(`tests/feed_compat_test.ts`) は意図的に本文を比較対象から外しており
+(title/link/pubDate と id/date_published のみ)、この変更と両立する。

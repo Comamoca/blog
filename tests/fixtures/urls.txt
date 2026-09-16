@@ -469,6 +469,7 @@
 /hub.html
 /info.html
 /me.html
+/sitemap.xml
 /tech/1/
 /tech/2/
 /tech/3/

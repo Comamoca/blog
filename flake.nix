@@ -351,28 +351,35 @@
 
           packages.og-fonts = ogFonts;
 
-          # Minimal shell for CI builds: only what `deno task build` and
+          # Minimal shell for CI builds: only what `npm run build` and
           # `wrangler pages deploy` need, so CI doesn't pay for editor
           # tooling (LSPs, textlint, claude-code, agent-browser, ...).
-          devShells.ci = pkgs.mkShell {
-            packages = with pkgs; [
-              vips
-              stdenv.cc.cc
-              deno
-              wrangler
-            ];
+          # nodejs はこの overlay 非適用の clean-pkgs から取る
+          # (devShells.default と同じ理由。67行目周辺のコメント参照)。
+          devShells.ci =
+            let
+              clean-pkgs = import inputs.nixpkgs { inherit system; };
+            in
+            pkgs.mkShell {
+              packages = with pkgs; [
+                vips
+                stdenv.cc.cc
+                deno
+                wrangler
+                clean-pkgs.nodejs
+              ];
 
-            LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc ]}";
+              LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc ]}";
 
-            shellHook = ''
-              [ -e ./fonts ] && rm -r ./fonts
-              mkdir -p ./fonts/noto-fonts
+              shellHook = ''
+                [ -e ./fonts ] && rm -r ./fonts
+                mkdir -p ./fonts/noto-fonts
 
-              ln -s ${fonts}/bin/NotoSansCJKjp-Regular.otf ./fonts/noto-fonts/NotoSansCJKjp-Regular.otf
-              ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Bold.otf
-              ln -s ${fonts}/bin/NotoSansCJKjp-Black.otf ./fonts/noto-fonts/NotoSansCJKjp-Black.otf
-            '';
-          };
+                ln -s ${fonts}/bin/NotoSansCJKjp-Regular.otf ./fonts/noto-fonts/NotoSansCJKjp-Regular.otf
+                ln -s ${fonts}/bin/NotoSansCJKjp-Bold.otf ./fonts/noto-fonts/NotoSansCJKjp-Bold.otf
+                ln -s ${fonts}/bin/NotoSansCJKjp-Black.otf ./fonts/noto-fonts/NotoSansCJKjp-Black.otf
+              '';
+            };
         };
     };
 }
