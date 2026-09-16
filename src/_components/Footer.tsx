@@ -1,6 +1,6 @@
 const today = new Date();
 
-export default async function Footer() {
+export default function Footer() {
   return (
     <>
       <footer className="flex justify-center mt-3">

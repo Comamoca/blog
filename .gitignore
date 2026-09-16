@@ -27,6 +27,7 @@ direnv
 .textlintrc
 _site
 _cache
+.cache
 
 /fonts
 _broken_links.json

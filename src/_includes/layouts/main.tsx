@@ -1,60 +1,73 @@
-// import Twemoji from "../../components/Twemoji.tsx";
-// import Header from "../../components/Header.tsx";
-// import Footer from "../../components/Footer.tsx";
-import { SITE_TITLE } from "../../consts.ts";
+import Header from "../../_components/Header.tsx";
+import Footer from "../../_components/Footer.tsx";
+import {
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+  TWITTER_USERNAME,
+} from "../../consts.ts";
 
-export default (
-  { title, children, comp }: Lume.Data,
-  helpers: Lume.Helpers,
-) => {
+export interface MainLayoutData {
+  title: string;
+  children: unknown;
+  /** ox-content: ctx.assets.ssrStylesheets() から得たhref一覧 */
+  styles?: string[];
+  /** ox-content: OGP用。未指定時はLume併存時の互換のため何も描画しない */
+  description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+}
+
+export default (data: MainLayoutData) => {
+  const {
+    title,
+    children,
+    styles,
+    description,
+    ogImage,
+    canonicalUrl,
+  } = data;
+
   return (
     <html lang="ja">
       <head>
-        {/*<BaseHead title={title} description={description} />*/}
         <meta charset="UTF-8" />
-        <link rel="stylesheet" href="/style.css" />
+        <title>{title}</title>
+        {(styles ?? ["/style.css"]).map((href) => (
+          <link rel="stylesheet" href={href} />
+        ))}
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"
         />
+        {ogImage
+          ? (
+            <>
+              <meta property="og:type" content="website" />
+              <meta property="og:title" content={title} />
+              <meta
+                property="og:description"
+                content={description ?? SITE_DESCRIPTION}
+              />
+              {canonicalUrl
+                ? <meta property="og:url" content={canonicalUrl} />
+                : null}
+              <meta property="og:image" content={ogImage} />
+              <meta name="twitter:card" content="summary_large_image" />
+              <meta name="twitter:site" content={TWITTER_USERNAME} />
+              <meta
+                name="description"
+                content={description ?? SITE_DESCRIPTION}
+              />
+              <meta name="generator" content="ox-content" />
+            </>
+          )
+          : null}
       </head>
       <body>
-        <comp.Header />
+        <Header />
         {children}
-        <comp.Footer />
-        <script src="/pagefind/pagefind-ui.js" data-cfasync="false"></script>
-        <script data-cfasync="false">
-          {`function initializePagefind() {
-            const searchElem = document.getElementById('search');
-            if (searchElem && typeof PagefindUI !== 'undefined') {
-              if (!searchElem.hasChildNodes()) {
-                new PagefindUI({
-                  element: "#search",
-                  showImages: false,
-                  excerptLength: 30,
-                  showEmptyFilters: true,
-                  showSubResults: false,
-                  resetStyles: true,
-                  bundlePath: "/pagefind/",
-                  baseUrl: "/"
-                });
-              }
-            } else if (typeof PagefindUI === 'undefined') {
-              // Retry after a short delay if PagefindUI is not yet loaded
-              setTimeout(initializePagefind, 100);
-            }
-          }
-
-          window.addEventListener('DOMContentLoaded', initializePagefind);
-          
-          // Also try to initialize immediately in case DOMContentLoaded already fired
-          if (document.readyState === 'loading') {
-            // Document still loading, DOMContentLoaded will fire
-          } else {
-            // Document already loaded, initialize immediately
-            initializePagefind();
-          }`}
-        </script>
+        <Footer />
       </body>
     </html>
   );
