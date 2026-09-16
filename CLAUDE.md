@@ -28,6 +28,10 @@ features
   TypeScriptユーザーに贈るClojure入門という記事を書く (Phase: initialized)
 - `linkcard-fix` - リンクカードが表示されていない問題の修正 (Phase:
   implementation-completed)
+- `worker-ogp` - OGP画像生成をCloudflare Workersへ移行 (Phase:
+  implementation-in-progress)
+- `ox-content-migration` - SSG基盤をLumeからox-contentへ移行し、URL互換性を
+  維持したままプレビュー反映を高速化する (Phase: tasks-generated / 承認待ち)
 
 ## Development Guidelines
 
