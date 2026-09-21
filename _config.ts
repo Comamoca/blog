@@ -155,10 +155,13 @@ site.use(feed({
   },
   items: {
     title: "=title",
-    description: "=extract",
+    description: "=description",
     published: "=date",
     updated: undefined,
-    content: "=content",
+    // `=content` is the raw markdown source, so the feed exposed unrendered
+    // markdown. `children` holds the markdown rendered to HTML (pre-layout),
+    // which is what feed readers expect.
+    content: "=children",
     authorName: AUTHOR,
     authorUrl: `${SITE_URL}/me`,
     image: "=cover",
