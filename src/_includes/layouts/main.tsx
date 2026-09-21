@@ -24,7 +24,9 @@ export default (
         <comp.Footer />
         <script src="/pagefind/pagefind-ui.js" data-cfasync="false"></script>
         <script data-cfasync="false">
-          {`function initializePagefind() {
+          {`let pagefindAttempts = 0;
+
+          function initializePagefind() {
             const searchElem = document.getElementById('search');
             if (searchElem && typeof PagefindUI !== 'undefined') {
               if (!searchElem.hasChildNodes()) {
@@ -40,8 +42,13 @@ export default (
                 });
               }
             } else if (typeof PagefindUI === 'undefined') {
-              // Retry after a short delay if PagefindUI is not yet loaded
-              setTimeout(initializePagefind, 100);
+              // Retry after a short delay if PagefindUI is not yet loaded.
+              // Give up after ~5s: dev builds don't emit the pagefind bundle
+              // (it is gated on RELEASE), so retrying forever would spin the
+              // timer at 10Hz for the whole session.
+              if (++pagefindAttempts < 50) {
+                setTimeout(initializePagefind, 100);
+              }
             }
           }
 
