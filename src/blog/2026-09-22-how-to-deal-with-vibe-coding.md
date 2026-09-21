@@ -115,7 +115,6 @@ codingでのテストの重要性については結構取り上げられてい�
 論文の本体が1985年と古く、原本がスキャンしたものしかないため、有志がOCRでスキャンしたものもあわせて添付しておきます。
 この論文に辿り着けたのはt-wadaさんの該当のツイートがきっかけなので、あわせて感謝を述べさせていただきます。
 
-Gist(Markdown)版:
-https://gist.github.com/masci/5ee3be331b05c9014cc5dea87f9c026b?utm_source=chatgpt.com
+Gist(Markdown)版: https://gist.github.com/masci/5ee3be331b05c9014cc5dea87f9c026b
 
 原本(PDF): https://pages.cs.wisc.edu/~remzi/Naur.pdf
