@@ -1,5 +1,5 @@
 name: concurrency test B (expression)
-on: workflow_dispatch
+on: pull_request
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   queue: max
