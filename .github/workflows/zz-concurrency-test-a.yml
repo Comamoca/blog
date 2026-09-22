@@ -1,0 +1,11 @@
+name: concurrency test A (literal true)
+on: workflow_dispatch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  queue: max
+  cancel-in-progress: true
+jobs:
+  sleep:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 90
