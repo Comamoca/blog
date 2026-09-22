@@ -3,7 +3,7 @@ on: pull_request
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   queue: max
-  cancel-in-progress: ${{ github.event_name == 'workflow_dispatch' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   sleep:
     runs-on: ubuntu-latest
