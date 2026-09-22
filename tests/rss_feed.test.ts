@@ -18,9 +18,16 @@ async function buildSite(): Promise<void> {
   }
 }
 
-async function gitHeadTimestamp(): Promise<number> {
+async function latestArticleCommitTimestamp(): Promise<number> {
   const cmd = new Deno.Command("git", {
-    args: ["log", "-1", "--format=%ct"],
+    args: [
+      "log",
+      "--diff-filter=A",
+      "-1",
+      "--format=%ct",
+      "--",
+      "src/blog",
+    ],
     stdout: "piped",
   });
   const { stdout } = await cmd.output();
@@ -31,7 +38,11 @@ async function gitHeadTimestamp(): Promise<number> {
 await buildSite();
 const feedXml = await Deno.readTextFile("./_site/api/feed.xml");
 
-Deno.test("RSS feed lastBuildDate matches latest git commit time", async () => {
+// <lastBuildDate> must track the latest *article addition*, not the latest
+// commit: otherwise editing an existing post — or any unrelated commit, such
+// as a CI tweak — makes the feed look like it changed when nothing was
+// published.
+Deno.test("RSS feed lastBuildDate matches latest article commit time", async () => {
   const lastBuildMatch = feedXml.match(
     /<lastBuildDate>([^<]+)<\/lastBuildDate>/,
   );
@@ -43,10 +54,11 @@ Deno.test("RSS feed lastBuildDate matches latest git commit time", async () => {
     `lastBuildDate ${lastBuildMatch[1]} must be a valid date`,
   );
 
-  const expected = await gitHeadTimestamp();
+  const expected = await latestArticleCommitTimestamp();
   assert(
     lastBuildDate.getTime() === expected * 1000,
-    `lastBuildDate ${lastBuildMatch[1]} must equal git HEAD commit time`,
+    `lastBuildDate ${lastBuildMatch[1]} must equal the time of the latest ` +
+      "commit that added an article under src/blog",
   );
 
   assert(

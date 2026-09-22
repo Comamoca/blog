@@ -19,7 +19,7 @@ import metas from "lume/plugins/metas.ts";
 // import base_path from "lume/plugins/base_path.ts";
 // import esbuild from "lume/plugins/esbuild.ts";
 import gitDate from "./plugins/lume/git_date.ts";
-import { getLatestGitCommitDate } from "./plugins/git_commit_date.ts";
+import { getLatestArticleCommitDate } from "./plugins/git_commit_date.ts";
 
 import { createHighlighter } from "npm:shiki";
 import {
@@ -151,7 +151,7 @@ site.use(feed({
     generator: true,
     authorName: AUTHOR,
     authorUrl: SITE_URL,
-    published: getLatestGitCommitDate(),
+    published: getLatestArticleCommitDate(),
   },
   items: {
     title: "=title",

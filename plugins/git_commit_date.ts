@@ -62,17 +62,27 @@ export function getFileFirstCommitDate(
 }
 
 /**
- * Returns the timestamp of the latest git commit, for use as the RSS feed's
- * <lastBuildDate>. Changes only when the repository changes, so readers are
- * notified of new posts without being re-flooded on every build.
+ * Returns the timestamp of the latest commit that *added* a file under
+ * `paths` (the article directory by default), for use as the RSS feed's
+ * <lastBuildDate>.
+ *
+ * Why not the latest commit of the whole repository? <lastBuildDate> would
+ * then move on every commit — a typo fix in an existing post, a CI tweak, a
+ * dependency bump — which makes the feed look like it changed when no new
+ * article was published. `--diff-filter=A` keeps only commits that introduce
+ * a new file, so editing an existing post leaves the date untouched. Renames
+ * are reported as `R` (git detects them by default) and are ignored too.
  *
  * Falls back to the current date when git is unavailable or fails, so the
  * build always succeeds (e.g. git-less CI sandboxes).
  */
-export function getLatestGitCommitDate(cwd: string = Deno.cwd()): Date {
+export function getLatestArticleCommitDate(
+  cwd: string = Deno.cwd(),
+  paths: string[] = ["src/blog"],
+): Date {
   try {
     const command = new Deno.Command("git", {
-      args: ["log", "-1", "--format=%ct"],
+      args: ["log", "--diff-filter=A", "-1", "--format=%ct", "--", ...paths],
       cwd,
       env: gitCommandEnv(cwd),
       stdout: "piped",
