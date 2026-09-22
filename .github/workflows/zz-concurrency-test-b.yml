@@ -1,11 +1,10 @@
-name: concurrency test B (expression)
+name: concurrency test C (job-level queue)
 on: pull_request
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  queue: max
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   sleep:
     runs-on: ubuntu-latest
+    concurrency:
+      group: concurrency-test-c-${{ github.ref }}
+      queue: max
     steps:
       - run: sleep 90
