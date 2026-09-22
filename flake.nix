@@ -317,6 +317,7 @@
                 llm-agents.packages.x86_64-linux.agent-browser
 
                 create
+                adrs
               ];
 
               # LD_LIBRARY_PATH = "${libPath}/lib";
