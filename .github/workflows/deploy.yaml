@@ -13,7 +13,16 @@ on:
       - "flake.lock"
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  # PRでは同一PR内の古い実行をキャンセルする (head_refがグループ名になる)。
+  # それ以外 (mainへのpush・workflow_dispatch) はrunごとにユニークなグループ
+  # (run_id) になるため一切キャンセルされない。
+  # mainのrunをキャンセルすると、og/やsrc/blog/ (OGフォントのコーパス) の
+  # 変更を含むrunが中断されたとき、次のrunのpaths-filterは直前コミットとの
+  # 差分しか見ないためOG Workerの再デプロイがスキップされ、記事タイトルの
+  # グリフが欠けたOG画像が生成されてしまうため。
+  # (注意: queue: maxとcancel-in-progress: trueはリテラル・式ともに併用不可
+  # なので、デプロイの直列化はdeployジョブ側のqueue: maxで行う)
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
 jobs:
@@ -90,6 +99,12 @@ jobs:
     permissions:
       contents: read
       id-token: write
+    # デプロイのみ直列化する。queue: maxで最大100件待機し1件ずつ完走させる
+    # (cancel-in-progressと併用不可なのでキャンセルではなく待機で競合を回避。
+    # キャンセルするとOGフォントのコーパス変更を含むrunのデプロイが飛ぶため)
+    concurrency:
+      group: ${{ github.workflow }}-deploy-${{ github.ref }}
+      queue: max
     steps:
       - uses: actions/checkout@v7
         with:
