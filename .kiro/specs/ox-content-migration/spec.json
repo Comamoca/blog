@@ -1,7 +1,7 @@
 {
   "feature_name": "ox-content-migration",
   "created_at": "2026-09-16T00:00:00Z",
-  "updated_at": "2026-09-16T14:00:00Z",
+  "updated_at": "2026-09-24T12:00:00Z",
   "language": "ja",
   "phase": "implementation-in-progress",
   "approvals": {
@@ -48,13 +48,13 @@
       "7.4",
       "8.1",
       "8.2",
-      "8.3"
+      "8.3",
+      "9.1",
+      "9.2"
     ],
     "remaining": [
-      "7.1 (検索機能: pagefind継続かox-content内蔵BM25かの決定と実装が未着手)",
-      "8.4 (Cloudflare Pagesへの実デプロイ。認証情報が必要でユーザーの実行が必要)",
-      "9.1 (Lumeの撤去。破壊的変更のためユーザー確認後に実施)",
-      "9.2 (CLAUDE.md/steeringドキュメントの更新)"
+      "7.1 (検索機能: Pagefind継続かox-content内蔵BM25かをユーザーと比較検討中)",
+      "8.4 (Cloudflare Pagesへの実デプロイ。認証情報が必要でユーザーの実行が必要。一旦保留)"
     ],
     "verification": {
       "url_compat": "476/476 (本番sitemap 472件 + 404.html + sitemap.xml + feed.xml + feed.json)",
@@ -64,6 +64,21 @@
       "sitemap": "本番sitemap.xmlと472件完全一致",
       "css_coverage": "生成HTML内172ユニーククラスを網羅、欠落なし",
       "dev_latency": "起動351-563ms、編集→反映 平均0.54s (要件: 5秒/1秒以内)"
+    },
+    "lume_removal": {
+      "restore_point": "git tag pre-lume-removal (commit 6ec5543)",
+      "restore_command": "git checkout pre-lume-removal -- <path> or git diff pre-lume-removal HEAD",
+      "removed": [
+        "_config.ts",
+        "plugins/",
+        "src/*.page.tsx",
+        "src/blog/_data.js",
+        "utils/fetchogp.ts",
+        "utils/logger.ts",
+        "src/types.ts",
+        "src/_components/BaseHead.tsx"
+      ],
+      "bug_found_and_fixed": "ssg/feed.tsにGIT_DIR継承対策 (gitCommandEnv) が欠けていた。pre-commitフックのGIT_DIRがexecFileSyncのcwdを上書きしテストが本物のリポジトリを見てしまう問題を修正"
     }
   },
   "notes": {

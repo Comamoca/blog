@@ -192,12 +192,12 @@
 
 -
   9. [ ] Lume の撤去
-- [ ] 9.1 不要になった依存と設定の削除
+- [x] 9.1 不要になった依存と設定の削除
   - `_config.ts`、`plugins/lume/`、Lume 関連の deno タスク
   - `deno.jsonc` の Lume インポートと lint プラグイン
   - _Requirements: 6.1_
 
-- [ ] 9.2 ドキュメントの更新
+- [x] 9.2 ドキュメントの更新
   - `CLAUDE.md` / `.kiro/steering/tech.md` / `structure.md` を
     新構成に合わせて更新する
   - `README.md` のビルド手順を更新する
