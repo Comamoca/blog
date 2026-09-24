@@ -3,7 +3,7 @@ import {
   buildOgImageUrl,
   MAX_DESCRIPTION_LENGTH,
   truncateDescription,
-} from "../plugins/og_metas.ts";
+} from "../ssg/og_metas.ts";
 
 Deno.test("buildOgImageUrl: post layout with title and description", () => {
   const url = buildOgImageUrl("post", "タイトル", "説明文");

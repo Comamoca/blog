@@ -66,6 +66,31 @@ Deno.test("combineDate: コミット時刻が無い場合はfileDateをそのま
   assertEquals(combined.getTime(), fileDate.getTime());
 });
 
+Deno.test("latestCommitDate: リポジトリ外では現在時刻にフォールバックする", () => {
+  const dir = Deno.makeTempDirSync();
+  try {
+    const before = Date.now();
+    const date = latestCommitDate(dir);
+    const after = Date.now();
+    assert(
+      date.getTime() >= before && date.getTime() <= after,
+      "フォールバック日時はおおよそ現在時刻であること",
+    );
+  } finally {
+    Deno.removeSync(dir, { recursive: true });
+  }
+});
+
+Deno.test("firstCommitTimes: リポジトリ外では空のMapを返す (例外を投げない)", () => {
+  const dir = Deno.makeTempDirSync();
+  try {
+    const times = firstCommitTimes(dir, "src/blog");
+    assertEquals(times.size, 0);
+  } finally {
+    Deno.removeSync(dir, { recursive: true });
+  }
+});
+
 Deno.test("firstCommitTimes: src/blog配下の実ファイルに対して時刻が引ける", () => {
   const times = firstCommitTimes(REPO_ROOT, "src/blog");
   assert(times.size > 0, "1件以上のコミット時刻が取得できること");

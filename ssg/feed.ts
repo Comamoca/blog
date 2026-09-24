@@ -9,6 +9,26 @@ import {
 const LIMIT = 10;
 
 /**
+ * gitサブプロセス用の環境変数を組み立てる。
+ *
+ * Node の execFileSync はデフォルトで親プロセスの環境を丸ごと継承し、
+ * 上書きはできても削除はできない。pre-commitフックのプロセスにはgitが
+ * `GIT_DIR` を絶対パスでexportしているため、それが継承されると `cwd` に
+ * 存在しないリポジトリ外ディレクトリを渡しても `git log` が成功してしまい
+ * (フックを実行している本物のリポジトリを見てしまう)、テスト用の一時
+ * ディレクトリでの「リポジトリ外」フォールバック検証が意味を失う。
+ * `cwd` から導いた値で `GIT_DIR`/`GIT_WORK_TREE` を明示的に上書きすることで
+ * `cwd` を唯一の真実にする。
+ */
+function gitCommandEnv(cwd: string): NodeJS.ProcessEnv {
+  return {
+    ...process.env,
+    GIT_DIR: `${cwd}/.git`,
+    GIT_WORK_TREE: cwd,
+  };
+}
+
+/**
  * 現行 plugins/lume/git_date.ts と同じ規則で日付を作る。
  * 日付部分はファイル名、時刻部分はそのファイルを追加した最初のコミット。
  *
@@ -19,12 +39,24 @@ export function firstCommitTimes(
   repoRoot: string,
   relDir: string,
 ): Map<string, number> {
-  const out = execFileSync(
-    "git",
-    ["log", "--diff-filter=A", "--format=%ct", "--name-only", "--", relDir],
-    { cwd: repoRoot, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 },
-  );
   const times = new Map<string, number>();
+  let out: string;
+  try {
+    out = execFileSync(
+      "git",
+      ["log", "--diff-filter=A", "--format=%ct", "--name-only", "--", relDir],
+      {
+        cwd: repoRoot,
+        env: gitCommandEnv(repoRoot),
+        encoding: "utf8",
+        maxBuffer: 64 * 1024 * 1024,
+      },
+    );
+  } catch {
+    // gitが無い/リポジトリ外など。呼び出し側はMap.get()がundefinedを返すのを
+    // 前提にファイル名の日付のみへフォールバックする。
+    return times;
+  }
   let ts = 0;
   for (const line of out.split("\n")) {
     const t = line.trim();
@@ -39,14 +71,23 @@ export function firstCommitTimes(
   return times;
 }
 
-/** 現行 getLatestGitCommitDate 相当: lastBuildDate に使う最新コミット時刻 */
+/**
+ * 現行 getLatestGitCommitDate 相当: lastBuildDate に使う最新コミット時刻。
+ * gitが利用できない/リポジトリ外では現在時刻にフォールバックし、
+ * ビルドが失敗しないようにする (git無しのCIサンドボックス等)。
+ */
 export function latestCommitDate(repoRoot: string): Date {
-  const out = execFileSync("git", ["log", "-1", "--format=%ct"], {
-    cwd: repoRoot,
-    encoding: "utf8",
-  });
-  const ts = Number.parseInt(out.trim(), 10);
-  return Number.isNaN(ts) ? new Date() : new Date(ts * 1000);
+  try {
+    const out = execFileSync("git", ["log", "-1", "--format=%ct"], {
+      cwd: repoRoot,
+      env: gitCommandEnv(repoRoot),
+      encoding: "utf8",
+    });
+    const ts = Number.parseInt(out.trim(), 10);
+    return Number.isNaN(ts) ? new Date() : new Date(ts * 1000);
+  } catch {
+    return new Date();
+  }
 }
 
 /** 日付はファイル名、時刻は初回コミットから合成する */

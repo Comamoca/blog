@@ -32,8 +32,9 @@ features
   implementation-in-progress)
 - `ox-content-migration` - SSG基盤をLumeからox-contentへ移行し、URL互換性を
   維持したままプレビュー反映を高速化する (Phase: implementation-in-progress。
-  記事/一覧/静的ページ/フィード/sitemapは実装・検証済み。検索機能の再実装、
-  実デプロイ、Lumeの撤去が残タスク)
+  記事/一覧/静的ページ/フィード/sitemap/Lumeの撤去まで実装・検証済み。
+  検索機能の実装方式検討 (Pagefind継続 vs ox-content内蔵BM25) と実デプロイ
+  確認が残タスク)
 
 ## Development Guidelines
 
@@ -112,10 +113,19 @@ code in this repository.
 
 ## Project Overview
 
-This is a personal blog built with Lume (Deno static site generator), using
-TailwindCSS, DaisyUI, and TypeScript. The blog supports bilingual content
-(Japanese/English) and includes features like search, RSS feeds, and automated
-font loading.
+This is a personal blog built with
+[ox-content](https://github.com/ubugeeei-prod/ox-content) (Rust-core SSG, driven
+via a Vite custom-host), using TailwindCSS, DaisyUI, and TypeScript. The blog
+supports bilingual content (Japanese/English) and includes RSS feeds and OG
+image generation (delegated to a separate Cloudflare Worker, `og/`). Search is
+not currently implemented (see README.md Todo and
+`.kiro/specs/ox-content-migration/`).
+
+The site was migrated from Lume (a Deno SSG) to ox-content; see
+`.kiro/specs/ox-content-migration/design.md` for the full rationale and
+`pre-lume-removal` git tag for the last commit with the old Lume pipeline still
+intact (restorable via `git checkout pre-lume-removal -- <path>` or
+`git diff pre-lume-removal HEAD` to review what changed).
 
 ## Development Commands
 
@@ -123,16 +133,20 @@ font loading.
 
 ```bash
 # Development server with hot reload
-deno task serve
+npm run dev
 
 # Production build
-deno task build
+npm run build
 
-# Build for Cloudflare Pages deployment
-deno task deploy
+# Deploy to Cloudflare Pages
+npx vite build
+wrangler pages deploy ./dist --project-name=blog
 
-# Download required fonts for OG image generation
+# Download fonts (used by the OG Worker's font-subsetting pipeline)
 deno task download-fonts
+
+# Run tests
+deno task test
 ```
 
 ### Alternative Tools
@@ -160,76 +174,91 @@ just latest-diary
 
 ```
 src/
-├── _components/          # Reusable components (TSX)
+├── _components/          # Reusable components (TSX, synchronous)
 │   ├── Header.tsx       # Main site header with navigation
 │   ├── PostList.tsx     # Blog post listing component
 │   ├── PostCard.tsx     # Individual post preview card
-│   ├── Search.tsx       # Site search functionality
+│   ├── Search.tsx       # Search UI shell (search itself is not implemented)
 │   ├── Footer.tsx       # Footer component
-│   ├── BaseHead.tsx     # HTML head component
 │   ├── Logo.tsx         # Site logo
 │   └── Twemoji.tsx      # Twemoji component
-├── _includes/           # Layout templates
-│   └── layouts/         # Page layout templates (main, post, OG images)
+├── _includes/layouts/   # main.tsx / post.tsx
 ├── blog/                # Blog post markdown files
 ├── img/                 # Image assets
-├── public/              # Static files copied as-is
+├── public/              # favicon.svg, icon.png (served at site root)
 ├── well-known/          # .well-known directory content
-└── *.page.tsx           # Page components (index, 404, diary, etc.)
+├── consts.ts            # Site constants
+└── style.css            # Tailwind v4 entry
 
-plugins/
-├── lume/                # Custom Lume plugins
-│   ├── footnote.ts      # Custom footnote processing
-│   └── git_date.ts      # Git commit date extraction
-├── linkcard.ts          # External link card generation
-└── git_commit_date.ts   # Latest git commit date helper
+ssg/                     # ox-content build logic (ported from plugins/)
+├── markdown.ts           # remark/rehype/HTML-postprocess plugin wiring
+├── linkcard.ts            # External link card generation
+├── fetchogp.ts             # OGP metadata fetching (linkedom-based)
+├── og_metas.ts              # og.comamoca.dev image URL generation
+├── feed.ts                   # RSS/JSON Feed, git-history-based dates
+├── static-assets.ts           # Serves img/public/well-known
+└── pages/                     # All/Tech/Diary/Me/Info/Hub/NotFound components
+
+host.ts                 # All route definitions (custom-host)
+vite.config.ts           # Vite + ox-content custom-host config
 
 scripts/
-└── downloadFonts.ts     # Font download script
+└── downloadFonts.ts     # Font download for the OG Worker's font subsetting
 
-_config.ts              # Main Lume configuration
-create.rb               # Blog post creation script
+create.rb                # Blog post creation script
 ```
 
 ### Key Technologies
 
-- **Framework**: Lume v3 (Deno static site generator)
+- **Framework**: ox-content (Rust core) + Vite custom-host
 - **Styling**: TailwindCSS v4 + DaisyUI v5
-- **Components**: TSX with Lume's JSX runtime (SSX)
+- **Components**: TSX with `@ox-content/vite-plugin`'s bundled synchronous JSX
+  runtime (`renderToString`). Not React/Preact.
 - **Deployment**: Cloudflare Pages
 - **Fonts**: Noto Sans CJK for Japanese support
 - **Syntax highlighting**: Shiki (catppuccin-mocha theme)
 
+### Routing
+
+There is no `*.page.tsx` file-naming convention. All routes (articles, listing
+pages, static pages, feeds, sitemap, 404) are defined programmatically in
+`host.ts`'s `routes()`. To add a URL, add a route there. URL compatibility with
+the pre-migration site is enforced by `tests/url_compat_test.ts` against
+`tests/fixtures/urls.txt`.
+
 ### Component Architecture
 
-Components in `src/_components/` are referenced via `comp.Header` syntax in
-layouts. When creating new components:
+Components are plain synchronous functions, imported directly (no
+`comp.Header`-style injection):
 
 ```tsx
-export default async function MyComponent() {
+export default function MyComponent() {
   // Component logic
 }
 ```
+
+Do not mark components `async` — the JSX runtime's `renderToString` is
+synchronous, so an async component's Promise is silently discarded and it
+renders as an empty string. Any async work (fetching data, reading files)
+belongs in `host.ts`'s route `render()`, with the resolved data passed to the
+component as props.
 
 ### Content Management
 
 - Blog posts: Markdown files in `src/blog/` with frontmatter
 - Diary entries: Special posts with `-diary.md` suffix
-- Image assets: Stored in `src/img/` and copied to the output as-is
+- Image assets: Stored in `src/img/` and served as-is (no build-time
+  optimization/resizing)
 
 ## Configuration Files
 
 ### Primary Config
 
-- `_config.ts`: Main Lume configuration with plugins and build settings
-- `deno.jsonc`: Deno configuration with tasks and imports
-
-### Environment-Specific Behavior
-
-The `RELEASE` environment variable controls production features:
-
-- When `RELEASE=1`: Enables minification, SEO plugins, OG image generation
-- Development: Simplified build with faster reload times
+- `vite.config.ts`: Vite + `oxContentCustomHost` configuration
+- `host.ts`: Route definitions
+- `package.json`: npm scripts and dependencies
+- `deno.jsonc`: Deno config for running tests (`deno task test`) and the
+  `date-fns` import used by `tests/diary.test.ts`
 
 ## Custom Features
 
@@ -241,28 +270,28 @@ The `RELEASE` environment variable controls production features:
 
 ### Font Handling
 
-- Custom font loading script: `scripts/downloadFonts.ts`
-- Supports Japanese typography with Noto fonts
-- Required for OG image generation in production
+- `scripts/downloadFonts.ts` downloads the Noto Sans CJK corpus consumed by the
+  OG Worker's (`og/`) font-subsetting pipeline. Unrelated to the blog's own
+  build, which does not generate images at build time.
 
 ### Search Functionality
 
-- Uses Pagefind for client-side search
-- Automatically indexes all content
-- Search component in `src/_components/Search.tsx`
+Not implemented. `src/_components/Search.tsx` renders the modal shell but has no
+working query logic behind it. See README.md's Todo and
+`.kiro/specs/ox-content-migration/` for the Pagefind-vs-ox-content-BM25
+comparison in progress.
 
 ### Link Cards
 
-- External link preview generation via `plugins/linkcard.ts`
-- Uses Remark plugin processing
-- Can be disabled with `DISABLE_LINKCARD` environment variable
+- External link preview generation via `ssg/linkcard.ts` (remark plugin, Node
+  port of the original Deno implementation)
+- Can be disabled with the `DISABLE_LINKCARD` environment variable
 
 ## Development Notes
 
 ### File Naming Conventions
 
-- Page files: `*.page.tsx` (e.g., `index.page.tsx`, `404.page.tsx`)
-- Components: PascalCase TSX files in `src/_components/`
+- Components: PascalCase TSX files in `src/_components/` or `ssg/pages/`
 - Blog posts: `YYYY-MM-DD-title.md` format
 - Diary entries: `YYYY-MM-DD-diary.md` format
 
@@ -273,24 +302,19 @@ The `RELEASE` environment variable controls production features:
 - Images are stored in `src/img/` and referenced as-is (no build-time
   optimization/resizing)
 
-### Plugin System
+### dev server の依存関係宣言
 
-Custom plugins are located in `plugins/` directory:
-
-- `linkcard.ts`: Generates preview cards for external links
-- `plugins/lume/footnote.ts`: Custom footnote processing
-- `plugins/lume/git_date.ts`: Git commit date extraction for RSS feed
+`host.ts` の各ルートには `dependencies` を宣言する必要がある。宣言が無いと
+devサーバーが応答をキャッシュし続け、ファイルを編集しても反映されない
+(エラーは出ない)。
 
 ## Deployment
 
-The site is automatically deployed to Cloudflare Pages. The build process:
+The site deploys to Cloudflare Pages via `.github/workflows/deploy.yaml` on push
+to `main`. The build process:
 
-1. Downloads required fonts for OG image generation
-2. Builds the site with production optimizations
-3. Deploys to `comamoca.dev` domain
+1. `npx vite build` — builds the static site to `dist/`
+2. `wrangler pages deploy ./dist` — deploys to `comamoca.dev`
 
-Production builds include additional optimizations:
-
-- HTML minification
-- Automatic sitemap and RSS feed generation
-- Broken link checking (output to `_broken_links.json`)
+The OG Worker (`og/`) deploys separately, only when its own inputs (`og/**`,
+`src/blog/**`, `flake.nix`, `flake.lock`) change.
