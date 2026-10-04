@@ -391,6 +391,7 @@ export const host = {
           MainLayout({
             title: "Page Not Found",
             description: SITE_DESCRIPTION,
+            styles: styles(),
             children: raw(renderToString(NotFoundPage({}) as any)),
           }) as any,
         );
@@ -443,11 +444,34 @@ ${
     ];
   },
 
-  notFound() {
+  notFound(context: { url: URL; assets: any }) {
+    // devサーバーの未マッチ要求のうち、静的アセットやVite内部リクエストは
+    // undefined を返して Vite の通常パイプライン (CSS変換・静的配信) に
+    // フォールスルーさせる。ここで常に404ページを返すと、/src/style.css や
+    // /@vite/client まで横取りして dev で CSS が一切効かなくなる
+    // (ox-content SSGモードの shouldSkip と同等の判定)。
+    const pathname = context.url.pathname;
+    const viteInternalPrefixes = ["/@vite/", "/@fs/", "/@id/", "/__"];
+    if (
+      viteInternalPrefixes.some((prefix) => pathname.startsWith(prefix)) ||
+      pathname.includes("/node_modules/") ||
+      /\.(?:js|ts|css|scss|less|svg|png|jpe?g|gif|webp|ico|woff2?|ttf|eot|json|map|mp4|webm|mp3|pdf)$/i
+        .test(pathname)
+    ) {
+      return undefined;
+    }
+
+    // 全ルートと同一CSSを参照する (routes() の cssHrefs と同じ計算)
+    const cssHrefs: string[] = context.assets
+      .ssrStylesheets({ modules: ["/src/_includes/layouts/post.tsx"] })
+      .stylesheets.map((s: any) => s.href)
+      .filter(Boolean);
+
     const body = renderToString(
       MainLayout({
         title: "Page Not Found",
         description: SITE_DESCRIPTION,
+        styles: cssHrefs,
         children: raw(renderToString(NotFoundPage({}) as any)),
       }) as any,
     );
