@@ -21,8 +21,11 @@ export default defineConfig({
       oxContent: {
         srcDir: "src",
         outDir: "dist",
-        // 検索方式は task 7.1 で決定する。決定までは既定のBM25インデックスを
-        // 無効化しておく (ルートごとに再構築が走り474ルートで大幅に遅くなるため)。
+        // 検索はPagefind続投で決定 (task 7.1)。ox-content内蔵のBM25は
+        // custom-hostに配線されておらず(他フレームワーク外からの利用も非推奨)、
+        // 索引もコーパス全体を1回のリクエストで読む設計なため不採用。
+        // 無効化しておかないとルートごとに再構築が走り474ルートで大幅に
+        // 遅くなる。
         search: false,
         // JSDoc由来のAPIドキュメント生成はこのブログでは不要
         docs: false,

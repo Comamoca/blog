@@ -129,6 +129,8 @@ jobs:
 
       - name: Run URL/feed compatibility tests
         run: |
+          # pagefind索引 (npm run build の後段) はURL/フィードの一致には
+          # 関与しないため、ここでは vite build のみで十分
           nix develop .#ci --command bash -c '
             DISABLE_LINKCARD=1 npx vite build &&
             BUILD_OUTPUT_DIR=dist deno test --allow-all tests/url_compat_test.ts tests/feed_compat_test.ts
@@ -139,7 +141,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          nix develop .#ci --command npx vite build
+          nix develop .#ci --command npm run build
           nix develop .#ci --command wrangler pages deploy ./dist --project-name=blog --commit-dirty=true
 
       # OG Workerはビルド入力 (og/・記事コーパス・nix定義) に変更がある場合のみ

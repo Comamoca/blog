@@ -6,6 +6,8 @@ import {
   SITE_URL,
   TWITTER_USERNAME,
 } from "../../consts.ts";
+import { PAGEFIND_INIT_SCRIPT } from "../../../ssg/pagefind-client.ts";
+import { raw } from "@ox-content/vite-plugin";
 
 export interface MainLayoutData {
   title: string;
@@ -68,6 +70,8 @@ export default (data: MainLayoutData) => {
         <Header />
         {children}
         <Footer />
+        <script src="/pagefind/pagefind-ui.js" data-cfasync="false"></script>
+        <script data-cfasync="false">{raw(PAGEFIND_INIT_SCRIPT)}</script>
       </body>
     </html>
   );

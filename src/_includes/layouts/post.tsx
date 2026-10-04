@@ -5,6 +5,8 @@ import Footer from "../../_components/Footer.tsx";
 import { format, parse } from "date-fns";
 import ja from "date-fns/locale/ja";
 import { SITE_DESCRIPTION, SITE_URL, TWITTER_USERNAME } from "../../consts.ts";
+import { PAGEFIND_INIT_SCRIPT } from "../../../ssg/pagefind-client.ts";
+import { raw } from "@ox-content/vite-plugin";
 
 function yymmdd(date: string): string {
   if (!date) {
@@ -144,6 +146,8 @@ export default function (data: PostLayoutData) {
           </div>
         </main>
         <Footer />
+        <script src="/pagefind/pagefind-ui.js" data-cfasync="false"></script>
+        <script data-cfasync="false">{raw(PAGEFIND_INIT_SCRIPT)}</script>
       </body>
     </html>
   );

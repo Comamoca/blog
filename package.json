@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "vite build && node --experimental-strip-types ssg/run-pagefind.ts",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "daisyui": "5.7.32",
     "date-fns": "4.4.0",
     "linkedom": "^0.18.13",
+    "pagefind": "^1.5.2",
     "shiki": "^3.13.0",
     "tailwindcss": "^4.1.16",
     "unist-util-visit": "^5.0.0",
