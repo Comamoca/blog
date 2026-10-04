@@ -11,13 +11,14 @@
 
 ## Frontend Technologies
 
-- **Static Site Generator**: ox-content (Rustコア) + Vite (custom-host)
+- **Static Site Generator**: ox-content (Rustコア) + Vite+
+  (Vite互換ツールチェーン; custom-host)
 - **Component Framework**: JSX/TSX。ランタイムは `@ox-content/vite-plugin`
   同梱の文字列SSR用JSXランタイム (`renderToString`)。React/Preact は未使用
 - **Styling**: TailwindCSS v4 (`@tailwindcss/vite`) + DaisyUI v5
 - **Typography**: Noto Sans CJK / さわらびゴシック for Japanese character
   support
-- **Search**: Pagefind継続で実装済み。`ssg/pagefind.ts` が `npm run build`
+- **Search**: Pagefind継続で実装済み。`ssg/pagefind.ts` が `bun run build`
   の後段 (`ssg/run-pagefind.ts`) でdist以下のHTMLを索引する。UIは
   `src/_components/Search.tsx` + `ssg/pagefind-client.ts`
   (PagefindUIの初期化)。ox-content内蔵BM25は不採用
@@ -27,7 +28,11 @@
 ## Backend & Build System
 
 - **Runtime**: Node.js (Vite/ox-contentのビルド) + Deno (テストのみ)
-- **Build System**: Vite (`vite.config.ts`) + `oxContentCustomHost` プラグイン
+- **Build System**: Vite+ (`vite.config.ts`) + `oxContentCustomHost`
+  プラグイン。 `vp dev` / `vp build` / `vp preview` を使用する (`vite` は
+  vite-plus-core へ alias される)。Oxfmt/Oxlint/Vitest は不採用 (整形は Nix
+  treefmt、テストは Deno)。Vite+ は Vite の置き換え (dev/build/preview)
+  としてのみ使う
 - **ルーティング**: `host.ts` が全ルート (記事・一覧・静的ページ・フィード・
   sitemap・404) を自前定義。記事URLはファイルツリー由来で現行 (旧Lume) と
   完全互換
@@ -40,9 +45,10 @@
 
 ## Development Environment
 
-- **Package Manager**: npm (`package.json` / `package-lock.json`)
-- **Task Runner**: npm scripts (`npm run dev` / `npm run build` /
-  `npm run preview`) + Deno tasks (`deno.jsonc`、テスト・OG Worker関連のみ)
+- **Package Manager**: bun (`package.json` /
+  `bun.lock`、`devEngines.packageManager` で指定)
+- **Task Runner**: bun scripts (`bun run dev` / `bun run build` /
+  `bun run preview`) + Deno tasks (`deno.jsonc`、テスト・OG Worker関連のみ)
 - **Alternative Tools**: Just commands for blog management workflows
 - **Shell Integration**: Nu shell scripts for content creation workflows
 
@@ -59,16 +65,13 @@
 
 ```bash
 # Development server with hot reload
-npm run dev
-# または (ni/nr を使う場合)
-ni
-nr dev
+bun run dev
 
 # Production build
-npm run build
+bun run build
 
 # ビルド + Cloudflare Pages へのデプロイ
-npx vite build
+bun run build
 wrangler pages deploy ./dist --project-name=blog
 
 # フォントダウンロード (OG Worker のフォントサブセット素材用)
@@ -118,9 +121,9 @@ nix develop .#ci
 
 ## Configuration Files
 
-- **Primary Config**: `vite.config.ts` - Vite + ox-content custom-host 設定
+- **Primary Config**: `vite.config.ts` - Vite+ + ox-content custom-host 設定
 - **Routing**: `host.ts` - 全ルート定義
-- **Node Config**: `package.json` - npm scripts と依存関係
+- **Node Config**: `package.json` - bun scripts と依存関係
 - **Deno Config**: `deno.jsonc` - テスト実行と `date-fns` importのみ
 - **Development Nix**: `flake.nix` - Nix development environment
 
@@ -156,13 +159,13 @@ nix develop .#ci
 2. **Component Development**: TSX files with 同期 function exports
    (ox-contentのJSXランタイムは同期のみ。`async` コンポーネントは無言で
    空文字列になる点に注意)
-3. **Local Development**: `npm run dev` でVite dev serverを起動
-4. **Production Build**: `npm run build`
+3. **Local Development**: `bun run dev` でVite dev serverを起動
+4. **Production Build**: `bun run build`
 5. **Deployment**: `.github/workflows/deploy.yaml` 経由でCloudflare Pagesへ
 
 ## Dependencies Management
 
-- **Runtime Dependencies**: `package.json` / `package-lock.json` (npm)
+- **Runtime Dependencies**: `package.json` / `bun.lock` (bun)
 - **Deno側**: `deno.jsonc` はテスト実行と `date-fns` importのみを管理
 - **Version Control**: `@ox-content/*` パッケージはバージョン固定
   (v3.2.6で検証済み)

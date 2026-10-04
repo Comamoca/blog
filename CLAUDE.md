@@ -130,13 +130,13 @@ intact (restorable via `git checkout pre-lume-removal -- <path>` or
 
 ```bash
 # Development server with hot reload
-npm run dev
+bun run dev
 
 # Production build
-npm run build
+bun run build
 
 # Deploy to Cloudflare Pages
-npx vite build
+bun run build
 wrangler pages deploy ./dist --project-name=blog
 
 # Download fonts (used by the OG Worker's font-subsetting pipeline)
@@ -196,7 +196,7 @@ ssg/                     # ox-content build logic (ported from plugins/)
 ├── static-assets.ts           # Serves img/public/well-known
 ├── pagefind.ts                 # Indexes dist/ HTML via Pagefind's Node API
 ├── pagefind-client.ts           # PagefindUI init script (main.tsx/post.tsx)
-├── run-pagefind.ts                # Entry point run after `vite build`
+├── run-pagefind.ts                # Entry point run after `vp build`
 └── pages/                          # All/Tech/Diary/Me/Info/Hub/NotFound
 
 host.ts                 # All route definitions (custom-host)
@@ -254,9 +254,9 @@ component as props.
 
 ### Primary Config
 
-- `vite.config.ts`: Vite + `oxContentCustomHost` configuration
+- `vite.config.ts`: Vite+ + `oxContentCustomHost` configuration
 - `host.ts`: Route definitions
-- `package.json`: npm scripts and dependencies
+- `package.json`: bun scripts and dependencies
 - `deno.jsonc`: Deno config for running tests (`deno task test`) and the
   `date-fns` import used by `tests/diary.test.ts`
 
@@ -279,13 +279,13 @@ component as props.
 Pagefind, continued from the pre-migration Lume setup (ox-content's own built-in
 BM25 search was evaluated and rejected — see
 `.kiro/specs/ox-content-migration/design.md` for the comparison). Unlike the
-rest of the build, this runs as a **separate step after** `vite build`, not as a
+rest of the build, this runs as a **separate step after** `vp build`, not as a
 Vite plugin hook:
 
 - `ssg/pagefind.ts` walks `dist/**/*.html` and builds the index via Pagefind's
   Node API (`createIndex` → `addHTMLFile` → `writeFiles`)
 - `ssg/run-pagefind.ts` is the entry point; `package.json`'s `build` script
-  chains it after `vite build` (`vite build && node ... run-pagefind.ts`). A
+  chains it after `vp build` (`vp build && node ... run-pagefind.ts`). A
   `closeBundle` Vite plugin hook was tried first but fired _before_
   `oxContentCustomHost`'s own output-writing hook, so plugin-array ordering
   can't be relied on here — a shell `&&` guarantees the order instead
@@ -328,7 +328,7 @@ devサーバーが応答をキャッシュし続け、ファイルを編集し�
 The site deploys to Cloudflare Pages via `.github/workflows/deploy.yaml` on push
 to `main`. The build process:
 
-1. `npx vite build` — builds the static site to `dist/`
+1. `bun run build` — builds the static site to `dist/` (Vite+)
 2. `wrangler pages deploy ./dist` — deploys to `comamoca.dev`
 
 The OG Worker (`og/`) deploys separately, only when its own inputs (`og/**`,

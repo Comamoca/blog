@@ -105,7 +105,7 @@ ssg/
 ├── static-assets.ts          # img/public/well-known の配信
 ├── pagefind.ts                # distのHTMLをPagefind Node APIで索引
 ├── pagefind-client.ts           # PagefindUI初期化スクリプト
-├── run-pagefind.ts                # `vite build` 後に実行するエントリ
+├── run-pagefind.ts                # `vp build` 後に実行するエントリ
 └── pages/                          # 一覧・静的ページの表示コンポーネント
     ├── HomePage.tsx
     ├── AllPage.tsx            # ページ送りUIが独自 (前へ/後へ + 番号)
@@ -201,7 +201,7 @@ scripts/
 Pagefind続投 (ox-content内蔵BM25は不採用。比較の詳細は
 `.kiro/specs/ox-content-migration/design.md`)。
 
-1. **ビルド後** → `npm run build` が `vite build` の後段で `ssg/run-pagefind.ts`
+1. **ビルド後** → `bun run build` が `vp build` の後段で `ssg/run-pagefind.ts`
    を実行し、`dist/**/*.html` を索引する (`rootSelector: "main"`
    のため一覧ページは索引対象外、旧Lume時代と 同じ挙動)
 2. **クライアント** → `ssg/pagefind-client.ts` の初期化スクリプトが
