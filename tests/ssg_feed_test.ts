@@ -5,7 +5,7 @@ import {
 import {
   combineDate,
   firstCommitTimes,
-  latestCommitDate,
+  latestArticleCommitDate,
 } from "../ssg/feed.ts";
 
 /**
@@ -25,16 +25,16 @@ import {
 
 const REPO_ROOT = new URL("..", import.meta.url).pathname;
 
-Deno.test("latestCommitDate はリポジトリの最新コミット時刻と一致する", async () => {
+Deno.test("latestArticleCommitDate は記事を追加した最新コミット時刻と一致する", async () => {
   const cmd = new Deno.Command("git", {
-    args: ["log", "-1", "--format=%ct"],
+    args: ["log", "--diff-filter=A", "-1", "--format=%ct", "--", "src/blog"],
     cwd: REPO_ROOT,
     stdout: "piped",
   });
   const { stdout } = await cmd.output();
   const expected = parseInt(new TextDecoder().decode(stdout).trim(), 10);
 
-  const actual = latestCommitDate(REPO_ROOT);
+  const actual = latestArticleCommitDate(REPO_ROOT);
   assertEquals(Math.floor(actual.getTime() / 1000), expected);
 });
 
@@ -66,11 +66,11 @@ Deno.test("combineDate: コミット時刻が無い場合はfileDateをそのま
   assertEquals(combined.getTime(), fileDate.getTime());
 });
 
-Deno.test("latestCommitDate: リポジトリ外では現在時刻にフォールバックする", () => {
+Deno.test("latestArticleCommitDate: リポジトリ外では現在時刻にフォールバックする", () => {
   const dir = Deno.makeTempDirSync();
   try {
     const before = Date.now();
-    const date = latestCommitDate(dir);
+    const date = latestArticleCommitDate(dir);
     const after = Date.now();
     assert(
       date.getTime() >= before && date.getTime() <= after,

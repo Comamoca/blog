@@ -72,13 +72,30 @@ export function firstCommitTimes(
 }
 
 /**
- * 現行 getLatestGitCommitDate 相当: lastBuildDate に使う最新コミット時刻。
+ * 現行 getLatestArticleCommitDate 相当: lastBuildDate に使う、`relDir` 配下に
+ * ファイルを「追加した」最新コミットの時刻。
+ *
+ * リポジトリ全体の最新コミットを使わないのは、既存記事の誤字修正やCIの調整、
+ * 依存の更新でも <lastBuildDate> が動いてしまい、新しい記事が無いのに
+ * フィードが更新されたように見えるため。`--diff-filter=A` で新規ファイルを
+ * 追加したコミットだけに絞る (リネームは `R` 扱いなので同様に無視される)。
+ *
  * gitが利用できない/リポジトリ外では現在時刻にフォールバックし、
  * ビルドが失敗しないようにする (git無しのCIサンドボックス等)。
  */
-export function latestCommitDate(repoRoot: string): Date {
+export function latestArticleCommitDate(
+  repoRoot: string,
+  relDir = "src/blog",
+): Date {
   try {
-    const out = execFileSync("git", ["log", "-1", "--format=%ct"], {
+    const out = execFileSync("git", [
+      "log",
+      "--diff-filter=A",
+      "-1",
+      "--format=%ct",
+      "--",
+      relDir,
+    ], {
       cwd: repoRoot,
       env: gitCommandEnv(repoRoot),
       encoding: "utf8",

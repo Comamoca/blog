@@ -22,7 +22,7 @@ import {
   combineDate,
   type FeedItem,
   firstCommitTimes,
-  latestCommitDate,
+  latestArticleCommitDate,
   renderJsonFeed,
   renderRss,
 } from "./ssg/feed.ts";
@@ -360,7 +360,7 @@ export const host = {
         return { title: p.title, url: p.url, contentHtml: html, published };
       }),
     );
-    const lastBuild = latestCommitDate(REPO_ROOT);
+    const lastBuild = latestArticleCommitDate(REPO_ROOT, BLOG_DIR);
 
     const feedRoutes = [
       {

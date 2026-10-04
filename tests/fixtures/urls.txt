@@ -432,6 +432,7 @@
 /blog/2026-08-24-tech-communities-im-following-recently/
 /blog/2026-08-25-hister-looks-good/
 /blog/2026-09-11-built-an-og-image-generation-server/
+/blog/2026-09-22-how-to-deal-with-vibe-coding/
 /diary/1/
 /diary/10/
 /diary/11/

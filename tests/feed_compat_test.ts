@@ -1,4 +1,7 @@
-import { assertEquals } from "https://deno.land/std@0.210.0/assert/mod.ts";
+import {
+  assert,
+  assertEquals,
+} from "https://deno.land/std@0.210.0/assert/mod.ts";
 import { join } from "jsr:@std/path";
 
 /**
@@ -10,6 +13,11 @@ import { join } from "jsr:@std/path";
  * design.md の設計決定ログのとおり別途方針を決めるため対象外。
  *
  * 出力先は BUILD_OUTPUT_DIR 環境変数で切り替える (デフォルト: _site)。
+ *
+ * スナップショット取得後に追加された記事があると、現在のフィードの先頭は
+ * スナップショットより進む (10件上限なので古い順に押し出される)。そのため
+ * 件数の完全一致ではなく、スナップショット先頭の記事で位置を合わせ、
+ * 両者に残っている範囲だけを比較する。
  */
 
 const OUTPUT_DIR = Deno.env.get("BUILD_OUTPUT_DIR") ?? "_site";
@@ -52,9 +60,16 @@ Deno.test({
     );
 
     assertEquals(actual.length, expected.length, "item件数が一致しない");
-    for (let i = 0; i < expected.length; i++) {
+
+    const offset = actual.findIndex((a) => a.link === expected[0].link);
+    assert(
+      offset >= 0,
+      `スナップショット先頭 (${expected[0].link}) が現在のフィードに無い`,
+    );
+
+    for (let i = 0; i + offset < actual.length; i++) {
       assertEquals(
-        actual[i],
+        actual[i + offset],
         expected[i],
         `item[${i}] (${expected[i].title}) が一致しない`,
       );
@@ -81,9 +96,18 @@ Deno.test({
       expected.items.length,
       "item件数が一致しない",
     );
-    for (let i = 0; i < expected.items.length; i++) {
+
+    const offset = actual.items.findIndex((a: { id: string }) =>
+      a.id === expected.items[0].id
+    );
+    assert(
+      offset >= 0,
+      `スナップショット先頭 (${expected.items[0].id}) が現在のフィードに無い`,
+    );
+
+    for (let i = 0; i + offset < actual.items.length; i++) {
       const e = expected.items[i];
-      const a = actual.items[i];
+      const a = actual.items[i + offset];
       assertEquals(
         { id: a.id, title: a.title, date_published: a.date_published },
         { id: e.id, title: e.title, date_published: e.date_published },

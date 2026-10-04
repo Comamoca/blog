@@ -327,6 +327,7 @@
 
                 create
                 vite-plus
+                adrs
               ];
 
               # LD_LIBRARY_PATH = "${libPath}/lib";

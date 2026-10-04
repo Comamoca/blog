@@ -8,8 +8,12 @@ import { join } from "jsr:@std/path";
  * ox-content移行のURL互換性回帰テスト。
  *
  * tests/fixtures/urls.txt は移行前 (Lume, RELEASE=1) のビルド出力から生成した
- * 正規URL一覧 (475件)。移行の全フェーズを通じて、ビルド出力に対応するURL一覧が
+ * 正規URL一覧 (477件)。移行の全フェーズを通じて、ビルド出力に対応するURL一覧が
  * 1件でもこのスナップショットと乖離したら失敗させる。
+ *
+ * スナップショット取得後にmainから入った新規記事はここに追記する
+ * (/blog/2026-09-22-how-to-deal-with-vibe-coding/)。移行前URLが1件も消えて
+ * いないこと・ドラフトが混入していないことの検証としては変わらず機能する。
  *
  * 出力先は BUILD_OUTPUT_DIR 環境変数で切り替える。
  *   - 未指定/Lumeビルド中:  _site (デフォルト)
@@ -114,14 +118,14 @@ Deno.test({
 });
 
 Deno.test({
-  name: "URL互換性: 公開記事URLの件数が421件",
+  name: "URL互換性: 公開記事URLの件数が422件",
   ignore: !(await dirExists(OUTPUT_DIR)),
   fn: async () => {
     const expected = await loadExpectedUrls();
     const blogUrls = expected.filter((u) => u.startsWith("/blog/"));
     assert(
-      blogUrls.length === 421,
-      `スナップショット自体が想定外 (${blogUrls.length}件、421件を期待)。fixtureが壊れている可能性がある`,
+      blogUrls.length === 422,
+      `スナップショット自体が想定外 (${blogUrls.length}件、422件を期待)。fixtureが壊れている可能性がある`,
     );
   },
 });
