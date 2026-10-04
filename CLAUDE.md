@@ -32,9 +32,8 @@ features
   implementation-in-progress)
 - `ox-content-migration` - SSG基盤をLumeからox-contentへ移行し、URL互換性を
   維持したままプレビュー反映を高速化する (Phase: implementation-in-progress。
-  記事/一覧/静的ページ/フィード/sitemap/Lumeの撤去まで実装・検証済み。
-  検索機能の実装方式検討 (Pagefind継続 vs ox-content内蔵BM25) と実デプロイ
-  確認が残タスク)
+  記事/一覧/静的ページ/フィード/sitemap/検索(Pagefind続投)/Lumeの撤去まで
+  実装・検証済み。実デプロイ確認のみ残タスク)
 
 ## Development Guidelines
 
@@ -116,10 +115,9 @@ code in this repository.
 This is a personal blog built with
 [ox-content](https://github.com/ubugeeei-prod/ox-content) (Rust-core SSG, driven
 via a Vite custom-host), using TailwindCSS, DaisyUI, and TypeScript. The blog
-supports bilingual content (Japanese/English) and includes RSS feeds and OG
-image generation (delegated to a separate Cloudflare Worker, `og/`). Search is
-not currently implemented (see README.md Todo and
-`.kiro/specs/ox-content-migration/`).
+supports bilingual content (Japanese/English) and includes RSS feeds, OG image
+generation (delegated to a separate Cloudflare Worker, `og/`), and
+Pagefind-based client-side search.
 
 The site was migrated from Lume (a Deno SSG) to ox-content; see
 `.kiro/specs/ox-content-migration/design.md` for the full rationale and
@@ -178,7 +176,7 @@ src/
 │   ├── Header.tsx       # Main site header with navigation
 │   ├── PostList.tsx     # Blog post listing component
 │   ├── PostCard.tsx     # Individual post preview card
-│   ├── Search.tsx       # Search UI shell (search itself is not implemented)
+│   ├── Search.tsx       # Pagefind search modal shell
 │   ├── Footer.tsx       # Footer component
 │   ├── Logo.tsx         # Site logo
 │   └── Twemoji.tsx      # Twemoji component
@@ -197,7 +195,10 @@ ssg/                     # ox-content build logic (ported from plugins/)
 ├── og_metas.ts              # og.comamoca.dev image URL generation
 ├── feed.ts                   # RSS/JSON Feed, git-history-based dates
 ├── static-assets.ts           # Serves img/public/well-known
-└── pages/                     # All/Tech/Diary/Me/Info/Hub/NotFound components
+├── pagefind.ts                 # Indexes dist/ HTML via Pagefind's Node API
+├── pagefind-client.ts           # PagefindUI init script (main.tsx/post.tsx)
+├── run-pagefind.ts                # Entry point run after `vite build`
+└── pages/                          # All/Tech/Diary/Me/Info/Hub/NotFound
 
 host.ts                 # All route definitions (custom-host)
 vite.config.ts           # Vite + ox-content custom-host config
@@ -276,10 +277,25 @@ component as props.
 
 ### Search Functionality
 
-Not implemented. `src/_components/Search.tsx` renders the modal shell but has no
-working query logic behind it. See README.md's Todo and
-`.kiro/specs/ox-content-migration/` for the Pagefind-vs-ox-content-BM25
-comparison in progress.
+Pagefind, continued from the pre-migration Lume setup (ox-content's own built-in
+BM25 search was evaluated and rejected — see
+`.kiro/specs/ox-content-migration/design.md` for the comparison). Unlike the
+rest of the build, this runs as a **separate step after** `vite build`, not as a
+Vite plugin hook:
+
+- `ssg/pagefind.ts` walks `dist/**/*.html` and builds the index via Pagefind's
+  Node API (`createIndex` → `addHTMLFile` → `writeFiles`)
+- `ssg/run-pagefind.ts` is the entry point; `package.json`'s `build` script
+  chains it after `vite build` (`vite build && node ... run-pagefind.ts`). A
+  `closeBundle` Vite plugin hook was tried first but fired _before_
+  `oxContentCustomHost`'s own output-writing hook, so plugin-array ordering
+  can't be relied on here — a shell `&&` guarantees the order instead
+- `ssg/pagefind-client.ts` holds the `PagefindUI` init script, shared by
+  `main.tsx` and `post.tsx`. It must be inserted via `raw()`, not as a plain JSX
+  text child — the JSX runtime HTML-escapes text children even inside
+  `<script>`, which silently breaks the embedded JS (`"` becomes `&quot;`)
+- Only runs in production builds; `dev` has no search index, matching the
+  dev-speed tradeoff documented for the other whole-site plugins
 
 ### Link Cards
 

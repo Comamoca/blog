@@ -17,8 +17,11 @@
 - **Styling**: TailwindCSS v4 (`@tailwindcss/vite`) + DaisyUI v5
 - **Typography**: Noto Sans CJK / さわらびゴシック for Japanese character
   support
-- **Search**: 未実装 (README.md の Todo に記載の既存課題)。Pagefind継続か
-  ox-content内蔵BM25かを比較検討中
+- **Search**: Pagefind継続で実装済み。`ssg/pagefind.ts` が `npm run build`
+  の後段 (`ssg/run-pagefind.ts`) でdist以下のHTMLを索引する。UIは
+  `src/_components/Search.tsx` + `ssg/pagefind-client.ts`
+  (PagefindUIの初期化)。ox-content内蔵BM25は不採用
+  (`.kiro/specs/ox-content-migration/design.md` 参照)
 - **Language**: TypeScript
 
 ## Backend & Build System

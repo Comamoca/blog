@@ -54,7 +54,7 @@ src/
 │   ├── Footer.tsx        # フッター
 │   ├── PostList.tsx      # 記事一覧
 │   ├── PostCard.tsx      # 記事カード
-│   ├── Search.tsx        # 検索UI (現状は検索機能自体が未実装)
+│   ├── Search.tsx        # 検索モーダルのシェル (PagefindUIがここに描画する)
 │   ├── Logo.tsx          # サイトロゴ
 │   └── Twemoji.tsx       # 絵文字表示
 ```
@@ -103,7 +103,10 @@ ssg/
 ├── og_metas.ts              # og.comamoca.dev 向け画像URL生成
 ├── feed.ts                   # RSS/JSON Feed生成、git履歴からの日付合成
 ├── static-assets.ts          # img/public/well-known の配信
-└── pages/                     # 一覧・静的ページの表示コンポーネント
+├── pagefind.ts                # distのHTMLをPagefind Node APIで索引
+├── pagefind-client.ts           # PagefindUI初期化スクリプト
+├── run-pagefind.ts                # `vite build` 後に実行するエントリ
+└── pages/                          # 一覧・静的ページの表示コンポーネント
     ├── HomePage.tsx
     ├── AllPage.tsx            # ページ送りUIが独自 (前へ/後へ + 番号)
     ├── TechPage.tsx            # ページ送りUIが独自 (番号のみ)
@@ -195,8 +198,14 @@ scripts/
 
 ### Search Integration
 
-未実装。README.mdのTodoに記載の既存課題。Pagefind継続かox-content内蔵
-BM25検索かを比較検討中 (詳細は `.kiro/specs/ox-content-migration/`)。
+Pagefind続投 (ox-content内蔵BM25は不採用。比較の詳細は
+`.kiro/specs/ox-content-migration/design.md`)。
+
+1. **ビルド後** → `npm run build` が `vite build` の後段で `ssg/run-pagefind.ts`
+   を実行し、`dist/**/*.html` を索引する (`rootSelector: "main"`
+   のため一覧ページは索引対象外、旧Lume時代と 同じ挙動)
+2. **クライアント** → `ssg/pagefind-client.ts` の初期化スクリプトが
+   `main.tsx`/`post.tsx` 共通で `#search` に `PagefindUI` を描画する
 
 This structure supports efficient development, content management, and
 deployment while maintaining clear separation of concerns and scalability for

@@ -13,8 +13,8 @@ primarily targeting developers and tech enthusiasts.
   broader accessibility
 - **Daily Diary Functionality**: Structured diary entries for regular technical
   journaling
-- **Search**: 未実装 (README.mdのTodo参照。Pagefind継続かox-content内蔵BM25か
-  を比較検討中)
+- **Search**: Pagefindによるクライアントサイド全文検索 (日本語はLinderaによる
+  形態素解析)
 - **RSS Feed Generation**: Automatic RSS feed creation for content syndication
 - **Responsive Design**: Mobile-first design with TailwindCSS and DaisyUI
   components
