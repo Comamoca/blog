@@ -1,11 +1,31 @@
-import { defineConfig } from "vite";
+import { defineConfig, lazyPlugins } from "vite-plus";
 import { oxContentCustomHost } from "@ox-content/vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import { staticAssets } from "./ssg/static-assets.ts";
 
 export default defineConfig({
+  // Oxfmt/Oxlint (vp check) は採用しない。整形は Nix treefmt、テストは deno test を
+  // 使うため。Vite+ は Vite の置き換え (dev/build/preview) としてのみ使う。
   // ox-content 同梱の文字列SSR用JSXランタイムを使う (React/Preact不要)。
-  esbuild: { jsx: "automatic", jsxImportSource: "@ox-content/vite-plugin" },
+  // Vite 8 では transform を Oxc が担うため oxc に指定する。esbuild を
+  // 併記すると oxc 側が優先され「esbuild は無視される」警告が出る。
+  oxc: {
+    jsx: { runtime: "automatic", importSource: "@ox-content/vite-plugin" },
+  },
+  // テストは Deno (`deno task test`) を使う。Vitest (vp test) にはこの
+  // リポジトリ向けのテストが無いため、Deno テスト (tests/**) と nix flake
+  // input のシンボリックフォレスト (.direnv/**) を探索せず 0 件でも成功させる。
+  test: {
+    include: ["src/**/*.{test,spec}.{ts,tsx}"],
+    exclude: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/.direnv/**",
+      "tests/**",
+      "og/**",
+    ],
+    passWithNoTests: true,
+  },
   server: {
     watch: {
       // .direnv/flake-inputs は nix flake input への symlink で、辿ると
@@ -14,7 +34,7 @@ export default defineConfig({
       ignored: ["**/.direnv/**", "**/.git/**", "**/dist/**"],
     },
   },
-  plugins: [
+  plugins: lazyPlugins(() => [
     tailwindcss(),
     oxContentCustomHost({
       host: "./host.ts",
@@ -44,5 +64,5 @@ export default defineConfig({
       ssrStylesheets: { modules: ["/src/_includes/layouts/post.tsx"] },
     }),
     staticAssets(),
-  ],
+  ]),
 });
