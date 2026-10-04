@@ -1,9 +1,9 @@
 {
   "feature_name": "ox-content-migration",
   "created_at": "2026-09-16T00:00:00Z",
-  "updated_at": "2026-10-04T12:00:00Z",
+  "updated_at": "2026-10-04T13:00:00Z",
   "language": "ja",
-  "phase": "implementation-in-progress",
+  "phase": "implementation-completed",
   "approvals": {
     "requirements": {
       "generated": true,
@@ -50,12 +50,11 @@
       "8.1",
       "8.2",
       "8.3",
+      "8.4",
       "9.1",
       "9.2"
     ],
-    "remaining": [
-      "8.4 (Cloudflare Pagesへの実デプロイ。ユーザー判断で一旦保留)"
-    ],
+    "remaining": [],
     "verification": {
       "url_compat": "476/476 (本番sitemap 472件 + 404.html + sitemap.xml + feed.xml + feed.json)",
       "feed_compat": "RSS/JSON Feed の title/link/pubDate・id/date_published 全件一致",
@@ -85,6 +84,14 @@
       "rejected": "ox-content内蔵BM25",
       "reason": "custom-hostに配線されておらず、索引はコーパス全体を1回で読む設計(実測591.6KB gzip、447記事、CJK文字単位トークナイズで転置索引が肥大化)。PagefindはLinderaで日本語形態素解析し、クエリにマッチした断片のみ遅延フェッチする",
       "verified": "agent-browserでの実ブラウザ検証 (post.tsx/main.tsx両レイアウトで検索モーダル→クエリ→ハイライト付き結果→遷移、console error無し)"
+    },
+    "demo_deploy": {
+      "url": "https://274c536a.comamoca.pages.dev",
+      "branch_alias_url": "https://feat-switch-ox-content.comamoca.pages.dev",
+      "environment": "Preview (not Production; production branch is main and was untouched)",
+      "project": "blog (Cloudflare Pages, via existing wrangler OAuth session)",
+      "verified": "curl smoke test (/, 記事, /all/1/, feed.xml, sitemap.xml, pagefind.js, nostr.json すべて200) + agent-browserでの実検索動作確認 (「Gleam」97件ヒット、ハイライト、console error無し)",
+      "deployed_from": "feat/switch-ox-content ブランチ (npm run build のフルビルド、linkcard有効・162記事でリンクカード生成、pagefind索引473ページ)"
     }
   },
   "notes": {

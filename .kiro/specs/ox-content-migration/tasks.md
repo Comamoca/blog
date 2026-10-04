@@ -184,7 +184,7 @@
   - paths フィルタに設定ファイルの変更を含める
   - _Requirements: 6.4_
 
-- [ ] 8.4 Cloudflare Pages へのデプロイと実機確認
+- [x] 8.4 Cloudflare Pages へのデプロイと実機確認
   - 代表的なURLの応答確認
   - RSSリーダーでの購読継続確認
   - OG画像の表示確認
