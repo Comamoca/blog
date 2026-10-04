@@ -13,7 +13,7 @@
     "@shikijs/rehype": "^3.13.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.16",
-    "daisyui": "5.7.32",
+    "daisyui": "5.7.47",
     "date-fns": "4.4.0",
     "linkedom": "^0.18.13",
     "pagefind": "^1.5.2",
