@@ -55,8 +55,8 @@
           # libPath = "${pkgs.lib.getLib stdenv.cc.cc}"/lib;
 
           wrangler-pkgs = import (builtins.fetchTarball {
-            url = "https://github.com/NixOS/nixpkgs/archive/21808d22b1cda1898b71cf1a1beb524a97add2c4.tar.gz";
-            sha256 = "sha256:0v2z6jphhbk1ik7fqhlfnihcyff5np9wb3pv19j9qb9mpildx0cg";
+            url = "https://github.com/NixOS/nixpkgs/archive/a7868a727837f3c09cee2ce0ca671c76b1589fed.tar.gz";
+            sha256 = "sha256-KgItSKML8Xvte0B7/uGnBDsYzSnnKHcOaiUbgWBXLXw=";
           }) { inherit system; };
 
           wrangler = wrangler-pkgs.wrangler;
