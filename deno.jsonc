@@ -1,43 +1,18 @@
 {
   "imports": {
-    "date-fns": "npm:date-fns@4.4.0",
-    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.4/",
-    "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts",
-    "daisyui": "npm:daisyui@5.7.47"
+    "date-fns": "npm:date-fns@4.4.0"
   },
   "test": {
     "include": ["tests/"]
   },
   "tasks": {
-    "lume": {
-      "description": "Run Lume command",
-      "command": "deno run -A lume/cli.ts"
-    },
-    "prebuild": "deno task lume",
-    "build": {
-      "description": "Build the site for production",
-      "command": "deno task lume"
-    },
-    "serve": {
-      "description": "Run and serve the site for development",
-      "command": "deno task lume -s"
-    },
-    "deploy": "env RELEASE=1 deno task lume --location https://comamoca.dev; wrangler pages deploy ./_site --project-name=blog --commit-dirty=true",
+    "download-fonts": "deno run -A ./scripts/downloadFonts.ts",
+    "extract-tags": "deno run -A ./scripts/extractTags.ts",
     "deploy-og": {
       "description": "Build and deploy the OG image Worker (og.comamoca.dev)",
       "command": "cd og && npm ci && gleam build --no-print-progress && wrangler deploy"
     },
-    "build-pages": "deno run -A ./scripts/downloadFonts.ts && deno task lume",
-    "download-fonts": "deno run -A ./scripts/downloadFonts.ts",
-    "extract-tags": "deno run -A ./scripts/extractTags.ts",
     "test": "deno test --allow-all"
-  },
-  "compilerOptions": {
-    "types": [
-      "lume/types.ts"
-    ],
-    "jsx": "react-jsx",
-    "jsxImportSource": "lume"
   },
   "nodeModulesDir": "auto",
   "unstable": [
@@ -46,21 +21,12 @@
   ],
   "fmt": {
     "exclude": [
-      "_site",
+      "dist",
       "_cache",
+      ".cache",
       "node_modules",
       "_broken_links.json"
     ]
-  },
-  "lint": {
-    "plugins": [
-      "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.4/lint.ts"
-    ],
-    "rules": {
-      "exclude": [
-        "no-import-prefix"
-      ]
-    }
   },
   "lock": false
 }

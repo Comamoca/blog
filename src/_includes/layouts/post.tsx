@@ -1,11 +1,15 @@
+import "../../style.css";
 import Twemoji from "../../_components/Twemoji.tsx";
 import Header from "../../_components/Header.tsx";
 import Footer from "../../_components/Footer.tsx";
 import { format, parse } from "date-fns";
 import ja from "date-fns/locale/ja";
+import { SITE_DESCRIPTION, SITE_URL, TWITTER_USERNAME } from "../../consts.ts";
+import { PAGEFIND_INIT_SCRIPT } from "../../../ssg/pagefind-client.ts";
+import { raw } from "@ox-content/vite-plugin";
 
 function yymmdd(date: string): string {
-  if (typeof date === "undefined") {
+  if (!date) {
     return "";
   }
 
@@ -13,11 +17,30 @@ function yymmdd(date: string): string {
   return format(datetime, "yyyy年M月d日", { locale: ja });
 }
 
-export default function (
-  data: Lume.Data,
-  helpers: Lume.Helpers,
-) {
-  const { title, children, pubDate, emoji, content } = data;
+export interface PostLayoutData {
+  title: string;
+  children: unknown;
+  pubDate: string;
+  emoji: string;
+  /** ox-content: ctx.assets.ssrStylesheets() から得たhref一覧 */
+  styles?: string[];
+  /** ox-content: OGP用。未指定時はLume併存時の互換のため何も描画しない */
+  description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+}
+
+export default function (data: PostLayoutData) {
+  const {
+    title,
+    children,
+    pubDate,
+    emoji,
+    styles,
+    description,
+    ogImage,
+    canonicalUrl,
+  } = data;
 
   const npub =
     "npub1f0xqy2qs5lhl2u035qszfne6sdw8jkh3px6we2c3u3gxy2v3g8tsvkn2qr";
@@ -25,10 +48,11 @@ export default function (
   return (
     <html lang="ja">
       <head>
-        {/* <BaseHead title={title} description={description} />  */}
         <meta charSet="UTF-8" />
         <title>{title}</title>
-        <link rel="stylesheet" href="/style.css" />
+        {(styles ?? ["/style.css"]).map((href) => (
+          <link rel="stylesheet" href={href} />
+        ))}
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"
@@ -37,6 +61,29 @@ export default function (
         </script>
         <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap-view@1.3.4">
         </script>
+        {ogImage
+          ? (
+            <>
+              <meta property="og:type" content="article" />
+              <meta property="og:title" content={title} />
+              <meta
+                property="og:description"
+                content={description ?? SITE_DESCRIPTION}
+              />
+              {canonicalUrl
+                ? <meta property="og:url" content={canonicalUrl} />
+                : null}
+              <meta property="og:image" content={ogImage} />
+              <meta name="twitter:card" content="summary_large_image" />
+              <meta name="twitter:site" content={TWITTER_USERNAME} />
+              <meta
+                name="description"
+                content={description ?? SITE_DESCRIPTION}
+              />
+              <meta name="generator" content="ox-content" />
+            </>
+          )
+          : null}
       </head>
       <body>
         <Header />
@@ -44,16 +91,12 @@ export default function (
           <div className="justify-center">
             <div className="flex flex-col mt-6">
               <div className="mx-auto mb-3">
-                {/* TODO: ちゃんとfrontmatterの絵文字を取得するようにする */}
                 <Twemoji emoji={emoji} />
               </div>
-              {/*  md:text-2xl md:text-4xl md:mx-auto */}
               <h1 className="text-xl text-center mx-5 md:text-3xl">
                 {title}
               </h1>
               <div className="flex flex-col mt-3 mx-auto">
-                {/* <FormattedDate date={pubDate} /> */}
-                {/* <spam className="md:ml-2">読み終わるまでの目安 約{minitesRead}分</spam> */}
                 <spam>{yymmdd(pubDate)}</spam>
               </div>
             </div>
@@ -66,7 +109,6 @@ export default function (
               </article>
               <hr className="w-4/6 h-1 mx-auto my-2 bg-gray-100 border-0 rounded my-10" />
               <div className="flex justify-center grid grid-cols-2 md:grid-cols-4 gap-2 py-5">
-                {/* justify-around */}
                 <a
                   className="btn btn-sm md:btn-md"
                   href="https://ko-fi.com/comamoca"
@@ -104,11 +146,8 @@ export default function (
           </div>
         </main>
         <Footer />
-        {/*HACK: デプロイ時にPagefindのスクリプトが実行されないため追加した*/}
-        <script>
-          {`const elem = document.getElementById('search')
-	    if (elem) {if (elem.children.length === 0) {new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/pagefind/","baseUrl":"/"});}}}`}
-        </script>
+        <script src="/pagefind/pagefind-ui.js" data-cfasync="false"></script>
+        <script data-cfasync="false">{raw(PAGEFIND_INIT_SCRIPT)}</script>
       </body>
     </html>
   );

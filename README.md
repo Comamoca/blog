@@ -52,7 +52,7 @@ nix fmt     # formatting
 
 ## 📝 Todo
 
-- [ ] Search bar feature
+- [x] Search bar feature
 - [ ] Recommend feature
 
 ## 📜 License

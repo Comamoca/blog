@@ -1,7 +1,7 @@
-# Claude Code Spec-Driven Development
+# Codex Spec-Driven Development
 
-Kiro-style Spec Driven Development implementation using claude code slash
-commands, hooks and agents.
+Kiro-style Spec Driven Development implementation using Codex slash commands,
+hooks and agents.
 
 ## Project Context
 
@@ -9,7 +9,7 @@ commands, hooks and agents.
 
 - Steering: `.kiro/steering/`
 - Specs: `.kiro/specs/`
-- Commands: `.claude/commands/`
+- Commands: `.Codex/commands/`
 
 ### Steering vs Specification
 
@@ -104,10 +104,10 @@ Managed by `/kiro:steering` command. Updates here reflect command changes.
 - **Conditional**: Loaded for specific file patterns (e.g., "*.test.js")
 - **Manual**: Reference with `@filename.md` syntax
 
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with
-code in this repository.
+This file provides guidance to Codex (Codex.ai/code) when working with code in
+this repository.
 
 ## Project Overview
 
@@ -130,13 +130,13 @@ intact (restorable via `git checkout pre-lume-removal -- <path>` or
 
 ```bash
 # Development server with hot reload
-bun run dev
+npm run dev
 
 # Production build
-bun run build
+npm run build
 
 # Deploy to Cloudflare Pages
-bun run build
+npm run build
 wrangler pages deploy ./dist --project-name=blog
 
 # Download fonts (used by the OG Worker's font-subsetting pipeline)
@@ -254,9 +254,9 @@ component as props.
 
 ### Primary Config
 
-- `vite.config.ts`: Vite+ + `oxContentCustomHost` configuration
+- `vite.config.ts`: Vite + `oxContentCustomHost` configuration
 - `host.ts`: Route definitions
-- `package.json`: bun scripts and dependencies
+- `package.json`: npm scripts and dependencies
 - `deno.jsonc`: Deno config for running tests (`deno task test`) and the
   `date-fns` import used by `tests/diary.test.ts`
 
@@ -328,7 +328,7 @@ devサーバーが応答をキャッシュし続け、ファイルを編集し�
 The site deploys to Cloudflare Pages via `.github/workflows/deploy.yaml` on push
 to `main`. The build process:
 
-1. `bun run build` — builds the static site to `dist/` (Vite+)
+1. `npm run build` — builds the static site to `dist/` (Vite+)
 2. `wrangler pages deploy ./dist` — deploys to `comamoca.dev`
 
 The OG Worker (`og/`) deploys separately, only when its own inputs (`og/**`,

@@ -2,33 +2,53 @@
 
 ## Architecture
 
-**Static Site Generator Architecture**: Lume v3-based static site generation
-with React component integration, deployed to Cloudflare Pages CDN for global
-distribution.
+**Static Site Generator Architecture**:
+[ox-content](https://github.com/ubugeeei-prod/ox-content) の custom-host API
+(Vite プラグイン) を用いた静的サイト生成。全ルートを `host.ts`
+で自前定義する構成で、ox-content 内蔵のブログモード (`/blog/page/{n}/`
+等の固定URL) は使わない。詳細な設計判断は
+`.kiro/specs/ox-content-migration/design.md` を参照。
 
 ## Frontend Technologies
 
-- **Static Site Generator**: Lume v3 (Deno-based)
-- **Component Framework**: React with TSX components using SSX runtime
-- **Styling**: TailwindCSS v4 + DaisyUI v5 for component library
-- **Typography**: Noto Sans CJK for Japanese character support
-- **Search**: Pagefind for client-side search functionality
-- **Language**: TypeScript for type safety and developer experience
+- **Static Site Generator**: ox-content (Rustコア) + Vite+
+  (Vite互換ツールチェーン; custom-host)
+- **Component Framework**: JSX/TSX。ランタイムは `@ox-content/vite-plugin`
+  同梱の文字列SSR用JSXランタイム (`renderToString`)。React/Preact は未使用
+- **Styling**: TailwindCSS v4 (`@tailwindcss/vite`) + DaisyUI v5
+- **Typography**: Noto Sans CJK / さわらびゴシック for Japanese character
+  support
+- **Search**: Pagefind継続で実装済み。`ssg/pagefind.ts` が `bun run build`
+  の後段 (`ssg/run-pagefind.ts`) でdist以下のHTMLを索引する。UIは
+  `src/_components/Search.tsx` + `ssg/pagefind-client.ts`
+  (PagefindUIの初期化)。ox-content内蔵BM25は不採用
+  (`.kiro/specs/ox-content-migration/design.md` 参照)
+- **Language**: TypeScript
 
 ## Backend & Build System
 
-- **Runtime**: Deno (JavaScript/TypeScript runtime)
-- **Build System**: Lume's integrated build pipeline
-- **Font Management**: Custom font downloading script for OG image generation
-- **Asset Optimization**: None by default — images in `src/img/` are copied
-  verbatim; Lume's `picture` / `transform_images` plugins are intentionally not
-  enabled
-- **Compression**: Brotli and Gzip compression for production builds
+- **Runtime**: Node.js (Vite/ox-contentのビルド) + Deno (テストのみ)
+- **Build System**: Vite+ (`vite.config.ts`) + `oxContentCustomHost`
+  プラグイン。 `vp dev` / `vp build` / `vp preview` を使用する (`vite` は
+  vite-plus-core へ alias される)。Oxfmt/Oxlint/Vitest は不採用 (整形は Nix
+  treefmt、テストは Deno)。Vite+ は Vite の置き換え (dev/build/preview)
+  としてのみ使う
+- **ルーティング**: `host.ts` が全ルート (記事・一覧・静的ページ・フィード・
+  sitemap・404) を自前定義。記事URLはファイルツリー由来で現行 (旧Lume) と
+  完全互換
+- **Markdownパイプライン**: `ssg/markdown.ts`。remark段にlinkcard、rehype段に
+  shiki (catppuccin-mocha)、生成後HTML段にfootnote後処理を接続
+- **静的アセット**: `ssg/static-assets.ts` が `src/img` / `src/public` /
+  `src/well-known` を配信 (dev: ミドルウェア直接配信、build: closeBundleで
+  コピー)
+- **Asset Optimization**: 画像最適化なし。`src/img/` の画像はそのまま配信
 
 ## Development Environment
 
-- **Package Manager**: Deno's built-in package management
-- **Task Runner**: Deno tasks (defined in `deno.jsonc`)
+- **Package Manager**: bun (`package.json` /
+  `bun.lock`、`devEngines.packageManager` で指定)
+- **Task Runner**: bun scripts (`bun run dev` / `bun run build` /
+  `bun run preview`) + Deno tasks (`deno.jsonc`、テスト・OG Worker関連のみ)
 - **Alternative Tools**: Just commands for blog management workflows
 - **Shell Integration**: Nu shell scripts for content creation workflows
 
@@ -36,7 +56,7 @@ distribution.
 
 - **Primary Host**: Cloudflare Pages
 - **Domain**: `comamoca.dev`
-- **Build Environment**: Automated builds on git push
+- **Build Environment**: `.github/workflows/deploy.yaml` (mainへのpushで発火)
 - **CDN**: Cloudflare's global CDN network
 
 ## Common Development Commands
@@ -45,15 +65,16 @@ distribution.
 
 ```bash
 # Development server with hot reload
-deno task serve
+bun run dev
 
 # Production build
-deno task build
+bun run build
 
-# Build for Cloudflare Pages deployment
-deno task deploy
+# ビルド + Cloudflare Pages へのデプロイ
+bun run build
+wrangler pages deploy ./dist --project-name=blog
 
-# Download required fonts for OG image generation
+# フォントダウンロード (OG Worker のフォントサブセット素材用)
 deno task download-fonts
 ```
 
@@ -76,6 +97,16 @@ just edit-diary
 just latest-diary
 ```
 
+### Testing
+
+```bash
+# 全テスト (Deno)
+deno task test
+
+# URL/フィード互換性テストのみ (要ビルド済みdist/)
+BUILD_OUTPUT_DIR=dist deno test --allow-all tests/url_compat_test.ts tests/feed_compat_test.ts
+```
+
 ### Development Tools
 
 ```bash
@@ -84,53 +115,57 @@ nix fmt
 
 # Enter development shell
 nix develop
+# CIと同じ最小devShell (npm/deno/wranglerのみ)
+nix develop .#ci
 ```
-
-## Environment Variables
-
-- **RELEASE**: Controls production features (minification, compression, SEO
-  plugins)
-  - `RELEASE=1`: Enables full production optimizations
-  - Development: Simplified build for faster iteration
 
 ## Configuration Files
 
-- **Primary Config**: `_config.ts` - Main Lume configuration
-- **Deno Config**: `deno.jsonc` - Deno runtime and task configuration
-- **Styling Config**: `tailwind.config.js` - TailwindCSS configuration
+- **Primary Config**: `vite.config.ts` - Vite+ + ox-content custom-host 設定
+- **Routing**: `host.ts` - 全ルート定義
+- **Node Config**: `package.json` - bun scripts と依存関係
+- **Deno Config**: `deno.jsonc` - テスト実行と `date-fns` importのみ
 - **Development Nix**: `flake.nix` - Nix development environment
 
 ## Plugin Architecture
 
-- **Custom Plugins**: Located in `plugins/` directory
-- **Link Cards**: `linkcard.ts` - External link preview generation
-- **Footnotes**: `plugins/lume/footnote.ts` - Custom footnote processing
+`ssg/` ディレクトリに移行済みの機能を集約している。
+
+- **Markdown設定**: `ssg/markdown.ts` - remark/rehype/HTML後処理プラグインの
+  組み立て
+- **Link Cards**: `ssg/linkcard.ts` + `ssg/fetchogp.ts` - 外部リンクの
+  OGPカード生成 (Node移植版。`linkedom` でHTML解析)
+- **OGPメタタグ**: `ssg/og_metas.ts` - og.comamoca.dev への画像URL生成
+- **フィード**: `ssg/feed.ts` - RSS/JSON Feed生成、git履歴からの日付合成
+- **一覧・静的ページ**: `ssg/pages/*.tsx` - 一覧/静的ページの表示コンポーネント
 
 ## Performance Optimizations
 
-- **Production Mode**: Minification, compression, and CSS optimization
+- **開発時反映速度**: リクエスト時レンダリング (Vite dev middleware) による
+  O(1)特性。記事数に依存せず編集→反映が実測0.5秒程度 (旧Lumeは記事447本で
+  約29秒、暫定対応後でも4.5秒)
 - **Image Processing**: None; images are served as-is from `src/img/`
-- **Font Loading**: Strategic font loading for OG image generation
 - **Static Generation**: Pre-built HTML for optimal loading performance
 
 ## Security Considerations
 
 - **Static Site**: No server-side vulnerabilities
 - **Content Security**: Markdown processing with safe rendering
-- **Font Security**: Controlled font downloading from trusted sources
 - **Deployment Security**: Cloudflare's security features and SSL/TLS
 
 ## Development Workflow
 
-1. **Content Creation**: Markdown files with frontmatter
-2. **Component Development**: TSX files with async function exports
-3. **Local Development**: Hot reload with `deno task serve`
-4. **Production Build**: Full optimization with `deno task build`
-5. **Deployment**: Automated via Cloudflare Pages on git push
+1. **Content Creation**: Markdown files with frontmatter (`src/blog/`)
+2. **Component Development**: TSX files with 同期 function exports
+   (ox-contentのJSXランタイムは同期のみ。`async` コンポーネントは無言で
+   空文字列になる点に注意)
+3. **Local Development**: `bun run dev` でVite dev serverを起動
+4. **Production Build**: `bun run build`
+5. **Deployment**: `.github/workflows/deploy.yaml` 経由でCloudflare Pagesへ
 
 ## Dependencies Management
 
-- **Runtime Dependencies**: Managed through Deno's import system
-- **Lock File**: `deno.lock` ensures reproducible builds
-- **Version Control**: Import URLs specify exact versions
-- **Security**: Deno's permission system provides sandboxing
+- **Runtime Dependencies**: `package.json` / `bun.lock` (bun)
+- **Deno側**: `deno.jsonc` はテスト実行と `date-fns` importのみを管理
+- **Version Control**: `@ox-content/*` パッケージはバージョン固定
+  (v3.2.6で検証済み)

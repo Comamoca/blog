@@ -1,0 +1,101 @@
+{
+  "feature_name": "ox-content-migration",
+  "created_at": "2026-09-16T00:00:00Z",
+  "updated_at": "2026-10-04T13:00:00Z",
+  "language": "ja",
+  "phase": "implementation-completed",
+  "approvals": {
+    "requirements": {
+      "generated": true,
+      "approved": true
+    },
+    "design": {
+      "generated": true,
+      "approved": true
+    },
+    "tasks": {
+      "generated": true,
+      "approved": true
+    }
+  },
+  "ready_for_implementation": true,
+  "implementation_status": {
+    "started_at": "2026-09-16T00:10:00Z",
+    "tasks_completed": [
+      "1.1",
+      "1.2",
+      "1.3",
+      "2.1",
+      "2.2",
+      "2.3",
+      "3.1",
+      "3.2",
+      "3.3",
+      "3.4",
+      "4.1",
+      "4.2",
+      "4.3",
+      "4.4",
+      "5.1",
+      "5.2",
+      "5.3",
+      "6.1",
+      "6.2",
+      "6.3",
+      "6.4",
+      "7.1",
+      "7.2",
+      "7.3",
+      "7.4",
+      "8.1",
+      "8.2",
+      "8.3",
+      "8.4",
+      "9.1",
+      "9.2"
+    ],
+    "remaining": [],
+    "verification": {
+      "url_compat": "476/476 (本番sitemap 472件 + 404.html + sitemap.xml + feed.xml + feed.json)",
+      "feed_compat": "RSS/JSON Feed の title/link/pubDate・id/date_published 全件一致",
+      "linkcard_count": "162記事 (移行前と同数、実ネットワーク経由で確認)",
+      "og_image": "本番と同一のURLクエリパラメータを生成することを確認",
+      "sitemap": "本番sitemap.xmlと472件完全一致",
+      "css_coverage": "生成HTML内172ユニーククラスを網羅、欠落なし",
+      "dev_latency": "起動351-563ms、編集→反映 平均0.54s (要件: 5秒/1秒以内)"
+    },
+    "lume_removal": {
+      "restore_point": "git tag pre-lume-removal (commit 6ec5543)",
+      "restore_command": "git checkout pre-lume-removal -- <path> or git diff pre-lume-removal HEAD",
+      "removed": [
+        "_config.ts",
+        "plugins/",
+        "src/*.page.tsx",
+        "src/blog/_data.js",
+        "utils/fetchogp.ts",
+        "utils/logger.ts",
+        "src/types.ts",
+        "src/_components/BaseHead.tsx"
+      ],
+      "bug_found_and_fixed": "ssg/feed.tsにGIT_DIR継承対策 (gitCommandEnv) が欠けていた。pre-commitフックのGIT_DIRがexecFileSyncのcwdを上書きしテストが本物のリポジトリを見てしまう問題を修正"
+    },
+    "search_decision": {
+      "chosen": "Pagefind継続",
+      "rejected": "ox-content内蔵BM25",
+      "reason": "custom-hostに配線されておらず、索引はコーパス全体を1回で読む設計(実測591.6KB gzip、447記事、CJK文字単位トークナイズで転置索引が肥大化)。PagefindはLinderaで日本語形態素解析し、クエリにマッチした断片のみ遅延フェッチする",
+      "verified": "agent-browserでの実ブラウザ検証 (post.tsx/main.tsx両レイアウトで検索モーダル→クエリ→ハイライト付き結果→遷移、console error無し)"
+    },
+    "demo_deploy": {
+      "url": "https://274c536a.comamoca.pages.dev",
+      "branch_alias_url": "https://feat-switch-ox-content.comamoca.pages.dev",
+      "environment": "Preview (not Production; production branch is main and was untouched)",
+      "project": "blog (Cloudflare Pages, via existing wrangler OAuth session)",
+      "verified": "curl smoke test (/, 記事, /all/1/, feed.xml, sitemap.xml, pagefind.js, nostr.json すべて200) + agent-browserでの実検索動作確認 (「Gleam」97件ヒット、ハイライト、console error無し)",
+      "deployed_from": "feat/switch-ox-content ブランチ (npm run build のフルビルド、linkcard有効・162記事でリンクカード生成、pagefind索引473ページ)"
+    }
+  },
+  "notes": {
+    "origin": "PoCによる実機検証 (2026-09-16) の結果をもとに起票。ユーザーの実装開始指示により承認済み扱いとし、tasks.mdの順に着手する。",
+    "poc_findings": "URL 472/472一致・既存remark/rehypeプラグイン動作・Tailwind v4+DaisyUI動作・RSS 10/10一致を実測で確認済み。"
+  }
+}

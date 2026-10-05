@@ -13,15 +13,15 @@ primarily targeting developers and tech enthusiasts.
   broader accessibility
 - **Daily Diary Functionality**: Structured diary entries for regular technical
   journaling
-- **Advanced Search**: Client-side search powered by Pagefind for fast content
-  discovery
+- **Search**: Pagefindによるクライアントサイド全文検索 (日本語はLinderaによる
+  形態素解析)
 - **RSS Feed Generation**: Automatic RSS feed creation for content syndication
 - **Responsive Design**: Mobile-first design with TailwindCSS and DaisyUI
   components
 - **OG Image Generation**: Automatic Open Graph image creation for social media
   sharing
-- **Fast Static Site Generation**: Built with Lume for optimal performance and
-  SEO
+- **Fast Static Site Generation**: Built with ox-content (Vite custom-host) for
+  optimal performance and SEO
 - **Typography Optimization**: Japanese font support with Noto Sans CJK for
   proper CJK character rendering
 

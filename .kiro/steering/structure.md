@@ -4,18 +4,44 @@
 
 ```
 /
-├── src/                    # Main source directory
-├── plugins/               # Custom Lume plugins
-├── scripts/               # Build and utility scripts  
-├── utils/                 # Shared utility functions
-├── tests/                 # Test files
-├── tools/                 # Development tools and migration scripts
-├── _config.ts             # Main Lume configuration
-├── deno.jsonc             # Deno configuration and tasks
-├── tailwind.config.js     # TailwindCSS configuration
-├── justfile               # Just command definitions
-└── flake.nix              # Nix development environment
+├── src/                    # コンテンツ・コンポーネント・レイアウト
+├── ssg/                    # ox-content用ビルドロジック (ルート定義以外)
+├── host.ts                 # 全ルート定義 (custom-host)
+├── vite.config.ts          # Vite + ox-content custom-host 設定
+├── utils/                  # 共有ユーティリティ (paginate.tsのみ)
+├── scripts/                # OG Worker用フォントダウンロード等
+├── tests/                  # テスト (Deno)
+├── tools/                  # 移行補助スクリプト
+├── og/                     # OG画像生成Worker (Gleam, 別デプロイ対象)
+├── package.json            # npm依存関係とスクリプト
+├── deno.jsonc              # Deno設定 (テスト実行用)
+├── justfile                # Just command definitions
+└── flake.nix               # Nix development environment
 ```
+
+## Routing Model
+
+ページファイル命名規則 (`*.page.tsx`) は使わない。全ルートを `host.ts` の
+`routes()` が動的に構築する。
+
+```ts
+// host.ts (抜粋)
+export const host = {
+  async routes(ctx) {
+    // 記事: src/blog/*.md を読んでルートを生成
+    // 一覧: /all/{n}/ /tech/{n}/ /diary/{n}/
+    // 静的: /me.html /info.html /hub.html
+    // フィード: /api/feed.xml /api/feed.json
+    // sitemap.xml, 404.html
+    return [...];
+  },
+  notFound() { ... },
+};
+```
+
+新しいURLを追加する場合は `host.ts` にルートを足す。URL互換性は
+`tests/fixtures/urls.txt` との照合テスト (`tests/url_compat_test.ts`) で
+担保している。
 
 ## Source Directory Structure (`src/`)
 
@@ -23,68 +49,73 @@
 
 ```
 src/
-├── _components/           # Reusable React components (TSX)
-│   ├── Header.tsx        # Main site header with navigation
-│   ├── Footer.tsx        # Site footer
-│   ├── PostList.tsx      # Blog post listing component
-│   ├── PostCard.tsx      # Individual post preview card
-│   ├── Search.tsx        # Site search functionality
-│   ├── BaseHead.tsx      # HTML head component
-│   ├── Logo.tsx          # Site logo component
-│   └── Twemoji.tsx       # Emoji rendering component
+├── _components/           # 再利用可能なTSXコンポーネント (同期関数)
+│   ├── Header.tsx        # サイトヘッダー・ナビゲーション
+│   ├── Footer.tsx        # フッター
+│   ├── PostList.tsx      # 記事一覧
+│   ├── PostCard.tsx      # 記事カード
+│   ├── Search.tsx        # 検索モーダルのシェル (PagefindUIがここに描画する)
+│   ├── Logo.tsx          # サイトロゴ
+│   └── Twemoji.tsx       # 絵文字表示
 ```
 
 ### Layout Templates
 
 ```
-src/_includes/
-└── layouts/
-    ├── main.tsx          # Main page layout
-    ├── post.tsx          # Blog post layout
-    ├── mainOgImage.tsx   # OG image layout for pages
-    └── postOgImage.tsx   # OG image layout for posts
+src/_includes/layouts/
+├── main.tsx              # 一覧・静的ページ用レイアウト
+└── post.tsx              # 記事ページ用レイアウト
 ```
 
-### Page Components
-
-```
-src/
-├── index.page.tsx        # Homepage
-├── 404.page.tsx          # Error page
-├── diary.page.tsx        # Diary listing page
-├── hub.page.tsx          # Hub/navigation page
-├── all.page.tsx          # All posts listing
-├── me.page.tsx           # About/profile page
-└── info.page.tsx         # Site information page
-```
+両レイアウトとも `style.css` をESM importしており、`ssrStylesheets`
+(vite.config.ts) がハッシュ付きCSSファイルへの `<link>` を生成する。
 
 ### Content Organization
 
 ```
 src/
-├── blog/                 # Blog post markdown files
-│   ├── _data.js          # Blog directory metadata
-│   ├── YYYY-MM-DD-title.md           # Regular blog posts
-│   └── YYYY-MM-DD-diary.md           # Daily diary entries
-└── img/                  # Image assets
-    └── _data.js          # Image directory metadata
+├── blog/                 # 記事Markdown
+│   ├── YYYY-MM-DD-title.md           # 通常記事
+│   └── YYYY-MM-DD-diary.md           # 日報
+└── img/                  # 画像アセット (ssg/static-assets.tsが配信)
 ```
 
 ### Shared Code
 
 ```
 src/
-├── consts.ts             # Site constants and configuration
-└── types.ts              # TypeScript type definitions
+├── consts.ts              # サイト定数 (SITE_TITLE等)
+├── style.css               # Tailwind v4 エントリ (@plugin/@theme/@apply含む)
+├── public/                 # favicon.svg / icon.png (サイトルート直下に展開)
+└── well-known/              # nostr.json 等 (/.well-known/ 配下に展開)
 ```
 
-## Plugin Directory Structure (`plugins/`)
+## `ssg/` Directory Structure
+
+Lumeプラグインの移植先。ox-content固有のビルドロジックをここに集約する。
 
 ```
-plugins/
-├── linkcard.ts           # External link card generation
-└── lume/
-    └── footnote.ts       # Custom footnote processing plugin
+ssg/
+├── markdown.ts            # remark/rehype/HTML後処理プラグインの組み立て
+├── linkcard.ts             # 外部リンクカード生成 (remarkプラグイン)
+├── fetchogp.ts              # OGP情報取得 (linkedomでHTML解析、ファイル
+│                             キャッシュ)
+├── og_metas.ts              # og.comamoca.dev 向け画像URL生成
+├── feed.ts                   # RSS/JSON Feed生成、git履歴からの日付合成
+├── static-assets.ts          # img/public/well-known の配信
+├── pagefind.ts                # distのHTMLをPagefind Node APIで索引
+├── pagefind-client.ts           # PagefindUI初期化スクリプト
+├── run-pagefind.ts                # `vp build` 後に実行するエントリ
+└── pages/                          # 一覧・静的ページの表示コンポーネント
+    ├── HomePage.tsx
+    ├── AllPage.tsx            # ページ送りUIが独自 (前へ/後へ + 番号)
+    ├── TechPage.tsx            # ページ送りUIが独自 (番号のみ)
+    ├── DiaryPage.tsx            # ページ送りUIが独自 (前後1件ずつ)
+    ├── MePage.tsx
+    ├── InfoPage.tsx
+    ├── HubPage.tsx
+    ├── NotFoundPage.tsx
+    └── types.ts                 # PostSummary / PageLink / Pagination 型
 ```
 
 ## Utility and Script Organization
@@ -93,22 +124,16 @@ plugins/
 
 ```
 utils/
-├── logger.ts             # Logging utilities
-└── fetchogp.ts           # Open Graph data fetching
+└── paginate.ts            # buildPageLinks() - ページ送りリンク生成
+                            # (host.tsとssg/pages/*.tsxで共有)
 ```
 
 ### Scripts (`scripts/`)
 
 ```
 scripts/
-└── downloadFonts.ts      # Font downloading for OG image generation
-```
-
-### Tools (`tools/`)
-
-```
-tools/
-└── migrate_meta.ts       # Metadata migration utilities
+├── downloadFonts.ts       # OG Worker用フォントサブセット素材のダウンロード
+└── extractTags.ts         # 記事frontmatterからタグ抽出
 ```
 
 ## File Naming Conventions
@@ -116,80 +141,71 @@ tools/
 ### Component Files
 
 - **Components**: PascalCase TSX files (e.g., `PostCard.tsx`)
-- **Pages**: kebab-case with `.page.tsx` suffix (e.g., `diary.page.tsx`)
-- **Layouts**: kebab-case TSX files in `_includes/layouts/`
+- **Layouts**: `src/_includes/layouts/` 配下のkebab-case TSXファイル
+- **ページ表示コンポーネント**: `ssg/pages/` 配下のPascalCase TSXファイル
+  (`*Page.tsx` サフィックス)
 
 ### Content Files
 
 - **Blog Posts**: `YYYY-MM-DD-title.md` format
 - **Diary Entries**: `YYYY-MM-DD-diary.md` format
-- **Data Files**: `_data.js` for directory-specific metadata
-
-### Configuration Files
-
-- **TypeScript**: `.ts` extension for utilities and types
-- **Configuration**: Descriptive names (e.g., `_config.ts`,
-  `tailwind.config.js`)
-
-## Import Organization
-
-### Component Imports
-
-- **Relative imports** for local components and utilities
-- **Absolute imports** for external dependencies via Deno's import system
-- **Type imports** separated using TypeScript's `import type` syntax
-
-### Lume Plugin System
-
-- **Built-in plugins**: Imported from Lume core
-- **Custom plugins**: Imported from local `plugins/` directory
-- **Configuration**: Centralized in `_config.ts`
 
 ## Key Architectural Principles
 
 ### Component Architecture
 
-- **Async Components**: All components are async functions due to Lume v3
-  requirements
+- **同期コンポーネント**: ox-contentのJSXランタイム (`renderToString`) は
+  同期のみ対応。`async` 関数コンポーネントはPromiseが無言で破棄され空文字列
+  になるため使わない
 - **Single Responsibility**: Each component handles one specific UI concern
-- **Composition**: Complex layouts built through component composition
-- **Type Safety**: Full TypeScript integration for props and state
+- **Composition**: `renderToString()` + `raw()` でネストしたコンポーネントを
+  文字列合成する (host.ts参照)
 
 ### Content Architecture
 
 - **Markdown-First**: Content authored in Markdown with frontmatter
 - **Date-Based Organization**: Posts organized chronologically by filename
-- **Metadata Separation**: Directory-specific metadata in `_data.js` files
-- **Asset Co-location**: Images stored alongside content when possible
+- **frontmatter読み込み**: `@ox-content/napi` の `prepareSource()` で
+  メタデータのみ高速に読む (host.ts)
 
 ### Build Architecture
 
-- **Static Generation**: All content pre-rendered at build time
-- **Plugin-Based**: Extensible through Lume's plugin system
-- **Environment-Aware**: Different optimizations for development vs production
-- **Type-Safe Configuration**: Configuration files use TypeScript for validation
+- **リクエスト時レンダリング**: dev時は該当ルートのみをリクエスト時に
+  レンダリングするO(1)特性 (旧LumeはO(n)で記事数に比例して遅化した)
+- **dependencies宣言必須**: 各ルートは `dependencies` (ファイル/ディレクトリ)
+  を宣言する必要がある。宣言が無いとdevサーバーが応答をキャッシュし続け、
+  ファイルを編集しても反映されない
 
-### Development Patterns
+### Testing Architecture
 
-- **Hot Reload**: Fast development with automatic rebuilds
-- **Task-Based Workflow**: Common operations encapsulated in Deno tasks
-- **Content Workflows**: Streamlined content creation through Just commands
-- **Version Control**: Git-based workflow with automated deployment
+- **URL/フィード互換性テスト**: `tests/url_compat_test.ts` /
+  `tests/feed_compat_test.ts` が `tests/fixtures/` のスナップショットと
+  ビルド出力 (`BUILD_OUTPUT_DIR` 環境変数で指定) を照合する
+- **純粋関数の単体テスト**: `ssg/*.ts` の日付ロジック・OGP URL生成ロジックは
+  `tests/ssg_feed_test.ts` / `tests/ssg_og_metas_test.ts` で直接検証する
 
 ## Data Flow Patterns
 
 ### Content Processing
 
-1. **Markdown Files** → Lume processing → **Static HTML**
-2. **Component Logic** → SSX rendering → **Generated markup**
-3. **Asset Files** → Optimization plugins → **Optimized assets**
-4. **Configuration** → Build pipeline → **Site generation**
+1. **Markdown Files** (`src/blog/*.md`) → `host.ts` がfrontmatterを読み
+   ルート一覧を構築
+2. **リクエスト/ビルド時** → `ssg/markdown.ts` の `transformMarkdown` で
+   Markdown→HTML変換 (remark/rehypeプラグイン適用)
+3. **JSXレンダリング** → `renderToString()` でレイアウト・ページ
+   コンポーネントを文字列化
+4. **静的アセット** → `ssg/static-assets.ts` がdev/build両方で配信
 
 ### Search Integration
 
-1. **Content** → Pagefind indexing → **Search index**
-2. **User Query** → Client-side search → **Results display**
-3. **Static Generation** → Search component → **Search interface**
+Pagefind続投 (ox-content内蔵BM25は不採用。比較の詳細は
+`.kiro/specs/ox-content-migration/design.md`)。
+
+1. **ビルド後** → `bun run build` が `vp build` の後段で `ssg/run-pagefind.ts`
+   を実行し、`dist/**/*.html` を索引する (`rootSelector: "main"`
+   のため一覧ページは索引対象外、旧Lume時代と 同じ挙動)
+2. **クライアント** → `ssg/pagefind-client.ts` の初期化スクリプトが
+   `main.tsx`/`post.tsx` 共通で `#search` に `PagefindUI` を描画する
 
 This structure supports efficient development, content management, and
 deployment while maintaining clear separation of concerns and scalability for
