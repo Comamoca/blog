@@ -10,14 +10,14 @@
   "dependencies": {
     "@ox-content/unplugin": "3.2.6",
     "@ox-content/vite-plugin": "3.2.6",
-    "@shikijs/rehype": "^3.13.0",
+    "@shikijs/rehype": "^4.0.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.16",
     "daisyui": "5.7.47",
     "date-fns": "4.4.0",
     "linkedom": "^0.18.13",
     "pagefind": "^1.5.2",
-    "shiki": "^3.13.0",
+    "shiki": "^4.0.0",
     "tailwindcss": "^4.1.16",
     "unist-util-visit": "^5.0.0",
     "valibot": "^1.5.0"
