@@ -8,6 +8,6 @@
     "@resvg/resvg-js": "^2.6.2",
     "@resvg/resvg-wasm": "^2.6.2",
     "og-wasm-shims": "file:./shims",
-    "satori": "^0.35.0"
+    "satori": "^0.47.0"
   }
 }
