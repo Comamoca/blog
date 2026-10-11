@@ -36,8 +36,9 @@
 - **ルーティング**: `host.ts` が全ルート (記事・一覧・静的ページ・フィード・
   sitemap・404) を自前定義。記事URLはファイルツリー由来で現行 (旧Lume) と
   完全互換
-- **Markdownパイプライン**: `ssg/markdown.ts`。remark段にlinkcard、rehype段に
-  shiki (catppuccin-mocha)、生成後HTML段にfootnote後処理を接続
+- **orgパイプライン**: `ssg/org.ts`。uniorg (parse→rehype) で org→HAST 化し、
+  `rehype-raw`・shiki (catppuccin-mocha)・`ssg/linkcard-rehype.ts`・脚注正規化を
+  接続する。メタデータは `ssg/org-meta.ts` が `#+KEYWORD:` を行ベースで抽出する
 - **静的アセット**: `ssg/static-assets.ts` が `src/img` / `src/public` /
   `src/well-known` を配信 (dev: ミドルウェア直接配信、build: closeBundleで
   コピー)
@@ -131,10 +132,11 @@ nix develop .#ci
 
 `ssg/` ディレクトリに移行済みの機能を集約している。
 
-- **Markdown設定**: `ssg/markdown.ts` - remark/rehype/HTML後処理プラグインの
-  組み立て
-- **Link Cards**: `ssg/linkcard.ts` + `ssg/fetchogp.ts` - 外部リンクの
-  OGPカード生成 (Node移植版。`linkedom` でHTML解析)
+- **orgパイプライン**: `ssg/org.ts` + `ssg/org-meta.ts` + `ssg/highlight.ts` -
+  uniorg による org→HTML変換、キーワード抽出、共有 Shiki ハイライタ
+- **Link Cards**: `ssg/linkcard-rehype.ts` + `ssg/linkcard.ts` +
+  `ssg/fetchogp.ts` - 外部リンクの OGPカード生成 (HAST版プラグイン。 `linkedom`
+  でHTML解析)
 - **OGPメタタグ**: `ssg/og_metas.ts` - og.comamoca.dev への画像URL生成
 - **フィード**: `ssg/feed.ts` - RSS/JSON Feed生成、git履歴からの日付合成
 - **一覧・静的ページ**: `ssg/pages/*.tsx` - 一覧/静的ページの表示コンポーネント
@@ -150,12 +152,12 @@ nix develop .#ci
 ## Security Considerations
 
 - **Static Site**: No server-side vulnerabilities
-- **Content Security**: Markdown processing with safe rendering
+- **Content Security**: org processing with safe rendering
 - **Deployment Security**: Cloudflare's security features and SSL/TLS
 
 ## Development Workflow
 
-1. **Content Creation**: Markdown files with frontmatter (`src/blog/`)
+1. **Content Creation**: org files with `#+KEYWORD:` metadata (`src/blog/`)
 2. **Component Development**: TSX files with 同期 function exports
    (ox-contentのJSXランタイムは同期のみ。`async` コンポーネントは無言で
    空文字列になる点に注意)

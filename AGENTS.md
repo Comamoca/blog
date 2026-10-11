@@ -33,6 +33,10 @@ features
 - `ox-content-migration` - SSG基盤をLumeからox-contentへ移行し、URL互換性を
   維持したままプレビュー反映を高速化する (Phase: implementation-completed。
   Cloudflare Pagesへのデモデプロイと実機確認まで完了。mainへのマージ待ち)
+- `org-mode-migration` - 記事・Markdownテンプレート・ビルドシステム・Emacs統合を
+  Markdownからorg-modeへ移行する。ox-content custom-hostの`render()`接続点に
+  uniorgパイプラインを追加し、URL互換・レイアウト・feed・Pagefindを維持する
+  (Phase: tasks-generated)
 
 ## Development Guidelines
 
@@ -180,7 +184,7 @@ src/
 │   ├── Logo.tsx         # Site logo
 │   └── Twemoji.tsx      # Twemoji component
 ├── _includes/layouts/   # main.tsx / post.tsx
-├── blog/                # Blog post markdown files
+├── blog/                # Blog post org files
 ├── img/                 # Image assets
 ├── public/              # favicon.svg, icon.png (served at site root)
 ├── well-known/          # .well-known directory content
@@ -188,8 +192,12 @@ src/
 └── style.css            # Tailwind v4 entry
 
 ssg/                     # ox-content build logic (ported from plugins/)
-├── markdown.ts           # remark/rehype/HTML-postprocess plugin wiring
-├── linkcard.ts            # External link card generation
+├── org.ts                # org→HTML pipeline (uniorg + shiki + linkcard + footnote)
+├── org-meta.ts           # org keyword (#+TITLE: etc.) extraction for post listing
+├── highlight.ts          # shared Shiki highlighter
+├── linkcard-rehype.ts     # External link card generation (HAST/rehype plugin)
+├── linkcard.ts            # OGP card HTML helpers (shared by linkcard-rehype)
+├── footnote.ts            # remark-gfm-compatible footnote post-processing
 ├── fetchogp.ts             # OGP metadata fetching (linkedom-based)
 ├── og_metas.ts              # og.comamoca.dev image URL generation
 ├── feed.ts                   # RSS/JSON Feed, git-history-based dates
@@ -245,8 +253,10 @@ component as props.
 
 ### Content Management
 
-- Blog posts: Markdown files in `src/blog/` with frontmatter
-- Diary entries: Special posts with `-diary.md` suffix
+- Blog posts: org-mode files in `src/blog/` with `#+KEYWORD:` metadata
+  (`#+TITLE:` / `#+DESCRIPTION:` / `#+DATE:` / `#+FILETAGS:` / `#+EMOJI:` /
+  `#+DRAFT:`)
+- Diary entries: Special posts with `-diary.org` suffix
 - Image assets: Stored in `src/img/` and served as-is (no build-time
   optimization/resizing)
 
@@ -265,7 +275,7 @@ component as props.
 ### Content Generation
 
 - `create.rb`: Ruby script for generating new blog posts and diary entries
-- Automatic frontmatter generation with timestamps
+- Emits org-mode templates (`#+KEYWORD:` metadata + org headings)
 - Support for both regular posts and daily diary entries
 
 ### Font Handling
@@ -298,8 +308,8 @@ Vite plugin hook:
 
 ### Link Cards
 
-- External link preview generation via `ssg/linkcard.ts` (remark plugin, Node
-  port of the original Deno implementation)
+- External link preview generation via `ssg/linkcard-rehype.ts` (HAST/rehype
+  plugin), sharing the OGP card helpers in `ssg/linkcard.ts`
 - Can be disabled with the `DISABLE_LINKCARD` environment variable
 
 ## Development Notes
@@ -307,8 +317,8 @@ Vite plugin hook:
 ### File Naming Conventions
 
 - Components: PascalCase TSX files in `src/_components/` or `ssg/pages/`
-- Blog posts: `YYYY-MM-DD-title.md` format
-- Diary entries: `YYYY-MM-DD-diary.md` format
+- Blog posts: `YYYY-MM-DD-title.org` format
+- Diary entries: `YYYY-MM-DD-diary.org` format
 
 ### Content Guidelines
 
