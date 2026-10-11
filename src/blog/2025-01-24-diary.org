@@ -1,0 +1,89 @@
+#+TITLE: 2025-01-24の日報
+#+DESCRIPTION: 01/24の日報をお届けいたします。
+#+DATE: [2025-01-24 Fri]
+#+EMOJI: 🦊
+#+DRAFT: false
+
+技術記事を書いて人に知識を伝える時に記事自体がボトルネックになってるんじゃないか？みたいなことを考えていた。
+
+AさんがBさんに技術的な知見を伝えたいとすると、
+
+#+begin_example
+A -> 記事 -> B
+#+end_example
+
+となる。でも記事の体裁を整えるのにもコストがかかるし、
+それを読み解いて自身の知識にするのにもコストがかかる。
+
+もし記事を書かずにAさんのメモをベースにしたLLMがこれを仲介したらどうなるのか？
+
+#+begin_example
+A -> LLM -> B
+#+end_example
+
+となって、Aさんは記事の体裁を整えるコストを払わずに済むし、
+Bさんも知りたい箇所だけを知ることができる。
+
+この方式だと、今書いてる日報みたいな形式でも(そのようなシステムを組めば)LLMが知識を吸収してくれるし、
+BさんはAさんが記事を書くまで待たなくてもLLMを通して即日で最新の知識にアクセスできるようになる。
+
+...ってのをここ最近考えていて、とりあえず自分の[[https://note.comamoca.dev/][note]]とこのブログを使って検証してみたいなと思っている。
+
+** 今日やったこと
+*** Nim x ESP32
+NimでESP32する方法に取り組んでいたのだけど、
+idf.pyを導入する過程でつまづいた...
+
+1/26追記:
+[[https://github.com/mirrexagon/nixpkgs-esp-dev][nixpkgs-esp-dev]]を使えばidf.pyの環境を楽に導入できる。
+
+shellとpackageが提供されているので、こんな感じに書けばidf.pyが使える環境を作れる。
+つまりidf.pyに依存するだけならFHSは必要ない。
+
+#+begin_src nix
+{
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    systems.url = "github:nix-systems/default";
+    esp-dev.url = "github:mirrexagon/nixpkgs-esp-dev";
+  };
+
+  outputs =
+    inputs@{
+      self,
+      systems,
+      nixpkgs,
+      flake-parts,
+      esp-dev,
+      ...
+    }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = import inputs.systems;
+      perSystem =
+        {
+          config,
+          pkgs,
+          system,
+          ...
+        }:
+        {
+          devShells.default = pkgs.mkShell {
+            packages = with pkgs; [
+              # idf.py導入
+              esp-dev.packages.${system}.esp-idf-esp32
+
+              # ここにパッケージを列挙
+            ];
+
+            shellHook = ''
+            '';
+          };
+        };
+    };
+}
+#+end_src
+
+** 明日以降やりたいこと
+Nimの環境構築を試してはいるけど、でもこれってErlang(AtomVM)で楽にできるんじゃない？
+という疑念が出てきたのでそれを試してみたい。

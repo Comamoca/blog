@@ -9,11 +9,10 @@ $yesterday = Date.today - 1
 
 def isodate(time); time.strftime("%F"); end
 def date(time); time.strftime("%-m/%-d"); end
-def us_date(time); time.strftime("%b %-d %Y"); end
+def org_date(time); "[#{time.strftime("%F %a")}]"; end
 
 def ask_override(diary_path, template)
   if File.exist?(diary_path)
-    # ファイルが存在する場合は上書きするか聞く
     answer = Readline.readline("File already exists. Do you want to overwrite it?(y/N)")
 
     if answer == "y"
@@ -32,18 +31,15 @@ $content_path = "./src/blog/"
 
 def diary_template(day)
   tmpl = <<EOF
----
-title: '#{isodate(day)}の日報'
-description: '#{date(day)}の日報をお届けいたします。'
-pubDate: '#{us_date(day)}'
-emoji: '🦊'
-tags: []
-draft: false
----
+#+TITLE: #{isodate(day)}の日報
+#+DESCRIPTION: #{date(day)}の日報をお届けいたします。
+#+DATE: #{org_date(day)}
+#+EMOJI: 🦊
+#+DRAFT: false
 
-## 今日やったこと
+** 今日やったこと
 
-## 明日以降やりたいこと
+** 明日以降やりたいこと
 
 EOF
 
@@ -52,14 +48,11 @@ end
 
 def article_template(day)
   tmpl = <<EOF
----
-title: ''
-description: ''
-pubDate: '#{us_date(day)}'
-emoji: '🦊'
-tags: []
-draft: true
----
+#+TITLE:
+#+DESCRIPTION:
+#+DATE: #{org_date(day)}
+#+EMOJI: 🦊
+#+DRAFT: true
 EOF
 
   return tmpl
@@ -72,16 +65,13 @@ if type == "diary"
 
   if is_yesterday == "y"
     diary_slug = "#{isodate($yesterday)}-diary"
-    diary_path = Pathname.new($content_path).join("#{diary_slug}.md")
-
-    # puts(diary_template($yesterday))
+    diary_path = Pathname.new($content_path).join("#{diary_slug}.org")
 
     ask_override(diary_path, diary_template($yesterday))
   else
     diary_slug = "#{isodate($today)}-diary"
-    diary_path = Pathname.new($content_path).join("#{diary_slug}.md")
+    diary_path = Pathname.new($content_path).join("#{diary_slug}.org")
 
-    # puts(diary_template($today))
     ask_override(diary_path, diary_template($today))
   end
 
@@ -89,8 +79,7 @@ if type == "diary"
 else
   slug = Readline.readline("Slug? > ")
 
-  article_path = Pathname.new($content_path).join("#{isodate($today)}-#{slug}.md")
-  # puts(article_template($today))
+  article_path = Pathname.new($content_path).join("#{isodate($today)}-#{slug}.org")
 
   File.write(article_path, article_template($today))
 

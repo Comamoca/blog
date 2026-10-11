@@ -1,0 +1,19 @@
+#+TITLE: 2025-01-31の日報
+#+DESCRIPTION: 01/31の日報をお届けいたします。
+#+DATE: [2025-01-31 Fri]
+#+EMOJI: 🦊
+#+DRAFT: false
+
+Djangoの日付表示で困っていたグループにちょろっと手を加えて[fn:1]解決したりした。
+自画自賛だけどちょっと名探偵味あったなぁ〜と悦に浸っていた。
+
+** 今日やったこと
+*** ESP32
+micropythonに[[https://github.com/miguelgrinberg/microdot][microdot]]っていうwebフレームワークを導入していた。
+micropythonでアプリケーションを導入させたり、外部ライブラリを使う方法が分からなくて詰まったのでそのあたりもメモしておきたい。
+
+** 明日以降やりたいこと
+micorodotでWebSocketクライアントを実装していきたい。
+あとメダリスト見そびれてるので見たい。
+
+[fn:1] ​~|data: "h:i:s"~​を追加した。jinjaのデータフィルター便利。

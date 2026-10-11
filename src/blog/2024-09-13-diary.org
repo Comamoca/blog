@@ -1,0 +1,13 @@
+#+TITLE: 2024-09-13の日報
+#+DESCRIPTION: 9/13の日報をお届けいたします。
+#+DATE: [2024-09-13 Fri]
+#+EMOJI: 🦊
+#+DRAFT: false
+
+** 今日やったこと
+*** Comamoca/scaffoldをFlakeに対応させた
+​~nix flake init -t github:Comamoca/scaffold#{template_name}~​みたいにしてテンプレを引っ張ってこれるので便利。
+
+** 明日やりたいこと
+ブログとかスライドのflakeまわりとか弄ってみたい。
+あと明日やることは9割明日できないので、1週間単位でのTodoの構築とかも試してみたいなと。

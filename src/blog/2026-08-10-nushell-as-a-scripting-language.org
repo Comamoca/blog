@@ -1,0 +1,6 @@
+#+TITLE: スクリプト言語としてのnushell
+#+DATE: [2026-08-10 Mon]
+#+EMOJI: 🦊
+#+DRAFT: true
+
+

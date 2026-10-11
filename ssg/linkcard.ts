@@ -1,70 +1,19 @@
 /**
- * 現行 plugins/linkcard.ts の移植版。remark(mdast)プラグイン本体のロジックは
- * 無変更。Deno固有だった fetchogp / logger / punycode の依存先のみ
- * Node向けに差し替えている。
+ * linkcard の共通資産。OGP を取得してカード HTML 文字列を生成する。
+ *
+ * mdast 版の remark プラグインは Markdown パイプライン除去に伴い削除した。
+ * org パイプラインの ssg/linkcard-rehype.ts (HAST 版) がこの関数群を利用する。
  */
-import { visit } from "unist-util-visit";
 import { fetchOGInfo } from "./fetchogp.ts";
 import { domainToASCII } from "node:url";
 
-export default function linkcard() {
-  return async (tree: any) => {
-    const transformers: Array<() => Promise<void>> = [];
-
-    visit(tree, "paragraph", (paragraphNode: any, idx: number) => {
-      if (paragraphNode.children.length !== 1) {
-        return;
-      }
-      if (paragraphNode.data !== undefined) {
-        return;
-      }
-
-      visit(paragraphNode, "text", (textNode: any) => {
-        const urls = textNode.value.match(
-          /(https?:\/\/|www(?=\.))([-.\w]+)([^ \t\r\n]*)/g,
-        );
-
-        if (!urls || urls.length !== 1) {
-          return;
-        }
-
-        const url = genURL(urls[0]);
-
-        transformers.push(async () => {
-          try {
-            const cardHTML = await cardLinkElement(url);
-            const node = { type: "html", value: cardHTML };
-            tree.children.splice(idx, 1, node);
-          } catch (error) {
-            console.error(
-              `[LinkCard] Failed to generate card for URL: ${url}, error: ${
-                (error as Error).message
-              }`,
-            );
-          }
-        });
-      });
-    });
-
-    try {
-      await Promise.all(transformers.map((t) => t()));
-    } catch (e) {
-      console.error(
-        `[LinkCard] Error during transformation: ${(e as Error).message}`,
-      );
-    }
-
-    return tree;
-  };
-}
-
-function genURL(urlStr: string): URL {
+export function genURL(urlStr: string): URL {
   const url = new URL(urlStr);
   url.hostname = domainToASCII(url.hostname);
   return url;
 }
 
-async function cardLinkElement(url: URL): Promise<string> {
+export async function cardLinkElement(url: URL): Promise<string> {
   const og = await fetchOGInfo(url.toString());
 
   const name = url.origin;

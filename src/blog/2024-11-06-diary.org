@@ -1,0 +1,27 @@
+#+TITLE: 2024-11-06の日報
+#+DESCRIPTION: 11/6の日報をお届けいたします。
+#+DATE: [2024-11-06 Wed]
+#+EMOJI: 🦊
+#+DRAFT: false
+
+** 今日やったこと
+*** xremap導入した
+今はこんな感じの設定をNix式でしている。
+
+#+begin_src yaml
+modmap:
+  - name: Global
+    remap:
+      Enter:
+        held: Alt_R
+        alone: Enter
+#+end_src
+
+挙動としては、Enter-xがM-xとして扱われてCtrl-Enterはそのままになるというもの。
+EmacsでAltが押しづらいと感じていたのでかな効いている。
+
+** 明日以降やりたいこと
+この設定でバリバリEmacsしていきたい。
+
+あとメモをPCで取るかスマホで取るかっていう話になった時に、Deno x
+Honoで良い感じに動機を取ってくれるWebメモアプリを作ろうと思っていたので、それもやっていきたい。

@@ -6,17 +6,16 @@
  * `/all/{n}/`・`/tech/{n}/`・`/diary/{n}/` と互換性がないため。
  * 代わりに全ルートをここで自前定義し、URL互換性を設計上保証する。
  *
- * frontmatter は @ox-content/napi の prepareSource() で読む (全文パース不要)。
- * ox-content の srcDir スキャンには依存せず、src/blog を直接列挙する
- * (将来のorg移行時に拡張子で分岐しやすくするため。詳細はdesign.md参照)。
+ * 記事メタデータは org キーワード (#+TITLE: 等) を ssg/org-meta.ts で行ベース抽出し、
+ * ox-content の srcDir スキャンには依存せず src/blog を直接列挙する。
  */
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
-import { prepareSource } from "@ox-content/napi";
 import { raw, renderToString } from "@ox-content/vite-plugin";
 
-import { renderMarkdown } from "./ssg/markdown.ts";
+import { renderOrg } from "./ssg/org.ts";
+import { extractOrgMeta } from "./ssg/org-meta.ts";
 import { buildOgImageUrl } from "./ssg/og_metas.ts";
 import {
   combineDate,
@@ -61,32 +60,27 @@ type Post = {
 
 async function loadPosts(): Promise<Post[]> {
   const dir = path.join(REPO_ROOT, BLOG_DIR);
-  const names = (await fs.readdir(dir)).filter((n) => n.endsWith(".md"));
+  const names = (await fs.readdir(dir)).filter((n) => n.endsWith(".org"));
   const posts: Post[] = [];
 
   for (const name of names) {
     const file = path.join(dir, name);
     const src = await fs.readFile(file, "utf8");
-    const fm = (prepareSource(src).frontmatter ?? {}) as Record<
-      string,
-      unknown
-    >;
-    if (fm.draft === true) continue;
+    const stem = name.replace(/\.org$/, "");
+    const meta = extractOrgMeta(src, stem);
+    if (meta.draft) continue;
 
-    const stem = name.replace(/\.md$/, "");
     posts.push({
       stem,
       file,
       relFile: `${BLOG_DIR}/${name}`,
       url: `/blog/${stem}/`,
-      title: String(fm.title ?? stem),
-      description: typeof fm.description === "string" ? fm.description : "",
-      pubDateRaw: String(fm.pubDate ?? ""),
-      // Lumeの各page.tsxと同じ比較 (new Date(pubDate)) でソートする。
-      // 同ブラウザエンジン (V8) 上でのMMM d yyyy解析なので結果は同一になる。
-      pubDateMs: new Date(String(fm.pubDate ?? stem.slice(0, 10))).getTime(),
-      tags: Array.isArray(fm.tags) ? (fm.tags as string[]) : [],
-      emoji: String(fm.emoji ?? "🦊"),
+      title: meta.title,
+      description: meta.description,
+      pubDateRaw: meta.pubDate,
+      pubDateMs: new Date(meta.pubDate).getTime(),
+      tags: meta.tags,
+      emoji: meta.emoji,
       isDiary: stem.includes("-diary"),
     });
   }
@@ -157,7 +151,7 @@ export const host = {
       dependencies: [{ path: p.relFile, kind: "file" as const }],
       render: async () => {
         const source = await fs.readFile(p.file, "utf8");
-        const { html } = await renderMarkdown(source, p.file);
+        const { html } = await renderOrg(source, p.file);
         const body = renderToString(
           PostLayout({
             title: p.title,
@@ -346,7 +340,8 @@ export const host = {
       post: p,
       published: combineDate(
         new Date(`${p.stem.slice(0, 10)}T00:00:00Z`),
-        commitTimes.get(`${BLOG_DIR}/${p.stem}.md`),
+        commitTimes.get(`${BLOG_DIR}/${p.stem}.md`) ??
+          commitTimes.get(`${BLOG_DIR}/${p.stem}.org`),
       ),
     }));
     feedCandidates.sort((a, b) =>
@@ -356,7 +351,7 @@ export const host = {
     const feedItems: FeedItem[] = await Promise.all(
       feedCandidates.slice(0, 10).map(async ({ post: p, published }) => {
         const source = await fs.readFile(p.file, "utf8");
-        const { html } = await renderMarkdown(source, p.file);
+        const { html } = await renderOrg(source, p.file);
         return { title: p.title, url: p.url, contentHtml: html, published };
       }),
     );

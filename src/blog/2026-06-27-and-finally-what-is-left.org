@@ -1,0 +1,8 @@
+#+TITLE: そして最後に残るのは
+#+DESCRIPTION: エンジニアニメで登壇した内容のブログ版です。
+#+DATE: [2026-06-27 Sat]
+#+FILETAGS: :imas:shinycolors:
+#+EMOJI: 🦊
+#+DRAFT: true
+
+** 
