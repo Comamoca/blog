@@ -32,7 +32,7 @@
   "devEngines": {
     "packageManager": {
       "name": "bun",
-      "version": "1.2.21",
+      "version": "1.4.3",
       "onFail": "download"
     }
   }
