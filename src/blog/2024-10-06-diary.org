@@ -1,0 +1,27 @@
+#+TITLE: 2024-10-06の日報
+#+DESCRIPTION: 10/6の日報をお届けいたします。
+#+DATE: [2024-10-06 Sun]
+#+EMOJI: 🦊
+#+DRAFT: false
+
+slyを起動したらなにもしてないのに接続できなくなった...
+
+slimeだと繋がるので謎すぎる。
+
+** 今日やったこと
+*** moonbitもくもく会に参加した
+遅刻したけど参加した。
+Neovimのサポートがないことが分かったのでlspconfigとかquickrunの設定とかを書いていた。
+
+設定内容とかはブログに書いた。
+
+[[https://comamoca.dev/blog/2024-10-06-write-moonbit-in-neovim/]]
+
+タイトルにはNeovimと書いてあるけどvim-lspの設定も書いてある。
+
+** 明日以降やりたいこと
+moonbitの構文まわりは触れなかったので、Gleam x
+moonbitとかをやってみたいなと。
+moonbitはまだNixで管理できてないので、それもやってみたい。
+
+あとは引き続きCLとか。

@@ -1,0 +1,18 @@
+#+TITLE: 2024-10-09の日報
+#+DESCRIPTION: 10/9の日報をお届けいたします。
+#+DATE: [2024-10-09 Wed]
+#+EMOJI: 🦊
+#+DRAFT: false
+
+** 今日やったこと
+*** アイマスSKK辞書のFlakeを書いた
+[[https://github.com/comamoca/flake-skk-jisyo-imasparql]]
+
+欲しかったので書いた。
+
+*** vim IMEに入ってるddcのskkeleton sourceを有効化した
+sourceを指定してはいたけど有効化していなかった。
+IMEでも補完が出てきて便利になった。
+
+** 明日以降やりたいこと
+textlintの設定とかやっていきたい。

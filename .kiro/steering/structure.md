@@ -28,7 +28,7 @@
 // host.ts (抜粋)
 export const host = {
   async routes(ctx) {
-    // 記事: src/blog/*.md を読んでルートを生成
+    // 記事: src/blog/*.org を読んでルートを生成
     // 一覧: /all/{n}/ /tech/{n}/ /diary/{n}/
     // 静的: /me.html /info.html /hub.html
     // フィード: /api/feed.xml /api/feed.json
@@ -74,9 +74,9 @@ src/_includes/layouts/
 
 ```
 src/
-├── blog/                 # 記事Markdown
-│   ├── YYYY-MM-DD-title.md           # 通常記事
-│   └── YYYY-MM-DD-diary.md           # 日報
+├── blog/                 # 記事org
+│   ├── YYYY-MM-DD-title.org          # 通常記事
+│   └── YYYY-MM-DD-diary.org          # 日報
 └── img/                  # 画像アセット (ssg/static-assets.tsが配信)
 ```
 
@@ -96,8 +96,12 @@ Lumeプラグインの移植先。ox-content固有のビルドロジックをこ
 
 ```
 ssg/
-├── markdown.ts            # remark/rehype/HTML後処理プラグインの組み立て
-├── linkcard.ts             # 外部リンクカード生成 (remarkプラグイン)
+├── org.ts                 # org→HTMLパイプライン (uniorg + shiki + linkcard + 脚注)
+├── org-meta.ts            # orgキーワード抽出 (記事一覧用)
+├── highlight.ts           # 共有 Shiki ハイライタ
+├── linkcard-rehype.ts      # 外部リンクカード生成 (HAST/rehypeプラグイン)
+├── linkcard.ts             # OGPカードHTMLヘルパー (linkcard-rehypeと共用)
+├── footnote.ts             # remark-gfm互換の脚注後処理
 ├── fetchogp.ts              # OGP情報取得 (linkedomでHTML解析、ファイル
 │                             キャッシュ)
 ├── og_metas.ts              # og.comamoca.dev 向け画像URL生成
@@ -133,7 +137,8 @@ utils/
 ```
 scripts/
 ├── downloadFonts.ts       # OG Worker用フォントサブセット素材のダウンロード
-└── extractTags.ts         # 記事frontmatterからタグ抽出
+├── extractTags.ts         # 記事からタグ抽出
+└── md2org.ts              # Markdown→org変換 (一度きりの移行用、pandoc+Lua)
 ```
 
 ## File Naming Conventions
@@ -147,8 +152,8 @@ scripts/
 
 ### Content Files
 
-- **Blog Posts**: `YYYY-MM-DD-title.md` format
-- **Diary Entries**: `YYYY-MM-DD-diary.md` format
+- **Blog Posts**: `YYYY-MM-DD-title.org` format
+- **Diary Entries**: `YYYY-MM-DD-diary.org` format
 
 ## Key Architectural Principles
 
@@ -163,10 +168,10 @@ scripts/
 
 ### Content Architecture
 
-- **Markdown-First**: Content authored in Markdown with frontmatter
+- **org-First**: Content authored in org-mode with `#+KEYWORD:` metadata
 - **Date-Based Organization**: Posts organized chronologically by filename
-- **frontmatter読み込み**: `@ox-content/napi` の `prepareSource()` で
-  メタデータのみ高速に読む (host.ts)
+- **キーワード読み込み**: `ssg/org-meta.ts` が `#+KEYWORD:` を行ベースで
+  高速抽出する (host.ts)
 
 ### Build Architecture
 
@@ -188,10 +193,10 @@ scripts/
 
 ### Content Processing
 
-1. **Markdown Files** (`src/blog/*.md`) → `host.ts` がfrontmatterを読み
+1. **org Files** (`src/blog/*.org`) → `host.ts` がキーワードを読み
    ルート一覧を構築
-2. **リクエスト/ビルド時** → `ssg/markdown.ts` の `transformMarkdown` で
-   Markdown→HTML変換 (remark/rehypeプラグイン適用)
+2. **リクエスト/ビルド時** → `ssg/org.ts` の `renderOrg` で org→HTML変換
+   (uniorg/rehypeプラグイン適用)
 3. **JSXレンダリング** → `renderToString()` でレイアウト・ページ
    コンポーネントを文字列化
 4. **静的アセット** → `ssg/static-assets.ts` がdev/build両方で配信

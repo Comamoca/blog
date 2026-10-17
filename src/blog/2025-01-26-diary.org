@@ -1,0 +1,22 @@
+#+TITLE: 2025-01-26の日報
+#+DESCRIPTION: 01/26の日報をお届けいたします。
+#+DATE: [2025-01-26 Sun]
+#+EMOJI: 🦊
+#+DRAFT: false
+
+** 今日やったこと
+*** Nix
+idf.pyの導入とかを試していた。 [[https://nixos.wiki/wiki/ESP-IDF][NixOS
+Wiki]]のお陰で良い感じに環境構築できそうなので良かった。
+
+*** AtomVM
+C++とかRustだとWebSocketを使うにはライブラリの導入が必要になって辛いけど、
+Erlang
+VMならランタイム込み込みで楽チンなのでは？と思って調べたらそうっぽいので
+それでやってみたい。
+
+** 明日以降やりたいこと
+AtomVMとGleamを使って実装しようと思ったけど、
+Gleamが呼び出すrebar3(Erlangのビルドツール)の設定を行う方法が分からない...
+
+とりあえずElixirで実装しちゃってから考えたい。
