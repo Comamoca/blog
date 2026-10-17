@@ -415,8 +415,8 @@
               packages = [
                 latest-pkgs.gleam
                 clean-pkgs.nodejs
-                pkgs.deno
-                pkgs.wrangler
+                deno
+                wrangler
                 pkgs.stdenv.cc.cc
               ];
 
