@@ -396,6 +396,41 @@
                 ln -s ${fonts}/bin/NotoSansCJKjp-Black.otf ./fonts/noto-fonts/NotoSansCJKjp-Black.otf
               '';
             };
+
+          # OG worker (og/) のCI向けシェル: gleam + nodejs + deno + wranglerと
+          # フォント配置をflake単位で単一管理する (test-ogジョブとdeploy-og
+          # ステップが使用。setup-beam廃止によりgleamのバージョンもflake.lock
+          # 経由で確定する)。
+          # gleamはrootのnixpkgsピンが古いためnixpkgs-latestから、nodejsは
+          # overlay非適用のclean-pkgsから取る (devShells.defaultと同じ理由。
+          # 67行目周辺のコメント参照)。deno/wranglerはdeploy-ogで必要。
+          # og_workerはtarget = "javascript"のためOTP/rebar3は不要
+          # (erlをPATHから外してもgleam testが全件passすることを検証済み)。
+          devShells.og-ci =
+            let
+              clean-pkgs = import inputs.nixpkgs { inherit system; };
+              latest-pkgs = import inputs.nixpkgs-latest { inherit system; };
+            in
+            pkgs.mkShell {
+              packages = [
+                latest-pkgs.gleam
+                clean-pkgs.nodejs
+                deno
+                wrangler
+                pkgs.stdenv.cc.cc
+              ];
+
+              LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc ]}";
+
+              # shellHookがogFonts derivation (記事コーパスからpyftsubsetで
+              # サブセット) を og/static/fonts/ に配置する (gitにはコミットしない)
+              shellHook = ''
+                [ -e ./og/static/fonts ] && rm -r ./og/static/fonts
+                mkdir -p ./og/static/fonts
+                ln -s ${ogFonts}/NotoSansJP-Regular.ttf ./og/static/fonts/NotoSansJP-Regular.ttf
+                ln -s ${ogFonts}/NotoSansJP-Bold.ttf ./og/static/fonts/NotoSansJP-Bold.ttf
+              '';
+            };
         };
     };
 }
