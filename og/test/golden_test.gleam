@@ -10,10 +10,10 @@ import og_worker/request.{Main, OgpRequest, Post}
 import og_worker/test_support.{load_file_bytes, sha256_hex}
 
 const golden_post_sha256 =
-  "824e9296280ee0d4cfcc57c71e2be401eee3db214d35e95bfaac623a16da2018"
+  "c545f9b0c7e596d4003d5be64e09d122dcb9353a9512edee9d0bb09d4843b7a8"
 
 const golden_main_sha256 =
-  "bbb1fa3ae32e7d2793d5cc701a26b44b8bd80f522824a7d2a845079ec303f468"
+  "d4806c198c05cba91c153f4458f45f1b5a079e435bef699095fe5af54c361052"
 
 pub fn render_post_card_golden_test() -> Promise(Nil) {
   let fonts = [
