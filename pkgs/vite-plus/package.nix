@@ -35,7 +35,7 @@ stdenv.mkDerivation (finalAttrs: {
   pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;
     pnpm = pnpm_10;
-    hash = "sha256-KQ7XsY9tcLYrbwDnvPar99GnF7E3vv6xRnU7d4w6lCg=";
+    hash = "sha256-TmTei0ivXvPgx5Am+sGYANHJPb/lzIYHRccp/NRtvwM=";
     fetcherVersion = 3;
     prePnpmInstall = ''
       pnpm config set minimum-release-age 0
