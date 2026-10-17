@@ -2,7 +2,7 @@
   "name": "vp-global",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "pnpm@12.11.2",
+  "packageManager": "pnpm@12.14.0",
   "dependencies": {
     "vite-plus": "1.3.0"
   }
