@@ -55,28 +55,21 @@ jobs:
       - uses: actions/checkout@v7
       - uses: nixbuild/nix-quick-install-action@v35
       - uses: DeterminateSystems/magic-nix-cache-action@main
-      # og_worker/router.gleam のASSETS bindingとgleam testの
-      # test_support.load_file_bytes が参照する og/static/fonts/*.ttf は
-      # gitにコミットせず、flake.nixの packages.og-fonts (pyftsubsetで
-      # ブログ記事コーパスからサブセット生成) をここでビルドして配置する
-      - name: Build & place OG fonts (nix)
+      # ツールチェーン (gleam/nodejs) もフォントもflakeで単一管理する:
+      # devShells.og-ci (gleam + nodejs + フォント配置shellHook) が
+      # setup-beamと `nix build .#og-fonts` + cp の両ステップを置き換える。
+      # og_workerはtarget = "javascript"のためOTP/rebar3は不要
+      # (erlをPATHから外してもgleam testが全件passすることを検証済み)
+      - name: Test OG worker
         run: |
-          nix build .#og-fonts -o og-fonts-result
-          mkdir -p og/static/fonts
-          cp og-fonts-result/*.ttf og/static/fonts/
-      - uses: erlef/setup-beam@v1
-        with:
-          otp-version: "29"
-          gleam-version: "v1.19.2"
-          rebar3-version: "3"
-      - working-directory: og
-        run: gleam deps download
-      - working-directory: og
-        run: npm ci
-      - working-directory: og
-        run: gleam test
-      - working-directory: og
-        run: gleam format --check src test
+          nix develop .#og-ci --command bash -c '
+            set -e
+            cd og
+            gleam deps download
+            npm ci
+            gleam test
+            gleam format --check src test
+          '
 
   deploy:
     needs: [changes, test-og]
@@ -150,9 +143,10 @@ jobs:
 
       # OG Workerはビルド入力 (og/・記事コーパス・nix定義) に変更がある場合のみ
       # デプロイ (手動実行時は常にデプロイ)
-      # deploy-og は gleam/npm を使うため、それらを含まない .#ci ではなく
-      # デフォルトのdevShellを使う (devShellのshellHookが最新コーパスで
-      # サブセットしたフォントを og/static/fonts/ に配置する)
+      # deploy-og は deno/gleam/npm/wrangler を使うため、それらを含む .#og-ci
+      # を使う (editor tooling込みのデフォルトdevShellはCI向けでないため。
+      # .#og-ci のshellHookがogFontsでサブセットしたフォントを
+      # og/static/fonts/ に配置する)
       - name: Deploy OG worker
         if: >-
           (github.event_name == 'workflow_dispatch' || needs.changes.outputs.og == 'true') &&
@@ -160,4 +154,4 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: nix develop --command deno task deploy-og
+        run: nix develop .#og-ci --command deno task deploy-og
