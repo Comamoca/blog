@@ -230,7 +230,12 @@
 
           treefmt = {
             projectRootFile = "flake.nix";
-            settings.excludes = [ ".commandcode/**" ];
+            # pnpm-lock.yamlはpnpmが生成するためdenoのフォーマットを当てると
+            # 差分が出続け、pre-commitのtreefmtが常に失敗する
+            settings.excludes = [
+              ".commandcode/**"
+              "**/pnpm-lock.yaml"
+            ];
             programs = {
               nixfmt.enable = true;
               deno = {
