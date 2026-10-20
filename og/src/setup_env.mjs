@@ -2,16 +2,18 @@
  * 起動時の環境調整 (satoriの依存emscripten対応)。
  *
  * - Workersには location が無いため、emscriptenの参照先として設定する
- * - satori/yogaのwasmロードは `fetch(dataURI, {credentials})` 形式で行われるが
+ * - satoriのwasmロードは `fetch(dataURI, {credentials})` 形式で行われるが
  *   workerdはcredentialsフィールド・data URIを許可しないため、
  *   emscriptenが要求する最小限のインターフェースを持つ擬似Responseを返す
- * - バイト列からのWebAssembly.instantiate / harfbuzzjsのaddFunction内部の
+ * - バイト列からのWebAssembly.instantiate / harfbuzzのaddFunction内部の
  *   WebAssembly.Module生成は動的コンパイル禁止で失敗するため、
- *   静的import済みのモジュール (yoga.wasm / shims/*.wasm) へ差し替える
+ *   静的import済みのモジュール (layout.wasm / hb.wasm / shims/*.wasm) へ
+ *   差し替える
  * - workerdのinstantiateはInstanceを直接返すため、emscriptenが期待する
  *   {instance} 形へ正規化する
  */
-import yogaWasmModule from "satori/yoga.wasm";
+import layoutWasmModule from "satori/layout.wasm";
+import hbWasmModule from "harfbuzzjs/hb.wasm";
 import shimVi from "og-wasm-shims/vi.wasm";
 import shimViiiffi from "og-wasm-shims/viiiffi.wasm";
 import shimViiiffffffi from "og-wasm-shims/viiiffffffi.wasm";
@@ -62,12 +64,35 @@ globalThis.fetch = (input, init) => {
   return normalize(ogFetch(input, init), input);
 };
 
+// satoriはlayout/harfbuzzのwasmをどちらもbase64で内蔵し、バイト列から
+// instantiateする。workerdは動的コンパイルを禁止するため静的importした
+// モジュールへ差し替えるが、どちらを渡すかはimportsの形で判別する。
+// (以前は無条件にlayout側へ差し替えていたため、harfbuzz初期化が
+// 「Import #0 ... is not an object or function」で恒久故障していた)
+function staticModuleFor(imports) {
+  if (typeof imports?.env?.resolve_calc === "function") {
+    return layoutWasmModule;
+  }
+  if (imports?.wasi_snapshot_preview1) {
+    return hbWasmModule;
+  }
+  return null;
+}
+
 WebAssembly.instantiate = (source, imports) => {
   if (
     (source instanceof Uint8Array || source instanceof ArrayBuffer) &&
     imports
   ) {
-    return normalize(ogInstantiate(yogaWasmModule, imports), yogaWasmModule);
+    const module = staticModuleFor(imports);
+    if (!module) {
+      throw new Error(
+        "setup_env: no statically imported wasm matches these imports: " +
+          Object.keys(imports).join(",") +
+          " (satori added a new wasm? add a static import for it)",
+      );
+    }
+    return normalize(ogInstantiate(module, imports), module);
   }
   return normalize(ogInstantiate(source, imports), source);
 };
