@@ -19,9 +19,10 @@ export async function cardLinkElement(url: URL): Promise<string> {
   const name = url.origin;
   const title = og.title === undefined ? og.siteTitle : og.title;
 
-  const image = og.image === undefined
-    ? ""
-    : `<img class="object-cover rounded-tr-lg rounded-br-lg h-full w-50 !m-0" src="${og.image}" alt="OGP image" />`;
+  const image =
+    og.image === undefined
+      ? ""
+      : `<img class="object-cover rounded-tr-lg rounded-br-lg h-full w-50 !m-0" src="${og.image}" alt="OGP image" />`;
 
   return `
   <div class="flex justify-center border-t border-gray-200 h-15 md:h-25 mx-5 md:mx-10">

@@ -1,7 +1,4 @@
-import {
-  assertEquals,
-  assertExists,
-} from "https://deno.land/std@0.210.0/assert/mod.ts";
+import { assertEquals, assertExists } from "https://deno.land/std@0.210.0/assert/mod.ts";
 
 // Environment state management for testing
 let originalRelease: string | undefined;
@@ -121,46 +118,39 @@ Deno.test("Environment Consistency Verification", async (t) => {
   environmentState.initialize();
 
   try {
-    await t.step(
-      "should have identical HTML structure across environments",
-      () => {
-        const testData = {
-          title: "Consistency Test Article",
-          siteTitle: "Test Site",
-          image: "https://example.com/test.jpg",
-        };
-        const testURL = "https://consistency-test.com";
+    await t.step("should have identical HTML structure across environments", () => {
+      const testData = {
+        title: "Consistency Test Article",
+        siteTitle: "Test Site",
+        image: "https://example.com/test.jpg",
+      };
+      const testURL = "https://consistency-test.com";
 
-        try {
-          // Generate HTML in development environment
-          environmentState.setDevelopment();
-          const devHTML = generateLinkCardHTML(testData, testURL);
+      try {
+        // Generate HTML in development environment
+        environmentState.setDevelopment();
+        const devHTML = generateLinkCardHTML(testData, testURL);
 
-          // Generate HTML in production environment
-          environmentState.setProduction();
-          const prodHTML = generateLinkCardHTML(testData, testURL);
+        // Generate HTML in production environment
+        environmentState.setProduction();
+        const prodHTML = generateLinkCardHTML(testData, testURL);
 
-          // Verify identical structure
-          assertEquals(
-            devHTML,
-            prodHTML,
-            "HTML structure must be identical across environments",
-          );
-          assertEquals(
-            devHTML.includes("flex flex-grow"),
-            true,
-            "Layout classes should be consistent",
-          );
-          assertEquals(
-            prodHTML.includes("flex flex-grow"),
-            true,
-            "Layout classes should be consistent",
-          );
-        } finally {
-          environmentState.restore();
-        }
-      },
-    );
+        // Verify identical structure
+        assertEquals(devHTML, prodHTML, "HTML structure must be identical across environments");
+        assertEquals(
+          devHTML.includes("flex flex-grow"),
+          true,
+          "Layout classes should be consistent",
+        );
+        assertEquals(
+          prodHTML.includes("flex flex-grow"),
+          true,
+          "Layout classes should be consistent",
+        );
+      } finally {
+        environmentState.restore();
+      }
+    });
 
     await t.step("should maintain consistent TailwindCSS classes", () => {
       const testData = { title: "CSS Test", siteTitle: "Test" };
@@ -173,23 +163,11 @@ Deno.test("Environment Consistency Verification", async (t) => {
         const prodHTML = generateLinkCardHTML(testData, "https://css-test.com");
 
         // Check specific responsive classes (common to all linkcards)
-        const responsiveClasses = [
-          "md:!text-base",
-          "md:max-w-full",
-          "md:min-w-10",
-        ];
+        const responsiveClasses = ["md:!text-base", "md:max-w-full", "md:min-w-10"];
 
         responsiveClasses.forEach((className) => {
-          assertEquals(
-            devHTML.includes(className),
-            true,
-            `Dev should include ${className}`,
-          );
-          assertEquals(
-            prodHTML.includes(className),
-            true,
-            `Prod should include ${className}`,
-          );
+          assertEquals(devHTML.includes(className), true, `Dev should include ${className}`);
+          assertEquals(prodHTML.includes(className), true, `Prod should include ${className}`);
           assertEquals(
             devHTML.includes(className),
             prodHTML.includes(className),
@@ -214,11 +192,7 @@ Deno.test("Environment Consistency Verification", async (t) => {
         // Both environments should enable the plugin by default
         assertEquals(devPlugins.length > 0, true, "Dev should enable plugin");
         assertEquals(prodPlugins.length > 0, true, "Prod should enable plugin");
-        assertEquals(
-          devPlugins.length,
-          prodPlugins.length,
-          "Plugin count should match",
-        );
+        assertEquals(devPlugins.length, prodPlugins.length, "Plugin count should match");
       } finally {
         environmentState.restore();
       }
@@ -237,11 +211,7 @@ Deno.test("Environment Consistency Verification", async (t) => {
         const prodDisabled = configureLinkCard();
 
         assertEquals(devDisabled.length, 0, "Dev should respect disable flag");
-        assertEquals(
-          prodDisabled.length,
-          0,
-          "Prod should respect disable flag",
-        );
+        assertEquals(prodDisabled.length, 0, "Prod should respect disable flag");
         assertEquals(
           devDisabled.length,
           prodDisabled.length,
@@ -261,16 +231,10 @@ Deno.test("Environment Consistency Verification", async (t) => {
       testCases.forEach((testData) => {
         try {
           environmentState.setDevelopment();
-          const devHTML = generateLinkCardHTML(
-            testData,
-            "https://image-test.com",
-          );
+          const devHTML = generateLinkCardHTML(testData, "https://image-test.com");
 
           environmentState.setProduction();
-          const prodHTML = generateLinkCardHTML(
-            testData,
-            "https://image-test.com",
-          );
+          const prodHTML = generateLinkCardHTML(testData, "https://image-test.com");
 
           assertEquals(
             devHTML,
@@ -303,17 +267,10 @@ Deno.test("Environment Consistency Verification", async (t) => {
         const devHTML = generateLinkCardHTML(testData, "https://a11y-test.com");
 
         environmentState.setProduction();
-        const prodHTML = generateLinkCardHTML(
-          testData,
-          "https://a11y-test.com",
-        );
+        const prodHTML = generateLinkCardHTML(testData, "https://a11y-test.com");
 
         // Accessibility features that must be consistent
-        const a11yFeatures = [
-          'title="Link Card"',
-          'href="https://a11y-test.com"',
-          "!no-underline",
-        ];
+        const a11yFeatures = ['title="Link Card"', 'href="https://a11y-test.com"', "!no-underline"];
 
         a11yFeatures.forEach((feature) => {
           assertEquals(

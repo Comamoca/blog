@@ -1,7 +1,6 @@
 # 実装計画
 
--
-  1. [ ] 回帰検証の土台づくり (最初に行う)
+- 1. [ ] 回帰検証の土台づくり (最初に行う)
 - [ ] 1.1 現行 main のベースライン確認
   - worktree (`feat/org-mode-migration`) で `deno task test` を実行し、
     `tests/url_compat_test.ts` / `tests/feed_compat_test.ts` が green
@@ -19,8 +18,7 @@
   - 生HTML (`<` を含む) 記事数、テーブルを含む記事数を把握する
   - _Requirements: 1.3, 1.4, 1.5_
 
--
-  2. [ ] Phase 0: org 出力の Spike (正規化方針の確定)
+- 2. [ ] Phase 0: org 出力の Spike (正規化方針の確定)
 - [ ] 2.1 uniorg パイプラインの試作
   - `unified().use(uniorgParse).use(uniorgRehype)` を一時スクリプトで動かし、
     org の代表サンプルを HTML 化する
@@ -46,8 +44,7 @@
   - `#+DATE:` を `MMM d yyyy` へ正規化する方針を確定する
   - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
 
--
-  3. [ ] Phase 1: org パイプライン追加 (md は無傷)
+- 3. [ ] Phase 1: org パイプライン追加 (md は無傷)
 - [ ] 3.1 Shiki highlighter の共有化
   - `ssg/markdown.ts` から highlighter 生成と `shiki()` ラッパーを
     `ssg/highlight.ts` へ切り出す
@@ -106,8 +103,7 @@
     描画が変化していないことを確認する
   - _Requirements: 8.1_
 
--
-  4. [ ] Phase 2: 変換器 + パイロット
+- 4. [ ] Phase 2: 変換器 + パイロット
 - [ ] 4.1 `scripts/md2org.ts` の実装
   - YAML frontmatter を org キーワードへ変換する
   - 本文を pandoc (`nix shell nixpkgs#pandoc` の `-f gfm -t org`) で変換する
@@ -123,8 +119,7 @@
   - 対象記事の dist HTML 差分と、RSS の pubDate/title/link の一致を検証する
   - _Requirements: 4.3, 4.4_
 
--
-  5. [ ] Phase 3: 一括変換
+- 5. [ ] Phase 3: 一括変換
 - [ ] 5.1 年度単位のバッチ変換
   - 残りの記事を年度単位で変換し、各バッチで build + url_compat を実行する
   - 各バッチで dist HTML 差分 (脚注部以外) と RSS diff を確認する
@@ -134,8 +129,7 @@
   - 全記事が `.org` になったことを確認する
   - _Requirements: 4.1, 8.2_
 
--
-  6. [ ] Phase 4: カットオーバー (blog)
+- 6. [ ] Phase 4: カットオーバー (blog)
 - [ ] 6.1 `pre-md-removal` タグの作成
   - md パイプラインが無傷で残る最後のコミットにタグを打つ (復元点)
   - _Requirements: 8.3_
@@ -167,8 +161,7 @@
   - `deno task test` (url_compat / feed_compat) と `npm run build` を通す
   - _Requirements: 4.1, 4.3, 7.1_
 
--
-  7. [ ] Emacs (dotfiles) の org 統合
+- 7. [ ] Emacs (dotfiles) の org 統合
 - [ ] 7.1 タグ補完の org 対応 (両対応 → 最終的に org のみ)
   - `my/blog-tags-*` (init.el:2630-2781) の YAML parse を org キーワード parse
     へ 変更し、走査対象を `.org` へ変更する

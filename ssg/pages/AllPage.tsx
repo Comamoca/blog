@@ -2,13 +2,15 @@ import Logo from "../../src/_components/Logo.tsx";
 import PostList from "../../src/_components/PostList.tsx";
 import type { PageLink, Pagination, PostSummary } from "./types.ts";
 
-export default function AllPage(
-  { posts, pagination, pageLinks }: {
-    posts: PostSummary[];
-    pagination: Pagination;
-    pageLinks: PageLink[];
-  },
-) {
+export default function AllPage({
+  posts,
+  pagination,
+  pageLinks,
+}: {
+  posts: PostSummary[];
+  pagination: Pagination;
+  pageLinks: PageLink[];
+}) {
   return (
     <div className="mx-8 text-lg md:mx-auto">
       <div className="my-8 flex flex-col justify-center">
@@ -38,10 +40,7 @@ export default function AllPage(
               {"omitted" in p ? "…" : p.page}
             </a>
           ))}
-          <a
-            href={pagination.next ?? undefined}
-            className="btn btn-sm px-1.5 md:btn-lg md:px-4"
-          >
+          <a href={pagination.next ?? undefined} className="btn btn-sm px-1.5 md:btn-lg md:px-4">
             {"後へ"}
           </a>
         </nav>

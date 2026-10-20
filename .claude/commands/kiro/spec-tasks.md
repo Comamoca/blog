@@ -45,8 +45,7 @@ Generate detailed implementation tasks for feature: **$1**
 - Format exactly as:
 
 ```markdown
--
-  1. [ ] Major task description
+- 1. [ ] Major task description
 - [ ] 1.1 Sub-task description
   - Detail item 1
   - Detail item 2
@@ -56,8 +55,7 @@ Generate detailed implementation tasks for feature: **$1**
   - Detail items...
   - _Requirements: X.X_
 
--
-  2. [ ] Next major task (NOT 1 again!)
+- 2. [ ] Next major task (NOT 1 again!)
 - [ ] 2.1 Sub-task...
 ```
 
@@ -97,16 +95,14 @@ Generate detailed implementation tasks for feature: **$1**
 ```markdown
 # Implementation Plan
 
--
-  1. [ ] Set up project foundation and infrastructure
+- 1. [ ] Set up project foundation and infrastructure
   - Initialize project with required technology stack
   - Configure server infrastructure and request handling
   - Establish data storage and caching layer
   - Set up configuration and environment management
   - _Requirements: All requirements need foundational setup_
 
--
-  2. [ ] Build authentication and user management system
+- 2. [ ] Build authentication and user management system
 - [ ] 2.1 Implement core authentication functionality
   - Set up user data storage with validation rules
   - Implement secure authentication mechanism

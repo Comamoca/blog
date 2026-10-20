@@ -1,7 +1,6 @@
 # 実装計画
 
--
-  1. [ ] Workerプロジェクトのセットアップ
+- 1. [ ] Workerプロジェクトのセットアップ
 - [x] 1.1 `og/` Gleamプロジェクトの新規作成
   - gleam.tomlにhinoto (git依存) / lustre / gleam_http / gleam_stdlib /
     gleam_javascript を定義
@@ -17,8 +16,7 @@
   - `wrangler dev` でローカル起動を確認
   - _Requirements: 6.1, 6.4_
 
--
-  2. [ ] リクエスト処理の実装
+- 2. [ ] リクエスト処理の実装
 - [x] 2.1 クエリパースとバリデーション
   - `gleam/uri` によるパラメータ解析 (`l` / `t` / `d`)
   - 必須パラメータ欠落・不正値で400を返す処理
@@ -30,8 +28,7 @@
   - `Cache-Control: public, max-age=31536000, immutable` レスポンスヘッダ
   - _Requirements: 2.2, 2.3_
 
--
-  3. [ ] 描画パイプラインの実装
+- 3. [ ] 描画パイプラインの実装
 - [x] 3.1 フォントサブセットの生成と読み込み
   - pyftsubsetでNoto Sans CJK JP Regular/Boldをサブセット
     (title/descriptionコーパス + JIS X 0208の漢字全字、~4.3MB/ウェイト)
@@ -66,8 +63,7 @@
     - harfbuzzjs: instantiateWasmフック + addFunction用shim事前コンパイル
   - _Requirements: 5.1, 5.4, 5.5_
 
--
-  4. [ ] Lume側の変更
+- 4. [ ] Lume側の変更
 - [x] 4.1 og-metasフックの実装
   - `ogLayout: "post" | "main"` データキーへの置換 (blog/_data.js + 8ページ)
   - `site.process([".html"], ...)` で `metas.image` にWorker URLを設定
@@ -83,8 +79,7 @@
   - RELEASE=1ビルドでOG画像PNGが出力されないことの確認、ビルド時間計測
   - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
--
-  5. [ ] デプロイとCI
+- 5. [ ] デプロイとCI
 - [x] 5.1 Workerデプロイの追加
   - deploy.yamlに `gleam build --target javascript` → `wrangler deploy`
     ジョブを追加
@@ -98,8 +93,7 @@
   - 測定値: バンドル952KB gzip (Free 3MB以内)、レンダリング約30-60ms
   - _Requirements: 1.5_
 
--
-  6. [ ] テストと検証
+- 6. [ ] テストと検証
 - [x] 6.1 ユニットテスト
   - gleeunit: クエリパース・バリデーション・レイアウト選択
   - deno test: LumeフックのURL生成 (切り詰め・決定性・RELEASEゲート)

@@ -1,8 +1,8 @@
 {
   "name": "og_worker-og-worker",
   "private": true,
-  "type": "module",
   "description": "wrangler/node bundle and test dependencies for the og_worker Gleam project",
+  "type": "module",
   "dependencies": {
     "@comamoca/komeiji": "^0.1.1",
     "@resvg/resvg-js": "^2.6.2",

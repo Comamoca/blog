@@ -1,5 +1,5 @@
 function hbjs(Module) {
-  'use strict';
+  "use strict";
 
   var exports = Module.wasmExports;
   var utf8Decoder = new TextDecoder("utf8");
@@ -10,17 +10,19 @@ function hbjs(Module) {
   let stackRestore = Module.stackRestore;
   let stackAlloc = Module.stackAlloc;
 
-  var freeFuncPtr = addFunction(function (ptr) { exports.free(ptr); }, 'vi');
+  var freeFuncPtr = addFunction(function (ptr) {
+    exports.free(ptr);
+  }, "vi");
 
   const TRACE_PHASE_DONT_STOP = 0;
   const TRACE_PHASE_GSUB = 1;
   const TRACE_PHASE_GPOS = 2;
 
-  const STATIC_ARRAY_SIZE = 128
+  const STATIC_ARRAY_SIZE = 128;
 
   const HB_MEMORY_MODE_WRITABLE = 2;
   const HB_SET_VALUE_INVALID = -1;
-  const HB_OT_NAME_ID_INVALID = 0xFFFF;
+  const HB_OT_NAME_ID_INVALID = 0xffff;
 
   const bufferContentType = {
     0: "INVALID",
@@ -28,43 +30,43 @@ function hbjs(Module) {
     2: "GLYPHS",
   };
   const bufferSerializeFlags = {
-    "DEFAULT": 0x00000000,
-    "NO_CLUSTERS": 0x00000001,
-    "NO_POSITIONS": 0x00000002,
-    "NO_GLYPH_NAMES": 0x00000004,
-    "GLYPH_EXTENTS": 0x00000008,
-    "GLYPH_FLAGS": 0x00000010,
-    "NO_ADVANCES": 0x00000020,
+    DEFAULT: 0x00000000,
+    NO_CLUSTERS: 0x00000001,
+    NO_POSITIONS: 0x00000002,
+    NO_GLYPH_NAMES: 0x00000004,
+    GLYPH_EXTENTS: 0x00000008,
+    GLYPH_FLAGS: 0x00000010,
+    NO_ADVANCES: 0x00000020,
   };
 
   const bufferFlags = {
-    "DEFAULT": 0x00000000,
-    "BOT": 0x00000001,
-    "EOT": 0x00000002,
-    "PRESERVE_DEFAULT_IGNORABLES": 0x00000004,
-    "REMOVE_DEFAULT_IGNORABLES": 0x00000008,
-    "DO_NOT_INSERT_DOTTED_CIRCLE": 0x00000010,
-    "VERIFY": 0x00000020,
-    "PRODUCE_UNSAFE_TO_CONCAT": 0x00000040,
-    "PRODUCE_SAFE_TO_INSERT_TATWEEL": 0x00000080,
+    DEFAULT: 0x00000000,
+    BOT: 0x00000001,
+    EOT: 0x00000002,
+    PRESERVE_DEFAULT_IGNORABLES: 0x00000004,
+    REMOVE_DEFAULT_IGNORABLES: 0x00000008,
+    DO_NOT_INSERT_DOTTED_CIRCLE: 0x00000010,
+    VERIFY: 0x00000020,
+    PRODUCE_UNSAFE_TO_CONCAT: 0x00000040,
+    PRODUCE_SAFE_TO_INSERT_TATWEEL: 0x00000080,
   };
 
   function _hb_tag(s) {
     return (
-      (s.charCodeAt(0) & 0xFF) << 24 |
-      (s.charCodeAt(1) & 0xFF) << 16 |
-      (s.charCodeAt(2) & 0xFF) << 8 |
-      (s.charCodeAt(3) & 0xFF) << 0
+      ((s.charCodeAt(0) & 0xff) << 24) |
+      ((s.charCodeAt(1) & 0xff) << 16) |
+      ((s.charCodeAt(2) & 0xff) << 8) |
+      ((s.charCodeAt(3) & 0xff) << 0)
     );
   }
 
   function _hb_untag(tag) {
     return [
-      String.fromCharCode((tag >> 24) & 0xFF),
-      String.fromCharCode((tag >> 16) & 0xFF),
-      String.fromCharCode((tag >> 8) & 0xFF),
-      String.fromCharCode((tag >> 0) & 0xFF)
-    ].join('');
+      String.fromCharCode((tag >> 24) & 0xff),
+      String.fromCharCode((tag >> 16) & 0xff),
+      String.fromCharCode((tag >> 8) & 0xff),
+      String.fromCharCode((tag >> 0) & 0xff),
+    ].join("");
   }
 
   function _utf8_ptr_to_string(ptr, length) {
@@ -80,21 +82,23 @@ function hbjs(Module) {
   }
 
   /**
-  * Use when you know the input range should be ASCII.
-  * Faster than encoding to UTF-8
-  **/
+   * Use when you know the input range should be ASCII.
+   * Faster than encoding to UTF-8
+   **/
   function _string_to_ascii_ptr(text) {
     const ptr = exports.malloc(text.length + 1);
     for (let i = 0; i < text.length; ++i) {
       const char = text.charCodeAt(i);
-      if (char > 127) throw new Error('Expected ASCII text');
+      if (char > 127) throw new Error("Expected ASCII text");
       Module.HEAPU8[ptr + i] = char;
     }
     Module.HEAPU8[ptr + text.length] = 0;
     return {
       ptr: ptr,
       length: text.length,
-      free: function () { exports.free(ptr); }
+      free: function () {
+        exports.free(ptr);
+      },
     };
   }
 
@@ -104,7 +108,9 @@ function hbjs(Module) {
     return {
       ptr: ptr,
       length: text.length,
-      free: function () { exports.free(ptr); }
+      free: function () {
+        exports.free(ptr);
+      },
     };
   }
 
@@ -115,7 +121,9 @@ function hbjs(Module) {
     return {
       ptr: ptr,
       length: words.length,
-      free: function () { exports.free(ptr); }
+      free: function () {
+        exports.free(ptr);
+      },
     };
   }
 
@@ -132,19 +140,27 @@ function hbjs(Module) {
   }
 
   /**
-  * Create an object representing a Harfbuzz blob.
-  * @param {string} blob A blob of binary data (usually the contents of a font file).
-  **/
+   * Create an object representing a Harfbuzz blob.
+   * @param {string} blob A blob of binary data (usually the contents of a font file).
+   **/
   function createBlob(blob) {
     var blobPtr = exports.malloc(blob.byteLength);
     Module.HEAPU8.set(new Uint8Array(blob), blobPtr);
-    var ptr = exports.hb_blob_create(blobPtr, blob.byteLength, HB_MEMORY_MODE_WRITABLE, blobPtr, freeFuncPtr);
+    var ptr = exports.hb_blob_create(
+      blobPtr,
+      blob.byteLength,
+      HB_MEMORY_MODE_WRITABLE,
+      blobPtr,
+      freeFuncPtr,
+    );
     return {
       ptr: ptr,
       /**
-      * Free the object.
-      */
-      destroy: function () { exports.hb_blob_destroy(ptr); }
+       * Free the object.
+       */
+      destroy: function () {
+        exports.hb_blob_destroy(ptr);
+      },
     };
   }
 
@@ -164,11 +180,11 @@ function hbjs(Module) {
   }
 
   /**
-  * Create an object representing a Harfbuzz face.
-  * @param {object} blob An object returned from `createBlob`.
-  * @param {number} index The index of the font in the blob. (0 for most files,
-  *  or a 0-indexed font number if the `blob` came form a TTC/OTC file.)
-  **/
+   * Create an object representing a Harfbuzz face.
+   * @param {object} blob An object returned from `createBlob`.
+   * @param {number} index The index of the font in the blob. (0 for most files,
+   *  or a 0-indexed font number if the `blob` came form a TTC/OTC file.)
+   **/
   function createFace(blob, index) {
     var ptr = exports.hb_face_create(blob.ptr, index);
     const upem = exports.hb_face_get_upem(ptr);
@@ -182,7 +198,9 @@ function hbjs(Module) {
       reference_table: function (table) {
         var blob = exports.hb_face_reference_table(ptr, _hb_tag(table));
         var length = exports.hb_blob_get_length(blob);
-        if (!length) { return; }
+        if (!length) {
+          return;
+        }
         var blobptr = exports.hb_blob_get_data(blob, null);
         var table_string = Module.HEAPU8.subarray(blobptr, blobptr + length);
         return table_string;
@@ -201,7 +219,7 @@ function hbjs(Module) {
           result[_hb_untag(Module.HEAPU32[axis / 4 + i * 8 + 1])] = {
             min: Module.HEAPF32[axis / 4 + i * 8 + 4],
             default: Module.HEAPF32[axis / 4 + i * 8 + 5],
-            max: Module.HEAPF32[axis / 4 + i * 8 + 6]
+            max: Module.HEAPF32[axis / 4 + i * 8 + 6],
           };
         });
         stackRestore(sp);
@@ -232,11 +250,18 @@ function hbjs(Module) {
         var tags = [];
         while (scriptCount == STATIC_ARRAY_SIZE) {
           Module.HEAPU32[scriptCountPtr / 4] = scriptCount;
-          exports.hb_ot_layout_table_get_script_tags(ptr, tableTag, startOffset,
-            scriptCountPtr, scriptTagsPtr);
+          exports.hb_ot_layout_table_get_script_tags(
+            ptr,
+            tableTag,
+            startOffset,
+            scriptCountPtr,
+            scriptTagsPtr,
+          );
           scriptCount = Module.HEAPU32[scriptCountPtr / 4];
-          var scriptTags = Module.HEAPU32.subarray(scriptTagsPtr / 4,
-            scriptTagsPtr / 4 + scriptCount);
+          var scriptTags = Module.HEAPU32.subarray(
+            scriptTagsPtr / 4,
+            scriptTagsPtr / 4 + scriptCount,
+          );
           tags.push(...Array.from(scriptTags).map(_hb_untag));
           startOffset += scriptCount;
         }
@@ -258,17 +283,23 @@ function hbjs(Module) {
         var tags = [];
         while (featureCount == STATIC_ARRAY_SIZE) {
           Module.HEAPU32[featureCountPtr / 4] = featureCount;
-          exports.hb_ot_layout_table_get_feature_tags(ptr, tableTag, startOffset,
-            featureCountPtr, featureTagsPtr);
+          exports.hb_ot_layout_table_get_feature_tags(
+            ptr,
+            tableTag,
+            startOffset,
+            featureCountPtr,
+            featureTagsPtr,
+          );
           featureCount = Module.HEAPU32[featureCountPtr / 4];
-          var scriptTags = Module.HEAPU32.subarray(featureTagsPtr / 4,
-            featureTagsPtr / 4 + featureCount);
+          var scriptTags = Module.HEAPU32.subarray(
+            featureTagsPtr / 4,
+            featureTagsPtr / 4 + featureCount,
+          );
           tags.push(...Array.from(scriptTags).map(_hb_untag));
           startOffset += featureCount;
         }
         stackRestore(sp);
         return tags;
-
       },
       /**
        * Return language tags in the given face's GSUB or GPOS table, underneath
@@ -286,11 +317,19 @@ function hbjs(Module) {
         var tags = [];
         while (languageCount == STATIC_ARRAY_SIZE) {
           Module.HEAPU32[languageCountPtr / 4] = languageCount;
-          exports.hb_ot_layout_script_get_language_tags(ptr, tableTag, scriptIndex, startOffset,
-            languageCountPtr, languageTagsPtr);
+          exports.hb_ot_layout_script_get_language_tags(
+            ptr,
+            tableTag,
+            scriptIndex,
+            startOffset,
+            languageCountPtr,
+            languageTagsPtr,
+          );
           languageCount = Module.HEAPU32[languageCountPtr / 4];
-          var languageTags = Module.HEAPU32.subarray(languageTagsPtr / 4,
-            languageTagsPtr / 4 + languageCount);
+          var languageTags = Module.HEAPU32.subarray(
+            languageTagsPtr / 4,
+            languageTagsPtr / 4 + languageCount,
+          );
           tags.push(...Array.from(languageTags).map(_hb_untag));
           startOffset += languageCount;
         }
@@ -314,11 +353,20 @@ function hbjs(Module) {
         var tags = [];
         while (featureCount == STATIC_ARRAY_SIZE) {
           Module.HEAPU32[featureCountPtr / 4] = featureCount;
-          exports.hb_ot_layout_language_get_feature_tags(ptr, tableTag, scriptIndex, languageIndex, startOffset,
-            featureCountPtr, featureTagsPtr);
+          exports.hb_ot_layout_language_get_feature_tags(
+            ptr,
+            tableTag,
+            scriptIndex,
+            languageIndex,
+            startOffset,
+            featureCountPtr,
+            featureTagsPtr,
+          );
           featureCount = Module.HEAPU32[featureCountPtr / 4];
-          var featureTags = Module.HEAPU32.subarray(featureTagsPtr / 4,
-            featureTagsPtr / 4 + featureCount);
+          var featureTags = Module.HEAPU32.subarray(
+            featureTagsPtr / 4,
+            featureTagsPtr / 4 + featureCount,
+          );
           tags.push(...Array.from(featureTags).map(_hb_untag));
           startOffset += featureCount;
         }
@@ -335,15 +383,15 @@ function hbjs(Module) {
         const gclass = exports.hb_ot_layout_get_glyph_class(ptr, glyph);
         switch (gclass) {
           case 0:
-            return 'UNCLASSIFIED';
+            return "UNCLASSIFIED";
           case 1:
-            return 'BASE_GLYPH';
+            return "BASE_GLYPH";
           case 2:
-            return 'LIGATURE';
+            return "LIGATURE";
           case 3:
-            return 'MARK';
+            return "MARK";
           case 4:
-            return 'COMPONENT';
+            return "COMPONENT";
         }
       },
       /**
@@ -360,8 +408,8 @@ function hbjs(Module) {
           // A more robust way would involve ading helper C functions to access
           // the struct and use them here.
           entries.push({
-            nameId: Module.HEAPU32[(entriesPtr / 4) + (i * 3)],
-            language: _language_to_string(Module.HEAPU32[(entriesPtr / 4) + (i * 3) + 2])
+            nameId: Module.HEAPU32[entriesPtr / 4 + i * 3],
+            language: _language_to_string(Module.HEAPU32[entriesPtr / 4 + i * 3 + 2]),
           });
         }
         stackRestore(sp);
@@ -399,8 +447,16 @@ function hbjs(Module) {
         var numNamedParametersPtr = stackAlloc(4);
         var firstParameterIdPtr = stackAlloc(4);
 
-        var found = exports.hb_ot_layout_feature_get_name_ids(ptr, tableTag, featureIndex,
-          labelIdPtr, tooltipIdPtr, sampleIdPtr, numNamedParametersPtr, firstParameterIdPtr);
+        var found = exports.hb_ot_layout_feature_get_name_ids(
+          ptr,
+          tableTag,
+          featureIndex,
+          labelIdPtr,
+          tooltipIdPtr,
+          sampleIdPtr,
+          numNamedParametersPtr,
+          firstParameterIdPtr,
+        );
 
         var names = null;
         if (found) {
@@ -409,12 +465,15 @@ function hbjs(Module) {
           let sampleTextNameId = Module.HEAPU32[sampleIdPtr / 4];
           let numNamedParameters = Module.HEAPU32[numNamedParametersPtr / 4];
           let firstParameterId = Module.HEAPU32[firstParameterIdPtr / 4];
-          let paramUiLabelNameIds = Array(numNamedParameters).fill().map((_, i) => firstParameterId + i);
+          let paramUiLabelNameIds = Array(numNamedParameters)
+            .fill()
+            .map((_, i) => firstParameterId + i);
           names = {
             uiLabelNameId: uiLabelNameId == HB_OT_NAME_ID_INVALID ? null : uiLabelNameId,
-            uiTooltipTextNameId: uiTooltipTextNameId == HB_OT_NAME_ID_INVALID ? null : uiTooltipTextNameId,
+            uiTooltipTextNameId:
+              uiTooltipTextNameId == HB_OT_NAME_ID_INVALID ? null : uiTooltipTextNameId,
             sampleTextNameId: sampleTextNameId == HB_OT_NAME_ID_INVALID ? null : sampleTextNameId,
-            paramUiLabelNameIds: paramUiLabelNameIds
+            paramUiLabelNameIds: paramUiLabelNameIds,
           };
         }
 
@@ -433,10 +492,10 @@ function hbjs(Module) {
   var pathBuffer = "";
 
   /**
-  * Create an object representing a Harfbuzz font.
-  * @param {object} blob An object returned from `createFace`.
-  * @param {number} ptr Optional pointer to an existing font.
-  **/
+   * Create an object representing a Harfbuzz font.
+   * @param {object} blob An object returned from `createFace`.
+   * @param {number} ptr Optional pointer to an existing font.
+   **/
   function createFont(face, ptr) {
     var ptr = ptr ? exports.hb_font_reference(ptr) : exports.hb_font_create(face.ptr);
     var drawFuncsPtr = null;
@@ -447,32 +506,43 @@ function hbjs(Module) {
     var closePathPtr = null;
 
     /**
-    * Return a glyph as an SVG path string.
-    * @param {number} glyphId ID of the requested glyph in the font.
-    **/
+     * Return a glyph as an SVG path string.
+     * @param {number} glyphId ID of the requested glyph in the font.
+     **/
     function glyphToPath(glyphId) {
       if (!drawFuncsPtr) {
         var moveTo = function (dfuncs, draw_data, draw_state, to_x, to_y, user_data) {
           pathBuffer += `M${to_x},${to_y}`;
-        }
+        };
         var lineTo = function (dfuncs, draw_data, draw_state, to_x, to_y, user_data) {
           pathBuffer += `L${to_x},${to_y}`;
-        }
-        var cubicTo = function (dfuncs, draw_data, draw_state, c1_x, c1_y, c2_x, c2_y, to_x, to_y, user_data) {
+        };
+        var cubicTo = function (
+          dfuncs,
+          draw_data,
+          draw_state,
+          c1_x,
+          c1_y,
+          c2_x,
+          c2_y,
+          to_x,
+          to_y,
+          user_data,
+        ) {
           pathBuffer += `C${c1_x},${c1_y} ${c2_x},${c2_y} ${to_x},${to_y}`;
-        }
+        };
         var quadTo = function (dfuncs, draw_data, draw_state, c_x, c_y, to_x, to_y, user_data) {
           pathBuffer += `Q${c_x},${c_y} ${to_x},${to_y}`;
-        }
+        };
         var closePath = function (dfuncs, draw_data, draw_state, user_data) {
-          pathBuffer += 'Z';
-        }
+          pathBuffer += "Z";
+        };
 
-        moveToPtr = addFunction(moveTo, 'viiiffi');
-        lineToPtr = addFunction(lineTo, 'viiiffi');
-        cubicToPtr = addFunction(cubicTo, 'viiiffffffi');
-        quadToPtr = addFunction(quadTo, 'viiiffffi');
-        closePathPtr = addFunction(closePath, 'viiii');
+        moveToPtr = addFunction(moveTo, "viiiffi");
+        lineToPtr = addFunction(lineTo, "viiiffi");
+        cubicToPtr = addFunction(cubicTo, "viiiffffffi");
+        quadToPtr = addFunction(quadTo, "viiiffffi");
+        closePathPtr = addFunction(closePath, "viiii");
         drawFuncsPtr = exports.hb_draw_funcs_create();
         exports.hb_draw_funcs_set_move_to_func(drawFuncsPtr, moveToPtr, 0, 0);
         exports.hb_draw_funcs_set_line_to_func(drawFuncsPtr, lineToPtr, 0, 0);
@@ -600,7 +670,7 @@ function hbjs(Module) {
             xBearing: Module.HEAP32[extentsPtr / 4],
             yBearing: Module.HEAP32[extentsPtr / 4 + 1],
             width: Module.HEAP32[extentsPtr / 4 + 2],
-            height: Module.HEAP32[extentsPtr / 4 + 3]
+            height: Module.HEAP32[extentsPtr / 4 + 3],
           };
         }
         stackRestore(sp);
@@ -623,23 +693,39 @@ function hbjs(Module) {
         return glyphId;
       },
       /**
-      * Return a glyph as a JSON path string
-      * based on format described on https://svgwg.org/specs/paths/#InterfaceSVGPathSegment
-      * @param {number} glyphId ID of the requested glyph in the font.
-      **/
+       * Return a glyph as a JSON path string
+       * based on format described on https://svgwg.org/specs/paths/#InterfaceSVGPathSegment
+       * @param {number} glyphId ID of the requested glyph in the font.
+       **/
       glyphToJson: function (glyphId) {
         var path = glyphToPath(glyphId);
-        return path.replace(/([MLQCZ])/g, '|$1 ').split('|').filter(function (x) { return x.length; }).map(function (x) {
-          var row = x.split(/[ ,]/g);
-          return { type: row[0], values: row.slice(1).filter(function (x) { return x.length; }).map(function (x) { return +x; }) };
-        });
+        return path
+          .replace(/([MLQCZ])/g, "|$1 ")
+          .split("|")
+          .filter(function (x) {
+            return x.length;
+          })
+          .map(function (x) {
+            var row = x.split(/[ ,]/g);
+            return {
+              type: row[0],
+              values: row
+                .slice(1)
+                .filter(function (x) {
+                  return x.length;
+                })
+                .map(function (x) {
+                  return +x;
+                }),
+            };
+          });
       },
       /**
-      * Set the font's scale factor, affecting the position values returned from
-      * shaping.
-      * @param {number} xScale Units to scale in the X dimension.
-      * @param {number} yScale Units to scale in the Y dimension.
-      **/
+       * Set the font's scale factor, affecting the position values returned from
+       * shaping.
+       * @param {number} xScale Units to scale in the X dimension.
+       * @param {number} yScale Units to scale in the Y dimension.
+       **/
       setScale: function (xScale, yScale) {
         exports.hb_font_set_scale(ptr, xScale, yScale);
       },
@@ -658,15 +744,15 @@ function hbjs(Module) {
         exports.free(vars);
       },
       /**
-      * Set the font's font functions.
-      * @param {object} fontFuncs The font functions.
-      **/
+       * Set the font's font functions.
+       * @param {object} fontFuncs The font functions.
+       **/
       setFuncs: function (fontFuncs) {
         exports.hb_font_set_funcs(ptr, fontFuncs.ptr);
       },
       /**
-      * Free the object.
-      */
+       * Free the object.
+       */
       destroy: function () {
         exports.hb_font_destroy(ptr);
         if (drawFuncsPtr) {
@@ -678,31 +764,31 @@ function hbjs(Module) {
           removeFunction(quadToPtr);
           removeFunction(closePathPtr);
         }
-      }
+      },
     };
   }
 
   /**
-  * Create a object representing a HarfBuzz font functions.
-  **/
+   * Create a object representing a HarfBuzz font functions.
+   **/
   function createFontFuncs() {
     var ptr = exports.hb_font_funcs_create();
     return {
       ptr: ptr,
       /**
-      * Set the font's glyph extents function.
-      * @param {function} func The function to set.
-      *
-      * The function takes the following arguments:
-      * @param {object} font The font.
-      * @param {number} glyph The glyph ID.
-      *
-      * The function should return an object with the following properties, or null on failure:
-      * @param {number} xBearing The x bearing of the glyph.
-      * @param {number} yBearing The y bearing of the glyph.
-      * @param {number} width The width of the glyph.
-      * @param {number} height The height of the glyph.
-      **/
+       * Set the font's glyph extents function.
+       * @param {function} func The function to set.
+       *
+       * The function takes the following arguments:
+       * @param {object} font The font.
+       * @param {number} glyph The glyph ID.
+       *
+       * The function should return an object with the following properties, or null on failure:
+       * @param {number} xBearing The x bearing of the glyph.
+       * @param {number} yBearing The y bearing of the glyph.
+       * @param {number} width The width of the glyph.
+       * @param {number} height The height of the glyph.
+       **/
       setGlyphExtentsFunc: function (func) {
         let funcPtr = addFunction(function (fontPtr, font_data, glyph, extentsPtr, user_data) {
           let font = createFont(null, fontPtr);
@@ -716,20 +802,20 @@ function hbjs(Module) {
             return 1;
           }
           return 0;
-        }, 'ippipp');
+        }, "ippipp");
         exports.hb_font_funcs_set_glyph_extents_func(ptr, funcPtr, 0, 0);
       },
       /**
-      * Set the font's glyph from name function.
-      * @param {function} func The function to set.
-      *
-      * The function takes the following arguments:
-      * @param {object} font The font.
-      * @param {string} name The glyph name.
-      *
-      * The function should return an object with the following properties, or null on failure:
-      * @param {number} glyph The glyph ID.
-      **/
+       * Set the font's glyph from name function.
+       * @param {function} func The function to set.
+       *
+       * The function takes the following arguments:
+       * @param {object} font The font.
+       * @param {string} name The glyph name.
+       *
+       * The function should return an object with the following properties, or null on failure:
+       * @param {number} glyph The glyph ID.
+       **/
       setGlyphFromNameFunc: function (func) {
         let funcPtr = addFunction(function (fontPtr, font_data, namePtr, len, glyphPtr, user_data) {
           let font = createFont(null, fontPtr);
@@ -741,57 +827,57 @@ function hbjs(Module) {
             return 1;
           }
           return 0;
-        }, 'ipppipp');
+        }, "ipppipp");
         exports.hb_font_funcs_set_glyph_from_name_func(ptr, funcPtr, 0, 0);
       },
       /**
-      * Set the font's glyph horizontal advance function.
-      * @param {function} func The function to set.
-      *
-      * The function takes the following arguments:
-      * @param {object} font The font.
-      * @param {number} glyph The glyph ID.
-      *
-      * The function should return the horizontal advance of the glyph.
-      **/
+       * Set the font's glyph horizontal advance function.
+       * @param {function} func The function to set.
+       *
+       * The function takes the following arguments:
+       * @param {object} font The font.
+       * @param {number} glyph The glyph ID.
+       *
+       * The function should return the horizontal advance of the glyph.
+       **/
       setGlyphHAdvanceFunc: function (func) {
         let funcPtr = addFunction(function (fontPtr, font_data, glyph, user_data) {
           let font = createFont(null, fontPtr);
           let advance = func(font, glyph);
           font.destroy();
           return advance;
-        }, 'ippip');
+        }, "ippip");
         exports.hb_font_funcs_set_glyph_h_advance_func(ptr, funcPtr, 0, 0);
       },
       /**
-      * Set the font's glyph vertical advance function.
-      * @param {function} func The function to set.
-      *
-      * The function takes the following arguments:
-      * @param {object} font The font.
-      * @param {number} glyph The glyph ID.
-      *
-      * The function should return the vertical advance of the glyph.
-      **/
+       * Set the font's glyph vertical advance function.
+       * @param {function} func The function to set.
+       *
+       * The function takes the following arguments:
+       * @param {object} font The font.
+       * @param {number} glyph The glyph ID.
+       *
+       * The function should return the vertical advance of the glyph.
+       **/
       setGlyphVAdvanceFunc: function (func) {
         let funcPtr = addFunction(function (fontPtr, font_data, glyph, user_data) {
           let font = createFont(null, fontPtr);
           let advance = func(font, glyph);
           font.destroy();
           return advance;
-        }, 'ippip');
+        }, "ippip");
         exports.hb_font_funcs_set_glyph_v_advance_func(ptr, funcPtr, 0, 0);
       },
       /**
-      * Set the font's glyph horizontal origin function.
-      * @param {function} func The function to set.
-      *
-      * The function takes the following arguments:
-      * @param {object} font The font.
-      * @param {number} glyph The glyph ID.
-      *
-      * The function should return the x and y horizontal origin of the glyph, or null on failure.
-      **/
+       * Set the font's glyph horizontal origin function.
+       * @param {function} func The function to set.
+       *
+       * The function takes the following arguments:
+       * @param {object} font The font.
+       * @param {number} glyph The glyph ID.
+       *
+       * The function should return the x and y horizontal origin of the glyph, or null on failure.
+       **/
       setGlyphHOriginFunc: function (func) {
         let funcPtr = addFunction(function (fontPtr, font_data, glyph, xPtr, yPtr, user_data) {
           let font = createFont(null, fontPtr);
@@ -803,19 +889,19 @@ function hbjs(Module) {
             return 1;
           }
           return 0;
-        }, 'ippippp');
+        }, "ippippp");
         exports.hb_font_funcs_set_glyph_h_origin_func(ptr, funcPtr, 0, 0);
       },
       /**
-      * Set the font's glyph vertical origin function.
-      * @param {function} func The function to set.
-      *
-      * The function takes the following arguments:
-      * @param {object} font The font.
-      * @param {number} glyph The glyph ID.
-      *
-      * The function should return the x and y vertical origin of the glyph, or null on failure.
-      **/
+       * Set the font's glyph vertical origin function.
+       * @param {function} func The function to set.
+       *
+       * The function takes the following arguments:
+       * @param {object} font The font.
+       * @param {number} glyph The glyph ID.
+       *
+       * The function should return the x and y vertical origin of the glyph, or null on failure.
+       **/
       setGlyphVOriginFunc: function (func) {
         let funcPtr = addFunction(function (fontPtr, font_data, glyph, xPtr, yPtr, user_data) {
           let font = createFont(null, fontPtr);
@@ -827,39 +913,45 @@ function hbjs(Module) {
             return 1;
           }
           return 0;
-        }, 'ippippp');
+        }, "ippippp");
         exports.hb_font_funcs_set_glyph_v_origin_func(ptr, funcPtr, 0, 0);
       },
       /**
-      * Set the font's glyph horizontal kerning function.
-      * @param {function} func The function to set.
-      *
-      * The function takes the following arguments:
-      * @param {object} font The font.
-      * @param {number} firstGlyph The first glyph ID.
-      * @param {number} secondGlyph The second glyph ID.
-      *
-      * The function should return the horizontal kerning of the glyphs.
-      **/
+       * Set the font's glyph horizontal kerning function.
+       * @param {function} func The function to set.
+       *
+       * The function takes the following arguments:
+       * @param {object} font The font.
+       * @param {number} firstGlyph The first glyph ID.
+       * @param {number} secondGlyph The second glyph ID.
+       *
+       * The function should return the horizontal kerning of the glyphs.
+       **/
       setGlyphHKerningFunc: function (func) {
-        let funcPtr = addFunction(function (fontPtr, font_data, firstGlyph, secondGlyph, user_data) {
+        let funcPtr = addFunction(function (
+          fontPtr,
+          font_data,
+          firstGlyph,
+          secondGlyph,
+          user_data,
+        ) {
           let font = createFont(null, fontPtr);
           let kerning = func(font, firstGlyph, secondGlyph);
           font.destroy();
           return kerning;
-        }, 'ippiip');
+        }, "ippiip");
         exports.hb_font_funcs_set_glyph_h_kerning_func(ptr, funcPtr, 0, 0);
       },
       /**
-      * Set the font's glyph name function.
-      * @param {function} func The function to set.
-      *
-      * The function takes the following arguments:
-      * @param {object} font The font.
-      * @param {number} glyph The glyph ID.
-      *
-      * The function should return the name of the glyph, or null on failure.
-      **/
+       * Set the font's glyph name function.
+       * @param {function} func The function to set.
+       *
+       * The function takes the following arguments:
+       * @param {object} font The font.
+       * @param {number} glyph The glyph ID.
+       *
+       * The function should return the name of the glyph, or null on failure.
+       **/
       setGlyphNameFunc: function (func) {
         let funcPtr = addFunction(function (fontPtr, font_data, glyph, namePtr, size, user_data) {
           let font = createFont(null, fontPtr);
@@ -870,19 +962,19 @@ function hbjs(Module) {
             return 1;
           }
           return 0;
-        }, 'ippipip');
+        }, "ippipip");
         exports.hb_font_funcs_set_glyph_name_func(ptr, funcPtr, 0, 0);
       },
       /**
-      * Set the font's nominal glyph function.
-      * @param {function} func The function to set.
-      *
-      * The function takes the following arguments:
-      * @param {object} font The font.
-      * @param {number} unicode The unicode.
-      *
-      * The function should return the nominal glyph of the unicode, or null on failure.
-      **/
+       * Set the font's nominal glyph function.
+       * @param {function} func The function to set.
+       *
+       * The function takes the following arguments:
+       * @param {object} font The font.
+       * @param {number} unicode The unicode.
+       *
+       * The function should return the nominal glyph of the unicode, or null on failure.
+       **/
       setNominalGlyphFunc: function (func) {
         let funcPtr = addFunction(function (fontPtr, font_data, unicode, glyphPtr, user_data) {
           let font = createFont(null, fontPtr);
@@ -893,22 +985,29 @@ function hbjs(Module) {
             return 1;
           }
           return 0;
-        }, 'ippipp');
+        }, "ippipp");
         exports.hb_font_funcs_set_nominal_glyph_func(ptr, funcPtr, 0, 0);
       },
       /**
-      * Set the font's variation glyph function.
-      * @param {function} func The function to set.
-      *
-      * The function takes the following arguments:
-      * @param {object} font The font.
-      * @param {number} unicode The unicode.
-      * @param {number} variationSelector The variation selector.
-      *
-      * The function should return the variation glyph of the unicode, or null on failure.
-      **/
+       * Set the font's variation glyph function.
+       * @param {function} func The function to set.
+       *
+       * The function takes the following arguments:
+       * @param {object} font The font.
+       * @param {number} unicode The unicode.
+       * @param {number} variationSelector The variation selector.
+       *
+       * The function should return the variation glyph of the unicode, or null on failure.
+       **/
       setVariationGlyphFunc: function (func) {
-        let funcPtr = addFunction(function (fontPtr, font_data, unicode, variationSelector, glyphPtr, user_data) {
+        let funcPtr = addFunction(function (
+          fontPtr,
+          font_data,
+          unicode,
+          variationSelector,
+          glyphPtr,
+          user_data,
+        ) {
           let font = createFont(null, fontPtr);
           let glyph = func(font, unicode, variationSelector);
           font.destroy();
@@ -917,21 +1016,21 @@ function hbjs(Module) {
             return 1;
           }
           return 0;
-        }, 'ippiipp');
+        }, "ippiipp");
         exports.hb_font_funcs_set_variation_glyph_func(ptr, funcPtr, 0, 0);
       },
       /**
-      * Set the font's horizontal extents function.
-      * @param {function} func The function to set.
-      *
-      * The function takes the following arguments:
-      * @param {object} font The font.
-      *
-      * The function should return an object with the following properties, or null on failure:
-      * @param {number} ascender The ascender of the font.
-      * @param {number} descender The descender of the font.
-      * @param {number} lineGap The line gap of the font.
-      **/
+       * Set the font's horizontal extents function.
+       * @param {function} func The function to set.
+       *
+       * The function takes the following arguments:
+       * @param {object} font The font.
+       *
+       * The function should return an object with the following properties, or null on failure:
+       * @param {number} ascender The ascender of the font.
+       * @param {number} descender The descender of the font.
+       * @param {number} lineGap The line gap of the font.
+       **/
       setFontHExtentsFunc: function (func) {
         let funcPtr = addFunction(function (fontPtr, font_data, extentsPtr, user_data) {
           let font = createFont(null, fontPtr);
@@ -944,21 +1043,21 @@ function hbjs(Module) {
             return 1;
           }
           return 0;
-        }, 'ipppp');
+        }, "ipppp");
         exports.hb_font_funcs_set_font_h_extents_func(ptr, funcPtr, 0, 0);
       },
       /**
-      * Set the font's vertical extents function.
-      * @param {function} func The function to set.
-      *
-      * The function takes the following arguments:
-      * @param {object} font The font.
-      *
-      * The function should return an object with the following properties, or null on failure:
-      * @param {number} ascender The ascender of the font.
-      * @param {number} descender The descender of the font.
-      * @param {number} lineGap The line gap of the font.
-      **/
+       * Set the font's vertical extents function.
+       * @param {function} func The function to set.
+       *
+       * The function takes the following arguments:
+       * @param {object} font The font.
+       *
+       * The function should return an object with the following properties, or null on failure:
+       * @param {number} ascender The ascender of the font.
+       * @param {number} descender The descender of the font.
+       * @param {number} lineGap The line gap of the font.
+       **/
       setFontVExtentsFunc: function (func) {
         let funcPtr = addFunction(function (fontPtr, font_data, extentsPtr, user_data) {
           let font = createFont(null, fontPtr);
@@ -971,29 +1070,29 @@ function hbjs(Module) {
             return 1;
           }
           return 0;
-        }, 'ipppp');
+        }, "ipppp");
         exports.hb_font_funcs_set_font_v_extents_func(ptr, funcPtr, 0, 0);
       },
       destroy: function () {
         exports.hb_font_funcs_destroy(ptr);
-      }
+      },
     };
   }
 
   /**
-  * Create an object representing a Harfbuzz buffer.
-  * @param {number} ptr Optional. The pointer to the buffer.
-  **/
+   * Create an object representing a Harfbuzz buffer.
+   * @param {number} ptr Optional. The pointer to the buffer.
+   **/
   function createBuffer(ptr) {
     var ptr = ptr ? exports.hb_buffer_reference(ptr) : exports.hb_buffer_create();
     return {
       ptr: ptr,
       /**
-      * Add text to the buffer.
-      * @param {string} text Text to be added to the buffer.
-      * @param {number} itemOffset Optional. The offset of the first character to add to the buffer.
-      * @param {number} itemLength Optional. The number of characters to add to the buffer, or null for the end of text.
-      **/
+       * Add text to the buffer.
+       * @param {string} text Text to be added to the buffer.
+       * @param {number} itemOffset Optional. The offset of the first character to add to the buffer.
+       * @param {number} itemLength Optional. The number of characters to add to the buffer, or null for the end of text.
+       **/
       addText: function (text, itemOffset = 0, itemLength = null) {
         const str = _string_to_utf16_ptr(text);
         if (itemLength == null) itemLength = str.length;
@@ -1001,109 +1100,121 @@ function hbjs(Module) {
         str.free();
       },
       /**
-      * Add code points to the buffer.
-      * @param {number[]} codePoints Array of code points to be added to the buffer.
-      * @param {number} itemOffset Optional. The offset of the first code point to add to the buffer.
-      * @param {number} itemLength Optional. The number of code points to add to the buffer, or null for the end of the array.
-      */
+       * Add code points to the buffer.
+       * @param {number[]} codePoints Array of code points to be added to the buffer.
+       * @param {number} itemOffset Optional. The offset of the first code point to add to the buffer.
+       * @param {number} itemLength Optional. The number of code points to add to the buffer, or null for the end of the array.
+       */
       addCodePoints: function (codePoints, itemOffset = 0, itemLength = null) {
         let codePointsPtr = exports.malloc(codePoints.length * 4);
-        let codePointsArray = Module.HEAPU32.subarray(codePointsPtr / 4, codePointsPtr / 4 + codePoints.length);
+        let codePointsArray = Module.HEAPU32.subarray(
+          codePointsPtr / 4,
+          codePointsPtr / 4 + codePoints.length,
+        );
         codePointsArray.set(codePoints);
         if (itemLength == null) itemLength = codePoints.length;
-        exports.hb_buffer_add_codepoints(ptr, codePointsPtr, codePoints.length, itemOffset, itemLength);
+        exports.hb_buffer_add_codepoints(
+          ptr,
+          codePointsPtr,
+          codePoints.length,
+          itemOffset,
+          itemLength,
+        );
         exports.free(codePointsPtr);
       },
       /**
-      * Set buffer script, language and direction.
-      *
-      * This needs to be done before shaping.
-      **/
+       * Set buffer script, language and direction.
+       *
+       * This needs to be done before shaping.
+       **/
       guessSegmentProperties: function () {
         return exports.hb_buffer_guess_segment_properties(ptr);
       },
       /**
-      * Set buffer direction explicitly.
-      * @param {string} direction: One of "ltr", "rtl", "ttb" or "btt"
-      */
+       * Set buffer direction explicitly.
+       * @param {string} direction: One of "ltr", "rtl", "ttb" or "btt"
+       */
       setDirection: function (dir) {
-        exports.hb_buffer_set_direction(ptr, {
-          ltr: 4,
-          rtl: 5,
-          ttb: 6,
-          btt: 7
-        }[dir] || 0);
+        exports.hb_buffer_set_direction(
+          ptr,
+          {
+            ltr: 4,
+            rtl: 5,
+            ttb: 6,
+            btt: 7,
+          }[dir] || 0,
+        );
       },
       /**
-      * Set buffer flags explicitly.
-      * @param {string[]} flags: A list of strings which may be either:
-      * "DEFAULT"
-      * "BOT"
-      * "EOT"
-      * "PRESERVE_DEFAULT_IGNORABLES"
-      * "REMOVE_DEFAULT_IGNORABLES"
-      * "DO_NOT_INSERT_DOTTED_CIRCLE"
-      * "VERIFY"
-      * "PRODUCE_UNSAFE_TO_CONCAT"
-      * "PRODUCE_SAFE_TO_INSERT_TATWEEL"
-      */
+       * Set buffer flags explicitly.
+       * @param {string[]} flags: A list of strings which may be either:
+       * "DEFAULT"
+       * "BOT"
+       * "EOT"
+       * "PRESERVE_DEFAULT_IGNORABLES"
+       * "REMOVE_DEFAULT_IGNORABLES"
+       * "DO_NOT_INSERT_DOTTED_CIRCLE"
+       * "VERIFY"
+       * "PRODUCE_UNSAFE_TO_CONCAT"
+       * "PRODUCE_SAFE_TO_INSERT_TATWEEL"
+       */
       setFlags: function (flags) {
-        var flagsValue = 0
-        flags.forEach(s => flagsValue |= bufferFlags[s] || 0);
+        var flagsValue = 0;
+        flags.forEach((s) => (flagsValue |= bufferFlags[s] || 0));
         exports.hb_buffer_set_flags(ptr, flagsValue);
       },
       /**
-      * Set buffer language explicitly.
-      * @param {string} language: The buffer language
-      */
+       * Set buffer language explicitly.
+       * @param {string} language: The buffer language
+       */
       setLanguage: function (language) {
         var str = _string_to_ascii_ptr(language);
         exports.hb_buffer_set_language(ptr, exports.hb_language_from_string(str.ptr, -1));
         str.free();
       },
       /**
-      * Set buffer script explicitly.
-      * @param {string} script: The buffer script
-      */
+       * Set buffer script explicitly.
+       * @param {string} script: The buffer script
+       */
       setScript: function (script) {
         var str = _string_to_ascii_ptr(script);
         exports.hb_buffer_set_script(ptr, exports.hb_script_from_string(str.ptr, -1));
         str.free();
       },
       /**
-      * Set the Harfbuzz clustering level.
-      *
-      * Affects the cluster values returned from shaping.
-      * @param {number} level: Clustering level. See the Harfbuzz manual chapter
-      * on Clusters.
-      **/
+       * Set the Harfbuzz clustering level.
+       *
+       * Affects the cluster values returned from shaping.
+       * @param {number} level: Clustering level. See the Harfbuzz manual chapter
+       * on Clusters.
+       **/
       setClusterLevel: function (level) {
-        exports.hb_buffer_set_cluster_level(ptr, level)
+        exports.hb_buffer_set_cluster_level(ptr, level);
       },
       /**
-      * Reset the buffer to its initial status.
-      **/
+       * Reset the buffer to its initial status.
+       **/
       reset: function () {
         exports.hb_buffer_reset(ptr);
       },
       /**
-      * Similar to reset(), but does not clear the Unicode functions and the
-      * replacement code point.
-      **/
+       * Similar to reset(), but does not clear the Unicode functions and the
+       * replacement code point.
+       **/
       clearContents: function () {
         exports.hb_buffer_clear_contents(ptr);
       },
       /**
-      * Set message func.
-      * @param {function} func The function to set.
-      *
-      * The function should accept three arguments:
-      * @param {object} buffer The buffer
-      * @param {object} font The font
-      * @param {string} message The message
-      *
-      * Returning false from this function will skip this shaping step and move to the next one.
-      */
+       * Set message func.
+       * @param {function} func The function to set.
+       *
+       * The function should accept three arguments:
+       * @param {object} buffer The buffer
+       * @param {object} font The font
+       * @param {string} message The message
+       *
+       * Returning false from this function will skip this shaping step and move to the next one.
+       */
       setMessageFunc: function (func) {
         var traceFunc = function (bufferPtr, fontPtr, messagePtr, user_data) {
           var message = _utf8_ptr_to_string(messagePtr);
@@ -1113,26 +1224,26 @@ function hbjs(Module) {
           buffer.destroy();
           font.destroy();
           return result ? 1 : 0;
-        }
-        var traceFuncPtr = addFunction(traceFunc, 'iiiii');
+        };
+        var traceFuncPtr = addFunction(traceFunc, "iiiii");
         exports.hb_buffer_set_message_func(ptr, traceFuncPtr, 0, 0);
       },
       /**
-      * Get the the number of items in the buffer.
-      * @returns {number} The buffer length.
-      */
+       * Get the the number of items in the buffer.
+       * @returns {number} The buffer length.
+       */
       getLength: function () {
         return exports.hb_buffer_get_length(ptr);
       },
       /**
-      * Get the glyph information from the buffer.
-      * @returns {object[]} The glyph information.
-      *
-      * The glyph information is returned as an array of objects with the
-      * following properties:
-      * @param {number} codepoint either a Unicode code point (before shaping) or a glyph index (after shaping).
-      * @param {number} cluster The cluster index of the glyph.
-      */
+       * Get the glyph information from the buffer.
+       * @returns {object[]} The glyph information.
+       *
+       * The glyph information is returned as an array of objects with the
+       * following properties:
+       * @param {number} codepoint either a Unicode code point (before shaping) or a glyph index (after shaping).
+       * @param {number} cluster The cluster index of the glyph.
+       */
       getGlyphInfos: function () {
         var infosPtr32 = exports.hb_buffer_get_glyph_infos(ptr, 0) / 4;
         // hb_glyph_info_t struct: { codepoint, mask, cluster, var1, var2 } (5 uint32s)
@@ -1147,24 +1258,27 @@ function hbjs(Module) {
         return infos;
       },
       /**
-      * Get the glyph positions from the buffer.
-      * @returns {object[]} The glyph positions.
-      *
-      * The glyph positions are returned as an array of objects with the
-      * following properties:
-      * @param {number} x_advance The x advance of the glyph.
-      * @param {number} y_advance The y advance of the glyph.
-      * @param {number} x_offset The x offset of the glyph.
-      * @param {number} y_offset The y offset of the glyph.
-      *
-      */
+       * Get the glyph positions from the buffer.
+       * @returns {object[]} The glyph positions.
+       *
+       * The glyph positions are returned as an array of objects with the
+       * following properties:
+       * @param {number} x_advance The x advance of the glyph.
+       * @param {number} y_advance The y advance of the glyph.
+       * @param {number} x_offset The x offset of the glyph.
+       * @param {number} y_offset The y offset of the glyph.
+       *
+       */
       getGlyphPositions: function () {
         var positionsPtr32 = exports.hb_buffer_get_glyph_positions(ptr, 0) / 4;
         if (positionsPtr32 == 0) {
           return [];
         }
         // hb_glyph_position_t struct: { x_advance, y_advance, x_offset, y_offset, var } (5 int32s)
-        var positionsArray = Module.HEAP32.subarray(positionsPtr32, positionsPtr32 + this.getLength() * 5);
+        var positionsArray = Module.HEAP32.subarray(
+          positionsPtr32,
+          positionsPtr32 + this.getLength() * 5,
+        );
         var positions = [];
         for (var i = 0; i < positionsArray.length; i += 5) {
           positions.push({
@@ -1177,18 +1291,20 @@ function hbjs(Module) {
         return positions;
       },
       /**
-      * Get the glyph information and positions from the buffer.
-      * @returns {object[]} The glyph information and positions.
-      *
-      * The glyph information is returned as an array of objects with the
-      * properties from getGlyphInfos and getGlyphPositions combined.
-      */
+       * Get the glyph information and positions from the buffer.
+       * @returns {object[]} The glyph information and positions.
+       *
+       * The glyph information is returned as an array of objects with the
+       * properties from getGlyphInfos and getGlyphPositions combined.
+       */
       getGlyphInfosAndPositions: function () {
         var infosPtr32 = exports.hb_buffer_get_glyph_infos(ptr, 0) / 4;
         var infosArray = Module.HEAPU32.subarray(infosPtr32, infosPtr32 + this.getLength() * 5);
 
         var positionsPtr32 = exports.hb_buffer_get_glyph_positions(ptr, 0) / 4;
-        var positionsArray = positionsPtr32 ? Module.HEAP32.subarray(positionsPtr32, positionsPtr32 + this.getLength() * 5) : null;
+        var positionsArray = positionsPtr32
+          ? Module.HEAP32.subarray(positionsPtr32, positionsPtr32 + this.getLength() * 5)
+          : null;
 
         var out = [];
         for (var i = 0; i < infosArray.length; i += 5) {
@@ -1196,10 +1312,14 @@ function hbjs(Module) {
             codepoint: infosArray[i],
             cluster: infosArray[i + 2],
           };
-          for (var [name, idx] of [['mask', 1], ['var1', 3], ['var2', 4]]) {
+          for (var [name, idx] of [
+            ["mask", 1],
+            ["var1", 3],
+            ["var2", 4],
+          ]) {
             Object.defineProperty(info, name, {
               value: infosArray[i + idx],
-              enumerable: false
+              enumerable: false,
             });
           }
           if (positionsArray) {
@@ -1207,9 +1327,9 @@ function hbjs(Module) {
             info.y_advance = positionsArray[i + 1];
             info.x_offset = positionsArray[i + 2];
             info.y_offset = positionsArray[i + 3];
-            Object.defineProperty(info, 'var', {
+            Object.defineProperty(info, "var", {
               value: positionsArray[i + 4],
-              enumerable: false
+              enumerable: false,
             });
           }
           out.push(info);
@@ -1217,11 +1337,11 @@ function hbjs(Module) {
         return out;
       },
       /**
-      * Update the glyph positions in the buffer.
-      * @param {object[]} positions The new glyph positions.
-      *
-      * WARNING: Do not use unless you know what you are doing.
-      */
+       * Update the glyph positions in the buffer.
+       * @param {object[]} positions The new glyph positions.
+       *
+       * WARNING: Do not use unless you know what you are doing.
+       */
       updateGlyphPositions: function (positions) {
         var positionsPtr32 = exports.hb_buffer_get_glyph_positions(ptr, 0) / 4;
         if (positionsPtr32 == 0) {
@@ -1237,22 +1357,22 @@ function hbjs(Module) {
         }
       },
       /**
-      * Serialize the buffer contents to a string.
-      * @param {object} font Optional. The font to use for serialization.
-      * @param {number} start Optional. The starting index of the glyphs to serialize.
-      * @param {number} end Optional. The ending index of the glyphs to serialize.
-      * @param {string} format Optional. The format to serialize the buffer contents to.
-      * @param {string[]} flags Optional. The flags to use for serialization. A list of strings which may be either:
-      * "DEFAULT"
-      * "NO_CLUSTERS"
-      * "NO_POSITIONS"
-      * "NO_GLYPH_NAMES"
-      * "GLYPH_EXTENTS"
-      * "GLYPH_FLAGS"
-      * "NO_ADVANCES"
-      *
-      * @returns {string} The serialized buffer contents.
-      */
+       * Serialize the buffer contents to a string.
+       * @param {object} font Optional. The font to use for serialization.
+       * @param {number} start Optional. The starting index of the glyphs to serialize.
+       * @param {number} end Optional. The ending index of the glyphs to serialize.
+       * @param {string} format Optional. The format to serialize the buffer contents to.
+       * @param {string[]} flags Optional. The flags to use for serialization. A list of strings which may be either:
+       * "DEFAULT"
+       * "NO_CLUSTERS"
+       * "NO_POSITIONS"
+       * "NO_GLYPH_NAMES"
+       * "GLYPH_EXTENTS"
+       * "GLYPH_FLAGS"
+       * "NO_ADVANCES"
+       *
+       * @returns {string} The serialized buffer contents.
+       */
       serialize: function (font, start = 0, end = null, format = "TEXT", flags = []) {
         var sp = stackSave();
         if (end == null) end = this.getLength();
@@ -1260,12 +1380,20 @@ function hbjs(Module) {
         var bufPtr = exports.malloc(bufLen);
         var bufConsumedPtr = stackAlloc(4);
         var flagsValue = 0;
-        flags.forEach(flag => flagsValue |= bufferSerializeFlags[flag] || 0);
+        flags.forEach((flag) => (flagsValue |= bufferSerializeFlags[flag] || 0));
         var result = "";
         while (start < end) {
-          start += exports.hb_buffer_serialize(ptr, start, end,
-            bufPtr, bufLen, bufConsumedPtr,
-            font ? font.ptr : 0, _hb_tag(format), flagsValue);
+          start += exports.hb_buffer_serialize(
+            ptr,
+            start,
+            end,
+            bufPtr,
+            bufLen,
+            bufConsumedPtr,
+            font ? font.ptr : 0,
+            _hb_tag(format),
+            flagsValue,
+          );
           var bufConsumed = Module.HEAPU32[bufConsumedPtr / 4];
           if (bufConsumed == 0) break;
           result += _utf8_ptr_to_string(bufPtr, bufConsumed);
@@ -1275,30 +1403,30 @@ function hbjs(Module) {
         return result;
       },
       /**
-      * Return the buffer content type.
-      *
-      * @returns {string} The buffer content type. One of:
-      * "INVALID"
-      * "UNICODE"
-      * "GLYPHS"
-      */
+       * Return the buffer content type.
+       *
+       * @returns {string} The buffer content type. One of:
+       * "INVALID"
+       * "UNICODE"
+       * "GLYPHS"
+       */
       getContentType: function () {
         return bufferContentType[exports.hb_buffer_get_content_type(ptr)];
       },
       /**
-      * Return the buffer contents as a JSON object.
-      *
-      * After shaping, this function will return an array of glyph information
-      * objects. Each object will have the following attributes:
-      *
-      *   - g: The glyph ID
-      *   - cl: The cluster ID
-      *   - ax: Advance width (width to advance after this glyph is painted)
-      *   - ay: Advance height (height to advance after this glyph is painted)
-      *   - dx: X displacement (adjustment in X dimension when painting this glyph)
-      *   - dy: Y displacement (adjustment in Y dimension when painting this glyph)
-      *   - flags: Glyph flags like `HB_GLYPH_FLAG_UNSAFE_TO_BREAK` (0x1)
-      **/
+       * Return the buffer contents as a JSON object.
+       *
+       * After shaping, this function will return an array of glyph information
+       * objects. Each object will have the following attributes:
+       *
+       *   - g: The glyph ID
+       *   - cl: The cluster ID
+       *   - ax: Advance width (width to advance after this glyph is painted)
+       *   - ay: Advance height (height to advance after this glyph is painted)
+       *   - dx: X displacement (adjustment in X dimension when painting this glyph)
+       *   - dy: Y displacement (adjustment in Y dimension when painting this glyph)
+       *   - flags: Glyph flags like `HB_GLYPH_FLAG_UNSAFE_TO_BREAK` (0x1)
+       **/
       json: function () {
         var buf = this.serialize(null, 0, null, "JSON", ["NO_GLYPH_NAMES", "GLYPH_FLAGS"]);
         var json = JSON.parse(buf);
@@ -1311,22 +1439,24 @@ function hbjs(Module) {
         return json;
       },
       /**
-      * Free the object.
-      */
-      destroy: function () { exports.hb_buffer_destroy(ptr); }
+       * Free the object.
+       */
+      destroy: function () {
+        exports.hb_buffer_destroy(ptr);
+      },
     };
   }
 
   /**
-  * Shape a buffer with a given font.
-  *
-  * This returns nothing, but modifies the buffer.
-  *
-  * @param {object} font: A font returned from `createFont`
-  * @param {object} buffer: A buffer returned from `createBuffer` and suitably
-  *   prepared.
-  * @param {object} features: A string of comma-separated OpenType features to apply.
-  */
+   * Shape a buffer with a given font.
+   *
+   * This returns nothing, but modifies the buffer.
+   *
+   * @param {object} font: A font returned from `createFont`
+   * @param {object} buffer: A buffer returned from `createBuffer` and suitably
+   *   prepared.
+   * @param {object} features: A string of comma-separated OpenType features to apply.
+   */
   function shape(font, buffer, features) {
     var featuresPtr = 0;
     var featuresLen = 0;
@@ -1342,8 +1472,7 @@ function hbjs(Module) {
     }
 
     exports.hb_shape(font.ptr, buffer.ptr, featuresPtr, featuresLen);
-    if (featuresPtr)
-      exports.free(featuresPtr);
+    if (featuresPtr) exports.free(featuresPtr);
   }
 
   /**
@@ -1370,22 +1499,21 @@ function hbjs(Module) {
     var failure = false;
 
     buffer.setMessageFunc((buffer, font, message) => {
-      if (message.startsWith("start table GSUB"))
-        currentPhase = TRACE_PHASE_GSUB;
-      else if (message.startsWith("start table GPOS"))
-        currentPhase = TRACE_PHASE_GPOS;
+      if (message.startsWith("start table GSUB")) currentPhase = TRACE_PHASE_GSUB;
+      else if (message.startsWith("start table GPOS")) currentPhase = TRACE_PHASE_GPOS;
 
-      if (currentPhase != stop_phase)
-        stopping = false;
+      if (currentPhase != stop_phase) stopping = false;
 
-      if (failure)
-        return true;
+      if (failure) return true;
 
-      if (stop_phase != TRACE_PHASE_DONT_STOP && currentPhase == stop_phase && message.startsWith("end lookup " + stop_at))
+      if (
+        stop_phase != TRACE_PHASE_DONT_STOP &&
+        currentPhase == stop_phase &&
+        message.startsWith("end lookup " + stop_at)
+      )
         stopping = true;
 
-      if (stopping)
-        return false;
+      if (stopping) return false;
 
       var traceBuf = buffer.serialize(font, 0, null, "JSON", ["NO_GLYPH_NAMES"]);
 
@@ -1460,4 +1588,4 @@ function hbjs(Module) {
 // Should be replaced with something more reliable
 try {
   module.exports = hbjs;
-} catch (e) { }
+} catch (e) {}

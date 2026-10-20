@@ -9,15 +9,7 @@ interface HeaderLinkProps {
 interface HeaderLinkData {
   href: string;
   title: string;
-  iconType:
-    | "home"
-    | "diary"
-    | "user"
-    | "hub"
-    | "info"
-    | "rss"
-    | "github"
-    | "twitter";
+  iconType: "home" | "diary" | "user" | "hub" | "info" | "rss" | "github" | "twitter";
 }
 
 const getIcon = (iconType: HeaderLinkData["iconType"]) => {
@@ -125,14 +117,8 @@ const linksData: HeaderLinkData[] = [
 
 const HeaderLink = ({ href, title, children }: HeaderLinkProps) => {
   return (
-    <a
-      href={href}
-      className="text-gray-500 hover:text-gray-700 py-1 border-gray-500"
-      title={title}
-    >
-      <div className="mx-3 w-3 md:w-10">
-        {children}
-      </div>
+    <a href={href} className="text-gray-500 hover:text-gray-700 py-1 border-gray-500" title={title}>
+      <div className="mx-3 w-3 md:w-10">{children}</div>
     </a>
   );
 };
@@ -156,7 +142,9 @@ export default function Header() {
     <>
       <div className="flex m-3 mt-5 sm:flex-row-reverse">
         <div className="list-none flex items-stretch mx-auto">
-          {links.map((child, idx) => <li key={idx}>{child}</li>)}
+          {links.map((child, idx) => (
+            <li key={idx}>{child}</li>
+          ))}
         </div>
       </div>
     </>

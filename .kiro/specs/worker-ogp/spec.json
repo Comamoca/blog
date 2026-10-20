@@ -37,9 +37,7 @@
       "6.1",
       "6.2"
     ],
-    "remaining": [
-      "6.3 (本番デプロイ後のCard Validator検証)"
-    ],
+    "remaining": ["6.3 (本番デプロイ後のCard Validator検証)"],
     "verification": {
       "gleam_test": "16 passed (komeiji+satori統合後のゴールデンハッシュで確定)",
       "deno_test": "34 passed (44 steps)",

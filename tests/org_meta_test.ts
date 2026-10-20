@@ -57,9 +57,6 @@ Deno.test("extractOrgMeta: 空タグ・タグ無しは空配列", () => {
 });
 
 Deno.test("extractOrgMeta: 先頭以外は大文字小文字を問わず最初の出現を優先", () => {
-  const meta = extractOrgMeta(
-    "#+TITLE: first\n#+TITLE: second\n",
-    "2024-01-01-x",
-  );
+  const meta = extractOrgMeta("#+TITLE: first\n#+TITLE: second\n", "2024-01-01-x");
   assertEquals(meta.title, "first");
 });

@@ -160,6 +160,7 @@ Create the custom steering document with:
    - Consistent formatting with other steering files
 
 3. **Document the inclusion mode** by adding a comment at the top:
+
    ```markdown
    <!-- Inclusion Mode: Always | Conditional: "pattern" | Manual -->
    ```

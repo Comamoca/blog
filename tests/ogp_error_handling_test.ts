@@ -1,7 +1,4 @@
-import {
-  assertEquals,
-  assertExists,
-} from "https://deno.land/std@0.210.0/assert/mod.ts";
+import { assertEquals, assertExists } from "https://deno.land/std@0.210.0/assert/mod.ts";
 import * as v from "npm:valibot";
 
 // Define the OGP schema
@@ -60,11 +57,7 @@ Deno.test("OGP Error Handling", async (t) => {
     });
 
     // Current implementation throws error, target implementation should return null
-    assertEquals(
-      result?.siteTitle,
-      "Default Site Title",
-      "Should provide default siteTitle",
-    );
+    assertEquals(result?.siteTitle, "Default Site Title", "Should provide default siteTitle");
   });
 
   await t.step("should handle network timeouts", async () => {
@@ -103,11 +96,7 @@ Deno.test("OGP Error Handling", async (t) => {
 
     assertExists(result, "Should return valid OGP data");
     assertEquals(result.title, "Mock Title", "Should parse OG title");
-    assertEquals(
-      result.image,
-      "https://example.com/image.jpg",
-      "Should parse OG image",
-    );
+    assertEquals(result.image, "https://example.com/image.jpg", "Should parse OG image");
     assertEquals(result.name, "Mock Site", "Should parse OG site name");
   });
 });

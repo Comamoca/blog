@@ -50,10 +50,7 @@ export function staticAssets(): Plugin {
             const stat = await fsp.stat(filePath);
             if (!stat.isFile()) continue;
             const ext = path.extname(filePath);
-            res.setHeader(
-              "Content-Type",
-              MIME[ext] ?? "application/octet-stream",
-            );
+            res.setHeader("Content-Type", MIME[ext] ?? "application/octet-stream");
             fs.createReadStream(filePath).pipe(res);
             return;
           } catch {

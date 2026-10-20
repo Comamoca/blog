@@ -53,10 +53,7 @@ async function writeCache(url: string, body: string): Promise<void> {
   }
 }
 
-export async function fetchOGInfo(
-  url: string,
-  timeout = 10000,
-): Promise<OGInfo> {
+export async function fetchOGInfo(url: string, timeout = 10000): Promise<OGInfo> {
   try {
     const useCache = process.env.NO_CACHE === undefined;
     const _url = new URL(url);
@@ -76,10 +73,10 @@ export async function fetchOGInfo(
       const resp = await fetch(_url, {
         headers: isJSR
           ? {
-            ...header,
-            "accept":
-              "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-          }
+              ...header,
+              accept:
+                "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+            }
           : header,
         signal: AbortSignal.timeout(timeout),
       });
@@ -98,9 +95,7 @@ export async function fetchOGInfo(
     // 2 プロパティだけの構造型に絞って扱う (実行時挙動は不変)。
     const document = parseHTML(body) as unknown as {
       title: string;
-      querySelectorAll(
-        selector: string,
-      ): Array<{
+      querySelectorAll(selector: string): Array<{
         hasAttribute(name: string): boolean;
         getAttribute(name: string): string | null;
       }>;
@@ -135,10 +130,7 @@ export async function fetchOGInfo(
 
     ogInfo.push({ siteTitle: title } as never);
 
-    const og = ogInfo.reduce(
-      (acc, obj) => (obj ? { ...acc, ...obj } : acc),
-      {},
-    );
+    const og = ogInfo.reduce((acc, obj) => (obj ? { ...acc, ...obj } : acc), {});
 
     const safeOg = {
       siteTitle: title,

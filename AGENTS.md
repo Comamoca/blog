@@ -139,6 +139,11 @@ npm run dev
 # Production build
 npm run build
 
+# Format code (Oxfmt, bundled with vite-plus; `nix fmt` / pre-commit run the same formatter)
+# (devEngines requires bun, so `npm run` is rejected — use `bun run` / `nr`)
+bun run fmt
+bun run fmt:check
+
 # Deploy to Cloudflare Pages
 npm run build
 wrangler pages deploy ./dist --project-name=blog

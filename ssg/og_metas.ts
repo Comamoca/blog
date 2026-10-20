@@ -10,9 +10,7 @@ export const OG_ORIGIN = "https://og.comamoca.dev";
 export const MAX_DESCRIPTION_LENGTH = 80;
 
 export function truncateDescription(text: string): string {
-  return text.length > MAX_DESCRIPTION_LENGTH
-    ? `${text.slice(0, MAX_DESCRIPTION_LENGTH)}…`
-    : text;
+  return text.length > MAX_DESCRIPTION_LENGTH ? `${text.slice(0, MAX_DESCRIPTION_LENGTH)}…` : text;
 }
 
 export function buildOgImageUrl(
@@ -21,10 +19,7 @@ export function buildOgImageUrl(
   description?: string,
   origin: string = OG_ORIGIN,
 ): string {
-  const params: string[] = [
-    `l=${encodeURIComponent(layout)}`,
-    `t=${encodeURIComponent(title)}`,
-  ];
+  const params: string[] = [`l=${encodeURIComponent(layout)}`, `t=${encodeURIComponent(title)}`];
   if (description) {
     params.push(`d=${encodeURIComponent(truncateDescription(description))}`);
   }

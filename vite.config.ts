@@ -17,13 +17,7 @@ export default defineConfig({
   // input のシンボリックフォレスト (.direnv/**) を探索せず 0 件でも成功させる。
   test: {
     include: ["src/**/*.{test,spec}.{ts,tsx}"],
-    exclude: [
-      "**/node_modules/**",
-      "**/dist/**",
-      "**/.direnv/**",
-      "tests/**",
-      "og/**",
-    ],
+    exclude: ["**/node_modules/**", "**/dist/**", "**/.direnv/**", "tests/**", "og/**"],
     passWithNoTests: true,
   },
   server: {

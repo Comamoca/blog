@@ -33,7 +33,6 @@ async function swapMatters(entry: WalkEntry) {
 
 const pages = await Array.fromAsync(expandGlob("./src/blog/*.md"));
 
-const result = pages
-  .map(swapMatters);
+const result = pages.map(swapMatters);
 
 await Promise.all(result);

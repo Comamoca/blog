@@ -49,11 +49,8 @@ function normalize(result, source) {
 }
 
 globalThis.fetch = (input, init) => {
-  const url = typeof input === "string"
-    ? input
-    : input instanceof URL
-    ? input.href
-    : input && input.url;
+  const url =
+    typeof input === "string" ? input : input instanceof URL ? input.href : input && input.url;
   if (typeof url === "string" && url.startsWith("data:")) {
     return Promise.resolve(dataUriFakeResponse(url));
   }
@@ -80,10 +77,7 @@ function staticModuleFor(imports) {
 }
 
 WebAssembly.instantiate = (source, imports) => {
-  if (
-    (source instanceof Uint8Array || source instanceof ArrayBuffer) &&
-    imports
-  ) {
+  if ((source instanceof Uint8Array || source instanceof ArrayBuffer) && imports) {
     const module = staticModuleFor(imports);
     if (!module) {
       throw new Error(
@@ -104,18 +98,44 @@ const shimCache = new Map();
 const wasmTypeCodes = { i: 127, p: 127, j: 126, f: 125, d: 124, e: 111 };
 const uleb128EncodeWithLen = (arr) => {
   const n = arr.length;
-  return [n % 128 | 128, n >> 7, ...arr];
+  return [(n % 128) | 128, n >> 7, ...arr];
 };
 const generateTypePack = (types) =>
   uleb128EncodeWithLen(Array.from(types, (type) => wasmTypeCodes[type]));
 const generateShimBytes = (sig) =>
-  Uint8Array.of(0, 97, 115, 109, 1, 0, 0, 0, 1,
+  Uint8Array.of(
+    0,
+    97,
+    115,
+    109,
+    1,
+    0,
+    0,
+    0,
+    1,
     ...uleb128EncodeWithLen([
-      1, 96,
+      1,
+      96,
       ...generateTypePack(sig.slice(1)),
       ...generateTypePack(sig[0] === "v" ? "" : sig[0]),
     ]),
-    2, 7, 1, 1, 101, 1, 102, 0, 0, 7, 5, 1, 1, 102, 0, 0);
+    2,
+    7,
+    1,
+    1,
+    101,
+    1,
+    102,
+    0,
+    0,
+    7,
+    5,
+    1,
+    1,
+    102,
+    0,
+    0,
+  );
 
 const shimModules = {
   vi: shimVi,

@@ -1,7 +1,6 @@
 # 実装計画
 
--
-  1. [ ] 回帰検証の土台づくり (最初に行う)
+- 1. [ ] 回帰検証の土台づくり (最初に行う)
 - [x] 1.1 移行前のURLスナップショットを固定化
   - 現行 `RELEASE=1` ビルドの `_site` から全出力URLを列挙し、
     `tests/fixtures/urls.txt` としてコミットする
@@ -20,8 +19,7 @@
   - 逆方向 (出力にあってスナップショットに無いURL) も検出し、 ドラフト混入を防ぐ
   - _Requirements: 1.1, 1.6, 1.7_
 
--
-  2. [ ] ビルド基盤のセットアップ
+- 2. [ ] ビルド基盤のセットアップ
 - [x] 2.1 Node/Vite ツールチェーンの導入
   - `package.json` に `@ox-content/vite-plugin` `@ox-content/unplugin` `vite`
     `@tailwindcss/vite` `tailwindcss` `daisyui` `@tailwindcss/typography`
@@ -41,8 +39,7 @@
   - `dev.routeDependencies` に記事ディレクトリを指定する
   - _Requirements: 2.5, 4.1_
 
--
-  3. [ ] Markdown パイプラインの移植
+- 3. [ ] Markdown パイプラインの移植
 - [x] 3.1 全コンポーネントから `async` を除去
   - `src/_components/*.tsx` の7ファイルと `Header.tsx` の `HeaderLink`
   - いずれも `await` していないためロジック変更は不要
@@ -69,8 +66,7 @@
     既存セレクタで置換されること
   - _Requirements: 3.3, 3.4_
 
--
-  4. [ ] 記事ページの移植
+- 4. [ ] 記事ページの移植
 - [x] 4.1 記事ルートの定義
   - frontmatter は `prepareSource()` で読む (全文パース不要)
   - `draft: true` を除外する
@@ -96,8 +92,7 @@
   - DaisyUI / typography / `@theme` のカスタム変数が含まれることを確認する
   - _Requirements: 4.2, 4.3_
 
--
-  5. [ ] 一覧ページ・静的ページの移植
+- 5. [ ] 一覧ページ・静的ページの移植
 - [x] 5.1 ページネーションルートの定義
   - `/all/{n}/` (日報以外)・`/tech/{n}/` (tech タグ)・`/diary/{n}/` (日報)
   - 1ページ10件、`pubDate` 降順
@@ -117,8 +112,7 @@
   - `notFound()` で `/404.html`
   - _Requirements: 1.4_
 
--
-  6. [ ] フィードの移植
+- 6. [ ] フィードの移植
 - [x] 6.1 git 日付ロジックのバッチ化
   - `git log --diff-filter=A --format=%ct --name-only` の1回走査で
     全ファイルの初回コミット時刻を取得する
@@ -143,8 +137,7 @@
   - 決定を design.md の設計決定ログへ追記する
   - _Requirements: 5.1_
 
--
-  7. [ ] 周辺機能の移植
+- 7. [ ] 周辺機能の移植
 - [x] 7.1 検索機能
   - Pagefind 継続か ox-content 内蔵BM25かを決定する
   - `Search.tsx` と初期化処理を更新する
@@ -167,8 +160,7 @@
   - 現行でも効いていないため挙動は変わらない
   - _Requirements: 4.3_
 
--
-  8. [ ] 統合と切り替え
+- 8. [ ] 統合と切り替え
 - [x] 8.1 全URL・全フィードの最終照合
   - 472/472 の一致と余剰0を確認する
   - _Requirements: 1.1, 1.7, 5.2_
@@ -190,8 +182,7 @@
   - OG画像の表示確認
   - _Requirements: 6.3_
 
--
-  9. [ ] Lume の撤去
+- 9. [ ] Lume の撤去
 - [x] 9.1 不要になった依存と設定の削除
   - `_config.ts`、`plugins/lume/`、Lume 関連の deno タスク
   - `deno.jsonc` の Lume インポートと lint プラグイン

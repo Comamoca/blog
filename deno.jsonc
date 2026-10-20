@@ -1,32 +1,20 @@
 {
   "imports": {
-    "date-fns": "npm:date-fns@4.4.0"
+    "date-fns": "npm:date-fns@4.4.0",
   },
   "test": {
-    "include": ["tests/"]
+    "include": ["tests/"],
   },
   "tasks": {
     "download-fonts": "deno run -A ./scripts/downloadFonts.ts",
     "extract-tags": "deno run -A ./scripts/extractTags.ts",
     "deploy-og": {
       "description": "Build and deploy the OG image Worker (og.comamoca.dev)",
-      "command": "cd og && npm ci && gleam build --no-print-progress && wrangler deploy"
+      "command": "cd og && npm ci && gleam build --no-print-progress && wrangler deploy",
     },
-    "test": "deno test --allow-all"
+    "test": "deno test --allow-all",
   },
   "nodeModulesDir": "auto",
-  "unstable": [
-    "temporal",
-    "fmt-component"
-  ],
-  "fmt": {
-    "exclude": [
-      "dist",
-      "_cache",
-      ".cache",
-      "node_modules",
-      "_broken_links.json"
-    ]
-  },
-  "lock": false
+  "unstable": ["temporal"],
+  "lock": false,
 }

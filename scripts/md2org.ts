@@ -55,9 +55,7 @@ export function pubDateToOrgDate(pubDate: string): string | null {
   const day = Number(m[2]);
   const year = Number(m[3]);
   const date = new Date(Date.UTC(year, month, day));
-  const iso = `${year}-${String(month + 1).padStart(2, "0")}-${
-    String(day).padStart(2, "0")
-  }`;
+  const iso = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
   return `[${iso} ${WEEKDAYS[date.getUTCDay()]}]`;
 }
 
@@ -107,10 +105,7 @@ export function frontmatterToKeywords(fm: Frontmatter, stem: string): string {
  *   `:END:` drawer を剥がす
  */
 export function postProcessOrg(body: string): string {
-  const withoutDrawers = body.replace(
-    /^:PROPERTIES:\n:CUSTOM_ID: .*\n:END:\n/gm,
-    "",
-  );
+  const withoutDrawers = body.replace(/^:PROPERTIES:\n:CUSTOM_ID: .*\n:END:\n/gm, "");
   return withoutDrawers
     .replaceAll("#+begin_html", "#+begin_export html")
     .replaceAll("#+end_html", "#+end_export");
@@ -119,11 +114,9 @@ export function postProcessOrg(body: string): string {
 /** pandoc を呼び出して md 本文を org へ変換する。 */
 async function pandocToOrg(body: string, filterPath: string): Promise<string> {
   const { spawn } = await import("node:child_process");
-  const proc = spawn(
-    "pandoc",
-    ["-f", "gfm", "-t", "org", `--lua-filter=${filterPath}`],
-    { stdio: ["pipe", "pipe", "inherit"] },
-  );
+  const proc = spawn("pandoc", ["-f", "gfm", "-t", "org", `--lua-filter=${filterPath}`], {
+    stdio: ["pipe", "pipe", "inherit"],
+  });
   const chunks: Uint8Array[] = [];
   const out = proc.stdout;
   if (out === null) throw new Error("pandoc stdout is not readable");
@@ -136,9 +129,7 @@ async function pandocToOrg(body: string, filterPath: string): Promise<string> {
   if (stdin === null) throw new Error("pandoc stdin is not writable");
   stdin.end(body);
   await done;
-  const code = await new Promise<number>((resolve) =>
-    proc.on("close", resolve)
-  );
+  const code = await new Promise<number>((resolve) => proc.on("close", resolve));
   if (code !== 0) {
     throw new Error(`pandoc exited with code ${code}`);
   }
@@ -195,16 +186,11 @@ async function main(argv: string[]): Promise<void> {
   const { prepareSource } = await import("@ox-content/napi");
 
   for (const file of files) {
-    const src = await (await import("node:fs/promises")).readFile(
-      file,
-      "utf8",
-    );
+    const src = await (await import("node:fs/promises")).readFile(file, "utf8");
     const { content, frontmatter } = prepareSource(src);
     const fm: Frontmatter = {
       title: String(frontmatter.title ?? ""),
-      description: typeof frontmatter.description === "string"
-        ? frontmatter.description
-        : "",
+      description: typeof frontmatter.description === "string" ? frontmatter.description : "",
       pubDate: String(frontmatter.pubDate ?? ""),
       tags: Array.isArray(frontmatter.tags) ? frontmatter.tags.map(String) : [],
       emoji: String(frontmatter.emoji ?? ""),

@@ -1,7 +1,4 @@
-import {
-  assertEquals,
-  assertExists,
-} from "https://deno.land/std@0.210.0/assert/mod.ts";
+import { assertEquals, assertExists } from "https://deno.land/std@0.210.0/assert/mod.ts";
 
 // Mock DOM Parser for testing HTML generation
 class MockDOMParser {
@@ -89,51 +86,24 @@ Deno.test("LinkCard Layout Verification", async (t) => {
       true,
       "Should have main flex container",
     );
-    assertEquals(
-      html.includes('href="https://example.com"'),
-      true,
-      "Should have correct URL link",
-    );
-    assertEquals(
-      html.includes('title="Link Card"'),
-      true,
-      "Should have Link Card title attribute",
-    );
+    assertEquals(html.includes('href="https://example.com"'), true, "Should have correct URL link");
+    assertEquals(html.includes('title="Link Card"'), true, "Should have Link Card title attribute");
   });
 
-  await t.step(
-    "should apply correct TailwindCSS classes for responsive design",
-    () => {
-      const ogData = {
-        title: "Test Article",
-        siteTitle: "Test Site",
-      };
+  await t.step("should apply correct TailwindCSS classes for responsive design", () => {
+    const ogData = {
+      title: "Test Article",
+      siteTitle: "Test Site",
+    };
 
-      const html = generateLinkCardHTML(ogData, "https://example.com");
+    const html = generateLinkCardHTML(ogData, "https://example.com");
 
-      // TailwindCSS responsive classes
-      assertEquals(
-        html.includes("md:!text-base"),
-        true,
-        "Should have responsive text size",
-      );
-      assertEquals(
-        html.includes("md:max-w-full"),
-        true,
-        "Should have responsive max width",
-      );
-      assertEquals(
-        html.includes("md:min-w-10"),
-        true,
-        "Should have responsive min width",
-      );
-      assertEquals(
-        html.includes("hover:bg-gray-100"),
-        true,
-        "Should have hover effects",
-      );
-    },
-  );
+    // TailwindCSS responsive classes
+    assertEquals(html.includes("md:!text-base"), true, "Should have responsive text size");
+    assertEquals(html.includes("md:max-w-full"), true, "Should have responsive max width");
+    assertEquals(html.includes("md:min-w-10"), true, "Should have responsive min width");
+    assertEquals(html.includes("hover:bg-gray-100"), true, "Should have hover effects");
+  });
 
   await t.step("should handle image display correctly", () => {
     const ogDataWithImage = {
@@ -142,10 +112,7 @@ Deno.test("LinkCard Layout Verification", async (t) => {
       image: "https://example.com/image.jpg",
     };
 
-    const htmlWithImage = generateLinkCardHTML(
-      ogDataWithImage,
-      "https://example.com",
-    );
+    const htmlWithImage = generateLinkCardHTML(ogDataWithImage, "https://example.com");
     assertEquals(
       htmlWithImage.includes('<img class="object-scale-down basis-4/12'),
       true,
@@ -162,10 +129,7 @@ Deno.test("LinkCard Layout Verification", async (t) => {
       siteTitle: "Test Site",
     };
 
-    const htmlWithoutImage = generateLinkCardHTML(
-      ogDataWithoutImage,
-      "https://example.com",
-    );
+    const htmlWithoutImage = generateLinkCardHTML(ogDataWithoutImage, "https://example.com");
     assertEquals(
       htmlWithoutImage.includes("<img"),
       false,
@@ -181,16 +145,8 @@ Deno.test("LinkCard Layout Verification", async (t) => {
 
     const html = generateLinkCardHTML(ogData, "https://example.com");
 
-    assertEquals(
-      html.includes("overflow-hidden"),
-      true,
-      "Should have overflow hidden",
-    );
-    assertEquals(
-      html.includes("text-ellipsis"),
-      true,
-      "Should have text ellipsis",
-    );
+    assertEquals(html.includes("overflow-hidden"), true, "Should have overflow hidden");
+    assertEquals(html.includes("text-ellipsis"), true, "Should have text ellipsis");
     assertEquals(
       html.includes("whitespace-nowrap"),
       true,
@@ -233,15 +189,7 @@ Deno.test("LinkCard Layout Verification", async (t) => {
     const html = generateLinkCardHTML(ogData, "https://example.com");
 
     assertEquals(html.includes("h-20"), true, "Should have fixed height");
-    assertEquals(
-      html.includes("max-w-md"),
-      true,
-      "Should have maximum width constraint",
-    );
-    assertEquals(
-      html.includes("basis-4/12"),
-      true,
-      "Should have proper image flex basis",
-    );
+    assertEquals(html.includes("max-w-md"), true, "Should have maximum width constraint");
+    assertEquals(html.includes("basis-4/12"), true, "Should have proper image flex basis");
   });
 });

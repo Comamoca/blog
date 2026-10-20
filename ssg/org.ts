@@ -31,17 +31,17 @@ type HastNode = HastElement | HastText;
 type HastRoot = { type: "root"; children: HastNode[] };
 
 function isElement(node: unknown): node is HastElement {
-  return (
-    typeof node === "object" && node !== null &&
-    "type" in node && node.type === "element"
-  );
+  return typeof node === "object" && node !== null && "type" in node && node.type === "element";
 }
 
 function isRoot(node: unknown): node is HastRoot {
   return (
-    typeof node === "object" && node !== null &&
-    "type" in node && node.type === "root" &&
-    "children" in node && Array.isArray(node.children)
+    typeof node === "object" &&
+    node !== null &&
+    "type" in node &&
+    node.type === "root" &&
+    "children" in node &&
+    Array.isArray(node.children)
   );
 }
 
@@ -58,9 +58,7 @@ function textContent(node: HastElement): string {
 function hasClassName(node: HastElement, name: string): boolean {
   const className = node.properties.className;
   if (className === undefined) return false;
-  return Array.isArray(className)
-    ? className.includes(name)
-    : className === name;
+  return Array.isArray(className) ? className.includes(name) : className === name;
 }
 
 /**
@@ -82,12 +80,8 @@ function footnoteDefinitionToLi(div: HastElement): HastElement {
     }
   }
 
-  const id = typeof footnum?.properties.id === "string"
-    ? footnum.properties.id
-    : undefined;
-  const backrefHref = typeof footnum?.properties.href === "string"
-    ? footnum.properties.href
-    : "#";
+  const id = typeof footnum?.properties.id === "string" ? footnum.properties.id : undefined;
+  const backrefHref = typeof footnum?.properties.href === "string" ? footnum.properties.href : "#";
 
   const backref: HastElement = {
     type: "element",
@@ -124,10 +118,7 @@ function footnoteNormalize() {
     let headingIdx = -1;
     for (let i = 0; i < children.length; i++) {
       const n = children[i];
-      if (
-        isElement(n) && n.tagName === "h1" &&
-        textContent(n) === "Footnotes:"
-      ) {
+      if (isElement(n) && n.tagName === "h1" && textContent(n) === "Footnotes:") {
         headingIdx = i;
         break;
       }
@@ -138,10 +129,7 @@ function footnoteNormalize() {
     let endIdx = children.length;
     for (let i = headingIdx + 1; i < children.length; i++) {
       const n = children[i];
-      if (
-        isElement(n) && n.tagName === "div" &&
-        hasClassName(n, "footnote-definition")
-      ) {
+      if (isElement(n) && n.tagName === "div" && hasClassName(n, "footnote-definition")) {
         liNodes.push(footnoteDefinitionToLi(n));
       } else {
         endIdx = i;
@@ -177,10 +165,7 @@ function footnoteNormalize() {
 // (ネットワーク越しのOGP取得を伴うため)。
 const DISABLE_LINKCARD = process.env.DISABLE_LINKCARD !== undefined;
 
-export async function renderOrg(
-  source: string,
-  file: string,
-): Promise<{ html: string }> {
+export async function renderOrg(source: string, file: string): Promise<{ html: string }> {
   try {
     const processor = unified()
       .use(uniorgParse, { useSubSuperscripts: false })
@@ -191,13 +176,11 @@ export async function renderOrg(
 
     const result = await processor
       .use(footnoteNormalize)
-      .use(rehypeStringify)
+      .use(rehypeStringify, { allowDangerousHtml: true })
       .process(source);
 
     return { html: footnotePost(String(result)) };
   } catch (error) {
-    throw new Error(
-      `Failed to render org file: ${file}: ${(error as Error).message}`,
-    );
+    throw new Error(`Failed to render org file: ${file}: ${(error as Error).message}`);
   }
 }

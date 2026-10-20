@@ -230,21 +230,55 @@
 
           treefmt = {
             projectRootFile = "flake.nix";
-            # pnpm-lock.yamlはpnpmが生成するためdenoのフォーマットを当てると
-            # 差分が出続け、pre-commitのtreefmtが常に失敗する
+            # pnpm-lock.yaml / package-lock.json はパッケージマネージャが生成
+            # するためフォーマットを当てると差分が出続け、pre-commitのtreefmtが
+            # 常に失敗する。.wt/ はgitignore済みの別リポジトリ置き場。
             settings.excludes = [
               ".commandcode/**"
+              ".wt/**"
               "**/pnpm-lock.yaml"
+              "**/package-lock.json"
             ];
             programs = {
               nixfmt.enable = true;
-              deno = {
-                enable = true;
-                package = deno;
-              };
               rufo.enable = true;
             };
-            settings.formatter = { };
+            # JS/TS/JSON/Markdown等は vite-plus 内蔵の Oxfmt で整形する。
+            # deno fmt から切り替え (oxc 系フォーマッタに統一)。
+            # `npm run fmt` (vp fmt) と同じ oxfmt なので整形結果が一致する。
+            settings.formatter = {
+              oxfmt = {
+                command = "${vite-plus}/bin/vp";
+                options = [ "fmt" ];
+                includes = [
+                  "*.js"
+                  "*.jsx"
+                  "*.mjs"
+                  "*.cjs"
+                  "*.ts"
+                  "*.tsx"
+                  "*.mts"
+                  "*.cts"
+                  "*.json"
+                  "*.jsonc"
+                  "*.json5"
+                  "*.md"
+                  "*.markdown"
+                  "*.mdx"
+                  "*.yaml"
+                  "*.yml"
+                  "*.toml"
+                  "*.html"
+                  "*.css"
+                  "*.scss"
+                  "*.less"
+                  "*.vue"
+                  "*.svelte"
+                  "*.graphql"
+                  "*.gql"
+                ];
+              };
+            };
           };
 
           pre-commit = {

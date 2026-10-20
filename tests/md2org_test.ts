@@ -45,12 +45,9 @@ Deno.test("frontmatterToKeywords omits empty description and empty tags", () => 
   const out = frontmatterToKeywords(fm, "2025-03-22-diary");
   assertEquals(
     out,
-    [
-      "#+TITLE: 2025-03-22の日報",
-      "#+DATE: [2025-03-22 Sat]",
-      "#+EMOJI: 🦊",
-      "#+DRAFT: false",
-    ].join("\n"),
+    ["#+TITLE: 2025-03-22の日報", "#+DATE: [2025-03-22 Sat]", "#+EMOJI: 🦊", "#+DRAFT: false"].join(
+      "\n",
+    ),
   );
 });
 
@@ -64,14 +61,7 @@ Deno.test("frontmatterToKeywords emits draft true", () => {
     draft: true,
   };
   const out = frontmatterToKeywords(fm, "2026-01-01-wip");
-  assertEquals(
-    out,
-    [
-      "#+TITLE: wip",
-      "#+DATE: [2026-01-01 Thu]",
-      "#+DRAFT: true",
-    ].join("\n"),
-  );
+  assertEquals(out, ["#+TITLE: wip", "#+DATE: [2026-01-01 Thu]", "#+DRAFT: true"].join("\n"));
 });
 
 Deno.test("frontmatterToKeywords falls back to filename date when pubDate missing", () => {
@@ -86,12 +76,7 @@ Deno.test("frontmatterToKeywords falls back to filename date when pubDate missin
   const out = frontmatterToKeywords(fm, "2024-09-08-diary");
   assertEquals(
     out,
-    [
-      "#+TITLE: t",
-      "#+DATE: [2024-09-08 Sun]",
-      "#+EMOJI: 🦊",
-      "#+DRAFT: false",
-    ].join("\n"),
+    ["#+TITLE: t", "#+DATE: [2024-09-08 Sun]", "#+EMOJI: 🦊", "#+DRAFT: false"].join("\n"),
   );
 });
 
@@ -111,42 +96,25 @@ Deno.test("stemToOrgDate derives date from filename prefix", () => {
 });
 
 Deno.test("postProcessOrg rewrites begin_html to begin_export html", () => {
-  const body = [
-    "#+begin_html",
-    "<blockquote>hello</blockquote>",
-    "#+end_html",
-    "",
-    "本文",
-  ].join("\n");
+  const body = ["#+begin_html", "<blockquote>hello</blockquote>", "#+end_html", "", "本文"].join(
+    "\n",
+  );
   assertEquals(
     postProcessOrg(body),
-    [
-      "#+begin_export html",
-      "<blockquote>hello</blockquote>",
-      "#+end_export",
-      "",
-      "本文",
-    ].join("\n"),
+    ["#+begin_export html", "<blockquote>hello</blockquote>", "#+end_export", "", "本文"].join(
+      "\n",
+    ),
   );
 });
 
 Deno.test("postProcessOrg strips PROPERTIES drawers pandoc inserts after headings", () => {
-  const body = [
-    "** 見出し",
-    ":PROPERTIES:",
-    ":CUSTOM_ID: 見出し",
-    ":END:",
-    "",
-    "段落。",
-  ].join("\n");
-  assertEquals(
-    postProcessOrg(body),
-    ["** 見出し", "", "段落。"].join("\n"),
+  const body = ["** 見出し", ":PROPERTIES:", ":CUSTOM_ID: 見出し", ":END:", "", "段落。"].join(
+    "\n",
   );
+  assertEquals(postProcessOrg(body), ["** 見出し", "", "段落。"].join("\n"));
 });
 
 Deno.test("postProcessOrg leaves ordinary content untouched", () => {
-  const body =
-    "** 見出し\n\n*強調*とZWSP\n\n#+begin_src ts\nconst x = 1;\n#+end_src\n";
+  const body = "** 見出し\n\n*強調*とZWSP\n\n#+begin_src ts\nconst x = 1;\n#+end_src\n";
   assertEquals(postProcessOrg(body), body);
 });

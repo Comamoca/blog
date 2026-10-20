@@ -31,19 +31,9 @@ export interface PostLayoutData {
 }
 
 export default function (data: PostLayoutData) {
-  const {
-    title,
-    children,
-    pubDate,
-    emoji,
-    styles,
-    description,
-    ogImage,
-    canonicalUrl,
-  } = data;
+  const { title, children, pubDate, emoji, styles, description, ogImage, canonicalUrl } = data;
 
-  const npub =
-    "npub1f0xqy2qs5lhl2u035qszfne6sdw8jkh3px6we2c3u3gxy2v3g8tsvkn2qr";
+  const npub = "npub1f0xqy2qs5lhl2u035qszfne6sdw8jkh3px6we2c3u3gxy2v3g8tsvkn2qr";
 
   return (
     <html lang="ja">
@@ -53,37 +43,22 @@ export default function (data: PostLayoutData) {
         {(styles ?? ["/style.css"]).map((href) => (
           <link rel="stylesheet" href={href} />
         ))}
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        />
-        <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap@latest">
-        </script>
-        <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap-view@1.3.4">
-        </script>
-        {ogImage
-          ? (
-            <>
-              <meta property="og:type" content="article" />
-              <meta property="og:title" content={title} />
-              <meta
-                property="og:description"
-                content={description ?? SITE_DESCRIPTION}
-              />
-              {canonicalUrl
-                ? <meta property="og:url" content={canonicalUrl} />
-                : null}
-              <meta property="og:image" content={ogImage} />
-              <meta name="twitter:card" content="summary_large_image" />
-              <meta name="twitter:site" content={TWITTER_USERNAME} />
-              <meta
-                name="description"
-                content={description ?? SITE_DESCRIPTION}
-              />
-              <meta name="generator" content="ox-content" />
-            </>
-          )
-          : null}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap@latest"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap-view@1.3.4"></script>
+        {ogImage ? (
+          <>
+            <meta property="og:type" content="article" />
+            <meta property="og:title" content={title} />
+            <meta property="og:description" content={description ?? SITE_DESCRIPTION} />
+            {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
+            <meta property="og:image" content={ogImage} />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:site" content={TWITTER_USERNAME} />
+            <meta name="description" content={description ?? SITE_DESCRIPTION} />
+            <meta name="generator" content="ox-content" />
+          </>
+        ) : null}
       </head>
       <body>
         <Header />
@@ -93,9 +68,7 @@ export default function (data: PostLayoutData) {
               <div className="mx-auto mb-3">
                 <Twemoji emoji={emoji} />
               </div>
-              <h1 className="text-xl text-center mx-5 md:text-3xl">
-                {title}
-              </h1>
+              <h1 className="text-xl text-center mx-5 md:text-3xl">{title}</h1>
               <div className="flex flex-col mt-3 mx-auto">
                 <spam>{yymmdd(pubDate)}</spam>
               </div>
@@ -109,19 +82,11 @@ export default function (data: PostLayoutData) {
               </article>
               <hr className="w-4/6 h-1 mx-auto my-2 bg-gray-100 border-0 rounded my-10" />
               <div className="flex justify-center grid grid-cols-2 md:grid-cols-4 gap-2 py-5">
-                <a
-                  className="btn btn-sm md:btn-md"
-                  href="https://ko-fi.com/comamoca"
-                >
+                <a className="btn btn-sm md:btn-md" href="https://ko-fi.com/comamoca">
                   <span className="text-xs md:text-base">ko-fi ☕</span>
                 </a>
-                <a
-                  className="btn btn-sm md:btn-md"
-                  href="https://github.com/sponsors/Comamoca"
-                >
-                  <span className="text-xs md:text-base">
-                    GitHub Sponsors 🐙
-                  </span>
+                <a className="btn btn-sm md:btn-md" href="https://github.com/sponsors/Comamoca">
+                  <span className="text-xs md:text-base">GitHub Sponsors 🐙</span>
                 </a>
 
                 <button

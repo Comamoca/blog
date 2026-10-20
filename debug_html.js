@@ -38,12 +38,6 @@ const html = generateLinkCardHTML(ogData, "https://example.com");
 console.log("Generated HTML:");
 console.log(html);
 console.log("\nChecking specific assertions:");
-console.log(
-  "Has main flex container:",
-  html.includes('<div class="flex flex-grow'),
-);
-console.log(
-  "Has correct URL link:",
-  html.includes('<a href="https://example.com"'),
-);
+console.log("Has main flex container:", html.includes('<div class="flex flex-grow'));
+console.log("Has correct URL link:", html.includes('<a href="https://example.com"'));
 console.log("Has title attribute:", html.includes('title="Link Card"'));

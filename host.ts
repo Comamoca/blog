@@ -115,15 +115,9 @@ function paginate(
   return out;
 }
 
-function toPageLinks(
-  current: number,
-  totalPages: number,
-  urlPrefix: string,
-): PageLink[] {
+function toPageLinks(current: number, totalPages: number, urlPrefix: string): PageLink[] {
   return buildPageLinks(current, totalPages).map((l) =>
-    "omitted" in l
-      ? { omitted: true }
-      : { page: l.page, url: `${urlPrefix}${l.page}/` }
+    "omitted" in l ? { omitted: true } : { page: l.page, url: `${urlPrefix}${l.page}/` },
   );
 }
 
@@ -170,9 +164,7 @@ export const host = {
 
     const blogDeps = [{ path: BLOG_DIR, kind: "directory" as const }];
 
-    const allRoutes = paginate(articles, "/all/").map((
-      { page, pagination, results },
-    ) => ({
+    const allRoutes = paginate(articles, "/all/").map(({ page, pagination, results }) => ({
       path: `/all/${page}/`,
       title: "全ての記事",
       dependencies: blogDeps,
@@ -196,9 +188,7 @@ export const host = {
       },
     }));
 
-    const techRoutes = paginate(techArticles, "/tech/").map((
-      { page, pagination, results },
-    ) => ({
+    const techRoutes = paginate(techArticles, "/tech/").map(({ page, pagination, results }) => ({
       path: `/tech/${page}/`,
       title: "全ての技術記事",
       dependencies: blogDeps,
@@ -221,9 +211,7 @@ export const host = {
       },
     }));
 
-    const diaryRoutes = paginate(diaries, "/diary/").map((
-      { page, pagination, results },
-    ) => ({
+    const diaryRoutes = paginate(diaries, "/diary/").map(({ page, pagination, results }) => ({
       path: `/diary/${page}/`,
       title: "すべての日報",
       dependencies: blogDeps,
@@ -261,11 +249,7 @@ export const host = {
             description: SITE_DESCRIPTION,
             ogImage: buildOgImageUrl("main", SITE_TITLE, SITE_DESCRIPTION),
             canonicalUrl: `${SITE_URL}/`,
-            children: raw(
-              renderToString(
-                HomePage({ posts: articles.map(toSummary) }) as any,
-              ),
-            ),
+            children: raw(renderToString(HomePage({ posts: articles.map(toSummary) }) as any)),
           }) as any,
         );
         return { html: `${DOC_PROLOGUE}${body}` };
@@ -301,11 +285,7 @@ export const host = {
             emoji: "❓",
             styles: styles(),
             description: SITE_DESCRIPTION,
-            ogImage: buildOgImageUrl(
-              "post",
-              "このブログについて",
-              SITE_DESCRIPTION,
-            ),
+            ogImage: buildOgImageUrl("post", "このブログについて", SITE_DESCRIPTION),
             canonicalUrl: `${SITE_URL}/info.html`,
             children: raw(renderToString(InfoPage({}) as any)),
           }) as any,
@@ -340,13 +320,10 @@ export const host = {
       post: p,
       published: combineDate(
         new Date(`${p.stem.slice(0, 10)}T00:00:00Z`),
-        commitTimes.get(`${BLOG_DIR}/${p.stem}.md`) ??
-          commitTimes.get(`${BLOG_DIR}/${p.stem}.org`),
+        commitTimes.get(`${BLOG_DIR}/${p.stem}.md`) ?? commitTimes.get(`${BLOG_DIR}/${p.stem}.org`),
       ),
     }));
-    feedCandidates.sort((a, b) =>
-      b.published.getTime() - a.published.getTime()
-    );
+    feedCandidates.sort((a, b) => b.published.getTime() - a.published.getTime());
 
     const feedItems: FeedItem[] = await Promise.all(
       feedCandidates.slice(0, 10).map(async ({ post: p, published }) => {
@@ -413,11 +390,9 @@ export const host = {
         const lastmod = lastBuild.toISOString();
         const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${
-          sitemapEntries.map((p) =>
-            `  <url><loc>${SITE_URL}${p}</loc><lastmod>${lastmod}</lastmod></url>`
-          ).join("\n")
-        }
+${sitemapEntries
+  .map((p) => `  <url><loc>${SITE_URL}${p}</loc><lastmod>${lastmod}</lastmod></url>`)
+  .join("\n")}
 </urlset>
 `;
         return { contentType: "application/xml", body };
@@ -450,8 +425,9 @@ ${
     if (
       viteInternalPrefixes.some((prefix) => pathname.startsWith(prefix)) ||
       pathname.includes("/node_modules/") ||
-      /\.(?:js|ts|css|scss|less|svg|png|jpe?g|gif|webp|ico|woff2?|ttf|eot|json|map|mp4|webm|mp3|pdf)$/i
-        .test(pathname)
+      /\.(?:js|ts|css|scss|less|svg|png|jpe?g|gif|webp|ico|woff2?|ttf|eot|json|map|mp4|webm|mp3|pdf)$/i.test(
+        pathname,
+      )
     ) {
       return undefined;
     }

@@ -54,88 +54,57 @@ function getEnhancedLinkCardConfig(
 }
 
 Deno.test("Enhanced LinkCard Configuration", async (t) => {
-  await t.step(
-    "should support explicit configuration object to disable linkcard",
-    () => {
-      const remarkPlugins = getEnhancedLinkCardConfig(
-        undefined,
-        undefined,
-        { enabled: false },
-      );
+  await t.step("should support explicit configuration object to disable linkcard", () => {
+    const remarkPlugins = getEnhancedLinkCardConfig(undefined, undefined, { enabled: false });
 
-      const hasLinkcard = remarkPlugins.some((plugin) =>
-        Array.isArray(plugin) ? plugin[0] === "linkcard" : plugin === "linkcard"
-      );
-      assertEquals(
-        hasLinkcard,
-        false,
-        "Linkcard should be disabled when config.enabled = false",
-      );
-    },
-  );
+    const hasLinkcard = remarkPlugins.some((plugin) =>
+      Array.isArray(plugin) ? plugin[0] === "linkcard" : plugin === "linkcard",
+    );
+    assertEquals(hasLinkcard, false, "Linkcard should be disabled when config.enabled = false");
+  });
 
   await t.step(
     "should support explicit configuration object to enable linkcard with options",
     () => {
-      const remarkPlugins = getEnhancedLinkCardConfig(
-        undefined,
-        undefined,
-        { enabled: true, debugMode: true },
+      const remarkPlugins = getEnhancedLinkCardConfig(undefined, undefined, {
+        enabled: true,
+        debugMode: true,
+      });
+
+      const linkcardPlugin = remarkPlugins.find(
+        (plugin) => Array.isArray(plugin) && plugin[0] === "linkcard",
       );
 
-      const linkcardPlugin = remarkPlugins.find((plugin) =>
-        Array.isArray(plugin) && plugin[0] === "linkcard"
-      );
-
-      assertEquals(
-        linkcardPlugin !== undefined,
-        true,
-        "Linkcard should be enabled",
-      );
-      assertEquals(
-        linkcardPlugin?.[1]?.debugMode,
-        true,
-        "Debug mode should be passed to plugin",
-      );
+      assertEquals(linkcardPlugin !== undefined, true, "Linkcard should be enabled");
+      assertEquals(linkcardPlugin?.[1]?.debugMode, true, "Debug mode should be passed to plugin");
     },
   );
 
-  await t.step(
-    "should prioritize config object over environment variables",
-    () => {
-      // Environment says disable, but config object says enable
-      const remarkPlugins = getEnhancedLinkCardConfig(
-        undefined,
-        "1", // DISABLE_LINKCARD = 1
-        { enabled: true },
-      );
-
-      const hasLinkcard = remarkPlugins.some((plugin) =>
-        Array.isArray(plugin) ? plugin[0] === "linkcard" : plugin === "linkcard"
-      );
-      assertEquals(
-        hasLinkcard,
-        false,
-        "Environment variables should still take precedence for backwards compatibility",
-      );
-    },
-  );
-
-  await t.step("should handle missing config gracefully", () => {
-    // Test with no config object - should work like before
+  await t.step("should prioritize config object over environment variables", () => {
+    // Environment says disable, but config object says enable
     const remarkPlugins = getEnhancedLinkCardConfig(
       undefined,
-      undefined,
-      undefined,
+      "1", // DISABLE_LINKCARD = 1
+      { enabled: true },
     );
 
     const hasLinkcard = remarkPlugins.some((plugin) =>
-      Array.isArray(plugin) ? plugin[0] === "linkcard" : plugin === "linkcard"
+      Array.isArray(plugin) ? plugin[0] === "linkcard" : plugin === "linkcard",
     );
     assertEquals(
       hasLinkcard,
-      true,
-      "Should enable by default when no config provided",
+      false,
+      "Environment variables should still take precedence for backwards compatibility",
     );
+  });
+
+  await t.step("should handle missing config gracefully", () => {
+    // Test with no config object - should work like before
+    const remarkPlugins = getEnhancedLinkCardConfig(undefined, undefined, undefined);
+
+    const hasLinkcard = remarkPlugins.some((plugin) =>
+      Array.isArray(plugin) ? plugin[0] === "linkcard" : plugin === "linkcard",
+    );
+    assertEquals(hasLinkcard, true, "Should enable by default when no config provided");
   });
 });

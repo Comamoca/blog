@@ -50,11 +50,7 @@ Deno.test("org レンダリング: 脚注が remark-gfm 形状に正規化され
     `<h2 id="footnote-label">脚注</h2>`,
     "footnotePost が footnote-label 見出しを「脚注」に書き換えること",
   );
-  assertStringIncludes(
-    html,
-    `<li id="fn.1">`,
-    '脚注定義が <li id="fn.N"> になること',
-  );
+  assertStringIncludes(html, `<li id="fn.1">`, '脚注定義が <li id="fn.N"> になること');
   assertStringIncludes(
     html,
     `data-footnote-backref`,

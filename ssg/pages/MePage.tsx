@@ -1,14 +1,12 @@
 const links: Array<{ link: string; name: string }> = [
   { link: "https://bsky.app/profile/comamoca.dev", name: "Bluesky" },
   {
-    link:
-      "https://nostx.io/npub1f0xqy2qs5lhl2u035qszfne6sdw8jkh3px6we2c3u3gxy2v3g8tsvkn2qr",
+    link: "https://nostx.io/npub1f0xqy2qs5lhl2u035qszfne6sdw8jkh3px6we2c3u3gxy2v3g8tsvkn2qr",
     name: "Nostr",
   },
   { link: "https://twitter.com/Comamoca_", name: "Twitter" },
   {
-    link:
-      "https://vrchat.com/home/user/usr_695212b9-72ea-4503-8109-47eb12d02a5d",
+    link: "https://vrchat.com/home/user/usr_695212b9-72ea-4503-8109-47eb12d02a5d",
     name: "VRChat",
   },
   { link: "https://discord.com/users/comamoca", name: "Discord" },
@@ -18,8 +16,7 @@ const links: Array<{ link: string; name: string }> = [
 export default function MePage() {
   return (
     <>
-      <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js">
-      </script>
+      <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
       <img
         src="https://r2.comamoca.dev/icon.png"
         className="mx-auto h-32 w-32 rounded-full md:mb-2 mt-8 md:mt-5"
@@ -39,12 +36,10 @@ export default function MePage() {
               <p className="font-normal text-gray-700">
                 Gleamが好きです。 <br />
                 普段はNixOSとEmacsでコードを書いています。
-
                 <h3>趣味</h3>
                 U149がきっかけでかれこれ3年くらいアイドルマスターを追っていて、主に学マスとシャニマスメインでやっています。
                 <div className="not-prose pt-2">
                   担当アイドル:
-
                   <div className="mt-2">
                     <ul className="list-disc pl-5">
                       <li className="py-0">小宮果穂</li>
@@ -53,7 +48,6 @@ export default function MePage() {
                       <li className="py-0">花海佑芽</li>
                     </ul>
                   </div>
-
                   <div className="mt-2">
                     担当ユニット:
                     <ul className="list-disc pl-5">
@@ -62,12 +56,14 @@ export default function MePage() {
                     </ul>
                   </div>
                 </div>
-
                 <h3>Links</h3>
-
                 <div className="flex flex-wrap">
                   {links.map((link: { link: string; name: string }) => {
-                    return <a href={link.link} className="px-1">{link.name}</a>;
+                    return (
+                      <a href={link.link} className="px-1">
+                        {link.name}
+                      </a>
+                    );
                   })}
                 </div>
               </p>

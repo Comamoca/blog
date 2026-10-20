@@ -177,9 +177,7 @@ function shiki(o) {
 のレンダリング結果は `raw()` で差し込む。
 
 ```ts
-renderToString(
-  PostLayout({ title, pubDate, emoji, styles, children: raw(res.html) }),
-);
+renderToString(PostLayout({ title, pubDate, emoji, styles, children: raw(res.html) }));
 ```
 
 **`renderToString` は同期である。** Promise
@@ -221,12 +219,12 @@ renderToString(
 列挙する設計のため、ox-content 側の対応拡張子の制約も受けない。
 
 ```ts
-render: (async () => {
+render: async () => {
   const html = p.file.endsWith(".org")
     ? await renderOrg(p.file) // uniorg (本移行では実装しない)
     : (await transformMarkdown(source, p.file, MD_OPTIONS)).html;
   return { html: shell(p.title, html) };
-});
+};
 ```
 
 uniorg (`uniorg-parse` → `uniorg-rehype` → `rehype-stringify`) が期待どおり HTML

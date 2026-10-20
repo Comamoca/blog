@@ -1,10 +1,5 @@
 import { execFileSync } from "node:child_process";
-import {
-  AUTHOR,
-  SITE_DESCRIPTION,
-  SITE_TITLE,
-  SITE_URL,
-} from "../src/consts.ts";
+import { AUTHOR, SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "../src/consts.ts";
 
 const LIMIT = 10;
 
@@ -35,10 +30,7 @@ function gitCommandEnv(cwd: string): NodeJS.ProcessEnv {
  * 現行実装は1ファイルにつき `git log` を1回spawnしていて447回で約3.8秒
  * かかっていた。ここでは1回の `git log --name-only` 走査で全件ぶんを引く。
  */
-export function firstCommitTimes(
-  repoRoot: string,
-  relDir: string,
-): Map<string, number> {
+export function firstCommitTimes(repoRoot: string, relDir: string): Map<string, number> {
   const times = new Map<string, number>();
   let out: string;
   try {
@@ -83,23 +75,17 @@ export function firstCommitTimes(
  * gitが利用できない/リポジトリ外では現在時刻にフォールバックし、
  * ビルドが失敗しないようにする (git無しのCIサンドボックス等)。
  */
-export function latestArticleCommitDate(
-  repoRoot: string,
-  relDir = "src/blog",
-): Date {
+export function latestArticleCommitDate(repoRoot: string, relDir = "src/blog"): Date {
   try {
-    const out = execFileSync("git", [
-      "log",
-      "--diff-filter=A",
-      "-1",
-      "--format=%ct",
-      "--",
-      relDir,
-    ], {
-      cwd: repoRoot,
-      env: gitCommandEnv(repoRoot),
-      encoding: "utf8",
-    });
+    const out = execFileSync(
+      "git",
+      ["log", "--diff-filter=A", "-1", "--format=%ct", "--", relDir],
+      {
+        cwd: repoRoot,
+        env: gitCommandEnv(repoRoot),
+        encoding: "utf8",
+      },
+    );
     const ts = Number.parseInt(out.trim(), 10);
     return Number.isNaN(ts) ? new Date() : new Date(ts * 1000);
   } catch {
@@ -108,10 +94,7 @@ export function latestArticleCommitDate(
 }
 
 /** 日付はファイル名、時刻は初回コミットから合成する */
-export function combineDate(
-  fileDate: Date,
-  commitMs: number | undefined,
-): Date {
+export function combineDate(fileDate: Date, commitMs: number | undefined): Date {
   if (commitMs === undefined) return fileDate;
   const c = new Date(commitMs);
   const d = new Date(fileDate);
@@ -120,13 +103,9 @@ export function combineDate(
 }
 
 const rfc822 = (d: Date) => d.toUTCString();
-const cdata = (s: string) =>
-  `<![CDATA[${s.replace(/]]>/g, "]]]]><![CDATA[>")}]]>`;
+const cdata = (s: string) => `<![CDATA[${s.replace(/]]>/g, "]]]]><![CDATA[>")}]]>`;
 const esc = (s: string) =>
-  s.replace(
-    /[&<>"]/g,
-    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]!),
-  );
+  s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
 
 export type FeedItem = {
   title: string;
@@ -136,7 +115,10 @@ export type FeedItem = {
 };
 
 export function renderRss(items: FeedItem[], lastBuild: Date): string {
-  const body = items.slice(0, LIMIT).map((i) => `
+  const body = items
+    .slice(0, LIMIT)
+    .map(
+      (i) => `
     <item>
       <title>${esc(i.title)}</title>
       <link>${SITE_URL}${i.url}</link>
@@ -149,7 +131,9 @@ export function renderRss(items: FeedItem[], lastBuild: Date): string {
         ${cdata(i.contentHtml)}
       </content:encoded>
       <pubDate>${rfc822(i.published)}</pubDate>
-    </item>`).join("");
+    </item>`,
+    )
+    .join("");
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:webfeeds="http://webfeeds.org/rss/1.0" version="2.0">

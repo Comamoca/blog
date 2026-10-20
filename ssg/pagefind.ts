@@ -29,7 +29,7 @@ async function listHtmlFiles(dir: string): Promise<string[]> {
   for (const entry of await fs.readdir(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      out.push(...await listHtmlFiles(full));
+      out.push(...(await listHtmlFiles(full)));
     } else if (entry.name.endsWith(".html")) {
       out.push(full);
     }

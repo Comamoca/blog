@@ -31,8 +31,7 @@ const resources: Array<HubLink> = [
   {
     title: "starter",
     link: new URL("https://github.com/Comamoca/starter"),
-    description:
-      "kickstartというツールで展開できるテンプレートを載せているリポジトリです。",
+    description: "kickstartというツールで展開できるテンプレートを載せているリポジトリです。",
   },
   {
     title: "nur-packages",
@@ -45,9 +44,7 @@ export default function HubPage() {
   return (
     <main className="mt-5 mx-8 md:mx-auto">
       <div className="flex flex-col justify-center">
-        <h2 className="text-3xl md:text-4xl px-auto mx-auto">
-          Hub
-        </h2>
+        <h2 className="text-3xl md:text-4xl px-auto mx-auto">Hub</h2>
 
         <p className="p-10 mx-auto">
           自分が書いた情報やテンプレートなど、自身がよく引用するリソースの一覧です。

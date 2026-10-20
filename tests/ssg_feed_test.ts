@@ -1,12 +1,5 @@
-import {
-  assert,
-  assertEquals,
-} from "https://deno.land/std@0.210.0/assert/mod.ts";
-import {
-  combineDate,
-  firstCommitTimes,
-  latestArticleCommitDate,
-} from "../ssg/feed.ts";
+import { assert, assertEquals } from "https://deno.land/std@0.210.0/assert/mod.ts";
+import { combineDate, firstCommitTimes, latestArticleCommitDate } from "../ssg/feed.ts";
 
 /**
  * ox-content移行版フィード日付ロジックの単体テスト。
@@ -44,7 +37,8 @@ Deno.test("combineDate: コミット時刻がある場合、時刻成分がUTC�
   const combined = combineDate(fileDate, commitMs);
 
   assert(
-    combined.getUTCHours() !== 0 || combined.getUTCMinutes() !== 0 ||
+    combined.getUTCHours() !== 0 ||
+      combined.getUTCMinutes() !== 0 ||
       combined.getUTCSeconds() !== 0,
     "コミット時刻を合成した日付はUTC深夜であってはならない",
   );
@@ -95,9 +89,6 @@ Deno.test("firstCommitTimes: src/blog配下の実ファイルに対して時刻�
   const times = firstCommitTimes(REPO_ROOT, "src/blog");
   assert(times.size > 0, "1件以上のコミット時刻が取得できること");
   for (const [, ts] of times) {
-    assert(
-      Number.isFinite(ts) && ts > 0,
-      "取得した時刻は有効なUNIX時刻(ms)であること",
-    );
+    assert(Number.isFinite(ts) && ts > 0, "取得した時刻は有効なUNIX時刻(ms)であること");
   }
 });

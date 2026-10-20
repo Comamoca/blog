@@ -23,9 +23,7 @@ function extractTags(frontmatter: string): string[] {
     if (raw === "") return [];
     try {
       const parsed = JSON.parse(raw);
-      return Array.isArray(parsed)
-        ? parsed.filter((t) => typeof t === "string")
-        : [];
+      return Array.isArray(parsed) ? parsed.filter((t) => typeof t === "string") : [];
     } catch {
       return [];
     }
@@ -35,9 +33,7 @@ function extractTags(frontmatter: string): string[] {
 
 const counts = new Map<string, number>();
 
-for await (
-  const entry of walk(BLOG_DIR, { exts: [".md"], includeDirs: false })
-) {
+for await (const entry of walk(BLOG_DIR, { exts: [".md"], includeDirs: false })) {
   const content = await Deno.readTextFile(entry.path);
   const tags = extractTags(extractFrontmatter(content));
   for (const tag of tags) {
@@ -45,9 +41,7 @@ for await (
   }
 }
 
-const sorted = [...counts.entries()]
-  .sort((a, b) => b[1] - a[1])
-  .map(([tag]) => tag);
+const sorted = [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([tag]) => tag);
 
 for (const tag of sorted) {
   console.log(tag);

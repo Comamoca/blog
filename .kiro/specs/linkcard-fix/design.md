@@ -58,7 +58,7 @@ graph TB
     J --> K[HTML Generator]
     G --> K
     K --> L[Static HTML Output]
-    
+
     M[Config Manager] --> C
     N[Logger System] --> E
     N --> C
@@ -84,13 +84,13 @@ graph TB
 ```mermaid
 sequenceDiagram
     participant MD as Markdown File
-    participant RP as Remark Pipeline  
+    participant RP as Remark Pipeline
     participant LC as Linkcard Plugin
     participant OF as OGP Fetcher
     participant CA as Cache API
     participant EX as External Site
     participant HG as HTML Generator
-    
+
     MD->>RP: Process markdown content
     RP->>LC: Parse paragraph nodes
     LC->>LC: Detect standalone URLs
@@ -98,7 +98,7 @@ sequenceDiagram
     OF->>CA: Check cache for URL
     alt Cache Hit
         CA->>OF: Return cached OGP data
-    else Cache Miss  
+    else Cache Miss
         OF->>EX: HTTP request with timeout
         EX->>OF: HTML response
         OF->>OF: Parse OGP metadata
@@ -124,7 +124,7 @@ flowchart TD
     F --> I[HTML Output]
     G --> I
     H --> I
-    
+
     J[Timeout] --> D
     K[Network Error] --> D
     L[Parse Error] --> G
@@ -242,14 +242,16 @@ interface OGPFetchService {
   getCacheStatus(): Promise<CacheStats>;
 }
 
-type FetchResult = {
-  success: true;
-  data: OGPData;
-} | {
-  success: false;
-  error: FetchError;
-  fallbackData: Partial<OGPData>;
-};
+type FetchResult =
+  | {
+      success: true;
+      data: OGPData;
+    }
+  | {
+      success: false;
+      error: FetchError;
+      fallbackData: Partial<OGPData>;
+    };
 ```
 
 **前提条件**: 有効なHTTP(S) URLと10秒以内のタイムアウト **事後条件**:
@@ -374,10 +376,10 @@ interface FetchError {
 ```mermaid
 flowchart TD
     A[Current State<br/>RELEASE-dependent] --> B[Phase 1<br/>Configuration Enhancement]
-    B --> C[Phase 2<br/>Development Enablement]  
+    B --> C[Phase 2<br/>Development Enablement]
     C --> D[Phase 3<br/>Testing & Validation]
     D --> E[Target State<br/>Environment-agnostic]
-    
+
     F[Rollback Trigger<br/>Build Failure] --> A
     G[Validation Checkpoint<br/>Link Cards Work] --> C
     H[Testing Checkpoint<br/>All Environments] --> D

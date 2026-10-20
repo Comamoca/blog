@@ -5,9 +5,7 @@ export type PostSummary = {
   description: string;
 };
 
-export type PageLink =
-  | { page: number; url: string }
-  | { omitted: true };
+export type PageLink = { page: number; url: string } | { omitted: true };
 
 export type Pagination = {
   page: number;

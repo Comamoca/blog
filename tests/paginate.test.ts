@@ -2,7 +2,7 @@ import { assert, assertEquals } from "jsr:@std/assert";
 import { buildPageLinks, type PageLink } from "../utils/paginate.ts";
 
 function simplify(result: PageLink[]): (number | string)[] {
-  return result.map((r) => "omitted" in r ? "..." : r.page);
+  return result.map((r) => ("omitted" in r ? "..." : r.page));
 }
 
 Deno.test("buildPageLinks - small pages", () => {
@@ -37,22 +37,14 @@ Deno.test("buildPageLinks - no unnecessary omission (gap=1)", () => {
 
 Deno.test("buildPageLinks - no duplicates", () => {
   const result = buildPageLinks(5, 10);
-  const pages = result.filter((r) => "page" in r).map((r) =>
-    (r as { page: number }).page
-  );
+  const pages = result.filter((r) => "page" in r).map((r) => (r as { page: number }).page);
   const uniquePages = [...new Set(pages)];
-  assertEquals(
-    pages.length,
-    uniquePages.length,
-    "Should not contain duplicate pages",
-  );
+  assertEquals(pages.length, uniquePages.length, "Should not contain duplicate pages");
 });
 
 Deno.test("buildPageLinks - always sorted", () => {
   const result = buildPageLinks(5, 10);
-  const pages = result.filter((r) => "page" in r).map((r) =>
-    (r as { page: number }).page
-  );
+  const pages = result.filter((r) => "page" in r).map((r) => (r as { page: number }).page);
   const sortedPages = [...pages].sort((a, b) => a - b);
   assertEquals(pages, sortedPages, "Pages should be sorted");
 });
@@ -61,9 +53,7 @@ Deno.test("buildPageLinks - always contains first and last page", () => {
   for (const totalPages of [3, 5, 10, 20]) {
     for (const current of [1, Math.ceil(totalPages / 2), totalPages]) {
       const result = buildPageLinks(current, totalPages);
-      const pages = result.filter((r) => "page" in r).map((r) =>
-        (r as { page: number }).page
-      );
+      const pages = result.filter((r) => "page" in r).map((r) => (r as { page: number }).page);
 
       assert(
         pages.includes(1),
@@ -79,9 +69,7 @@ Deno.test("buildPageLinks - always contains first and last page", () => {
 
 Deno.test("buildPageLinks - no out of range values", () => {
   const result = buildPageLinks(5, 10);
-  const pages = result.filter((r) => "page" in r).map((r) =>
-    (r as { page: number }).page
-  );
+  const pages = result.filter((r) => "page" in r).map((r) => (r as { page: number }).page);
 
   for (const page of pages) {
     assert(page >= 1, `Page ${page} should be >= 1`);

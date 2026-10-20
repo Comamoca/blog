@@ -1,7 +1,4 @@
-import {
-  assert,
-  assertEquals,
-} from "https://deno.land/std@0.210.0/assert/mod.ts";
+import { assert, assertEquals } from "https://deno.land/std@0.210.0/assert/mod.ts";
 import { join } from "jsr:@std/path";
 
 /**
@@ -37,7 +34,11 @@ async function dirExists(path: string): Promise<boolean> {
 
 async function loadExpectedUrls(): Promise<string[]> {
   const text = await Deno.readTextFile(FIXTURE_PATH);
-  return text.split("\n").map((l) => l.trim()).filter(Boolean).sort();
+  return text
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean)
+    .sort();
 }
 
 /** urls.txt の1エントリ (例: "/blog/foo/" や "/me.html") を出力ファイルパスへ変換する */
@@ -67,9 +68,9 @@ Deno.test({
     assertEquals(
       missing,
       [],
-      `${missing.length}件のURLに対応する出力が見つからない (先頭10件: ${
-        missing.slice(0, 10).join(", ")
-      })`,
+      `${missing.length}件のURLに対応する出力が見つからない (先頭10件: ${missing
+        .slice(0, 10)
+        .join(", ")})`,
     );
   },
 });

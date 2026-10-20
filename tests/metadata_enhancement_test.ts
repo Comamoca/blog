@@ -1,7 +1,4 @@
-import {
-  assertEquals,
-  assertExists,
-} from "https://deno.land/std@0.210.0/assert/mod.ts";
+import { assertEquals, assertExists } from "https://deno.land/std@0.210.0/assert/mod.ts";
 
 // Enhanced metadata extraction functionality tests
 // Testing improved OGP extraction, fallbacks, and special site handling
@@ -11,8 +8,7 @@ class MockDOMParser {
   parseFromString(html: string, mimeType: string) {
     return {
       title: this.extractTitle(html),
-      querySelectorAll: (selector: string) =>
-        this.extractMetaTags(html, selector),
+      querySelectorAll: (selector: string) => this.extractMetaTags(html, selector),
     };
   }
 
@@ -89,9 +85,7 @@ function enhancedOGPExtraction(html: string, url: string): any {
 function extractOGProperty(doc: any, property: string): string | null {
   const metaTags = doc.querySelectorAll("meta");
   for (const tag of metaTags) {
-    if (
-      tag.hasAttribute("property") && tag.getAttribute("property") === property
-    ) {
+    if (tag.hasAttribute("property") && tag.getAttribute("property") === property) {
       return tag.getAttribute("content");
     }
   }
@@ -156,9 +150,7 @@ function extractFromTitle(title: string): string | null {
 function extractMetaDescription(doc: any): string | null {
   const metaTags = doc.querySelectorAll("meta");
   for (const tag of metaTags) {
-    if (
-      tag.hasAttribute("name") && tag.getAttribute("name") === "description"
-    ) {
+    if (tag.hasAttribute("name") && tag.getAttribute("name") === "description") {
       return tag.getAttribute("content");
     }
   }
@@ -177,11 +169,7 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
     `;
 
     const result = enhancedOGPExtraction(htmlWithOG, "https://example.com");
-    assertEquals(
-      result.title,
-      "OG Title",
-      "Should prefer OG title over HTML title",
-    );
+    assertEquals(result.title, "OG Title", "Should prefer OG title over HTML title");
 
     const htmlWithoutOG = `
       <html>
@@ -192,32 +180,18 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
     `;
 
     const result2 = enhancedOGPExtraction(htmlWithoutOG, "https://example.com");
-    assertEquals(
-      result2.title,
-      "HTML Title Only",
-      "Should fallback to HTML title",
-    );
+    assertEquals(result2.title, "HTML Title Only", "Should fallback to HTML title");
   });
 
   await t.step("should resolve relative image URLs correctly", () => {
     // Test absolute URL (should remain unchanged)
     const absoluteUrl = "https://cdn.example.com/image.jpg";
-    const resolved1 = resolveImageURL(
-      absoluteUrl,
-      new URL("https://example.com"),
-    );
-    assertEquals(
-      resolved1,
-      absoluteUrl,
-      "Absolute URLs should remain unchanged",
-    );
+    const resolved1 = resolveImageURL(absoluteUrl, new URL("https://example.com"));
+    assertEquals(resolved1, absoluteUrl, "Absolute URLs should remain unchanged");
 
     // Test relative URL with leading slash
     const relativeUrl1 = "/images/thumbnail.jpg";
-    const resolved2 = resolveImageURL(
-      relativeUrl1,
-      new URL("https://example.com"),
-    );
+    const resolved2 = resolveImageURL(relativeUrl1, new URL("https://example.com"));
     assertEquals(
       resolved2,
       "https://example.com/images/thumbnail.jpg",
@@ -226,10 +200,7 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
 
     // Test relative URL without leading slash
     const relativeUrl2 = "images/thumbnail.jpg";
-    const resolved3 = resolveImageURL(
-      relativeUrl2,
-      new URL("https://example.com"),
-    );
+    const resolved3 = resolveImageURL(relativeUrl2, new URL("https://example.com"));
     assertEquals(
       resolved3,
       "https://example.com/images/thumbnail.jpg",
@@ -248,19 +219,13 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
 
     testCases.forEach(({ title, expected }) => {
       const result = extractFromTitle(title);
-      assertEquals(
-        result,
-        expected,
-        `Should extract "${expected}" from "${title}"`,
-      );
+      assertEquals(result, expected, `Should extract "${expected}" from "${title}"`);
     });
   });
 
-  await t.step(
-    "should handle special sites like JSR with proper headers",
-    () => {
-      // Test JSR-like HTML structure
-      const jsrHtml = `
+  await t.step("should handle special sites like JSR with proper headers", () => {
+    // Test JSR-like HTML structure
+    const jsrHtml = `
       <html>
         <head>
           <title>@std/fmt - JSR</title>
@@ -271,16 +236,11 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
       </html>
     `;
 
-      const result = enhancedOGPExtraction(jsrHtml, "https://jsr.io/@std/fmt");
-      assertEquals(result.title, "@std/fmt", "Should extract JSR package name");
-      assertEquals(result.siteTitle, "JSR", "Should extract JSR site name");
-      assertEquals(
-        result.image,
-        "https://jsr.io/logo.png",
-        "Should resolve JSR relative image URL",
-      );
-    },
-  );
+    const result = enhancedOGPExtraction(jsrHtml, "https://jsr.io/@std/fmt");
+    assertEquals(result.title, "@std/fmt", "Should extract JSR package name");
+    assertEquals(result.siteTitle, "JSR", "Should extract JSR site name");
+    assertEquals(result.image, "https://jsr.io/logo.png", "Should resolve JSR relative image URL");
+  });
 
   await t.step("should extract description from OG and meta fallback", () => {
     const htmlWithOGDescription = `
@@ -292,15 +252,8 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
       </html>
     `;
 
-    const result = enhancedOGPExtraction(
-      htmlWithOGDescription,
-      "https://example.com",
-    );
-    assertEquals(
-      result.description,
-      "OG Description",
-      "Should prefer OG description",
-    );
+    const result = enhancedOGPExtraction(htmlWithOGDescription, "https://example.com");
+    assertEquals(result.description, "OG Description", "Should prefer OG description");
 
     const htmlWithMetaOnly = `
       <html>
@@ -310,10 +263,7 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
       </html>
     `;
 
-    const result2 = enhancedOGPExtraction(
-      htmlWithMetaOnly,
-      "https://example.com",
-    );
+    const result2 = enhancedOGPExtraction(htmlWithMetaOnly, "https://example.com");
     assertEquals(
       result2.description,
       "Meta Description Only",
@@ -330,11 +280,7 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
     assertExists(result.siteTitle, "Should always provide a site title");
     assertExists(result.url, "Should always provide the URL");
     assertExists(result.origin, "Should always provide the origin");
-    assertEquals(
-      result.origin,
-      "https://example.com",
-      "Origin should match the input URL",
-    );
+    assertEquals(result.origin, "https://example.com", "Origin should match the input URL");
   });
 
   await t.step("should handle malformed HTML gracefully", () => {
@@ -347,24 +293,11 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
         </head>
     `;
 
-    const result = enhancedOGPExtraction(
-      malformedHtml,
-      "https://malformed.com",
-    );
+    const result = enhancedOGPExtraction(malformedHtml, "https://malformed.com");
 
     // Should not throw errors and provide some usable data
-    assertExists(
-      result.title,
-      "Should handle malformed HTML and provide title",
-    );
-    assertExists(
-      result.siteTitle,
-      "Should provide site title even with malformed HTML",
-    );
-    assertEquals(
-      result.url,
-      "https://malformed.com",
-      "Should preserve the original URL",
-    );
+    assertExists(result.title, "Should handle malformed HTML and provide title");
+    assertExists(result.siteTitle, "Should provide site title even with malformed HTML");
+    assertEquals(result.url, "https://malformed.com", "Should preserve the original URL");
   });
 });

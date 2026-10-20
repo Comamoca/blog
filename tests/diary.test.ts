@@ -9,11 +9,7 @@ function parseFileNameDate(fileName: string): Date {
   return parsed;
 }
 
-function assertDateMatches(
-  fileName: string,
-  pubDate: string,
-  message: string,
-): void {
+function assertDateMatches(fileName: string, pubDate: string, message: string): void {
   const parsedPubDate = parse(pubDate, "MMM d yyyy", new Date());
   assert(parsedPubDate, `invalid pubDate "${pubDate}" at ${fileName}`);
   assertEquals(parseFileNameDate(fileName), parsedPubDate, message);

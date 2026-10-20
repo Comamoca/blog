@@ -11,16 +11,8 @@ export default function HomePage({ posts }: { posts: PostSummary[] }) {
       </div>
       <div className="flex md:items-center flex-col gap-6 grid-cols-4">
         <PostList pages={posts.slice(0, 8)} />
-        <PostCard
-          title="全ての技術記事"
-          description="全ての技術記事はこちらから"
-          slug="/tech/1"
-        />
-        <PostCard
-          title="全ての記事"
-          description="全ての記事はこちらから"
-          slug="/all/1"
-        />
+        <PostCard title="全ての技術記事" description="全ての技術記事はこちらから" slug="/tech/1" />
+        <PostCard title="全ての記事" description="全ての記事はこちらから" slug="/all/1" />
       </div>
     </div>
   );

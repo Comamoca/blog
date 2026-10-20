@@ -249,7 +249,7 @@ site.process([".html"], (page) => {
 
 ```toml
 name = "blog-og"
-main = "build/dev/javascript/og_worker/og_worker.mjs"  # gleam build成果物をwrangler(esbuild)がバンドル
+main = "build/dev/javascript/og_worker/og_worker.mjs" # gleam build成果物をwrangler(esbuild)がバンドル
 compatibility_date = "2026-08-01"
 assets = { directory = "./static", binding = "ASSETS" }
 routes = [{ pattern = "og.comamoca.dev", custom_domain = true }]

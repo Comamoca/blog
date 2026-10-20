@@ -6,10 +6,7 @@ export default function Twemoji({ emoji, size = 20 }) {
 
   return (
     <>
-      <img
-        src={url.toString()}
-        className={style}
-      />
+      <img src={url.toString()} className={style} />
     </>
   );
 }
