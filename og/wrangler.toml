@@ -1,7 +1,9 @@
 name = "blog-og"
 main = "build/dev/javascript/og_worker/index.js"
 compatibility_date = "2024-09-25"
-# satoriの依存harfbuzzjsがnode builtins (fs) を参照するため必要
+# koishiのffi.mjsがread_test_font_file (テスト専用ヘルパー) でnode:fsを
+# importするため必要 (harfbuzzjsの依存ではない。satori 0.47でharfbuzzjs
+# パッケージへの依存自体は消えている)
 compatibility_flags = ["nodejs_compat"]
 
 # 本番: og.comamoca.dev カスタムドメイン (初回デプロイ時にDNSレコード自動作成)
@@ -12,13 +14,12 @@ routes = [{ pattern = "og.comamoca.dev", custom_domain = true }]
 # [vars]
 # OG_CACHE_API = "1"
 
-# satoriの依存harfbuzzjs (emscripten) はworkerで self.location.href を読み
-# 初期化に失敗するため、静的wasm importするshadow packageへ差し替える
 # koishiのSVG→PNG変換が使うresvg-jsはネイティブ(napi)モジュールのため
 # workerdで読み込めない。同じresvgのwasmビルド(resvg-wasm)を公開する
 # shadow packageへ差し替える (初期化は src/index.js が行う)
+# (harfbuzzjsのaliasはsatori 0.47でharfbuzzjsパッケージへの依存自体が
+# 消えたため不要になった。wasmはsetup_env.mjsが静的importで直接差し替える)
 [alias]
-harfbuzzjs = "./src/og_worker/interop/vendor/harfbuzzjs"
 "@resvg/resvg-js" = "./src/og_worker/interop/vendor/resvg-js"
 
 [build]
