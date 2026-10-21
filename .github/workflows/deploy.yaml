@@ -77,6 +77,54 @@ jobs:
         run: gleam test
       - working-directory: og
         run: gleam format --check src test
+      # gleam testはNode上で動くため、setup_env.mjs (workerdのwasm動的コンパイル
+      # 禁止を回避する静的importの差し替え) を一切通らない。satoriの自動更新で
+      # wasmの出し方が変わると、ここを通さない限りビルドは緑のまま本番だけ
+      # 500を返す (実際に satori 0.47 で一度起きた)。wrangler dev --local で
+      # 実際にWorkerを起動し、実際にレンダリングさせて検出する
+      - name: Smoke test OG image rendering (wrangler dev)
+        working-directory: og
+        run: |
+          nix develop ..#ci --command wrangler dev --port 8799 --local &
+          WRANGLER_PID=$!
+
+          ready=""
+          for _ in $(seq 1 60); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 3 \
+              'http://127.0.0.1:8799/og.png?l=post&t=smoke+test&d=ci' || true)
+            if [ "$code" = "200" ]; then
+              ready=1
+              break
+            fi
+            sleep 2
+          done
+
+          if [ -z "$ready" ]; then
+            echo "::error::wrangler dev did not become ready"
+            kill "$WRANGLER_PID" 2>/dev/null || true
+            exit 1
+          fi
+
+          for q in \
+            'l=post&t=smoke+test&d=ascii+only' \
+            'l=post&t=%E3%82%B9%E3%83%A2%E3%83%BC%E3%82%AF%E3%83%86%E3%82%B9%E3%83%88&d=%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%82%B0%E3%83%AA%E3%83%95' \
+            'l=main&t=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88'; do
+            out=$(mktemp)
+            code=$(curl -s -o "$out" -w '%{http_code}' --max-time 30 \
+              "http://127.0.0.1:8799/og.png?$q")
+            if [ "$code" != "200" ]; then
+              echo "::error::og.png returned $code for query '$q'"
+              kill "$WRANGLER_PID" 2>/dev/null || true
+              exit 1
+            fi
+            if ! file "$out" | grep -q 'PNG image data, 1200 x 600'; then
+              echo "::error::og.png response for '$q' is not a 1200x600 PNG: $(file "$out")"
+              kill "$WRANGLER_PID" 2>/dev/null || true
+              exit 1
+            fi
+          done
+
+          kill "$WRANGLER_PID" 2>/dev/null || true
 
   deploy:
     needs: [changes, test-og]
