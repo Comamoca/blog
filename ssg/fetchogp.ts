@@ -90,15 +90,18 @@ export async function fetchOGInfo(url: string, timeout = 10000): Promise<OGInfo>
       return text;
     })();
 
-    // linkedom の型は `Window & typeof globalThis` を返すが Deno 環境では
-    // `document` がその型に現れない。実体は HTML ドキュメントなので、ここで使う
-    // 2 プロパティだけの構造型に絞って扱う (実行時挙動は不変)。
-    const document = parseHTML(body) as unknown as {
-      title: string;
-      querySelectorAll(selector: string): Array<{
-        hasAttribute(name: string): boolean;
-        getAttribute(name: string): string | null;
-      }>;
+    // linkedom の parseHTML は window 相当のオブジェクトを返すため、
+    // document を取り出してから使う。型は `Window & typeof globalThis` だが
+    // Deno 環境では `document` がその型に現れないので、ここで使う
+    // 2 プロパティだけの構造型に絞って扱う。
+    const { document } = parseHTML(body) as unknown as {
+      document: {
+        title: string;
+        querySelectorAll(selector: string): Array<{
+          hasAttribute(name: string): boolean;
+          getAttribute(name: string): string | null;
+        }>;
+      };
     };
     const title = document.title || _url.hostname || "Unknown Site";
 
