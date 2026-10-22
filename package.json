@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@ox-content/unplugin": "3.3.2",
-    "@ox-content/vite-plugin": "3.3.3",
+    "@ox-content/vite-plugin": "3.4.0",
     "@shikijs/rehype": "^4.0.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.16",
