@@ -1,11 +1,10 @@
 /**
- * ssg/linkcard.ts (remark/mdast 版) の HAST (rehype) 版。
+ * ssg/linkcard.ts のカード HTML 生成を HAST (rehype) プラグインから呼ぶ版。
  *
  * org の裸URLは uniorg-rehype が `<p><a href="URL">URL</a></p>` (autolink) に変換
- * するため、remark 版のような `paragraph > text` ではなく「子が単一の `<a>` で
- * `textContent === href`」を対象にカード HTML へ置換する。OGP は既存
- * `cardLinkElement` / `genURL` を共有し、`.cache/fetchogp` のファイルキャッシュを
- * 再利用する。`DISABLE_LINKCARD` を尊重する。
+ * するため、対象は「子が単一の `<a>` で `textContent === href`」の段落になる。
+ * OGP は `cardLinkElement` / `genURL` を共有し、`.cache/fetchogp` の
+ * ファイルキャッシュを再利用する。`DISABLE_LINKCARD` を尊重する。
  */
 import { visit } from "unist-util-visit";
 import { cardLinkElement, genURL } from "./linkcard.ts";

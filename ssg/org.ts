@@ -5,7 +5,7 @@
  * (rehype-raw) → コードハイライト (shiki, catppuccin-mocha) → リンクカード
  * (linkcardRehype) → 脚注正規化 (footnoteNormalize) → HTML 文字列、の順に処理し、
  * 最後に既存の footnotePost (remark-gfm 互換の脚注仕上げ) を適用する。
- * ox-content の transformMarkdown (md 専用) は通さない。
+ * ox-content の transformMarkdown は通さない (org 専用のパイプライン)。
  */
 import { unified } from "unified";
 import uniorgParse from "uniorg-parse";
@@ -162,7 +162,7 @@ function footnoteNormalize() {
   };
 }
 
-// markdown.ts と同じ規約: DISABLE_LINKCARD で linkcard プラグイン自体を外す
+// DISABLE_LINKCARD で linkcard プラグイン自体を外す
 // (ネットワーク越しのOGP取得を伴うため)。
 const DISABLE_LINKCARD = process.env.DISABLE_LINKCARD !== undefined;
 

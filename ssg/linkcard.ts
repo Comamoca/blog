@@ -1,7 +1,7 @@
 /**
  * linkcard の共通資産。OGP を取得してカード HTML 文字列を生成する。
  *
- * mdast 版の remark プラグインは Markdown パイプライン除去に伴い削除した。
+ * mdast 版の remark プラグインは Lume/md パイプラインの撤去時に削除した。
  * org パイプラインの ssg/linkcard-rehype.ts (HAST 版) がこの関数群を利用する。
  */
 import { fetchOGInfo } from "./fetchogp.ts";

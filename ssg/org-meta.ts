@@ -2,9 +2,9 @@
  * org 記事のキーワード (#+TITLE: / #+DESCRIPTION: / #+DATE: / #+FILETAGS: /
  * #+EMOJI: / #+DRAFT:) を、全文パースせずに行ベースで抽出する軽量モジュール。
  *
- * `loadPosts()` が .md の frontmatter 相当として消費する。欠落時のフォールバックは
- * loadPosts() が md に対して行うのと同じ規則 (title→stem, emoji→"🦊", tags→[],
- * draft→falsy) をここで適用し、Post 型を不変に保つ。
+ * `loadPosts()` が記事メタデータとして消費する。欠落時のフォールバック
+ * (title→stem, emoji→"🦊", tags→[], draft→falsy) をここで適用し、
+ * Post 型を不変に保つ。
  */
 
 export type OrgMeta = {

@@ -329,7 +329,7 @@ export const host = {
       post: p,
       published: combineDate(
         new Date(`${p.stem.slice(0, 10)}T00:00:00Z`),
-        commitTimes.get(`${BLOG_DIR}/${p.stem}.md`) ?? commitTimes.get(`${BLOG_DIR}/${p.stem}.org`),
+        commitTimes.get(`${BLOG_DIR}/${p.stem}.org`),
       ),
     }));
     feedCandidates.sort((a, b) => b.published.getTime() - a.published.getTime());
