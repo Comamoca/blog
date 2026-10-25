@@ -327,9 +327,9 @@ sitemap・Pagefind のインデックスすべてで除外される (`tests/` �
   フィルタを渡す (`vp run test tests/foo.test.ts` でも同じ)
 - 整形は `vp run fmt` / `vp run fmt:check` (Oxfmt)。`nix fmt` と pre-commit が
   同じフォーマッタを使う
-- `BUILD_OUTPUT_DIR=dist` を指定すると `tests/url_compat_test.ts` と
-  `tests/feed_compat_test.ts` は `dist/` を検査する (未指定なら `_site`。
-  出力ディレクトリが無い場合はskip)
+- `tests/url_compat_test.ts` と `tests/feed_compat_test.ts` はビルド出力
+  (`dist/`、`vite.config.ts` の `outDir`) を検査する。`BUILD_OUTPUT_DIR` で
+  別ディレクトリを指せる。出力ディレクトリが無い場合はskip
 
 ## Configuration Files
 

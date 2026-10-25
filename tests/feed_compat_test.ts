@@ -11,7 +11,7 @@ import { readFile, stat } from "node:fs/promises";
  * (JSON Feed) に限定する。content:encoded / content_html の本文形式は
  * design.md の設計決定ログのとおり別途方針を決めるため対象外。
  *
- * 出力先は BUILD_OUTPUT_DIR 環境変数で切り替える (デフォルト: _site)。
+ * 出力先は BUILD_OUTPUT_DIR 環境変数で切り替える (デフォルト: dist)。
  *
  * スナップショット取得後に追加された記事があると、現在のフィードの先頭は
  * スナップショットより進む (10件上限なので古い順に押し出される)。そのため
@@ -19,7 +19,7 @@ import { readFile, stat } from "node:fs/promises";
  * 両者に残っている範囲だけを比較する。
  */
 
-const OUTPUT_DIR = process.env.BUILD_OUTPUT_DIR ?? "_site";
+const OUTPUT_DIR = process.env.BUILD_OUTPUT_DIR ?? "dist";
 
 async function fileExists(path: string): Promise<boolean> {
   try {
@@ -55,7 +55,9 @@ test.skipIf(!(await fileExists(join(OUTPUT_DIR, "api", "feed.xml"))))(
     const offset = actual.findIndex((a) => a.link === expected[0].link);
     assert(offset >= 0, `スナップショット先頭 (${expected[0].link}) が現在のフィードに無い`);
 
-    for (let i = 0; i + offset < actual.length; i++) {
+    // offset は「現在のフィード側でスナップショット先頭が何番目か」。
+    // 両者が同じ並びなら expected[i] は actual[i + offset] に対応する。
+    for (let i = 0; i + offset < actual.length && i < expected.length; i++) {
       assertEquals(
         actual[i + offset],
         expected[i],
@@ -76,7 +78,7 @@ test.skipIf(!(await fileExists(join(OUTPUT_DIR, "api", "feed.json"))))(
     const offset = actual.items.findIndex((a: { id: string }) => a.id === expected.items[0].id);
     assert(offset >= 0, `スナップショット先頭 (${expected.items[0].id}) が現在のフィードに無い`);
 
-    for (let i = 0; i + offset < actual.items.length; i++) {
+    for (let i = 0; i + offset < actual.items.length && i < expected.items.length; i++) {
       const e = expected.items[i];
       const a = actual.items[i + offset];
       assertEquals(
