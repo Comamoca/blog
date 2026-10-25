@@ -419,5 +419,8 @@ path changes (`ssg/**`, `host.ts`, `tests/**`, `src/**`, config files, …), so
 regressions in the build logic are caught before merge. The `deploy` job itself
 never runs on pull requests.
 
-The OG Worker (`og/`) deploys separately, only when its own inputs (`og/**`,
-`src/blog/**`, `flake.nix`, `flake.lock`) change.
+The OG Worker (`og/`) deploys separately, only when its inputs change:
+`og/**`, `flake.nix`, `flake.lock`, or the font corpus (the `#+TITLE:` /
+`#+DESCRIPTION:` lines of `src/blog/*.org`, which `flake.nix`'s `ogFonts`
+subsets from). Article edits that leave those two lines alone do not trigger
+the OG jobs.

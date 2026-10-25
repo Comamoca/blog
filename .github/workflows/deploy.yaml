@@ -43,9 +43,12 @@ jobs:
       contents: read
       pull-requests: read
     outputs:
-      og: ${{ steps.filter.outputs.og }}
+      og: ${{ steps.og.outputs.changed }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          # 記事コーパスの比較に「変更前のコミット」が要るので浅いcloneにしない
+          fetch-depth: 0
       - uses: dorny/paths-filter@v4
         id: filter
         with:
@@ -53,11 +56,60 @@ jobs:
             og:
               # Worker本体
               - "og/**"
-              # フォントのサブセット元コーパス (記事のtitle/description)
-              - "src/blog/**"
               # ogFonts derivationとWorkerのビルド定義
               - "flake.nix"
               - "flake.lock"
+      # 記事 (src/blog/**) は ogFonts のコーパス元だが、カードに載るのは
+      # #+TITLE: / #+DESCRIPTION: だけで、本文だけの修正ではフォントは
+      # 1バイトも変わらない。ファイル単位のパス判定は中身を見ないため、
+      # 本文修正だけのpushでもOG Workerのテスト・デプロイが走っていた。
+      # そこでコーパスに実際に寄与する文字 (title/description 由来の集合) を
+      # 変更前後で比較し、差があるときだけ og 扱いにする。
+      - name: Check OG font corpus changes
+        id: og
+        env:
+          BASE_REV: ${{ github.event_name == 'push' && github.event.before || '' }}
+        run: |
+          set -euo pipefail
+
+          # flake.nix の ogFonts と同じ抽出規則。ここが乖離すると
+          # 「フォントが変わったのにジョブが飛ぶ」または逆の誤判定になる。
+          extract() {
+            if [ "$1" = "" ] || ! git cat-file -e "$1^{commit}" 2>/dev/null; then
+              return 1
+            fi
+            git ls-tree -r --name-only "$1" -- src/blog |
+              grep -E '\.org$' |
+              while IFS= read -r f; do
+                git show "$1:$f" | awk '
+                  index($0, "#+TITLE:") == 1 || index($0, "#+DESCRIPTION:") == 1 {
+                    sub(/^[^:]*:[ \t]*/, "");
+                    print
+                  }
+                '
+              done | LC_ALL=C sort
+          }
+
+          # 1行 = 1タイトル or 1説明文なので、行の差分がそのままコーパスの差分になる
+          if extract "$BASE_REV" > /tmp/before.txt 2>/dev/null; then
+            extract HEAD > /tmp/after.txt
+            if diff -q /tmp/before.txt /tmp/after.txt > /dev/null; then
+              corpus_changed=false
+            else
+              corpus_changed=true
+            fi
+          else
+            # 比較対象が取れない (初回push・force push・手動実行など) は
+            # 取りこぼすより安全側に倒して実行する
+            corpus_changed=true
+          fi
+
+          echo "corpus_changed=$corpus_changed"
+          if [ "$corpus_changed" = "true" ] || [ "${{ steps.filter.outputs.og }}" = "true" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
 
   test-og:
     needs: changes
