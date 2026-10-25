@@ -165,13 +165,15 @@
 
                 mkdir -p $out
 
-                # 記事のtitle/descriptionフロントマターを抽出してコーパスにする
-                # (カードに載る記事由来のテキストはこの2フィールドのみ)
-                for f in $src/*.md; do
+                # 記事の #+TITLE: / #+DESCRIPTION: (org keyword) を抽出してコーパスに
+                # する (カードに載る記事由来のテキストはこの2フィールドのみ)。
+                # org移行前は .md frontmatter (title/description) だった。
+                # awkで #+ を正規表現に書くと \+ の解釈が実装依存になるため、
+                # index() による前置一致で判定する
+                for f in $src/*.org; do
                   awk "
-                    /^---\$/ { fm = !fm; next }
-                    fm && /^(title|description):/ {
-                      sub(/^(title|description):[ \t]*/, \"\");
+                    index(\$0, \"#+TITLE:\") == 1 || index(\$0, \"#+DESCRIPTION:\") == 1 {
+                      sub(/^[^:]*:[ \t]*/, \"\");
                       print
                     }
                   " "$f" >> corpus.txt
