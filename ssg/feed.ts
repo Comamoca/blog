@@ -24,6 +24,42 @@ function gitCommandEnv(cwd: string): NodeJS.ProcessEnv {
 }
 
 /**
+ * `relDir` 配下のリネーム対応表 (旧パス → 新パス) を返す。
+ *
+ * md→org 移行では 1コミットで数百ファイルがリネームされる。git は
+ * 類似度しきい値 (デフォルト 50%) を下回る組み合わせをリネームと見なさず、
+ * 旧パスの削除 + 新パスの追加として扱う。その場合は対応表に載らないので、
+ * 呼び出し側は「新パスに追加コミットの時刻があるか」だけで判断することになる。
+ * 移行コミットで内容がほぼそのまま (frontmatter を org キーワードに置換した
+ * 程度) なので、実際にはほぼ全件がリネームとして検出される。
+ */
+function renamesOf(repoRoot: string, relDir: string): Array<[string, string]> {
+  let out: string;
+  try {
+    out = execFileSync(
+      "git",
+      ["log", "--diff-filter=R", "-M", "--format=", "--name-status", "--", relDir],
+      {
+        cwd: repoRoot,
+        env: gitCommandEnv(repoRoot),
+        encoding: "utf8",
+        maxBuffer: 64 * 1024 * 1024,
+      },
+    );
+  } catch {
+    return [];
+  }
+  const pairs: Array<[string, string]> = [];
+  for (const line of out.split("\n")) {
+    // "R078\told\tnew"
+    const parts = line.split("\t");
+    if (parts.length !== 3 || !parts[0].startsWith("R")) continue;
+    pairs.push([parts[1].trim(), parts[2].trim()]);
+  }
+  return pairs;
+}
+
+/**
  * 現行 plugins/lume/git_date.ts と同じ規則で日付を作る。
  * 日付部分はファイル名、時刻部分はそのファイルを追加した最初のコミット。
  *
@@ -59,6 +95,15 @@ export function firstCommitTimes(repoRoot: string, relDir: string): Map<string, 
     }
     // 同じファイルが複数回出たら、より古い(=追加時の)コミットを優先する
     if (!times.has(t) || times.get(t)! > ts) times.set(t, ts);
+  }
+  // md→org の一括変換は `git log --name-only` 上ではリネームとして扱われ、
+  // `--diff-filter=A` の一覧に org 側が現れない (現れても md を消して org を
+  // 作ったコミットの時刻になる)。記事の「初出」は md 時代の追加コミットなので、
+  // リネーム対応表を引いて org の時刻を md 側のものへ引き継ぐ。
+  for (const [from, to] of renamesOf(repoRoot, relDir)) {
+    const previous = times.get(from);
+    if (previous === undefined) continue;
+    if (!times.has(to) || times.get(to)! > previous) times.set(to, previous);
   }
   return times;
 }
