@@ -3,10 +3,23 @@ on:
   push:
     branches:
       - "main"
+  # PRではビルド・テストに関係する変更を検知した時点で走らせる。
+  # 以前は og/ と src/blog/ のみがtriggerで、ssg/ や host.ts (ビルドロジック)
+  # を変えたPRではCIが起動せず、回帰が検出されなかった。
+  # deployジョブはPRでは実行されないため、デプロイへの影響はない。
   pull_request:
     paths:
       - "og/**"
       - "src/blog/**"
+      - "src/**"
+      - "ssg/**"
+      - "host.ts"
+      - "tests/**"
+      - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
+      - "deno.jsonc"
+      - "vite.config.ts"
       - "flake.nix"
       - "flake.lock"
 
@@ -181,11 +194,15 @@ jobs:
         run: |
           nix develop .#ci --command vp install --frozen-lockfile
 
-      - name: Run URL/feed compatibility tests
+      # テストスイート全体を走らせる。ここを互換性テスト2本に限定すると、
+      # 脚注の水平線化 (ssg/org.ts) や下書きの非公開化 (host.ts) の
+      # 回帰がCIで検出されなくなるため。互換性テストは dist/ を参照する
+      # ので、先にDISABLE_LINKCARD=1 でビルドしておく必要がある。
+      - name: Run test suite
         run: |
           nix develop .#ci --command bash -c '
             DISABLE_LINKCARD=1 vp build &&
-            BUILD_OUTPUT_DIR=dist vp run test tests/url_compat_test.ts tests/feed_compat_test.ts
+            BUILD_OUTPUT_DIR=dist vp run test
           '
 
       - name: Build & Deploy blog
