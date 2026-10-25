@@ -33,6 +33,10 @@ features
 - `ox-content-migration` - SSG基盤をLumeからox-contentへ移行し、URL互換性を
   維持したままプレビュー反映を高速化する (Phase: implementation-completed。
   Cloudflare Pagesへのデモデプロイと実機確認まで完了。mainへのマージ待ち)
+- `org-mode-migration` - 記事・Markdownテンプレート・ビルドシステム・Emacs統合を
+  Markdownからorg-modeへ移行する。ox-content custom-hostの`render()`接続点に
+  uniorgパイプラインを追加し、URL互換・レイアウト・feed・Pagefindを維持する
+  (Phase: tasks-generated)
 
 ## Development Guidelines
 
@@ -190,7 +194,7 @@ src/
 │   ├── Logo.tsx         # Site logo
 │   └── Twemoji.tsx      # Twemoji component
 ├── _includes/layouts/   # main.tsx / post.tsx
-├── blog/                # Blog post markdown files
+├── blog/                # Blog post org files
 ├── img/                 # Image assets
 ├── public/              # favicon.svg, icon.png (served at site root)
 ├── well-known/          # .well-known directory content
@@ -198,8 +202,12 @@ src/
 └── style.css            # Tailwind v4 entry
 
 ssg/                     # ox-content build logic (ported from plugins/)
-├── markdown.ts           # remark/rehype/HTML-postprocess plugin wiring
-├── linkcard.ts            # External link card generation
+├── org.ts                # org→HTML pipeline (uniorg + shiki + linkcard + footnote)
+├── org-meta.ts           # org keyword (#+TITLE: etc.) extraction for post listing
+├── highlight.ts          # shared Shiki highlighter
+├── linkcard-rehype.ts     # External link card generation (HAST/rehype plugin)
+├── linkcard.ts            # OGP card HTML helpers (shared by linkcard-rehype)
+├── footnote.ts            # remark-gfm-compatible footnote post-processing
 ├── fetchogp.ts             # OGP metadata fetching (linkedom-based)
 ├── og_metas.ts              # og.comamoca.dev image URL generation
 ├── feed.ts                   # RSS/JSON Feed, git-history-based dates
@@ -255,10 +263,60 @@ component as props.
 
 ### Content Management
 
-- Blog posts: Markdown files in `src/blog/` with frontmatter
-- Diary entries: Special posts with `-diary.md` suffix
+- Blog posts: org-mode files in `src/blog/` with `#+KEYWORD:` metadata
+  (`#+TITLE:` / `#+DESCRIPTION:` / `#+DATE:` / `#+FILETAGS:` / `#+EMOJI:` /
+  `#+DRAFT:`)
+- Diary entries: Special posts with `-diary.org` suffix
 - Image assets: Stored in `src/img/` and served as-is (no build-time
   optimization/resizing)
+
+### Drafts
+
+`#+DRAFT: true` を付けた記事は **dev でのみ** 公開され、本番ビルドには一切
+含まれない。`host.ts` の `loadPosts(includeDrafts)` が `ctx.mode === "serve"`
+(=`vp dev`) のときだけ下書きを拾うことで制御している。
+
+下書きは本番成果物のどこにも現れない: 記事ページ・一覧ページ・RSS/JSON Feed・
+sitemap・Pagefind のインデックスすべてで除外される (`tests/` に回帰テストが
+ある)。下書きの状態で `#+DRAFT:` を外せば、dev のホットリロードで公開状態に
+切り替わる。
+
+### Footnotes
+
+脚注は remark-gfm 互換の `<section class="footnotes">` として出力する。
+セクションの見出しは置かず、**区切りは水平線 (`<hr>`)** で表現する:
+
+```html
+<section class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn.1">…</li>
+  </ol>
+</section>
+```
+
+- `ssg/org.ts` の `footnoteNormalize()` が uniorg-rehype の出力
+  (`<h1>Footnotes:</h1>` + `<div class="footnote-definition">`) をこの形状に
+  正規化する。戻りリンク (`data-footnote-backref`) も保持される
+- `ssg/footnote.ts` は既存のremark-gfm 互換の仕上げ処理 (バックリファレンスの
+  調整) のみ担う
+- 本文中の水平線 (org の5個以上のダッシュ) と脚注の `<hr>` は独立している
+
+### Testing
+
+テストは **Deno** で走る (`vp run test` → `deno test --allow-all`)。`vp test`
+(Vitest) は **使えない**: `vite.config.ts` の `test.include` は
+`src/**/*.{test,spec}.{ts,tsx}` のみで `tests/**` を除外しており、かつ
+Deno テストは `jsr:@std/assert` と `Deno.*` API に依存しているため Node ベースの
+Vitest では実行できない (0件で exit 0 になるため、気づかずに素通りする)。
+
+- テストは `tests/` 配下に置き、`deno.jsonc` の `test.include` でスコープされる
+- `vp run test` はタスク1つ + 追加引数という形で、2つ目の引数はタスクの
+  コマンドへのフィルタとして渡される (`vp run test tests/foo.test.ts` は可)
+- 整形は `vp run fmt` / `vp run fmt:check` (Oxfmt)。`nix fmt` と pre-commit が
+  同じフォーマッタを使う
+- `BUILD_OUTPUT_DIR=dist` を指定すると `tests/url_compat_test.ts` と
+  `tests/feed_compat_test.ts` は `dist/` を検査する (未指定なら `_site`)
 
 ## Configuration Files
 
@@ -308,8 +366,8 @@ Vite plugin hook:
 
 ### Link Cards
 
-- External link preview generation via `ssg/linkcard.ts` (remark plugin, Node
-  port of the original Deno implementation)
+- External link preview generation via `ssg/linkcard-rehype.ts` (HAST/rehype
+  plugin), sharing the OGP card helpers in `ssg/linkcard.ts`
 - Can be disabled with the `DISABLE_LINKCARD` environment variable
 
 ## Development Notes
@@ -317,13 +375,13 @@ Vite plugin hook:
 ### File Naming Conventions
 
 - Components: PascalCase TSX files in `src/_components/` or `ssg/pages/`
-- Blog posts: `YYYY-MM-DD-title.md` format
-- Diary entries: `YYYY-MM-DD-diary.md` format
+- Blog posts: `YYYY-MM-DD-title.org` format
+- Diary entries: `YYYY-MM-DD-diary.org` format
 
 ### Content Guidelines
 
 - Use Japanese as primary language with English support
-- Include proper frontmatter in all markdown files
+- Include proper org-mode keywords (`#+TITLE:` / `#+DATE:` 等) in all articles
 - Images are stored in `src/img/` and referenced as-is (no build-time
   optimization/resizing)
 
@@ -340,6 +398,12 @@ to `main`. The build process:
 
 1. `bun run build` — builds the static site to `dist/` (Vite+)
 2. `wrangler pages deploy ./dist` — deploys to `comamoca.dev`
+
+CI runs the **full** test suite (`vp run test`) before deploying, not just the
+compatibility tests. PRs trigger the workflow when any build- or test-relevant
+path changes (`ssg/**`, `host.ts`, `tests/**`, `src/**`, config files, …), so
+regressions in the build logic are caught before merge. The `deploy` job itself
+never runs on pull requests.
 
 The OG Worker (`og/`) deploys separately, only when its own inputs (`og/**`,
 `src/blog/**`, `flake.nix`, `flake.lock`) change.

@@ -39,9 +39,39 @@ See [this page](https://comamoca.pages.dev).
 clone this repo, follow under commands.
 
 ```sh
-ni
-nr dev
+bun install        # install dependencies
+bun run dev        # dev server (http://localhost:5173)
 ```
+
+All tasks live in `package.json` and run through Vite+'s task runner (`vp run
+<task>`). `vp run` with no arguments lists them.
+
+```sh
+vp run test        # run the test suite (Deno)
+vp run fmt         # format the code (Oxfmt)
+vp run fmt:check   # check formatting without writing
+vp run build       # production build into dist/
+vp run preview     # serve the production build
+```
+
+Note: `vp test` (Vitest) is **not** used here. The test suite lives in `tests/`
+and runs on Deno (`vp run test` → `deno test --allow-all`), because the tests
+depend on `jsr:@std/assert` and the `Deno.*` APIs.
+
+### Writing posts
+
+Articles are [org-mode](https://orgmode.org) files under `src/blog/`, named
+`YYYY-MM-DD-title.org` (daily entries use the `-diary.org` suffix).
+
+```sh
+just new           # create a new blog post
+just diary         # create a new diary entry
+just open          # pick an existing post to edit (requires nu + fzf)
+```
+
+Add `#+DRAFT: true` to keep an article unpublished. Drafts show up in the dev
+server only — they never reach the production build, feeds, sitemap, or search
+index.
 
 ### With Nix
 
@@ -54,6 +84,15 @@ nix fmt     # formatting
 
 - [x] Search bar feature
 - [ ] Recommend feature
+
+## 🛠️ Tech stack
+
+- [ox-content](https://github.com/ubugeeei-prod/ox-content) (Rust-core SSG) +
+  Vite+ custom host
+- TailwindCSS v4 + DaisyUI v5
+- org-mode content pipeline (uniorg + Shiki)
+- Pagefind for client-side search
+- Cloudflare Pages for hosting, a Cloudflare Worker for OG images
 
 ## 📜 License
 
