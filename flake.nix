@@ -340,7 +340,7 @@
                 # deno."1.28.0"
                 # deno."2.4.5"
                 deno
-                bun
+                pnpm
                 wrangler
                 latest-pkgs.gleam
                 clean-pkgs.nodejs
@@ -421,7 +421,7 @@
                 vips
                 stdenv.cc.cc
                 deno
-                bun
+                pnpm
                 wrangler
                 clean-pkgs.nodejs
                 vite-plus

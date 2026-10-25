@@ -166,7 +166,7 @@ commands also work via `bun run <task>`. `deno task <task>` resolves
 `package.json` scripts too, but it is not a supported entry point here:
 `deno task fmt:check` failed in the tested environment with an env-access
 permission error in oxfmt's binding. Resolving a script does not guarantee
-execution compatibility. Use `vp run` / `bun run` for all tasks. `npm run` is rejected by the
+execution compatibility. Use `vp run` / `vp run` for all tasks. `npm run` is rejected by the
 `devEngines` `packageManager: bun` constraint. The Deno-backed utilities
 (`download-fonts`, `extract-tags`) still run on the Deno runtime
 (`deno run`) internally, but their task entries live in `package.json`;

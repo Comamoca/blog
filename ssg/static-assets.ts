@@ -31,6 +31,8 @@ const MIME: Record<string, string> = {
   ".json": "application/json",
   ".webp": "image/webp",
   ".gif": "image/gif",
+  ".woff2": "font/woff2",
+  ".avif": "image/avif",
 };
 
 export function staticAssets(): Plugin {
@@ -51,6 +53,7 @@ export function staticAssets(): Plugin {
             if (!stat.isFile()) continue;
             const ext = path.extname(filePath);
             res.setHeader("Content-Type", MIME[ext] ?? "application/octet-stream");
+            res.setHeader("Cache-Control", "public, max-age=86400, immutable");
             fs.createReadStream(filePath).pipe(res);
             return;
           } catch {
@@ -62,7 +65,8 @@ export function staticAssets(): Plugin {
     },
 
     async closeBundle() {
-      const outDir = "dist";
+      // outDir は vite.config.ts の oxContent.outDir と同期（configResolved で解決）
+      const outDir = (this as any).env?.outDir ?? "dist";
       for (const { dir, outSubdir } of MOUNTS) {
         try {
           await fsp.access(dir);

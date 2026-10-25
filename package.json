@@ -9,8 +9,7 @@
     "test": "vp test",
     "fmt": "vp fmt",
     "fmt:check": "vp fmt --check",
-    "download-fonts": "deno run -A ./scripts/downloadFonts.ts",
-    "extract-tags": "deno run -A ./scripts/extractTags.ts",
+    "extract-tags": "node --experimental-strip-types ./scripts/extractTags.ts",
     "deploy-og": "cd og && npm ci && gleam build --no-print-progress && wrangler deploy"
   },
   "dependencies": {
@@ -43,8 +42,8 @@
   },
   "devEngines": {
     "packageManager": {
-      "name": "bun",
-      "version": "1.4.3",
+      "name": "pnpm",
+      "version": "10.11.0",
       "onFail": "download"
     }
   }
