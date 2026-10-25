@@ -11,18 +11,16 @@ import { readdir, readFile, stat } from "node:fs/promises";
  * 1件でもこのスナップショットと乖離したら失敗させる。
  *
  * スナップショット取得後にmainから入った新規記事はここに追記する
- * (/blog/2026-09-22-how-to-deal-with-vibe-coding/)。移行前URLが1件も消えて
- * いないこと・ドラフトが混入していないことの検証としては変わらず機能する。
+ * (直近は /blog/2026-10-18-switched-blog-from-lume-to-ox-content/ など3件)。
+ * 移行前URLが1件も消えていないこと・ドラフトが混入していないことの検証としては
+ * 変わらず機能する。
  *
- * 出力先は BUILD_OUTPUT_DIR 環境変数で切り替える。
- *   - 未指定/Lumeビルド中:  _site (デフォルト)
- *   - ox-content移行後:     dist を指定して実行する
- *
- * 出力ディレクトリが存在しない場合はビルド未実行とみなしてスキップする
- * (ox-content移行の初期フェーズではまだ dist が存在しないため)。
+ * 出力先は BUILD_OUTPUT_DIR 環境変数で切り替える。未指定なら dist
+ * (vite.config.ts の outDir と同じ)。出力ディレクトリが存在しない場合は
+ * ビルド未実行とみなしてスキップする。
  */
 
-const OUTPUT_DIR = process.env.BUILD_OUTPUT_DIR ?? "_site";
+const OUTPUT_DIR = process.env.BUILD_OUTPUT_DIR ?? "dist";
 const FIXTURE_PATH = join("tests", "fixtures", "urls.txt");
 
 async function dirExists(path: string): Promise<boolean> {
@@ -117,11 +115,11 @@ test.skipIf(!outputReady)("URL互換性: 出力に余剰URL (ドラフト混入�
   );
 });
 
-test.skipIf(!outputReady)("URL互換性: 公開記事URLの件数が422件", async () => {
+test.skipIf(!outputReady)("URL互換性: 公開記事URLの件数が425件", async () => {
   const expected = await loadExpectedUrls();
   const blogUrls = expected.filter((u) => u.startsWith("/blog/"));
   assert(
-    blogUrls.length === 422,
-    `スナップショット自体が想定外 (${blogUrls.length}件、422件を期待)。fixtureが壊れている可能性がある`,
+    blogUrls.length === 425,
+    `スナップショット自体が想定外 (${blogUrls.length}件、425件を期待)。fixtureが壊れている可能性がある`,
   );
 });
