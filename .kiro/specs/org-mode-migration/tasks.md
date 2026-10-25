@@ -5,7 +5,7 @@
   - worktree (`feat/org-mode-migration`) で `vp run test` を実行し、
     `tests/url_compat_test.ts` / `tests/feed_compat_test.ts` が green
     であることを 確認する
-  - `npm run build` で現行 dist を生成し、ビルドが通ることを確認する
+  - `bun run build` で現行 dist を生成し、ビルドが通ることを確認する
   - _Requirements: 4.3, 7.1_
 
 - [ ] 1.2 md 記事 HTML のスナップショット取得
@@ -158,7 +158,7 @@
   - _Requirements: 8.3_
 
 - [ ] 6.6 最終回帰確認
-  - `vp run test` (url_compat / feed_compat) と `npm run build` を通す
+  - `vp run test` (url_compat / feed_compat) と `bun run build` を通す
   - _Requirements: 4.1, 4.3, 7.1_
 
 - 7. [ ] Emacs (dotfiles) の org 統合

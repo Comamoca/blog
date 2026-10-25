@@ -162,12 +162,15 @@ vp run test
 
 All tasks are registered in `package.json` and executed through Vite+'s task
 runner (`vp run <task>`); `vp run` with no arguments lists them. The same
-commands also work via `bun run <task>` and `deno task <task>` (Deno 2 reads
-`package.json` scripts as tasks). `npm run` is rejected by the `devEngines`
-`packageManager: bun` constraint. The Deno-backed utilities (`download-fonts`,
-`extract-tags`) still run on the Deno runtime (`deno run`) internally, but
-their task entries live in `package.json`; `deno.jsonc` no longer defines any
-tasks.
+commands also work via `bun run <task>`. `deno task <task>` resolves
+`package.json` scripts too, but tasks whose command invokes `vp`
+(`fmt` / `fmt:check` / `dev` / `build` / `preview`) fail under Deno's
+node-compat permission sandbox (oxfmt's NAPI binding is denied env access),
+so use `vp run` / `bun run` for those. `npm run` is rejected by the
+`devEngines` `packageManager: bun` constraint. The Deno-backed utilities
+(`download-fonts`, `extract-tags`) still run on the Deno runtime
+(`deno run`) internally, but their task entries live in `package.json`;
+`deno.jsonc` no longer defines any tasks.
 
 ### Alternative Tools
 

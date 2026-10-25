@@ -10,7 +10,7 @@
  * 並び順で保証できず (実測: 先に発火してしまい ox-content が書き出す前の
  * distを見てしまった)、`package.json` の `build` スクリプトで
  * `vite build` の後続ステップとして明示的に直列実行する
- * (`npm run build` 参照)。
+ * (`bun run build` / `vp run build` 参照)。
  *
  * ビルド時のみ実行する (devでは動かさない)。447記事ぶんのHTMLを毎回
  * クロールし直すコストは、O(1)の編集→反映を狙ったdevサーバーの設計と
