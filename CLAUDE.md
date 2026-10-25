@@ -316,19 +316,20 @@ sitemap・Pagefind のインデックスすべてで除外される (`tests/` �
 
 ### Testing
 
-テストは **Deno** で走る (`vp run test` → `deno test --allow-all`)。`vp test`
-(Vitest) は **使えない**: `vite.config.ts` の `test.include` は
-`src/**/*.{test,spec}.{ts,tsx}` のみで `tests/**` を除外しており、かつ
-Deno テストは `jsr:@std/assert` と `Deno.*` API に依存しているため Node ベースの
-Vitest では実行できない (0件で exit 0 になるため、気づかずに素通りする)。
+テストは **Vitest** で走る (`vp test`、または `vp run test` → `vp test`)。
+`vite.config.ts` の `test.include` が `tests/**/*.test.ts` と
+`tests/**/*_test.ts` の両命名を網羅する。`passWithNoTests` は外して
+あるため、includeパターンが壊れて0件になっても素通りせず失敗する。
 
-- テストは `tests/` 配下に置き、`deno.jsonc` の `test.include` でスコープされる
-- `vp run test` はタスク1つ + 追加引数という形で、2つ目の引数はタスクの
-  コマンドへのフィルタとして渡される (`vp run test tests/foo.test.ts` は可)
+- テストは `tests/` 配下に置く。アサーションは `tests/_asserts.ts`
+  (std/assert互換のNode assertラッパー) からimportする
+- ファイル単位の絞り込みは `vp test tests/foo.test.ts` のように
+  フィルタを渡す (`vp run test tests/foo.test.ts` でも同じ)
 - 整形は `vp run fmt` / `vp run fmt:check` (Oxfmt)。`nix fmt` と pre-commit が
   同じフォーマッタを使う
 - `BUILD_OUTPUT_DIR=dist` を指定すると `tests/url_compat_test.ts` と
-  `tests/feed_compat_test.ts` は `dist/` を検査する (未指定なら `_site`)
+  `tests/feed_compat_test.ts` は `dist/` を検査する (未指定なら `_site`。
+  出力ディレクトリが無い場合はskip)
 
 ## Configuration Files
 
@@ -337,8 +338,9 @@ Vitest では実行できない (0件で exit 0 になるため、気づかず�
 - `vite.config.ts`: Vite+ + `oxContentCustomHost` configuration
 - `host.ts`: Route definitions
 - `package.json`: task definitions (executed via `vp run <task>`) and dependencies
-- `deno.jsonc`: Deno config for the test runner configuration and the
-  `date-fns` import used by `tests/diary.test.ts`
+- `deno.jsonc`: Deno config for the two Deno-runtime utility scripts
+  (`download-fonts` / `extract-tags`). No test configuration — tests run on
+  Vitest via `vp test`
 
 ## Custom Features
 

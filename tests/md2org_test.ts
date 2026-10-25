@@ -1,8 +1,9 @@
 /**
  * scripts/md2org.ts の純関数 (`frontmatterToKeywords` / `postProcessOrg`)
- * のユニットテスト。Deno で実行する (`vp run test` → `deno test --allow-all`)。
+ * のユニットテスト。
  */
-import { assertEquals } from "jsr:@std/assert";
+import { test } from "vite-plus/test";
+import { assertEquals } from "./_asserts.ts";
 
 import {
   frontmatterToKeywords,
@@ -11,7 +12,7 @@ import {
   stemToOrgDate,
 } from "../scripts/md2org.ts";
 
-Deno.test("frontmatterToKeywords maps title, description, pubDate, tags, emoji, draft", () => {
+test("frontmatterToKeywords maps title, description, pubDate, tags, emoji, draft", () => {
   const fm = {
     title: "monadsが良かった話",
     description: "TSでRustlyな型が使えるmonadsが良かった話",
@@ -33,7 +34,7 @@ Deno.test("frontmatterToKeywords maps title, description, pubDate, tags, emoji, 
   );
 });
 
-Deno.test("frontmatterToKeywords omits empty description and empty tags", () => {
+test("frontmatterToKeywords omits empty description and empty tags", () => {
   const fm = {
     title: "2025-03-22の日報",
     description: "",
@@ -51,7 +52,7 @@ Deno.test("frontmatterToKeywords omits empty description and empty tags", () => 
   );
 });
 
-Deno.test("frontmatterToKeywords emits draft true", () => {
+test("frontmatterToKeywords emits draft true", () => {
   const fm = {
     title: "wip",
     description: "",
@@ -64,7 +65,7 @@ Deno.test("frontmatterToKeywords emits draft true", () => {
   assertEquals(out, ["#+TITLE: wip", "#+DATE: [2026-01-01 Thu]", "#+DRAFT: true"].join("\n"));
 });
 
-Deno.test("frontmatterToKeywords falls back to filename date when pubDate missing", () => {
+test("frontmatterToKeywords falls back to filename date when pubDate missing", () => {
   const fm = {
     title: "t",
     description: "",
@@ -80,22 +81,22 @@ Deno.test("frontmatterToKeywords falls back to filename date when pubDate missin
   );
 });
 
-Deno.test("pubDateToOrgDate handles quoted-style single-digit day and zero-padded day", () => {
+test("pubDateToOrgDate handles quoted-style single-digit day and zero-padded day", () => {
   assertEquals(pubDateToOrgDate("Oct 9 2025"), "[2025-10-09 Thu]");
   assertEquals(pubDateToOrgDate("Apr 08 2023"), "[2023-04-08 Sat]");
 });
 
-Deno.test("pubDateToOrgDate returns null for unparseable input", () => {
+test("pubDateToOrgDate returns null for unparseable input", () => {
   assertEquals(pubDateToOrgDate("not a date"), null);
   assertEquals(pubDateToOrgDate(""), null);
 });
 
-Deno.test("stemToOrgDate derives date from filename prefix", () => {
+test("stemToOrgDate derives date from filename prefix", () => {
   assertEquals(stemToOrgDate("2024-09-08-diary"), "[2024-09-08 Sun]");
   assertEquals(stemToOrgDate("no-date-here"), null);
 });
 
-Deno.test("postProcessOrg rewrites begin_html to begin_export html", () => {
+test("postProcessOrg rewrites begin_html to begin_export html", () => {
   const body = ["#+begin_html", "<blockquote>hello</blockquote>", "#+end_html", "", "本文"].join(
     "\n",
   );
@@ -107,14 +108,14 @@ Deno.test("postProcessOrg rewrites begin_html to begin_export html", () => {
   );
 });
 
-Deno.test("postProcessOrg strips PROPERTIES drawers pandoc inserts after headings", () => {
+test("postProcessOrg strips PROPERTIES drawers pandoc inserts after headings", () => {
   const body = ["** 見出し", ":PROPERTIES:", ":CUSTOM_ID: 見出し", ":END:", "", "段落。"].join(
     "\n",
   );
   assertEquals(postProcessOrg(body), ["** 見出し", "", "段落。"].join("\n"));
 });
 
-Deno.test("postProcessOrg leaves ordinary content untouched", () => {
+test("postProcessOrg leaves ordinary content untouched", () => {
   const body = "** 見出し\n\n*強調*とZWSP\n\n#+begin_src ts\nconst x = 1;\n#+end_src\n";
   assertEquals(postProcessOrg(body), body);
 });

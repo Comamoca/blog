@@ -1,53 +1,29 @@
-import { assertEquals, assertExists } from "https://deno.land/std@0.210.0/assert/mod.ts";
+import { describe, test } from "vite-plus/test";
+import { assertEquals, assertExists } from "./_asserts.ts";
 
 // Mock development environment configuration
 let originalRelease: string | undefined;
 let originalDisableCard: string | undefined;
 
 const mockDevEnvironment = () => {
-  try {
-    originalRelease = Deno.env.get("RELEASE");
-    originalDisableCard = Deno.env.get("DISABLE_LINKCARD");
-  } catch {
-    // If permission denied, set defaults
-    originalRelease = undefined;
-    originalDisableCard = undefined;
-  }
+  originalRelease = process.env.RELEASE;
+  originalDisableCard = process.env.DISABLE_LINKCARD;
 
   // Clear environment variables to simulate dev environment
-  try {
-    if (originalRelease) Deno.env.delete("RELEASE");
-    if (originalDisableCard) Deno.env.delete("DISABLE_LINKCARD");
-  } catch {
-    // Ignore permission errors
-  }
+  if (originalRelease) delete process.env.RELEASE;
+  if (originalDisableCard) delete process.env.DISABLE_LINKCARD;
 
   return () => {
     // Restore original environment
-    try {
-      if (originalRelease) Deno.env.set("RELEASE", originalRelease);
-      if (originalDisableCard) {
-        Deno.env.set("DISABLE_LINKCARD", originalDisableCard);
-      }
-    } catch {
-      // Ignore permission errors
-    }
+    if (originalRelease) process.env.RELEASE = originalRelease;
+    if (originalDisableCard) process.env.DISABLE_LINKCARD = originalDisableCard;
   };
 };
 
 // Mock Lume configuration function
 function configureLinkCard(linkCardConfig?: { enabled?: boolean }): any[] {
-  let RELEASE: string | undefined;
-  let DISABLE_LINKCARD: string | undefined;
-
-  try {
-    RELEASE = Deno.env.get("RELEASE");
-    DISABLE_LINKCARD = Deno.env.get("DISABLE_LINKCARD");
-  } catch {
-    // If permission denied, use defaults
-    RELEASE = undefined;
-    DISABLE_LINKCARD = undefined;
-  }
+  const RELEASE: string | undefined = process.env.RELEASE;
+  const DISABLE_LINKCARD: string | undefined = process.env.DISABLE_LINKCARD;
 
   const isDisabledByEnv = DISABLE_LINKCARD !== undefined;
   const isDisabledByConfig = linkCardConfig?.enabled === false;
@@ -73,8 +49,8 @@ async function mockDevServerOperation(pluginConfig: any[]): Promise<{
   };
 }
 
-Deno.test("Development Server LinkCard Operation", async (t) => {
-  await t.step("should enable linkcard plugin in development environment", async () => {
+describe("Development Server LinkCard Operation", () => {
+  test("should enable linkcard plugin in development environment", async () => {
     const cleanup = mockDevEnvironment();
 
     try {
@@ -90,12 +66,12 @@ Deno.test("Development Server LinkCard Operation", async (t) => {
     }
   });
 
-  await t.step("should respect DISABLE_LINKCARD in development", async () => {
+  test("should respect DISABLE_LINKCARD in development", async () => {
     const cleanup = mockDevEnvironment();
 
     try {
       // Set disable flag
-      Deno.env.set("DISABLE_LINKCARD", "1");
+      process.env.DISABLE_LINKCARD = "1";
 
       const plugins = configureLinkCard();
       const devOperation = await mockDevServerOperation(plugins);
@@ -107,7 +83,7 @@ Deno.test("Development Server LinkCard Operation", async (t) => {
     }
   });
 
-  await t.step("should provide debug information in development", async () => {
+  test("should provide debug information in development", async () => {
     const cleanup = mockDevEnvironment();
 
     try {
@@ -121,7 +97,7 @@ Deno.test("Development Server LinkCard Operation", async (t) => {
     }
   });
 
-  await t.step("should support configuration changes without restart", async () => {
+  test("should support configuration changes without restart", async () => {
     const cleanup = mockDevEnvironment();
 
     try {
@@ -144,7 +120,7 @@ Deno.test("Development Server LinkCard Operation", async (t) => {
     }
   });
 
-  await t.step("should maintain consistent behavior with production", async () => {
+  test("should maintain consistent behavior with production", async () => {
     const cleanup = mockDevEnvironment();
 
     try {
@@ -153,7 +129,7 @@ Deno.test("Development Server LinkCard Operation", async (t) => {
       const devOperation = await mockDevServerOperation(devPlugins);
 
       // Test production behavior (simulated)
-      Deno.env.set("RELEASE", "1");
+      process.env.RELEASE = "1";
       const prodPlugins = configureLinkCard();
 
       assertEquals(
@@ -173,8 +149,8 @@ Deno.test("Development Server LinkCard Operation", async (t) => {
 });
 
 // Integration test for development workflow
-Deno.test("Development Workflow Integration", async (t) => {
-  await t.step("should handle hot reload with plugin changes", async () => {
+describe("Development Workflow Integration", () => {
+  test("should handle hot reload with plugin changes", () => {
     const cleanup = mockDevEnvironment();
 
     try {
@@ -194,7 +170,7 @@ Deno.test("Development Workflow Integration", async (t) => {
     }
   });
 
-  await t.step("should support real-time debugging", async () => {
+  test("should support real-time debugging", async () => {
     const cleanup = mockDevEnvironment();
 
     try {

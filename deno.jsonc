@@ -1,14 +1,9 @@
 {
-  "imports": {
-    "date-fns": "npm:date-fns@4.4.0",
-  },
-  "test": {
-    "include": ["tests/"],
-  },
-  // tasks は廃止した (d5b3815 で test を package.json scripts (= `vp run`) に一本化し、
-  // download-fonts / extract-tags / deploy-og も続けて package.json scripts へ移した)。
-  // タスクの入口は `vp run <task>` で、ここには定義しない。
+  // テストはVitest (package.json の test タスク = `vp test`) で実行するため、
+  // ここにはテスト設定 (imports/test) を置かない。Deno は download-fonts /
+  // extract-tags の2スクリプトのランタイムとしてのみ使う (package.json
+  // scripts 経由で `deno run -A` が呼ばれる。依存はjsr:/deno.landの直URLで
+  // 解決されnode_modulesを必要としない)。
   "nodeModulesDir": "auto",
-  "unstable": ["temporal"],
   "lock": false,
 }

@@ -1,7 +1,8 @@
-import { assertEquals } from "https://deno.land/std@0.210.0/assert/mod.ts";
+import { test } from "vite-plus/test";
+import { assertEquals } from "./_asserts.ts";
 import { buildOgImageUrl, MAX_DESCRIPTION_LENGTH, truncateDescription } from "../ssg/og_metas.ts";
 
-Deno.test("buildOgImageUrl: post layout with title and description", () => {
+test("buildOgImageUrl: post layout with title and description", () => {
   const url = buildOgImageUrl("post", "タイトル", "説明文");
   assertEquals(
     url,
@@ -9,7 +10,7 @@ Deno.test("buildOgImageUrl: post layout with title and description", () => {
   );
 });
 
-Deno.test("buildOgImageUrl: main layout without description omits d param", () => {
+test("buildOgImageUrl: main layout without description omits d param", () => {
   const url = buildOgImageUrl("main", "かわいい駆動生活。");
   assertEquals(
     url,
@@ -17,25 +18,25 @@ Deno.test("buildOgImageUrl: main layout without description omits d param", () =
   );
 });
 
-Deno.test("buildOgImageUrl: empty description omits d param", () => {
+test("buildOgImageUrl: empty description omits d param", () => {
   const url = buildOgImageUrl("post", "タイトル", "");
   assertEquals(url, "https://og.comamoca.dev/og.png?l=post&t=%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB");
 });
 
-Deno.test("buildOgImageUrl: percent-encodes special characters", () => {
+test("buildOgImageUrl: percent-encodes special characters", () => {
   const url = buildOgImageUrl("post", "a&b=c d", undefined);
   assertEquals(url, "https://og.comamoca.dev/og.png?l=post&t=a%26b%3Dc%20d");
 });
 
-Deno.test("buildOgImageUrl: is deterministic for the same input", () => {
+test("buildOgImageUrl: is deterministic for the same input", () => {
   assertEquals(buildOgImageUrl("post", "同じ", "内容"), buildOgImageUrl("post", "同じ", "内容"));
 });
 
-Deno.test("truncateDescription: keeps text within the limit", () => {
+test("truncateDescription: keeps text within the limit", () => {
   assertEquals(truncateDescription("短い文"), "短い文");
 });
 
-Deno.test("truncateDescription: truncates to 80 chars with ellipsis", () => {
+test("truncateDescription: truncates to 80 chars with ellipsis", () => {
   const long = "あ".repeat(MAX_DESCRIPTION_LENGTH + 10);
   const truncated = truncateDescription(long);
   assertEquals(truncated.length, MAX_DESCRIPTION_LENGTH + 1);
@@ -43,7 +44,7 @@ Deno.test("truncateDescription: truncates to 80 chars with ellipsis", () => {
   assertEquals(truncated.slice(0, MAX_DESCRIPTION_LENGTH), "あ".repeat(MAX_DESCRIPTION_LENGTH));
 });
 
-Deno.test("truncateDescription: keeps exactly 80-char text unchanged", () => {
+test("truncateDescription: keeps exactly 80-char text unchanged", () => {
   const exact = "い".repeat(MAX_DESCRIPTION_LENGTH);
   assertEquals(truncateDescription(exact), exact);
 });

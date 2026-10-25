@@ -1,9 +1,10 @@
-import { assert, assertEquals, assertStringIncludes } from "jsr:@std/assert";
+import { test } from "vite-plus/test";
+import { assert, assertEquals, assertStringIncludes } from "./_asserts.ts";
 
 // linkcard はネットワーク越しのOGP取得を伴うため、テストでは無効化して
 // 裸URLが autolink のまま残ることを検証する (org.ts はモジュールロード時に
 // DISABLE_LINKCARD を読むため、動的 import の前に設定する)。
-Deno.env.set("DISABLE_LINKCARD", "1");
+process.env.DISABLE_LINKCARD = "1";
 
 const { renderOrg } = await import("../ssg/org.ts");
 
@@ -32,7 +33,7 @@ https://example.com/
 [fn:1] This is the footnote body.
 `;
 
-Deno.test("org レンダリング: 脚注が remark-gfm 形状に正規化される", async () => {
+test("org レンダリング: 脚注が remark-gfm 形状に正規化される", async () => {
   const { html } = await renderOrg(FIXTURE, "test.org");
 
   assertStringIncludes(
@@ -58,7 +59,7 @@ Deno.test("org レンダリング: 脚注が remark-gfm 形状に正規化され
   );
 });
 
-Deno.test("org レンダリング: コード・裸URL・テーブル・export html が変換される", async () => {
+test("org レンダリング: コード・裸URL・テーブル・export html が変換される", async () => {
   const { html } = await renderOrg(FIXTURE, "test.org");
 
   assertStringIncludes(
@@ -91,14 +92,14 @@ Deno.test("org レンダリング: コード・裸URL・テーブル・export ht
 /** 脚注セクションの境界条件。 */
 const fnWrap = (body: string) => `#+TITLE: T\n#+DATE: [2025-10-09 Thu]\n\n${body}\n`;
 
-Deno.test("org レンダリング: 脚注なしでは脚注セクションが出ない", async () => {
+test("org レンダリング: 脚注なしでは脚注セクションが出ない", async () => {
   const { html } = await renderOrg(fnWrap("本文だけ。"), "test.org");
 
   assert(!html.includes(`class="footnotes"`), "脚注セクションが作られないこと");
   assert(!html.includes(`id="footnote-label"`), "footnote-label が無いこと");
 });
 
-Deno.test("org レンダリング: 複数脚注でも区切りの hr は1つだけ", async () => {
+test("org レンダリング: 複数脚注でも区切りの hr は1つだけ", async () => {
   const { html } = await renderOrg(
     fnWrap("A.[fn:1] B.[fn:2] C.[fn:3]\n\n[fn:1] one\n[fn:2] two\n[fn:3] three"),
     "test.org",
@@ -115,7 +116,7 @@ Deno.test("org レンダリング: 複数脚注でも区切りの hr は1つだ�
   }
 });
 
-Deno.test("org レンダリング: 本文の水平線と脚注の水平線が混同されない", async () => {
+test("org レンダリング: 本文の水平線と脚注の水平線が混同されない", async () => {
   // org の水平線は5個以上のダッシュ (4個は段落になる)
   const { html } = await renderOrg(
     fnWrap("前段\n\n-----\n\n中段。[fn:1]\n\n[fn:1] note"),
@@ -134,7 +135,7 @@ Deno.test("org レンダリング: 本文の水平線と脚注の水平線が混
   );
 });
 
-Deno.test("org レンダリング: 脚注セクション内に見出し要素が残らない", async () => {
+test("org レンダリング: 脚注セクション内に見出し要素が残らない", async () => {
   const { html } = await renderOrg(fnWrap("A.[fn:1]\n\n[fn:1] one"), "test.org");
 
   const section = html.slice(html.indexOf(`<section class="footnotes">`));

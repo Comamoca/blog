@@ -1,5 +1,6 @@
-import { assertEquals, assertExists } from "https://deno.land/std@0.210.0/assert/mod.ts";
-import * as v from "npm:valibot";
+import { describe, test } from "vite-plus/test";
+import { assertEquals, assertExists } from "./_asserts.ts";
+import * as v from "valibot";
 
 // Define the OGP schema
 const OGInfoSchema = v.object({
@@ -43,14 +44,14 @@ async function mockFetchOGInfo(
 
     // This should throw validation error if required fields are missing
     return v.parse(OGInfoSchema, ogInfo);
-  } catch (error) {
+  } catch {
     // Return null for error cases - this is what we want to test
     return null;
   }
 }
 
-Deno.test("OGP Error Handling", async (t) => {
-  await t.step("should handle validation errors gracefully", async () => {
+describe("OGP Error Handling", () => {
+  test("should handle validation errors gracefully", async () => {
     // Test case where siteTitle is missing (current error scenario)
     const result = await mockFetchOGInfo("https://example.com", {
       html: '<meta property="og:title" content="Test" />',
@@ -60,7 +61,7 @@ Deno.test("OGP Error Handling", async (t) => {
     assertEquals(result?.siteTitle, "Default Site Title", "Should provide default siteTitle");
   });
 
-  await t.step("should handle network timeouts", async () => {
+  test("should handle network timeouts", async () => {
     const timeoutError = new Error("Timeout");
     timeoutError.name = "TimeoutError";
 
@@ -71,7 +72,7 @@ Deno.test("OGP Error Handling", async (t) => {
     assertEquals(result, null, "Should return null for timeout errors");
   });
 
-  await t.step("should handle network errors", async () => {
+  test("should handle network errors", async () => {
     const networkError = new Error("Network error");
     networkError.name = "NetworkError";
 
@@ -82,7 +83,7 @@ Deno.test("OGP Error Handling", async (t) => {
     assertEquals(result, null, "Should return null for network errors");
   });
 
-  await t.step("should parse valid OGP data correctly", async () => {
+  test("should parse valid OGP data correctly", async () => {
     const validHtml = `
       <title>Site Title</title>
       <meta property="og:title" content="Article Title" />

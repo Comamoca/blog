@@ -27,13 +27,13 @@
 
 ## Backend & Build System
 
-- **Runtime**: Node.js (Vite/ox-contentのビルド) + Deno (テストとフォントDL等の
-  ユーティリティスクリプト)
+- **Runtime**: Node.js (Vite/ox-contentのビルド・テスト) + Deno
+  (フォントDL・タグ抽出のユーティリティスクリプトのみ)
 - **Build System**: Vite+ (`vite.config.ts`) + `oxContentCustomHost`
   プラグイン。 `vp dev` / `vp build` / `vp preview` を使用する (`vite` は
-  vite-plus-core へ alias される)。Oxfmt/Oxlint/Vitest は不採用 (整形は Nix
-  treefmt、テストは Deno)。Vite+ は Vite の置き換え (dev/build/preview)
-  としてのみ使う
+  vite-plus-core へ alias される)。整形は Nix treefmt (`vp run fmt` と同じ
+  oxfmt)、テストは Vite+同梱の Vitest (`vp test`)。OxfmtのCLIとしての直接使用と
+  Oxlintは不採用
 - **ルーティング**: `host.ts` が全ルート (記事・一覧・静的ページ・フィード・
   sitemap・404) を自前定義。記事URLはファイルツリー由来で現行 (旧Lume) と
   完全互換
@@ -104,7 +104,7 @@ just latest-diary
 ### Testing
 
 ```bash
-# 全テスト (Deno)
+# 全テスト (Vitest)
 vp run test
 
 # URL/フィード互換性テストのみ (要ビルド済みdist/)
@@ -132,7 +132,8 @@ nix develop .#ci
 - **Primary Config**: `vite.config.ts` - Vite+ + ox-content custom-host 設定
 - **Routing**: `host.ts` - 全ルート定義
 - **Node Config**: `package.json` - タスク定義 (`vp run`) と依存関係
-- **Deno Config**: `deno.jsonc` - テスト実行と `date-fns` importのみ
+- **Deno Config**: `deno.jsonc` - ユーティリティスクリプト用 (テスト設定は無し。
+  テストはVitest `vp test` で実行)
 - **Development Nix**: `flake.nix` - Nix development environment
 
 ## Plugin Architecture
@@ -175,6 +176,7 @@ nix develop .#ci
 ## Dependencies Management
 
 - **Runtime Dependencies**: `package.json` / `bun.lock` (bun)
-- **Deno側**: `deno.jsonc` はテスト実行と `date-fns` importのみを管理
+- **Deno側**: `deno.jsonc` はユーティリティスクリプト用の最小設定のみを管理
+  (テストはVitestで実行するためDeno設定に含まれない)
 - **Version Control**: `@ox-content/*` パッケージはバージョン固定
   (v3.2.6で検証済み)

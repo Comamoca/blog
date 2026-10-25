@@ -98,20 +98,16 @@
           };
 
           # pre-commit用テストランナー。実行入口は package.json の test
-          # script (= `vp run test`) に一本化し、ここはそのラッパーに
-          # なるだけにする (テストの起動方法を変える唯一の場所)。
-          # 依存の事前キャッシュはネットワーク不通環境でもテストを
-          # スキップできるようにするため残す。
-          deno-test = pkgs.writeShellApplication {
-            name = "deno-test";
-            runtimeInputs = [ deno ];
+          # script (= `vp run test` → `vp test`) に一本化し、ここはその
+          # ラッパーになるだけにする (テストの起動方法を変える唯一の場所)。
+          # テストはDenoからVitestへ移行したため依存の事前キャッシュは不要
+          # (vp test はプロジェクトの node_modules を直接使う。vp は flake の
+          # vite-plus パッケージ由来でnode_modulesの状態に左右されない)。
+          vitest-test = pkgs.writeShellApplication {
+            name = "vitest-test";
+            runtimeInputs = [ vite-plus ];
             text = ''
-              # Pre-cache dependencies to avoid network issues during build
-              if ! ${deno}/bin/deno cache tests/*.ts 2>/dev/null; then
-                echo "Warning: Could not cache test dependencies, skipping deno test in offline environment"
-                exit 0
-              fi
-              ${deno}/bin/deno test --allow-env --allow-read --allow-run --allow-write --no-prompt
+              ${vite-plus}/bin/vp test
             '';
           };
 
@@ -303,10 +299,10 @@
                   language = "system";
                 };
                 gitlint.enable = true;
-                deno-test = {
+                vitest-test = {
                   enable = true;
-                  name = "deno-test";
-                  entry = "${deno-test}/bin/deno-test";
+                  name = "vitest-test";
+                  entry = "${vitest-test}/bin/vitest-test";
                   language = "system";
                   # tests/ 配下の変更時のみ実行(全コミットでフルテストが走るのを防ぐ)
                   files = "^tests/";

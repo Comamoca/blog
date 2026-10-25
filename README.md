@@ -54,9 +54,8 @@ vp run build       # production build into dist/
 vp run preview     # serve the production build
 ```
 
-Note: `vp test` (Vitest) is **not** used here. The test suite lives in `tests/`
-and runs on Deno (`vp run test` → `deno test --allow-all`), because the tests
-depend on `jsr:@std/assert` and the `Deno.*` APIs.
+Tests run on Vitest via `vp test` (or `vp run test`). They live in `tests/` —
+see the Testing section in AGENTS.md for details.
 
 ### Writing posts
 

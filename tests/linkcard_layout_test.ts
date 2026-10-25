@@ -1,8 +1,9 @@
-import { assertEquals, assertExists } from "https://deno.land/std@0.210.0/assert/mod.ts";
+import { describe, test } from "vite-plus/test";
+import { assertEquals } from "./_asserts.ts";
 
 // Mock DOM Parser for testing HTML generation
 class MockDOMParser {
-  parseFromString(html: string, mimeType: string) {
+  parseFromString(_html: string, _mimeType: string) {
     return {
       title: "Test Site Title",
       querySelectorAll: (selector: string) => {
@@ -69,8 +70,8 @@ function generateLinkCardHTML(ogData: any, url: string): string {
      `;
 }
 
-Deno.test("LinkCard Layout Verification", async (t) => {
-  await t.step("should generate proper card layout HTML structure", () => {
+describe("LinkCard Layout Verification", () => {
+  test("should generate proper card layout HTML structure", () => {
     const ogData = {
       title: "Test Article",
       siteTitle: "Test Site",
@@ -90,7 +91,7 @@ Deno.test("LinkCard Layout Verification", async (t) => {
     assertEquals(html.includes('title="Link Card"'), true, "Should have Link Card title attribute");
   });
 
-  await t.step("should apply correct TailwindCSS classes for responsive design", () => {
+  test("should apply correct TailwindCSS classes for responsive design", () => {
     const ogData = {
       title: "Test Article",
       siteTitle: "Test Site",
@@ -105,7 +106,7 @@ Deno.test("LinkCard Layout Verification", async (t) => {
     assertEquals(html.includes("hover:bg-gray-100"), true, "Should have hover effects");
   });
 
-  await t.step("should handle image display correctly", () => {
+  test("should handle image display correctly", () => {
     const ogDataWithImage = {
       title: "Test Article",
       siteTitle: "Test Site",
@@ -137,7 +138,7 @@ Deno.test("LinkCard Layout Verification", async (t) => {
     );
   });
 
-  await t.step("should handle text overflow with ellipsis", () => {
+  test("should handle text overflow with ellipsis", () => {
     const ogData = {
       title: "Very Long Article Title That Should Be Truncated With Ellipsis",
       siteTitle: "Test Site",
@@ -154,7 +155,7 @@ Deno.test("LinkCard Layout Verification", async (t) => {
     );
   });
 
-  await t.step("should generate accessible markup", () => {
+  test("should generate accessible markup", () => {
     const ogData = {
       title: "Test Article",
       siteTitle: "Test Site",
@@ -179,7 +180,7 @@ Deno.test("LinkCard Layout Verification", async (t) => {
     );
   });
 
-  await t.step("should maintain proper aspect ratio and sizing", () => {
+  test("should maintain proper aspect ratio and sizing", () => {
     const ogData = {
       title: "Test Article",
       siteTitle: "Test Site",

@@ -1,11 +1,12 @@
-import { assertEquals, assertExists } from "https://deno.land/std@0.210.0/assert/mod.ts";
+import { describe, test } from "vite-plus/test";
+import { assertEquals, assertExists } from "./_asserts.ts";
 
 // Enhanced metadata extraction functionality tests
 // Testing improved OGP extraction, fallbacks, and special site handling
 
 // Mock DOM Parser for testing enhanced metadata extraction
 class MockDOMParser {
-  parseFromString(html: string, mimeType: string) {
+  parseFromString(html: string, _mimeType: string) {
     return {
       title: this.extractTitle(html),
       querySelectorAll: (selector: string) => this.extractMetaTags(html, selector),
@@ -157,8 +158,8 @@ function extractMetaDescription(doc: any): string | null {
   return null;
 }
 
-Deno.test("Enhanced Metadata Extraction", async (t) => {
-  await t.step("should extract OG title with HTML title fallback", () => {
+describe("Enhanced Metadata Extraction", () => {
+  test("should extract OG title with HTML title fallback", () => {
     const htmlWithOG = `
       <html>
         <head>
@@ -183,7 +184,7 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
     assertEquals(result2.title, "HTML Title Only", "Should fallback to HTML title");
   });
 
-  await t.step("should resolve relative image URLs correctly", () => {
+  test("should resolve relative image URLs correctly", () => {
     // Test absolute URL (should remain unchanged)
     const absoluteUrl = "https://cdn.example.com/image.jpg";
     const resolved1 = resolveImageURL(absoluteUrl, new URL("https://example.com"));
@@ -208,7 +209,7 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
     );
   });
 
-  await t.step("should extract site name from various title patterns", () => {
+  test("should extract site name from various title patterns", () => {
     const testCases = [
       { title: "Article Title - Site Name", expected: "Site Name" },
       { title: "Article Title | Site Name", expected: "Site Name" },
@@ -223,7 +224,7 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
     });
   });
 
-  await t.step("should handle special sites like JSR with proper headers", () => {
+  test("should handle special sites like JSR with proper headers", () => {
     // Test JSR-like HTML structure
     const jsrHtml = `
       <html>
@@ -242,7 +243,7 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
     assertEquals(result.image, "https://jsr.io/logo.png", "Should resolve JSR relative image URL");
   });
 
-  await t.step("should extract description from OG and meta fallback", () => {
+  test("should extract description from OG and meta fallback", () => {
     const htmlWithOGDescription = `
       <html>
         <head>
@@ -271,7 +272,7 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
     );
   });
 
-  await t.step("should provide comprehensive fallback data", () => {
+  test("should provide comprehensive fallback data", () => {
     // Test with minimal HTML
     const minimalHtml = "<html><head></head><body></body></html>";
     const result = enhancedOGPExtraction(minimalHtml, "https://example.com");
@@ -283,7 +284,7 @@ Deno.test("Enhanced Metadata Extraction", async (t) => {
     assertEquals(result.origin, "https://example.com", "Origin should match the input URL");
   });
 
-  await t.step("should handle malformed HTML gracefully", () => {
+  test("should handle malformed HTML gracefully", () => {
     const malformedHtml = `
       <html>
         <head>

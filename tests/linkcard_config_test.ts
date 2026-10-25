@@ -1,7 +1,8 @@
-import { assertEquals } from "https://deno.land/std@0.210.0/assert/mod.ts";
+import { describe, test } from "vite-plus/test";
+import { assertEquals } from "./_asserts.ts";
 
 // Helper function to test linkcard plugin configuration
-function getLinkCardPluginConfig(release?: string, disableLinkcard?: string) {
+function getLinkCardPluginConfig(_release?: string, disableLinkcard?: string) {
   const remarkPlugins: any[] = [];
 
   // New logic: enable by default unless explicitly disabled
@@ -14,8 +15,8 @@ function getLinkCardPluginConfig(release?: string, disableLinkcard?: string) {
   return remarkPlugins;
 }
 
-Deno.test("LinkCard Configuration - Environment-based control", async (t) => {
-  await t.step("should enable linkcard plugin in development environment by default", () => {
+describe("LinkCard Configuration - Environment-based control", () => {
+  test("should enable linkcard plugin in development environment by default", () => {
     // Test development environment (no RELEASE env var)
     const remarkPlugins = getLinkCardPluginConfig(undefined, undefined);
 
@@ -23,7 +24,7 @@ Deno.test("LinkCard Configuration - Environment-based control", async (t) => {
     assertEquals(hasLinkcard, true, "Linkcard plugin should be enabled in development environment");
   });
 
-  await t.step("should enable linkcard plugin in production environment", () => {
+  test("should enable linkcard plugin in production environment", () => {
     // Test production environment (RELEASE env var set)
     const remarkPlugins = getLinkCardPluginConfig("1", undefined);
 
@@ -31,7 +32,7 @@ Deno.test("LinkCard Configuration - Environment-based control", async (t) => {
     assertEquals(hasLinkcard, true, "Linkcard plugin should be enabled in production environment");
   });
 
-  await t.step("should allow disabling linkcard with DISABLE_LINKCARD environment variable", () => {
+  test("should allow disabling linkcard with DISABLE_LINKCARD environment variable", () => {
     // Test explicit disable in production
     const remarkPluginsProduction = getLinkCardPluginConfig("1", "1");
     const hasLinkcardProduction = remarkPluginsProduction.includes("linkcard");

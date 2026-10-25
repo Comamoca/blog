@@ -54,9 +54,8 @@ vp run build       # 本番ビルド (dist/ へ出力)
 vp run preview     # 本番ビルドを配信
 ```
 
-なお `vp test` (Vitest) は **使用しません**。テストは `tests/` に置かれており
-`jsr:@std/assert` と `Deno.*` API に依存しているため、Deno で実行します
-(`vp run test` → `deno test --allow-all`)。
+テストは `vp test` (または `vp run test`) で実行します。テストは `tests/` に
+置いています (詳細は AGENTS.md の Testing 節を参照)。
 
 ### 記事を書く
 

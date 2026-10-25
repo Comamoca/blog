@@ -1,5 +1,7 @@
-import { assert, assertEquals } from "https://deno.land/std@0.210.0/assert/mod.ts";
-import { join } from "jsr:@std/path";
+import { test } from "vite-plus/test";
+import { assert, assertEquals } from "./_asserts.ts";
+import { join } from "node:path";
+import { readFile, stat } from "node:fs/promises";
 
 /**
  * ox-content移行のフィード互換性回帰テスト。
@@ -17,11 +19,11 @@ import { join } from "jsr:@std/path";
  * 両者に残っている範囲だけを比較する。
  */
 
-const OUTPUT_DIR = Deno.env.get("BUILD_OUTPUT_DIR") ?? "_site";
+const OUTPUT_DIR = process.env.BUILD_OUTPUT_DIR ?? "_site";
 
 async function fileExists(path: string): Promise<boolean> {
   try {
-    await Deno.stat(path);
+    await stat(path);
     return true;
   } catch {
     return false;
@@ -42,14 +44,11 @@ function parseRssItems(xml: string): RssItem[] {
   return items;
 }
 
-const readyForXml = await fileExists(join(OUTPUT_DIR, "api", "feed.xml"));
-
-Deno.test({
-  name: "フィード互換性: RSS item の title/link/pubDate が移行前と一致する",
-  ignore: !readyForXml,
-  fn: async () => {
-    const expected = parseRssItems(await Deno.readTextFile(join("tests", "fixtures", "feed.xml")));
-    const actual = parseRssItems(await Deno.readTextFile(join(OUTPUT_DIR, "api", "feed.xml")));
+test.skipIf(!(await fileExists(join(OUTPUT_DIR, "api", "feed.xml"))))(
+  "フィード互換性: RSS item の title/link/pubDate が移行前と一致する",
+  async () => {
+    const expected = parseRssItems(await readFile(join("tests", "fixtures", "feed.xml"), "utf-8"));
+    const actual = parseRssItems(await readFile(join(OUTPUT_DIR, "api", "feed.xml"), "utf-8"));
 
     assertEquals(actual.length, expected.length, "item件数が一致しない");
 
@@ -64,16 +63,13 @@ Deno.test({
       );
     }
   },
-});
+);
 
-const readyForJson = await fileExists(join(OUTPUT_DIR, "api", "feed.json"));
-
-Deno.test({
-  name: "フィード互換性: JSON Feed の id/title/date_published が移行前と一致する",
-  ignore: !readyForJson,
-  fn: async () => {
-    const expected = JSON.parse(await Deno.readTextFile(join("tests", "fixtures", "feed.json")));
-    const actual = JSON.parse(await Deno.readTextFile(join(OUTPUT_DIR, "api", "feed.json")));
+test.skipIf(!(await fileExists(join(OUTPUT_DIR, "api", "feed.json"))))(
+  "フィード互換性: JSON Feed の id/title/date_published が移行前と一致する",
+  async () => {
+    const expected = JSON.parse(await readFile(join("tests", "fixtures", "feed.json"), "utf-8"));
+    const actual = JSON.parse(await readFile(join(OUTPUT_DIR, "api", "feed.json"), "utf-8"));
 
     assertEquals(actual.items.length, expected.items.length, "item件数が一致しない");
 
@@ -90,4 +86,4 @@ Deno.test({
       );
     }
   },
-});
+);

@@ -6,7 +6,7 @@
     "dev": "vp dev",
     "build": "vp build && node --experimental-strip-types ssg/run-pagefind.ts",
     "preview": "vp preview",
-    "test": "deno test --allow-all",
+    "test": "vp test",
     "fmt": "vp fmt",
     "fmt:check": "vp fmt --check",
     "download-fonts": "deno run -A ./scripts/downloadFonts.ts",

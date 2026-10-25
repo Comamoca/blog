@@ -1,4 +1,5 @@
-import { assertEquals, assertExists } from "https://deno.land/std@0.210.0/assert/mod.ts";
+import { describe, test } from "vite-plus/test";
+import { assertEquals } from "./_asserts.ts";
 
 // Mock DOM environment for testing user interactions
 class MockElement {
@@ -67,8 +68,8 @@ function generateLinkCardHTML(ogData: any, url: string): string {
      `;
 }
 
-Deno.test("LinkCard User Interaction", async (t) => {
-  await t.step("should generate clickable navigation link", () => {
+describe("LinkCard User Interaction", () => {
+  test("should generate clickable navigation link", () => {
     const ogData = {
       title: "Test Article",
       siteTitle: "Test Site",
@@ -86,7 +87,7 @@ Deno.test("LinkCard User Interaction", async (t) => {
     assertEquals(html.includes('class="!no-underline'), true, "Should remove default link styling");
   });
 
-  await t.step("should implement text truncation with ellipsis", () => {
+  test("should implement text truncation with ellipsis", () => {
     const longTitleData = {
       title: "Very Long Article Title That Should Be Truncated With Ellipsis When Displayed",
       siteTitle: "Test Site",
@@ -107,7 +108,7 @@ Deno.test("LinkCard User Interaction", async (t) => {
     );
   });
 
-  await t.step("should provide hover effects", () => {
+  test("should provide hover effects", () => {
     const ogData = {
       title: "Test Article",
       siteTitle: "Test Site",
@@ -125,7 +126,7 @@ Deno.test("LinkCard User Interaction", async (t) => {
     assertEquals(html.includes("rounded-lg"), true, "Should have rounded corners for modern look");
   });
 
-  await t.step("should maintain accessibility standards", () => {
+  test("should maintain accessibility standards", () => {
     const ogData = {
       title: "Test Article",
       siteTitle: "Test Site",
@@ -151,7 +152,7 @@ Deno.test("LinkCard User Interaction", async (t) => {
     assertEquals(html.includes("<span"), true, "Should use semantic text elements");
   });
 
-  await t.step("should handle responsive text sizing", () => {
+  test("should handle responsive text sizing", () => {
     const ogData = {
       title: "Test Article",
       siteTitle: "Test Site",
@@ -166,7 +167,7 @@ Deno.test("LinkCard User Interaction", async (t) => {
     assertEquals(html.includes("md:max-w-full"), true, "Should expand on medium screens");
   });
 
-  await t.step("should provide proper image interaction", () => {
+  test("should provide proper image interaction", () => {
     const ogDataWithImage = {
       title: "Test Article",
       siteTitle: "Test Site",
@@ -181,7 +182,7 @@ Deno.test("LinkCard User Interaction", async (t) => {
     assertEquals(html.includes("basis-4/12"), true, "Should allocate proper space for image");
   });
 
-  await t.step("should maintain consistent layout without image", () => {
+  test("should maintain consistent layout without image", () => {
     const ogDataWithoutImage = {
       title: "Test Article",
       siteTitle: "Test Site",

@@ -1,5 +1,7 @@
-import { assert, assertEquals } from "https://deno.land/std@0.210.0/assert/mod.ts";
-import { join } from "jsr:@std/path";
+import { test } from "vite-plus/test";
+import { assert, assertEquals } from "./_asserts.ts";
+import { join } from "node:path";
+import { readdir, readFile, stat } from "node:fs/promises";
 
 /**
  * ox-content移行のURL互換性回帰テスト。
@@ -20,20 +22,20 @@ import { join } from "jsr:@std/path";
  * (ox-content移行の初期フェーズではまだ dist が存在しないため)。
  */
 
-const OUTPUT_DIR = Deno.env.get("BUILD_OUTPUT_DIR") ?? "_site";
+const OUTPUT_DIR = process.env.BUILD_OUTPUT_DIR ?? "_site";
 const FIXTURE_PATH = join("tests", "fixtures", "urls.txt");
 
 async function dirExists(path: string): Promise<boolean> {
   try {
-    const stat = await Deno.stat(path);
-    return stat.isDirectory;
+    const s = await stat(path);
+    return s.isDirectory();
   } catch {
     return false;
   }
 }
 
 async function loadExpectedUrls(): Promise<string[]> {
-  const text = await Deno.readTextFile(FIXTURE_PATH);
+  const text = await readFile(FIXTURE_PATH, "utf-8");
   return text
     .split("\n")
     .map((l) => l.trim())
@@ -49,17 +51,18 @@ function urlToOutputPath(url: string): string {
   return join(OUTPUT_DIR, url);
 }
 
-Deno.test({
-  name: "URL互換性: スナップショットの全URLに対応する出力ファイルが存在する",
-  ignore: !(await dirExists(OUTPUT_DIR)),
-  fn: async () => {
+const outputReady = await dirExists(OUTPUT_DIR);
+
+test.skipIf(!outputReady)(
+  "URL互換性: スナップショットの全URLに対応する出力ファイルが存在する",
+  async () => {
     const expected = await loadExpectedUrls();
     const missing: string[] = [];
 
     for (const url of expected) {
       const path = urlToOutputPath(url);
       try {
-        await Deno.stat(path);
+        await stat(path);
       } catch {
         missing.push(url);
       }
@@ -73,60 +76,52 @@ Deno.test({
         .join(", ")})`,
     );
   },
-});
+);
 
-Deno.test({
-  name: "URL互換性: 出力に余剰URL (ドラフト混入等) が無い",
-  ignore: !(await dirExists(OUTPUT_DIR)),
-  fn: async () => {
-    const expected = new Set(await loadExpectedUrls());
-    const extra: string[] = [];
+test.skipIf(!outputReady)("URL互換性: 出力に余剰URL (ドラフト混入等) が無い", async () => {
+  const expected = new Set(await loadExpectedUrls());
+  const extra: string[] = [];
 
-    async function walk(dir: string, urlPrefix: string) {
-      for await (const entry of Deno.readDir(dir)) {
-        const full = join(dir, entry.name);
-        if (entry.isDirectory) {
-          await walk(full, `${urlPrefix}${entry.name}/`);
-          continue;
-        }
-        if (entry.name === "index.html") {
-          if (!expected.has(urlPrefix)) extra.push(urlPrefix);
-          continue;
-        }
-        if (entry.name.endsWith(".html")) {
-          const url = `${urlPrefix}${entry.name}`;
-          if (!expected.has(url)) extra.push(url);
-          continue;
-        }
-        if (
-          (urlPrefix === "/api/" || full.includes(`${OUTPUT_DIR}/api/`)) &&
-          (entry.name === "feed.xml" || entry.name === "feed.json")
-        ) {
-          const url = `${urlPrefix}${entry.name}`;
-          if (!expected.has(url)) extra.push(url);
-        }
+  async function walk(dir: string, urlPrefix: string) {
+    for (const entry of await readdir(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        await walk(full, `${urlPrefix}${entry.name}/`);
+        continue;
+      }
+      if (entry.name === "index.html") {
+        if (!expected.has(urlPrefix)) extra.push(urlPrefix);
+        continue;
+      }
+      if (entry.name.endsWith(".html")) {
+        const url = `${urlPrefix}${entry.name}`;
+        if (!expected.has(url)) extra.push(url);
+        continue;
+      }
+      if (
+        (urlPrefix === "/api/" || full.includes(`${OUTPUT_DIR}/api/`)) &&
+        (entry.name === "feed.xml" || entry.name === "feed.json")
+      ) {
+        const url = `${urlPrefix}${entry.name}`;
+        if (!expected.has(url)) extra.push(url);
       }
     }
+  }
 
-    await walk(OUTPUT_DIR, "/");
+  await walk(OUTPUT_DIR, "/");
 
-    assertEquals(
-      extra,
-      [],
-      `${extra.length}件の余剰URL (先頭10件: ${extra.slice(0, 10).join(", ")})`,
-    );
-  },
+  assertEquals(
+    extra,
+    [],
+    `${extra.length}件の余剰URL (先頭10件: ${extra.slice(0, 10).join(", ")})`,
+  );
 });
 
-Deno.test({
-  name: "URL互換性: 公開記事URLの件数が422件",
-  ignore: !(await dirExists(OUTPUT_DIR)),
-  fn: async () => {
-    const expected = await loadExpectedUrls();
-    const blogUrls = expected.filter((u) => u.startsWith("/blog/"));
-    assert(
-      blogUrls.length === 422,
-      `スナップショット自体が想定外 (${blogUrls.length}件、422件を期待)。fixtureが壊れている可能性がある`,
-    );
-  },
+test.skipIf(!outputReady)("URL互換性: 公開記事URLの件数が422件", async () => {
+  const expected = await loadExpectedUrls();
+  const blogUrls = expected.filter((u) => u.startsWith("/blog/"));
+  assert(
+    blogUrls.length === 422,
+    `スナップショット自体が想定外 (${blogUrls.length}件、422件を期待)。fixtureが壊れている可能性がある`,
+  );
 });

@@ -1,4 +1,5 @@
-import { assertEquals } from "https://deno.land/std@0.210.0/assert/mod.ts";
+import { describe, test } from "vite-plus/test";
+import { assertEquals } from "./_asserts.ts";
 
 interface LinkCardConfig {
   enabled?: boolean;
@@ -20,7 +21,7 @@ function getCurrentLinkCardConfig(disableLinkcard?: string) {
 
 // Enhanced configuration function that supports object-based config (target implementation)
 function getEnhancedLinkCardConfig(
-  release?: string,
+  _release?: string,
   disableLinkcard?: string,
   linkCardConfig?: LinkCardConfig,
 ) {
@@ -53,8 +54,8 @@ function getEnhancedLinkCardConfig(
   return remarkPlugins;
 }
 
-Deno.test("Enhanced LinkCard Configuration", async (t) => {
-  await t.step("should support explicit configuration object to disable linkcard", () => {
+describe("Enhanced LinkCard Configuration", () => {
+  test("should support explicit configuration object to disable linkcard", () => {
     const remarkPlugins = getEnhancedLinkCardConfig(undefined, undefined, { enabled: false });
 
     const hasLinkcard = remarkPlugins.some((plugin) =>
@@ -63,24 +64,21 @@ Deno.test("Enhanced LinkCard Configuration", async (t) => {
     assertEquals(hasLinkcard, false, "Linkcard should be disabled when config.enabled = false");
   });
 
-  await t.step(
-    "should support explicit configuration object to enable linkcard with options",
-    () => {
-      const remarkPlugins = getEnhancedLinkCardConfig(undefined, undefined, {
-        enabled: true,
-        debugMode: true,
-      });
+  test("should support explicit configuration object to enable linkcard with options", () => {
+    const remarkPlugins = getEnhancedLinkCardConfig(undefined, undefined, {
+      enabled: true,
+      debugMode: true,
+    });
 
-      const linkcardPlugin = remarkPlugins.find(
-        (plugin) => Array.isArray(plugin) && plugin[0] === "linkcard",
-      );
+    const linkcardPlugin = remarkPlugins.find(
+      (plugin) => Array.isArray(plugin) && plugin[0] === "linkcard",
+    );
 
-      assertEquals(linkcardPlugin !== undefined, true, "Linkcard should be enabled");
-      assertEquals(linkcardPlugin?.[1]?.debugMode, true, "Debug mode should be passed to plugin");
-    },
-  );
+    assertEquals(linkcardPlugin !== undefined, true, "Linkcard should be enabled");
+    assertEquals(linkcardPlugin?.[1]?.debugMode, true, "Debug mode should be passed to plugin");
+  });
 
-  await t.step("should prioritize config object over environment variables", () => {
+  test("should prioritize config object over environment variables", () => {
     // Environment says disable, but config object says enable
     const remarkPlugins = getEnhancedLinkCardConfig(
       undefined,
@@ -98,7 +96,7 @@ Deno.test("Enhanced LinkCard Configuration", async (t) => {
     );
   });
 
-  await t.step("should handle missing config gracefully", () => {
+  test("should handle missing config gracefully", () => {
     // Test with no config object - should work like before
     const remarkPlugins = getEnhancedLinkCardConfig(undefined, undefined, undefined);
 

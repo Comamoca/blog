@@ -4,8 +4,9 @@ import tailwindcss from "@tailwindcss/vite";
 import { staticAssets } from "./ssg/static-assets.ts";
 
 export default defineConfig({
-  // Oxfmt/Oxlint (vp check) は採用しない。整形は Nix treefmt、テストは deno test を
-  // 使うため。Vite+ は Vite の置き換え (dev/build/preview) とタスク実行
+  // Oxfmt/Oxlint (vp check) は採用しない。整形は Nix treefmt (`vp run fmt` と
+  // 同じoxfmt)、テストは Vite+同梱のVitest (`vp test`) を使うため。
+  // Vite+ は Vite の置き換え (dev/build/preview) とタスク実行
   // (vp run) として使う。
   // ox-content 同梱の文字列SSR用JSXランタイムを使う (React/Preact不要)。
   // Vite 8 では transform を Oxc が担うため oxc に指定する。esbuild を
@@ -13,14 +14,14 @@ export default defineConfig({
   oxc: {
     jsx: { runtime: "automatic", importSource: "@ox-content/vite-plugin" },
   },
-  // テストは Deno (`vp run test` → `deno test --allow-all`) を使う。
-  // Vitest (vp test) にはこのリポジトリ向けのテストが無いため、Deno テスト
-  // (tests/**) と nix flake input のシンボリックフォレスト (.direnv/**) を
-  // 探索せず 0 件でも成功させる。
+  // テストはVitest (`vp test` / `vp run test`) で実行する。tests/ 配下に
+  // *.test.ts と *_test.ts の両方の命名が混在しているため両方を網羅する
+  // (.direnv/** はnix flake inputのシンボリックフォレストで巨大なため除外)。
+  // passWithNoTestsを外している: includeパターンが壊れて0件になったら
+  // 素通りせず失敗させる。
   test: {
-    include: ["src/**/*.{test,spec}.{ts,tsx}"],
-    exclude: ["**/node_modules/**", "**/dist/**", "**/.direnv/**", "tests/**", "og/**"],
-    passWithNoTests: true,
+    include: ["tests/**/*.test.ts", "tests/**/*_test.ts"],
+    exclude: ["**/node_modules/**", "**/dist/**", "**/.direnv/**", "og/**"],
   },
   server: {
     watch: {
@@ -32,13 +33,12 @@ export default defineConfig({
   },
   // タスクの入口は package.json の scripts に集約し、`vp run <task>` で
   // 実行する (package.json の script も vp run の task として扱われる)。
-  //   vp run test           テスト (Deno)
+  //   vp run test           テスト (Vitest)
   //   vp run fmt            整形 (oxfmt)
   //   vp run fmt:check      整形チェック
   //   vp run download-fonts フォントDL (Denoスクリプト)
   //   vp run deploy-og      OG Workerのデプロイ
-  // deno task は廃止 (deno.jsonc に tasks を定義しない)。Deno は
-  // テストランナーとユーティリティスクリプトのランタイムとしてのみ使う。
+  // Deno はテスト実行には使わない (Denoスクリプトのランタイムとしてのみ使う)。
   plugins: lazyPlugins(() => [
     tailwindcss(),
     oxContentCustomHost({

@@ -1,6 +1,8 @@
+import { test } from "vite-plus/test";
+import { assertEquals, assert } from "./_asserts.ts";
 import { parse } from "date-fns";
-import { expandGlob } from "jsr:@std/fs";
-import { assert, assertEquals } from "jsr:@std/assert";
+import { readdir, readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { extractOrgMeta } from "../ssg/org-meta.ts";
 
 function parseFileNameDate(fileName: string): Date {
@@ -15,19 +17,20 @@ function assertDateMatches(fileName: string, pubDate: string, message: string): 
   assertEquals(parseFileNameDate(fileName), parsedPubDate, message);
 }
 
-Deno.test("Blog post date validation (org)", async () => {
-  const postFiles = await Array.fromAsync(expandGlob("./src/blog/*.org"));
+test("Blog post date validation (org)", async () => {
+  const entries = await readdir("src/blog");
+  const postFiles = entries.filter((name) => name.endsWith(".org")).sort();
 
-  for (const file of postFiles) {
-    if (file.name.startsWith("flycheck_")) continue;
+  for (const name of postFiles) {
+    if (name.startsWith("flycheck_")) continue;
 
-    const content = await Deno.readTextFile(file.path);
-    const meta = extractOrgMeta(content, file.name.replace(/\.org$/, ""));
+    const content = await readFile(join("src/blog", name), "utf-8");
+    const meta = extractOrgMeta(content, name.replace(/\.org$/, ""));
 
     assertDateMatches(
-      file.name,
+      name,
       meta.pubDate,
-      `slug date and #+DATE does not match. Please check keyword and slug at ${file.path}`,
+      `slug date and #+DATE does not match. Please check keyword and slug at ${join("src/blog", name)}`,
     );
   }
 });
