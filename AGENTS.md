@@ -148,7 +148,13 @@ bun run build
 wrangler pages deploy ./dist --project-name=blog
 
 # Download fonts (used by the OG Worker's font-subsetting pipeline)
-deno task download-fonts
+vp run download-fonts
+
+# List tags used across articles (org `#+FILETAGS:`)
+vp run extract-tags
+
+# Deploy the OG image Worker (og.comamoca.dev)
+vp run deploy-og
 
 # Run tests
 vp run test
@@ -156,9 +162,10 @@ vp run test
 
 All tasks are registered in `package.json` and executed through Vite+'s task
 runner (`vp run <task>`); `vp run` with no arguments lists them. The same
-commands work via `bun run <task>` / `npm run <task>`. Deno tasks
-(`deno task ...`) remain only for the Deno-only scripts (font download, OG
-worker deploy) that have no Node equivalent.
+commands work via `bun run <task>` / `npm run <task>`. The Deno-backed
+utilities (`download-fonts`, `extract-tags`) still run on the Deno runtime
+(`deno run`) internally, but their task entries live in `package.json`;
+`deno.jsonc` no longer defines any tasks.
 
 ### Alternative Tools
 

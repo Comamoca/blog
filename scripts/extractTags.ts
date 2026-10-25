@@ -3,19 +3,13 @@ import { walk } from "jsr:@std/fs";
 const BLOG_DIR = "./src/blog";
 
 /**
- * ファイル先頭の frontmatter ブロック (--- で囲まれた部分) を抽出する。
- */
-function extractFrontmatter(content: string): string {
-  if (!content.startsWith("---")) return "";
-  const end = content.indexOf("\n---", 3);
-  return end === -1 ? "" : content.slice(3, end);
-}
-
-/**
- * frontmatter から tags を抽出する。
+ * frontmatter (Markdown) から tags を抽出する。
  * 1行の JSON 配列形式 (tags: ["a", "b"]) に対応。
  */
-function extractTags(frontmatter: string): string[] {
+function extractFrontmatterTags(content: string): string[] {
+  if (!content.startsWith("---")) return [];
+  const end = content.indexOf("\n---", 3);
+  const frontmatter = end === -1 ? "" : content.slice(3, end);
   for (const line of frontmatter.split("\n")) {
     const match = line.match(/^tags:\s*(.*)$/);
     if (!match) continue;
@@ -31,11 +25,31 @@ function extractTags(frontmatter: string): string[] {
   return [];
 }
 
+/**
+ * org の `#+FILETAGS: :tag1:tag2:` からタグを抽出する。
+ * 複数行の FILETAGS があれば併合する。
+ */
+function extractFileTags(content: string): string[] {
+  const tags: string[] = [];
+  for (const line of content.split("\n")) {
+    const match = line.match(/^\s*#\+FILETAGS:\s*(.*)$/i);
+    if (!match) continue;
+    for (const tag of match[1].split(":")) {
+      const t = tag.trim();
+      if (t !== "") tags.push(t);
+    }
+  }
+  return tags;
+}
+
 const counts = new Map<string, number>();
 
-for await (const entry of walk(BLOG_DIR, { exts: [".md"], includeDirs: false })) {
+// 記事は org-mode (#+FILETAGS:)。旧Markdown (frontmatter tags) にも対応する。
+for await (const entry of walk(BLOG_DIR, { exts: [".org", ".md"], includeDirs: false })) {
   const content = await Deno.readTextFile(entry.path);
-  const tags = extractTags(extractFrontmatter(content));
+  const tags = entry.path.endsWith(".md")
+    ? extractFrontmatterTags(content)
+    : extractFileTags(content);
   for (const tag of tags) {
     counts.set(tag, (counts.get(tag) ?? 0) + 1);
   }

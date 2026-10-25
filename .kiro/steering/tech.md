@@ -27,7 +27,8 @@
 
 ## Backend & Build System
 
-- **Runtime**: Node.js (Vite/ox-contentのビルド) + Deno (テストのみ)
+- **Runtime**: Node.js (Vite/ox-contentのビルド) + Deno (テストとフォントDL等の
+  ユーティリティスクリプト)
 - **Build System**: Vite+ (`vite.config.ts`) + `oxContentCustomHost`
   プラグイン。 `vp dev` / `vp build` / `vp preview` を使用する (`vite` は
   vite-plus-core へ alias される)。Oxfmt/Oxlint/Vitest は不採用 (整形は Nix
@@ -48,8 +49,10 @@
 
 - **Package Manager**: bun (`package.json` /
   `bun.lock`、`devEngines.packageManager` で指定)
-- **Task Runner**: bun scripts (`bun run dev` / `bun run build` /
-  `bun run preview`) + Deno tasks (`deno.jsonc`、テスト・OG Worker関連のみ)
+- **Task Runner**: Vite+ task runner (`vp run <task>`、task定義は package.json
+  に一本化。`bun run <task>` でも同じ)。フォントDL等の Deno
+  ランタイムのスクリプトも package.json scripts 経由 (`deno run` を内部で呼ぶ)。
+  `deno task` は廃止済み
 - **Alternative Tools**: Just commands for blog management workflows
 - **Shell Integration**: Nu shell scripts for content creation workflows
 
@@ -76,7 +79,7 @@ bun run build
 wrangler pages deploy ./dist --project-name=blog
 
 # フォントダウンロード (OG Worker のフォントサブセット素材用)
-deno task download-fonts
+vp run download-fonts
 ```
 
 ### Content Management (with Just)
@@ -108,7 +111,8 @@ vp run test
 BUILD_OUTPUT_DIR=dist vp run test tests/url_compat_test.ts tests/feed_compat_test.ts
 ```
 
-テストと整形の実行入口は `vp run` に一本化している (task定義は package.json)。
+テスト・整形・フォントDL・OGデプロイ等、全タスクの実行入口は `vp run` に
+一本化している (task定義は package.json)。`deno task` は廃止済み。
 `vp run` と引数なしで実行するとタスク一覧が表示される。
 
 ### Development Tools
@@ -119,7 +123,7 @@ nix fmt
 
 # Enter development shell
 nix develop
-# CIと同じ最小devShell (npm/deno/wranglerのみ)
+# CIと同じ最小devShell (node/bun/deno/wrangler/vp のみ)
 nix develop .#ci
 ```
 
@@ -127,7 +131,7 @@ nix develop .#ci
 
 - **Primary Config**: `vite.config.ts` - Vite+ + ox-content custom-host 設定
 - **Routing**: `host.ts` - 全ルート定義
-- **Node Config**: `package.json` - bun scripts と依存関係
+- **Node Config**: `package.json` - タスク定義 (`vp run`) と依存関係
 - **Deno Config**: `deno.jsonc` - テスト実行と `date-fns` importのみ
 - **Development Nix**: `flake.nix` - Nix development environment
 

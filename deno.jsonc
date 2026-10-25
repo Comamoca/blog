@@ -5,14 +5,9 @@
   "test": {
     "include": ["tests/"],
   },
-  "tasks": {
-    "download-fonts": "deno run -A ./scripts/downloadFonts.ts",
-    "extract-tags": "deno run -A ./scripts/extractTags.ts",
-    "deploy-og": {
-      "description": "Build and deploy the OG image Worker (og.comamoca.dev)",
-      "command": "cd og && npm ci && gleam build --no-print-progress && wrangler deploy",
-    },
-  },
+  // tasks は廃止した (d5b3815 で test を package.json scripts (= `vp run`) に一本化し、
+  // download-fonts / extract-tags / deploy-og も続けて package.json scripts へ移した)。
+  // タスクの入口は `vp run <task>` で、ここには定義しない。
   "nodeModulesDir": "auto",
   "unstable": ["temporal"],
   "lock": false,

@@ -215,9 +215,10 @@ jobs:
 
       # OG Workerはビルド入力 (og/・記事コーパス・nix定義) に変更がある場合のみ
       # デプロイ (手動実行時は常にデプロイ)
-      # deploy-og は gleam/npm を使うため、それらを含まない .#ci ではなく
+      # `vp run deploy-og` は gleam/npm を使うため、それらを含まない .#ci ではなく
       # デフォルトのdevShellを使う (devShellのshellHookが最新コーパスで
-      # サブセットしたフォントを og/static/fonts/ に配置する)
+      # サブセットしたフォントを og/static/fonts/ に配置する。vpはこのシェルの
+      # vite-plus パッケージから提供される)
       - name: Deploy OG worker
         if: >-
           (github.event_name == 'workflow_dispatch' || needs.changes.outputs.og == 'true') &&
@@ -225,4 +226,4 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: nix develop --command deno task deploy-og
+        run: nix develop --command vp run deploy-og

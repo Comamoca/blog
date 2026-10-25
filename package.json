@@ -8,7 +8,10 @@
     "preview": "vp preview",
     "test": "deno test --allow-all",
     "fmt": "vp fmt",
-    "fmt:check": "vp fmt --check"
+    "fmt:check": "vp fmt --check",
+    "download-fonts": "deno run -A ./scripts/downloadFonts.ts",
+    "extract-tags": "deno run -A ./scripts/extractTags.ts",
+    "deploy-og": "cd og && npm ci && gleam build --no-print-progress && wrangler deploy"
   },
   "dependencies": {
     "@ox-content/unplugin": "3.3.2",

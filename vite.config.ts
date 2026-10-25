@@ -32,10 +32,13 @@ export default defineConfig({
   },
   // タスクの入口は package.json の scripts に集約し、`vp run <task>` で
   // 実行する (package.json の script も vp run の task として扱われる)。
-  //   vp run test      テスト (Deno)
-  //   vp run fmt       整形 (oxfmt)
-  //   vp run fmt:check 整形チェック
-  // deno task には test を定義しない (入口を一本化するため)。
+  //   vp run test           テスト (Deno)
+  //   vp run fmt            整形 (oxfmt)
+  //   vp run fmt:check      整形チェック
+  //   vp run download-fonts フォントDL (Denoスクリプト)
+  //   vp run deploy-og      OG Workerのデプロイ
+  // deno task は廃止 (deno.jsonc に tasks を定義しない)。Deno は
+  // テストランナーとユーティリティスクリプトのランタイムとしてのみ使う。
   plugins: lazyPlugins(() => [
     tailwindcss(),
     oxContentCustomHost({
