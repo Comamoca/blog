@@ -134,18 +134,17 @@ intact (restorable via `git checkout pre-lume-removal -- <path>` or
 
 ```bash
 # Development server with hot reload
-npm run dev
+bun run dev
 
 # Production build
-npm run build
+bun run build
 
 # Format code (Oxfmt, bundled with vite-plus; `nix fmt` / pre-commit run the same formatter)
-# (devEngines requires bun, so `npm run` is rejected — use `bun run` / `nr`)
 vp run fmt
 vp run fmt:check
 
 # Deploy to Cloudflare Pages
-npm run build
+bun run build
 wrangler pages deploy ./dist --project-name=blog
 
 # Download fonts (used by the OG Worker's font-subsetting pipeline)

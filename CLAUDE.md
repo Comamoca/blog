@@ -135,6 +135,10 @@ bun run dev
 # Production build
 bun run build
 
+# Format code (Oxfmt, bundled with vite-plus; `nix fmt` / pre-commit run the same formatter)
+vp run fmt
+vp run fmt:check
+
 # Deploy to Cloudflare Pages
 bun run build
 wrangler pages deploy ./dist --project-name=blog
@@ -144,10 +148,6 @@ deno task download-fonts
 
 # Run tests
 vp run test
-
-# Format / check formatting
-vp run fmt
-vp run fmt:check
 ```
 
 All tasks are registered in `package.json` and executed through Vite+'s task

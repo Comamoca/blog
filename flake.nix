@@ -250,7 +250,7 @@
             };
             # JS/TS/JSON/Markdown等は vite-plus 内蔵の Oxfmt で整形する。
             # deno fmt から切り替え (oxc 系フォーマッタに統一)。
-            # `npm run fmt` (vp fmt) と同じ oxfmt なので整形結果が一致する。
+            # `vp run fmt` (vp fmt) と同じ oxfmt なので整形結果が一致する。
             settings.formatter = {
               oxfmt = {
                 command = "${vite-plus}/bin/vp";
