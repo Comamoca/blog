@@ -1,6 +1,6 @@
 /**
  * scripts/md2org.ts の純関数 (`frontmatterToKeywords` / `postProcessOrg`)
- * のユニットテスト。Deno で実行する (`deno test --allow-all`)。
+ * のユニットテスト。Deno で実行する (`vp run test` → `deno test --allow-all`)。
  */
 import { assertEquals } from "jsr:@std/assert";
 

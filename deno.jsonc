@@ -12,7 +12,6 @@
       "description": "Build and deploy the OG image Worker (og.comamoca.dev)",
       "command": "cd og && npm ci && gleam build --no-print-progress && wrangler deploy",
     },
-    "test": "deno test --allow-all",
   },
   "nodeModulesDir": "auto",
   "unstable": ["temporal"],

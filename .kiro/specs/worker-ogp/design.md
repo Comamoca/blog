@@ -286,7 +286,7 @@ routes = [{ pattern = "og.comamoca.dev", custom_domain = true }]
 ## テスト戦略
 
 1. **ユニットテスト (gleeunit)**: クエリパース・バリデーション (400系)
-   ・レイアウト選択。 Lume側フックは`deno task test`でURL生成 (決定性・切り詰め)
+   ・レイアウト選択。 Lume側フックは`vp run test`でURL生成 (決定性・切り詰め)
    をテスト
 2. **ゴールデン画像テスト**: 固定入力 (日本語タイトル/長文説明文/main)
    からのPNGの

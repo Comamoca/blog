@@ -1,4 +1,4 @@
-import { assertStringIncludes } from "jsr:@std/assert";
+import { assert, assertStringIncludes } from "jsr:@std/assert";
 
 // linkcard はネットワーク越しのOGP取得を伴うため、テストでは無効化して
 // 裸URLが autolink のまま残ることを検証する (org.ts はモジュールロード時に
@@ -45,10 +45,10 @@ Deno.test("org レンダリング: 脚注が remark-gfm 形状に正規化され
     `<section class="footnotes">`,
     "脚注セクションが section.footnotes になること",
   );
-  assertStringIncludes(
-    html,
-    `<h2 id="footnote-label">脚注</h2>`,
-    "footnotePost が footnote-label 見出しを「脚注」に書き換えること",
+  assertStringIncludes(html, `<hr>`, "脚注セクションの見出しの代わりに水平線 (hr) が置かれること");
+  assert(
+    !html.includes(`id="footnote-label"`),
+    "脚注セクションに footnote-label 見出しが残らないこと",
   );
   assertStringIncludes(html, `<li id="fn.1">`, '脚注定義が <li id="fn.N"> になること');
   assertStringIncludes(

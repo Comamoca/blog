@@ -2,7 +2,7 @@
 
 - 1. [ ] 回帰検証の土台づくり (最初に行う)
 - [ ] 1.1 現行 main のベースライン確認
-  - worktree (`feat/org-mode-migration`) で `deno task test` を実行し、
+  - worktree (`feat/org-mode-migration`) で `vp run test` を実行し、
     `tests/url_compat_test.ts` / `tests/feed_compat_test.ts` が green
     であることを 確認する
   - `npm run build` で現行 dist を生成し、ビルドが通ることを確認する
@@ -158,7 +158,7 @@
   - _Requirements: 8.3_
 
 - [ ] 6.6 最終回帰確認
-  - `deno task test` (url_compat / feed_compat) と `npm run build` を通す
+  - `vp run test` (url_compat / feed_compat) と `npm run build` を通す
   - _Requirements: 4.1, 4.3, 7.1_
 
 - 7. [ ] Emacs (dotfiles) の org 統合

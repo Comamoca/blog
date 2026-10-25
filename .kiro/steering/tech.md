@@ -102,11 +102,14 @@ just latest-diary
 
 ```bash
 # 全テスト (Deno)
-deno task test
+vp run test
 
 # URL/フィード互換性テストのみ (要ビルド済みdist/)
-BUILD_OUTPUT_DIR=dist deno test --allow-all tests/url_compat_test.ts tests/feed_compat_test.ts
+BUILD_OUTPUT_DIR=dist vp run test tests/url_compat_test.ts tests/feed_compat_test.ts
 ```
+
+テストと整形の実行入口は `vp run` に一本化している (task定義は package.json)。
+`vp run` と引数なしで実行するとタスク一覧が表示される。
 
 ### Development Tools
 

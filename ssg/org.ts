@@ -142,11 +142,12 @@ function footnoteNormalize() {
       tagName: "section",
       properties: { className: ["footnotes"] },
       children: [
+        // 脚注セクションは見出しを持たない。区切りは水平線 (hr) で表現する。
         {
           type: "element",
-          tagName: "h2",
-          properties: { id: "footnote-label" },
-          children: [{ type: "text", value: "Footnotes" }],
+          tagName: "hr",
+          properties: {},
+          children: [],
         },
         {
           type: "element",

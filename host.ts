@@ -58,7 +58,14 @@ type Post = {
   isDiary: boolean;
 };
 
-async function loadPosts(): Promise<Post[]> {
+/**
+ * 記事一覧を組み立てる。
+ *
+ * `includeDrafts` が true のとき `#+DRAFT: true` の記事も含める。開発サーバー
+ * (ctx.mode === "serve") では下書きも確認したいので true にする。本番ビルド
+ * (ctx.mode === "build") では下書きを公開しない。
+ */
+async function loadPosts(includeDrafts: boolean): Promise<Post[]> {
   const dir = path.join(REPO_ROOT, BLOG_DIR);
   const names = (await fs.readdir(dir)).filter((n) => n.endsWith(".org"));
   const posts: Post[] = [];
@@ -68,7 +75,7 @@ async function loadPosts(): Promise<Post[]> {
     const src = await fs.readFile(file, "utf8");
     const stem = name.replace(/\.org$/, "");
     const meta = extractOrgMeta(src, stem);
-    if (meta.draft) continue;
+    if (meta.draft && !includeDrafts) continue;
 
     posts.push({
       stem,
@@ -125,7 +132,9 @@ const DOC_PROLOGUE = "<!doctype html>";
 
 export const host = {
   async routes(ctx: any) {
-    const posts = await loadPosts();
+    // 開発サーバー ("serve") では下書きも表示して確認できるようにする。
+    // 本番ビルド ("build") では下書きを公開しない。
+    const posts = await loadPosts(ctx.mode === "serve");
     const articles = posts.filter((p) => !p.isDiary);
     const diaries = posts.filter((p) => p.isDiary);
     const techArticles = articles.filter((p) => p.tags.includes("tech"));

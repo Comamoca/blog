@@ -6,6 +6,7 @@
     "dev": "vp dev",
     "build": "vp build && node --experimental-strip-types ssg/run-pagefind.ts",
     "preview": "vp preview",
+    "test": "deno test --allow-all",
     "fmt": "vp fmt",
     "fmt:check": "vp fmt --check"
   },

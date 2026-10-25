@@ -5,16 +5,18 @@ import { staticAssets } from "./ssg/static-assets.ts";
 
 export default defineConfig({
   // Oxfmt/Oxlint (vp check) は採用しない。整形は Nix treefmt、テストは deno test を
-  // 使うため。Vite+ は Vite の置き換え (dev/build/preview) としてのみ使う。
+  // 使うため。Vite+ は Vite の置き換え (dev/build/preview) とタスク実行
+  // (vp run) として使う。
   // ox-content 同梱の文字列SSR用JSXランタイムを使う (React/Preact不要)。
   // Vite 8 では transform を Oxc が担うため oxc に指定する。esbuild を
   // 併記すると oxc 側が優先され「esbuild は無視される」警告が出る。
   oxc: {
     jsx: { runtime: "automatic", importSource: "@ox-content/vite-plugin" },
   },
-  // テストは Deno (`deno task test`) を使う。Vitest (vp test) にはこの
-  // リポジトリ向けのテストが無いため、Deno テスト (tests/**) と nix flake
-  // input のシンボリックフォレスト (.direnv/**) を探索せず 0 件でも成功させる。
+  // テストは Deno (`vp run test` → `deno test --allow-all`) を使う。
+  // Vitest (vp test) にはこのリポジトリ向けのテストが無いため、Deno テスト
+  // (tests/**) と nix flake input のシンボリックフォレスト (.direnv/**) を
+  // 探索せず 0 件でも成功させる。
   test: {
     include: ["src/**/*.{test,spec}.{ts,tsx}"],
     exclude: ["**/node_modules/**", "**/dist/**", "**/.direnv/**", "tests/**", "og/**"],
@@ -28,6 +30,12 @@ export default defineConfig({
       ignored: ["**/.direnv/**", "**/.git/**", "**/dist/**"],
     },
   },
+  // タスクの入口は package.json の scripts に集約し、`vp run <task>` で
+  // 実行する (package.json の script も vp run の task として扱われる)。
+  //   vp run test      テスト (Deno)
+  //   vp run fmt       整形 (oxfmt)
+  //   vp run fmt:check 整形チェック
+  // deno task には test を定義しない (入口を一本化するため)。
   plugins: lazyPlugins(() => [
     tailwindcss(),
     oxContentCustomHost({

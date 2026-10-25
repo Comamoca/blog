@@ -97,6 +97,11 @@
             };
           };
 
+          # pre-commit用テストランナー。実行入口は package.json の test
+          # script (= `vp run test`) に一本化し、ここはそのラッパーに
+          # なるだけにする (テストの起動方法を変える唯一の場所)。
+          # 依存の事前キャッシュはネットワーク不通環境でもテストを
+          # スキップできるようにするため残す。
           deno-test = pkgs.writeShellApplication {
             name = "deno-test";
             runtimeInputs = [ deno ];

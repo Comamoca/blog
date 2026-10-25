@@ -143,8 +143,18 @@ wrangler pages deploy ./dist --project-name=blog
 deno task download-fonts
 
 # Run tests
-deno task test
+vp run test
+
+# Format / check formatting
+vp run fmt
+vp run fmt:check
 ```
+
+All tasks are registered in `package.json` and executed through Vite+'s task
+runner (`vp run <task>`); `vp run` with no arguments lists them. The same
+commands work via `bun run <task>` / `npm run <task>`. Deno tasks
+(`deno task ...`) remain only for the Deno-only scripts (font download, OG
+worker deploy) that have no Node equivalent.
 
 ### Alternative Tools
 
@@ -256,8 +266,8 @@ component as props.
 
 - `vite.config.ts`: Vite+ + `oxContentCustomHost` configuration
 - `host.ts`: Route definitions
-- `package.json`: bun scripts and dependencies
-- `deno.jsonc`: Deno config for running tests (`deno task test`) and the
+- `package.json`: task definitions (executed via `vp run <task>`) and dependencies
+- `deno.jsonc`: Deno config for the test runner configuration and the
   `date-fns` import used by `tests/diary.test.ts`
 
 ## Custom Features

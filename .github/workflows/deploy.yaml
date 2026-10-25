@@ -185,7 +185,7 @@ jobs:
         run: |
           nix develop .#ci --command bash -c '
             DISABLE_LINKCARD=1 vp build &&
-            BUILD_OUTPUT_DIR=dist deno test --allow-all tests/url_compat_test.ts tests/feed_compat_test.ts
+            BUILD_OUTPUT_DIR=dist vp run test tests/url_compat_test.ts tests/feed_compat_test.ts
           '
 
       - name: Build & Deploy blog
