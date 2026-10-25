@@ -48,6 +48,13 @@ flycheck_*
 # og worker用フォント (nix build .#og-fonts / devShellのshellHookで生成)
 /og/static/fonts/
 
+# og worker内でのビルド実行時にできる複製 (cd og して wrangler/gleam を叩いた時の名残)
+/og/og/
+/og/fonts/
+
+# nREPLの接続ポートファイル
+.nrepl-port
+
 # editor / agent session state
 .commandcode/
 .omo/
