@@ -68,7 +68,7 @@ https://tamaparks.com/event/event-2494/
 <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
-五日市線秋川駅からバスであきる野市民球場まで行き、そこから徒歩5分かかった。
+五日市線秋川駅からバスであきる野市民球場まで行き、そこから5分ほど歩きました。
 
 #+begin_export html
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">都心で生活してたらまず行かないであろう謎の駅に来た https://t.co/OhBtDhr3is</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://x.com/Comamoca_/status/2111711292264489330?ref_src=twsrc%5Etfw">October 18, 2026</a></blockquote>
