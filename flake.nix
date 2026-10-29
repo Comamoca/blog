@@ -236,9 +236,17 @@
             # pnpm-lock.yaml / package-lock.json はパッケージマネージャが生成
             # するためフォーマットを当てると差分が出続け、pre-commitのtreefmtが
             # 常に失敗する。.wt/ はgitignore済みの別リポジトリ置き場。
+            # .tmp-* は検証用のスクラッチ (生成HTMLの山など) を置く場所。
+            # 数千ファイルのHTMLが *.html にマッチし、`nix fmt` が実測57秒
+            # かかっていた (除外後は121ファイル・約1秒)。
+            # パターンは「.tmp-* という名前のファイル/ディレクトリ」に当てる。
+            # ディレクトリに当たれば配下ごと除外される。先頭 `**/` は0階層に
+            # マッチしないため、直下用と併記する。
             settings.excludes = [
               ".commandcode/**"
               ".wt/**"
+              ".tmp-*"
+              "**/.tmp-*"
               "**/pnpm-lock.yaml"
               "**/package-lock.json"
             ];
