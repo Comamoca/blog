@@ -43,4 +43,9 @@ export function shiki(opts: ShikiOptions) {
 export const SHIKI_OPTIONS: ShikiOptions = {
   themes: { light: "catppuccin-mocha", dark: "catppuccin-mocha" },
   inline: "tailing-curly-colon",
+  // 既定の 500ms 制限だと、文法の初回 JIT が重い行 (elisp など) で
+  // vscode-textmate が行の途中で打ち切り、残りを打ち切り時点のスコープ色で
+  // 出力する。負荷次第で同じ入力から別の HTML が出るため無制限にする。
+  // 実測では制限を外してもビルド時間は無視できる差だった。
+  tokenizeTimeLimit: 0,
 };
