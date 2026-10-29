@@ -143,3 +143,28 @@ test("org レンダリング: 脚注セクション内に見出し要素が残�
   assertStringIncludes(html, `data-footnote-backref`, "戻りリンクがあること");
   assertStringIncludes(html, `↩︎`, "戻りリンクの記号が ↩︎ になること");
 });
+
+test("org レンダリング: 画像の #+attr_html が画像側にだけ付く", async () => {
+  const { html } = await renderOrg(
+    fnWrap(`#+attr_html: :width 450\n[[file:../img/a.png]]`),
+    "test.org",
+  );
+
+  assertStringIncludes(html, `<img width="450"`, "#+attr_html の width が img に付くこと");
+  assert(!html.includes(`<p width`), "段落側に width が残らないこと");
+});
+
+test("org レンダリング: 中央寄せブロック内の画像属性も画像側に付く", async () => {
+  const { html } = await renderOrg(
+    fnWrap(`#+begin_center\n#+attr_html: :width 450\n[[file:../img/a.png]]\n#+end_center`),
+    "test.org",
+  );
+
+  assertStringIncludes(
+    html,
+    `<div class="center"><img width="450"`,
+    "div.center の中で画像にだけ width が付くこと",
+  );
+  assert(!/<p width/.test(html), "段落側に width が残らないこと");
+  assertStringIncludes(html, `</div>`, "中央寄せの div が閉じていること");
+});

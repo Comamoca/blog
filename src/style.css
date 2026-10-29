@@ -20,6 +20,20 @@ body {
   @apply mx-auto;
 }
 
+/* `#+begin_center` ブロック (org の中央寄せ) */
+.center {
+  @apply text-center;
+}
+
+/* 中身は段落で包まれるため、旧 `<center>` と同じ見た目になるよう調整する */
+.center > p {
+  @apply my-0;
+}
+
+.center img {
+  @apply mx-auto;
+}
+
 span.shiki {
   border-radius: 0.25rem;
   padding-bottom: 0.125rem;

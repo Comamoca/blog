@@ -4,6 +4,16 @@ import { AUTHOR, SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "../src/consts.ts
 const LIMIT = 10;
 
 /**
+ * gitサブプロセスのstdio設定。stdoutだけを取り、stderrは捨てる。
+ *
+ * リポジトリ外のディレクトリ (テスト用の一時ディレクトリなど) を渡すと
+ * `git log` は失敗し、そのままでは
+ * `fatal: not a git repository: ...` がビルド/テストのログに混ざる。
+ * 呼び出し側は失敗を握って日付フォールバックするので、stderrは不要。
+ */
+const GIT_STDIO: ["ignore", "pipe", "ignore"] = ["ignore", "pipe", "ignore"];
+
+/**
  * gitサブプロセス用の環境変数を組み立てる。
  *
  * Node の execFileSync はデフォルトで親プロセスの環境を丸ごと継承し、
@@ -44,6 +54,7 @@ function renamesOf(repoRoot: string, relDir: string): Array<[string, string]> {
         env: gitCommandEnv(repoRoot),
         encoding: "utf8",
         maxBuffer: 64 * 1024 * 1024,
+        stdio: GIT_STDIO,
       },
     );
   } catch {
@@ -78,6 +89,7 @@ export function firstCommitTimes(repoRoot: string, relDir: string): Map<string, 
         env: gitCommandEnv(repoRoot),
         encoding: "utf8",
         maxBuffer: 64 * 1024 * 1024,
+        stdio: GIT_STDIO,
       },
     );
   } catch {
@@ -129,6 +141,7 @@ export function latestArticleCommitDate(repoRoot: string, relDir = "src/blog"): 
         cwd: repoRoot,
         env: gitCommandEnv(repoRoot),
         encoding: "utf8",
+        stdio: GIT_STDIO,
       },
     );
     const ts = Number.parseInt(out.trim(), 10);

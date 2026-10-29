@@ -3,7 +3,8 @@
  *
  * unified で org → orgast (uniorg-parse) → hast (uniorg-rehype) → 生HTML
  * (rehype-raw) → コードハイライト (shiki, catppuccin-mocha) → リンクカード
- * (linkcardRehype) → 脚注正規化 (footnoteNormalize) → HTML 文字列、の順に処理し、
+ * (linkcardRehype) → 画像属性の正規化 (imageAttrNormalize) → 脚注正規化
+ * (footnoteNormalize) → HTML 文字列、の順に処理し、
  * 最後に既存の footnotePost (remark-gfm 互換の脚注仕上げ) を適用する。
  * ox-content の transformMarkdown は通さない (org 専用のパイプライン)。
  */
@@ -162,6 +163,51 @@ function footnoteNormalize() {
   };
 }
 
+/**
+ * uniorg-rehype は画像1枚だけの行を `<p><img></p>` にする。旧サイトで画像を
+ * 直接 HTML で書いていた箇所には `<p>` が無く、段落の余白分だけ画像の位置が
+ * ずれる。また `#+attr_html: :width 450` の属性は画像ではなく `<p>` に付く
+ * (`<p width="450">` は HTML として不正)。
+ *
+ * 属性付きの画像段落だけを畳む。`[[file:...]]` だけの素の画像行は、移行前の
+ * サイトでも `<p>` に包まれていたため、そのまま残して見た目を保つ。
+ */
+function imageParagraphNormalize() {
+  return (tree: unknown) => {
+    if (!isRoot(tree)) return;
+    walk(tree.children);
+  };
+
+  function walk(nodes: HastNode[]) {
+    for (let i = 0; i < nodes.length; i++) {
+      const node = nodes[i];
+      if (!isElement(node)) continue;
+      const image = node.tagName === "p" ? unwrapSoleImage(node) : undefined;
+      if (image) {
+        nodes[i] = image;
+        continue;
+      }
+      walk(node.children);
+    }
+  }
+
+  /** 属性付きかつ画像1枚だけの段落なら、属性を画像へ寄せて画像を返す。 */
+  function unwrapSoleImage(paragraph: HastElement): HastElement | undefined {
+    if (Object.keys(paragraph.properties).length === 0) return;
+    const children = paragraph.children.filter(
+      (child) => child.type !== "text" || child.value.trim() !== "",
+    );
+    if (children.length !== 1) return;
+    const image = children[0];
+    if (!isElement(image) || image.tagName !== "img") return;
+
+    for (const [key, value] of Object.entries(paragraph.properties)) {
+      if (image.properties[key] === undefined) image.properties[key] = value;
+    }
+    return image;
+  }
+}
+
 // DISABLE_LINKCARD で linkcard プラグイン自体を外す
 // (ネットワーク越しのOGP取得を伴うため)。
 const DISABLE_LINKCARD = process.env.DISABLE_LINKCARD !== undefined;
@@ -176,6 +222,7 @@ export async function renderOrg(source: string, file: string): Promise<{ html: s
     if (!DISABLE_LINKCARD) processor.use(linkcardRehype);
 
     const result = await processor
+      .use(imageParagraphNormalize)
       .use(footnoteNormalize)
       .use(rehypeStringify, { allowDangerousHtml: true })
       .process(source);

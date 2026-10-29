@@ -235,19 +235,25 @@
             projectRootFile = "flake.nix";
             # pnpm-lock.yaml / package-lock.json はパッケージマネージャが生成
             # するためフォーマットを当てると差分が出続け、pre-commitのtreefmtが
-            # 常に失敗する。.wt/ はgitignore済みの別リポジトリ置き場。
+            # 常に失敗する (.wt/ はgitignore済みの別リポジトリ置き場)。
             # .tmp-* は検証用のスクラッチ (生成HTMLの山など) を置く場所。
             # 数千ファイルのHTMLが *.html にマッチし、`nix fmt` が実測57秒
-            # かかっていた (除外後は121ファイル・約1秒)。
+            # かかっていた (除外後は120ファイル・約1秒)。treefmtはgitignoreを
+            # 見ずに明示的なファイルリストをformatterへ渡すため、vp側の
+            # ignore では防げない (明示指定された .tmp-* は整形される)。
             # パターンは「.tmp-* という名前のファイル/ディレクトリ」に当てる。
             # ディレクトリに当たれば配下ごと除外される。先頭 `**/` は0階層に
-            # マッチしないため、直下用と併記する。
+            # マッチしないため、直下用と併記する。lockfile も同じ理由で
+            # 直下用 (`pnpm-lock.yaml`) と下位階層用 (`**/...`) を併記する
+            # (vp はlockfileを自前で無視するが、treefmt側でも明示的に外す)。
             settings.excludes = [
               ".commandcode/**"
               ".wt/**"
               ".tmp-*"
               "**/.tmp-*"
+              "pnpm-lock.yaml"
               "**/pnpm-lock.yaml"
+              "package-lock.json"
               "**/package-lock.json"
             ];
             programs = {
