@@ -8,7 +8,7 @@
 ちょうど自分の泊っている所で収録してて入れなかったから御徒町のスタバで暇を潰してたのを思い出す。(収録見たかった〜!)
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">やっぱVimはソフトもそれを取り巻くコミュニティも良いよなぁ〜って思えた回だった<br><br>Vimやると人生変わるよ(マジ) <a href="https://t.co/jW9NXZhaks">https://t.co/jW9NXZhaks</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1863455569891426548?ref_src=twsrc%5Etfw">December 2, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">やっぱVimはソフトもそれを取り巻くコミュニティも良いよなぁ〜って思えた回だった<br><br>Vimやると人生変わるよ(マジ) <a href="https://t.co/jW9NXZhaks">https://t.co/jW9NXZhaks</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1863455569891426548?ref_src=twsrc%5Etfw">December 2, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ** 今日やったこと

@@ -8,7 +8,7 @@
 *** flake-updatorをリリースした
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">リポジトリ内のflake.nixを再帰的にアップデートするworkflowをリリースしました！<br><br>元は自身のリポジトリで使っていたworkflowを切り出したものです。<br>今後は僕自身このworkflowを使ってドッグフーディングしていこうと思います！<a href="https://t.co/m16qqCaveb">https://t.co/m16qqCaveb</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1936822256329699809?ref_src=twsrc%5Etfw">June 22, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">リポジトリ内のflake.nixを再帰的にアップデートするworkflowをリリースしました！<br><br>元は自身のリポジトリで使っていたworkflowを切り出したものです。<br>今後は僕自身このworkflowを使ってドッグフーディングしていこうと思います！<a href="https://t.co/m16qqCaveb">https://t.co/m16qqCaveb</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1936822256329699809?ref_src=twsrc%5Etfw">June 22, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 リポジトリ内のflake.nixを再帰的にnix flake

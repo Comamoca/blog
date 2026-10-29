@@ -18,7 +18,7 @@
 どうせ買い替えるのなら高いやつにしちゃえってことで買ったのがこれ。試聴した時あまりに音が良すぎて即買いした。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">買ったのはこれ <a href="https://t.co/aBOioQzceg">https://t.co/aBOioQzceg</a> <a href="https://t.co/9u57Wbz5tu">pic.twitter.com/9u57Wbz5tu</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1940070130492284989?ref_src=twsrc%5Etfw">July 1, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">買ったのはこれ <a href="https://t.co/aBOioQzceg">https://t.co/aBOioQzceg</a> <a href="https://t.co/9u57Wbz5tu">pic.twitter.com/9u57Wbz5tu</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1940070130492284989?ref_src=twsrc%5Etfw">July 1, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ついでに仕事でリモートする機会も増えると思うのでマイク付きのヘッドセットも買った。

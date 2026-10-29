@@ -21,7 +21,7 @@
 --------------
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">見せてあげますよ、本当の「ノマド」ってやつを...！ <a href="https://t.co/83DMLr1pUl">pic.twitter.com/83DMLr1pUl</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1948741670033654016?ref_src=twsrc%5Etfw">July 25, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">見せてあげますよ、本当の「ノマド」ってやつを...！ <a href="https://t.co/83DMLr1pUl">pic.twitter.com/83DMLr1pUl</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1948741670033654016?ref_src=twsrc%5Etfw">July 25, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ただ、高尾までの時間は人が多すぎてそもそも座れないので、想像よりも作業時間は少ないってのが不満点。

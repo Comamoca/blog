@@ -16,7 +16,7 @@ yasunori's blogが更新されて沸きたっていた。
 *** Emacs
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">gitmojiの情報が入ってるJSONから補完候補を生成するelispを書いてみた<br>Emacs楽しい <a href="https://t.co/2viLAsXBdI">pic.twitter.com/2viLAsXBdI</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1863867051674353751?ref_src=twsrc%5Etfw">December 3, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">gitmojiの情報が入ってるJSONから補完候補を生成するelispを書いてみた<br>Emacs楽しい <a href="https://t.co/2viLAsXBdI">pic.twitter.com/2viLAsXBdI</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1863867051674353751?ref_src=twsrc%5Etfw">December 3, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 今日は[[https://gitmoji.dev/][gitmoji]]を良い感じに補完してくれるsourceを書いていた。
@@ -85,7 +85,7 @@ runtimeを扱うことになるから、そのあたりの読者へのケアを�
 休みに入ってダラダラしがちなので!やれの精神で進捗重ねていきたい。
 
 #+begin_export html
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/JV3KOJ_Z4Vs?si=RILufoxBpOLt-KlM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JV3KOJ_Z4Vs?si=RILufoxBpOLt-KlM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 #+end_export
 
 [fn:1] [[https://zenn.dev/shougo/articles/vimconf-2024][Vimconf 2024

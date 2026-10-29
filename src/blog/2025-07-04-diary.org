@@ -8,7 +8,7 @@
 *** 佑芽ちゃんゲットした
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">最高の週末、始めます <a href="https://t.co/oM1Ojph0AT">pic.twitter.com/oM1Ojph0AT</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1941095153932149001?ref_src=twsrc%5Etfw">July 4, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">最高の週末、始めます <a href="https://t.co/oM1Ojph0AT">pic.twitter.com/oM1Ojph0AT</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1941095153932149001?ref_src=twsrc%5Etfw">July 4, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ナムコに行ったのでクレーンにチャレンジしてみた。5000円飛んだ気がしたけど取れて良かった。
@@ -16,7 +16,7 @@
 *** ラーメン
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">2日連続でラーメン食べてる <a href="https://t.co/KCzoBdqdiC">pic.twitter.com/KCzoBdqdiC</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1941138843354513806?ref_src=twsrc%5Etfw">July 4, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">2日連続でラーメン食べてる <a href="https://t.co/KCzoBdqdiC">pic.twitter.com/KCzoBdqdiC</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1941138843354513806?ref_src=twsrc%5Etfw">July 4, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ぬい取れた記念でラーメンを食べた。完飲した。

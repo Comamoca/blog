@@ -7,7 +7,7 @@
 Emacs入学式ちょっとやってみたいかも。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">良いアイデアだな〜と思ったのでやりたいかも <a href="https://t.co/z2FocmslAx">https://t.co/z2FocmslAx</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1926978164925800473?ref_src=twsrc%5Etfw">May 26, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">良いアイデアだな〜と思ったのでやりたいかも <a href="https://t.co/z2FocmslAx">https://t.co/z2FocmslAx</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1926978164925800473?ref_src=twsrc%5Etfw">May 26, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ** 今日やったこと

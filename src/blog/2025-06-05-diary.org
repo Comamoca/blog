@@ -7,7 +7,7 @@
 広ちゃんゴーストめちゃかわいくて動かしたい欲がある。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">広ちゃんゴースト仮公開します<br>まだほとんど何も出来ませんが雰囲気を楽しみたい人向け<br>↓narファイルをDLしてsspにドラッグするとインストール出来ます↓<a href="https://t.co/fov6Hb74IL">https://t.co/fov6Hb74IL</a><br><br>↓SSP（本体クライアント）↓<a href="https://t.co/p674pW3i4u">https://t.co/p674pW3i4u</a><br><br>ネットワーク更新機能対応済みなのでSSP上から更新可能 <a href="https://t.co/GQzd11xXv2">pic.twitter.com/GQzd11xXv2</a></p>&mdash; 8bit (@8bitcanvas) <a href="https://twitter.com/8bitcanvas/status/1930387458287411256?ref_src=twsrc%5Etfw">June 4, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">広ちゃんゴースト仮公開します<br>まだほとんど何も出来ませんが雰囲気を楽しみたい人向け<br>↓narファイルをDLしてsspにドラッグするとインストール出来ます↓<a href="https://t.co/fov6Hb74IL">https://t.co/fov6Hb74IL</a><br><br>↓SSP（本体クライアント）↓<a href="https://t.co/p674pW3i4u">https://t.co/p674pW3i4u</a><br><br>ネットワーク更新機能対応済みなのでSSP上から更新可能 <a href="https://t.co/GQzd11xXv2">pic.twitter.com/GQzd11xXv2</a></p>&mdash; 8bit (@8bitcanvas) <a href="https://twitter.com/8bitcanvas/status/1930387458287411256?ref_src=twsrc%5Etfw">June 4, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ** 今日やったこと

@@ -6,7 +6,7 @@
 #+DRAFT: false
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">本日はこちらに <a href="https://t.co/SYyGgn2w60">pic.twitter.com/SYyGgn2w60</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1774287425357099464?ref_src=twsrc%5Etfw">March 31, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">本日はこちらに <a href="https://t.co/SYyGgn2w60">pic.twitter.com/SYyGgn2w60</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1774287425357099464?ref_src=twsrc%5Etfw">March 31, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 甲斐国もくもく会に行ってきたのでその感想とか。
@@ -41,7 +41,7 @@ Twitter を見ずに作業ができて良かった。
 同年代でプログラミングの事を話せる人が地元だと皆無なのでこういう人が集まれる場ができたら(個人的に)嬉しい。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">みなさんお疲れ様でした〜<a href="https://twitter.com/hashtag/%E7%94%B2%E6%96%90%E5%9B%BD%E3%82%82%E3%81%8F%E3%82%82%E3%81%8F%E4%BC%9A?src=hash&amp;ref_src=twsrc%5Etfw">#甲斐国もくもく会</a> <a href="https://t.co/JzVdMRNsXk">pic.twitter.com/JzVdMRNsXk</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1774358076029870504?ref_src=twsrc%5Etfw">March 31, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">みなさんお疲れ様でした〜<a href="https://twitter.com/hashtag/%E7%94%B2%E6%96%90%E5%9B%BD%E3%82%82%E3%81%8F%E3%82%82%E3%81%8F%E4%BC%9A?src=hash&amp;ref_src=twsrc%5Etfw">#甲斐国もくもく会</a> <a href="https://t.co/JzVdMRNsXk">pic.twitter.com/JzVdMRNsXk</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1774358076029870504?ref_src=twsrc%5Etfw">March 31, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 [fn:1] 今回は初対面ということもあってあまり話せなかったので、次回はもっと話せるようにしていきたい。

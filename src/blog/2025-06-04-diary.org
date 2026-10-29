@@ -27,7 +27,7 @@ typstでスライドを作る体験はめちゃくちゃ良いのだけど、ス
 raizawa-meetupの帰り道で間違えて三田線に乗っちゃったので有楽町あたりまで来ちゃったんだけど、途中でトマソンを見つけたのでよしとする。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">これは有楽町で見つけたトマソン <a href="https://t.co/C8JDkevOxh">pic.twitter.com/C8JDkevOxh</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1930293781980688638?ref_src=twsrc%5Etfw">June 4, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">これは有楽町で見つけたトマソン <a href="https://t.co/C8JDkevOxh">pic.twitter.com/C8JDkevOxh</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1930293781980688638?ref_src=twsrc%5Etfw">June 4, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 後日談だけど、この前後あたりから何か吹っ切れた所があって無敵状態なのでこの調子で色々進めていきたい。

@@ -33,7 +33,7 @@ Lispテンプレート」を作りたい欲求が高まっているので、あ�
 *** PureScript
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">実は spago@next なら<br>npx spago bundle --bundler-args=&quot;--target=es6&quot; --bundler-args=&quot;--format=esm&quot; <br>とかでいけそうではあります</p>&mdash; ゆきくらげ@「ORACLE」通販あります (@yukikurage_2019) <a href="https://twitter.com/yukikurage_2019/status/1859219975418048607?ref_src=twsrc%5Etfw">November 20, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">実は spago@next なら<br>npx spago bundle --bundler-args=&quot;--target=es6&quot; --bundler-args=&quot;--format=esm&quot; <br>とかでいけそうではあります</p>&mdash; ゆきくらげ@「ORACLE」通販あります (@yukikurage_2019) <a href="https://twitter.com/yukikurage_2019/status/1859219975418048607?ref_src=twsrc%5Etfw">November 20, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 と教えていただいたので試していた。

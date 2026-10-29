@@ -31,7 +31,7 @@ Duolingoを150日続けてるので、その感想みたいなのを書いてい
 上の話はこのツイートがかなり核心を突いていると思う。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">日本の友人へ<br><br>最近、日本語は単なる「文字の言語」ではなく、一種の「情報圧縮システム」のように感じるようになりました。<br><br>最初は、ひらがな・カタカナ・漢字の混在は単なる「複雑さ」だと思っていました。<br>しかし今では、それぞれが特定の役割を持った設計構造のように見えます。…</p>&mdash; THECULTURALLINK (@THECULTURALLINK) <a href="https://x.com/THECULTURALLINK/status/2048272695758922106?ref_src=twsrc%5Etfw">April 26, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">日本の友人へ<br><br>最近、日本語は単なる「文字の言語」ではなく、一種の「情報圧縮システム」のように感じるようになりました。<br><br>最初は、ひらがな・カタカナ・漢字の混在は単なる「複雑さ」だと思っていました。<br>しかし今では、それぞれが特定の役割を持った設計構造のように見えます。…</p>&mdash; THECULTURALLINK (@THECULTURALLINK) <a href="https://x.com/THECULTURALLINK/status/2048272695758922106?ref_src=twsrc%5Etfw">April 26, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ある程度は成長を感じられてるのでこれからも続ける予定だし、今後は他の方法で英語の学習とかできたらなと。

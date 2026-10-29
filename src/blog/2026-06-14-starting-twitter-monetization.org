@@ -45,7 +45,7 @@
 以下のスライドはOSSに関する話題ですが、ツイートが多くの人に注目された時(いわゆる「バズった」)に同じ内容のリプが異なる人から大量に届きます。
 
 #+begin_export html
-  <iframe class="speakerdeck-iframe" style="border: 0px; background: padding-box rgba(0, 0, 0, 0.1); margin: 0px; padding: 0px; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 100%; height: auto; aspect-ratio: 560 / 315;" frameborder="0" src="https://speakerdeck.com/player/fac3c8cacd8f480eb533c5fca3b72afd?slide=77" title="OSS開発者の憂鬱" allowfullscreen="true" allow="web-share" data-ratio="1.7777777777777777"></iframe>
+<iframe class="speakerdeck-iframe" style="border: 0px; background: padding-box rgba(0, 0, 0, 0.1); margin: 0px; padding: 0px; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 100%; height: auto; aspect-ratio: 560 / 315;" frameborder="0" src="https://speakerdeck.com/player/fac3c8cacd8f480eb533c5fca3b72afd?slide=77" title="OSS開発者の憂鬱" allowfullscreen="true" allow="web-share" data-ratio="1.7777777777777777"></iframe>
 #+end_export
 
 バズったことがある人は分かると思うのですが、これが​*結構消耗する*​んですよね。

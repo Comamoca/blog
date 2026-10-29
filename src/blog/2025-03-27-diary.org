@@ -5,7 +5,7 @@
 #+DRAFT: false
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">(emacsでlisp書いたこと無い)</p>&mdash; yasunori🫖 (@YKirin0418) <a href="https://twitter.com/YKirin0418/status/1905114743121326388?ref_src=twsrc%5Etfw">March 27, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">(emacsでlisp書いたこと無い)</p>&mdash; yasunori🫖 (@YKirin0418) <a href="https://twitter.com/YKirin0418/status/1905114743121326388?ref_src=twsrc%5Etfw">March 27, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 EmacsでLisp書いてないのあまりにも勿体無いので東京行ったらみっちりLispをペンギンしたい...

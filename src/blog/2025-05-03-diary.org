@@ -8,14 +8,14 @@
 *** 神田を歩きまくった
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">天気良すぎていっぱい歩いた <a href="https://t.co/QrVx9bzzh6">pic.twitter.com/QrVx9bzzh6</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1918481785329205326?ref_src=twsrc%5Etfw">May 3, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">天気良すぎていっぱい歩いた <a href="https://t.co/QrVx9bzzh6">pic.twitter.com/QrVx9bzzh6</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1918481785329205326?ref_src=twsrc%5Etfw">May 3, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 kuuさんと別れた後秋葉原をぶらついてたのだけど、朝7時となるとどこも開いてない。
 なので淡路町方面に適当に歩いてたらお茶の水に着いてしまったので、神田神社にお参りしてITまもりを買った。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">御徒町で降りてご飯食べた後、今日良い天気だな〜とか考えながらぶらぶら歩いてたら水道橋まで来てしまった</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1918463615881130417?ref_src=twsrc%5Etfw">May 3, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">御徒町で降りてご飯食べた後、今日良い天気だな〜とか考えながらぶらぶら歩いてたら水道橋まで来てしまった</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1918463615881130417?ref_src=twsrc%5Etfw">May 3, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 その後はμ'sダッシュしたくなったので男坂を探していたのだけど、なんやかんやで水道橋まで来てしまった。
@@ -26,7 +26,7 @@ kuuさんと別れた後秋葉原をぶらついてたのだけど、朝7時と�
 帰宅した時にこんなツイートをしたのだけど、東京来てからの感想が集約されてるのでこれについてもブログ書いてみたいなと。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">毎日楽しんでるやつは勝手に面白そうなこと見つけて勝手に楽しんでるってここ数週間でよく分かったので、おもろそうな事見つけたらアクセルベタ踏みで突っ込んでいきたい</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1918498473575628832?ref_src=twsrc%5Etfw">May 3, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">毎日楽しんでるやつは勝手に面白そうなこと見つけて勝手に楽しんでるってここ数週間でよく分かったので、おもろそうな事見つけたらアクセルベタ踏みで突っ込んでいきたい</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1918498473575628832?ref_src=twsrc%5Etfw">May 3, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 *** Emacs

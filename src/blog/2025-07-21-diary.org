@@ -8,7 +8,7 @@
 *** Lustreやった
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">GleamのLustreでクリックした日付を取得して表示するコンポーネント作れた<br>これ作るのに一日かかった...TEA難しい...<a href="https://twitter.com/hashtag/gleamlang?src=hash&amp;ref_src=twsrc%5Etfw">#gleamlang</a> <a href="https://twitter.com/hashtag/lustre?src=hash&amp;ref_src=twsrc%5Etfw">#lustre</a> <a href="https://t.co/u9UzzKEi2k">pic.twitter.com/u9UzzKEi2k</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1947323337681809633?ref_src=twsrc%5Etfw">July 21, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">GleamのLustreでクリックした日付を取得して表示するコンポーネント作れた<br>これ作るのに一日かかった...TEA難しい...<a href="https://twitter.com/hashtag/gleamlang?src=hash&amp;ref_src=twsrc%5Etfw">#gleamlang</a> <a href="https://twitter.com/hashtag/lustre?src=hash&amp;ref_src=twsrc%5Etfw">#lustre</a> <a href="https://t.co/u9UzzKEi2k">pic.twitter.com/u9UzzKEi2k</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1947323337681809633?ref_src=twsrc%5Etfw">July 21, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 LustreでカレンダーUIを作ってみた。

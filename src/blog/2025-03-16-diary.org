@@ -10,7 +10,7 @@
 *** ブログ
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">ブログで日付形式が異なるのが原因でCIが落ちた事が何回かあったからテストを書いて自動的に形式を確認するようにしてみた<br><br>pre-commit使ってコミット前に走るようにしたので、これでもうこれが原因のCI落ちは回避できるはず...<a href="https://t.co/zQEXh99rVz">https://t.co/zQEXh99rVz</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1901284291960811674?ref_src=twsrc%5Etfw">March 16, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">ブログで日付形式が異なるのが原因でCIが落ちた事が何回かあったからテストを書いて自動的に形式を確認するようにしてみた<br><br>pre-commit使ってコミット前に走るようにしたので、これでもうこれが原因のCI落ちは回避できるはず...<a href="https://t.co/zQEXh99rVz">https://t.co/zQEXh99rVz</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1901284291960811674?ref_src=twsrc%5Etfw">March 16, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ブログで日付が間違っているせいでCIが落ちるトラブルが相次いだので、テストを実行することにした。

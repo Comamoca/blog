@@ -9,7 +9,7 @@
 ミニPC見に行ったけど全然なかった... アマゾンで買おうかなと。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今日ヨドバシ行ったらエントリー向けペンタブが6000円くらいで売ってて、最近ちょっとお絵かきに興味あるから近いうちに買ってみようかなと思った<br>調べたらLinuxで使ってる人いるらしいし結構良さそうなんだよな〜</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1920125930858786877?ref_src=twsrc%5Etfw">May 7, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今日ヨドバシ行ったらエントリー向けペンタブが6000円くらいで売ってて、最近ちょっとお絵かきに興味あるから近いうちに買ってみようかなと思った<br>調べたらLinuxで使ってる人いるらしいし結構良さそうなんだよな〜</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1920125930858786877?ref_src=twsrc%5Etfw">May 7, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 代わりに6000円のペンタブを見つけたのでこれでお絵描きするの良さそうだなと思っている。

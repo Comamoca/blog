@@ -13,7 +13,7 @@
 *** Emacs
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">意外と反応あったのでにゃーんバージョンも作ってみた(雑実装) <a href="https://t.co/8ntySRSaSv">https://t.co/8ntySRSaSv</a> <a href="https://t.co/7HHrHDXe01">pic.twitter.com/7HHrHDXe01</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1894295116753576137?ref_src=twsrc%5Etfw">February 25, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">意外と反応あったのでにゃーんバージョンも作ってみた(雑実装) <a href="https://t.co/8ntySRSaSv">https://t.co/8ntySRSaSv</a> <a href="https://t.co/7HHrHDXe01">pic.twitter.com/7HHrHDXe01</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1894295116753576137?ref_src=twsrc%5Etfw">February 25, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 選択範囲を伏せ字にするやつを書いていた。

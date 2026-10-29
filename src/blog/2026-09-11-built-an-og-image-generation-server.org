@@ -19,8 +19,9 @@ OG画像は生成処理をworkersで実装する必要があるので見送っ�
 
 こんな感じでレンダリングされる。
 
+# クエリ文字列付きのURLはOrgの画像リンクとして扱われないため、ここだけHTMLで書く
 #+begin_export html
-  <img src="https://og.comamoca.dev/og.png?l=post&t=GleamでOG画像生成サーバーを作った&d=既にこのブログで動かしている" />
+<img src="https://og.comamoca.dev/og.png?l=post&t=GleamでOG画像生成サーバーを作った&d=既にこのブログで動かしている" />
 #+end_export
 
 ** 実装
@@ -54,7 +55,7 @@ satoriとkomeijiを使うパッケージなので名前はkoishiにした。
 命名はTwitterで頂いたものを採用した。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">koishiのほうが良かったのでは（横槍） <a href="https://t.co/mz4ht3BHmi">https://t.co/mz4ht3BHmi</a></p>&mdash; しろね⿻ (@aqyuki21s) <a href="https://x.com/aqyuki21s/status/2095508088745021877?ref_src=twsrc%5Etfw">September 3, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">koishiのほうが良かったのでは（横槍） <a href="https://t.co/mz4ht3BHmi">https://t.co/mz4ht3BHmi</a></p>&mdash; しろね⿻ (@aqyuki21s) <a href="https://x.com/aqyuki21s/status/2095508088745021877?ref_src=twsrc%5Etfw">September 3, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 これで、Lustreで記述したHTML

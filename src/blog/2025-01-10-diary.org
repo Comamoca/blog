@@ -5,7 +5,7 @@
 #+DRAFT: false
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">本日最大の知見は「英語で推しカプはshipって言う」です</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1877718353319719106?ref_src=twsrc%5Etfw">January 10, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">本日最大の知見は「英語で推しカプはshipって言う」です</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1877718353319719106?ref_src=twsrc%5Etfw">January 10, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 補足: shipは​/relationship/​の略で、人と人の関係性 =
@@ -29,7 +29,7 @@ LispでVanJSを動かす試みをしようとしたけど、jsclもparenscript�
 squintでHonoを動かしてた。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">squintでHonoを書いてみる<br>S式でスッキリと書けるからこれはこれでアリかもしれない <a href="https://t.co/eZdpdySYCC">pic.twitter.com/eZdpdySYCC</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1877657383398523128?ref_src=twsrc%5Etfw">January 10, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">squintでHonoを書いてみる<br>S式でスッキリと書けるからこれはこれでアリかもしれない <a href="https://t.co/eZdpdySYCC">pic.twitter.com/eZdpdySYCC</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1877657383398523128?ref_src=twsrc%5Etfw">January 10, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 squintでは​~{:msg "Hello"}~​は​~{msg: "Hello"}~​として扱われるのだけど、

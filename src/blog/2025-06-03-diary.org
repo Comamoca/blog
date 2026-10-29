@@ -19,7 +19,7 @@ SquintっていうClojure2JSコンパイラがるのだけど、それを使っ�
 普通に動いてしまったので他に先駆者がいるのかと思ったけど、特に誰も記事を書いてなかったので書いていきたい。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">完成してしまった…<br>squintで書いたworkers<a href="https://t.co/vTcCv5B8cS">https://t.co/vTcCv5B8cS</a> <a href="https://t.co/xjK824ri9B">https://t.co/xjK824ri9B</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1929873667372024163?ref_src=twsrc%5Etfw">June 3, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">完成してしまった…<br>squintで書いたworkers<a href="https://t.co/vTcCv5B8cS">https://t.co/vTcCv5B8cS</a> <a href="https://t.co/xjK824ri9B">https://t.co/xjK824ri9B</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1929873667372024163?ref_src=twsrc%5Etfw">June 3, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 みんなMCPの話ししてたから、そろそろMCPサーバーやるべきだなと思ったり。

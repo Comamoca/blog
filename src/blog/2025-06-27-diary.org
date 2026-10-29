@@ -5,7 +5,7 @@
 #+DRAFT: false
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">全部Emacsにすれば乗り換えるコストがゼロになってお得って価値観で生きてる <a href="https://t.co/vznAB9WcuK">https://t.co/vznAB9WcuK</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1938481402414264448?ref_src=twsrc%5Etfw">June 27, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">全部Emacsにすれば乗り換えるコストがゼロになってお得って価値観で生きてる <a href="https://t.co/vznAB9WcuK">https://t.co/vznAB9WcuK</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1938481402414264448?ref_src=twsrc%5Etfw">June 27, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ** 今日やったこと

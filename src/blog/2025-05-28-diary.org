@@ -9,7 +9,7 @@
 cookdoでナスと豚バラ炒めを作った。 結構美味しかったのでまた作りたい。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">東京来て初めてまともな自炊(cookdo)したかもしれない <a href="https://t.co/lnbCA95dpb">pic.twitter.com/lnbCA95dpb</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1927338864198262868?ref_src=twsrc%5Etfw">May 27, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">東京来て初めてまともな自炊(cookdo)したかもしれない <a href="https://t.co/lnbCA95dpb">pic.twitter.com/lnbCA95dpb</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1927338864198262868?ref_src=twsrc%5Etfw">May 27, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 *** Emacs

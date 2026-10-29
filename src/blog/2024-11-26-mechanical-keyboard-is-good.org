@@ -91,9 +91,9 @@ Ctrlマップを楽しめる。
 
 [[https://r2.comamoca.dev/2024-11-6-minilar-with-penlight.jpg]]
 
-#+begin_export html
-  <center>MINILA-Rとペンライト(アイマス規格なので25cmくらいだと思う)</center>
-#+end_export
+#+begin_center
+MINILA-Rとペンライト(アイマス規格なので25cmくらいだと思う)
+#+end_center
 
 スペースの左右にあるのがFnキー。ホームポジションを崩さず打てるので使いやすい。
 

@@ -11,11 +11,9 @@
 表紙とか凝ってたらめちゃくちゃ良い感じになってしまった。\\
 ​+まだ中身スカスカなのに+​
 
-#+begin_export html
-  <center>
-  <img src="https://r2.comamoca.dev/2024-11-11-typst-book-cover.webp" />
-  </center>
-#+end_export
+#+begin_center
+[[https://r2.comamoca.dev/2024-11-11-typst-book-cover.webp]]
+#+end_center
 
 Typst思ってたよりも良い感じなので今度からスライドもこれで書いてみたいな～とか思ってる。\\
 以前taniさんがTypstでスライド作っていてすごく良い感じだったし、この開発体験であのクウォリティ出せるなら最高かもしれない。

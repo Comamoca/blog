@@ -6,7 +6,7 @@
 #+DRAFT: false
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">YAPC::Fukuoka 2025 本編・懇親会にご参加いただいた皆さま、ありがとうございました。無事すべての日程を終えることができました。… <a href="https://t.co/SDqFH7mSz4">pic.twitter.com/SDqFH7mSz4</a></p>&mdash; yapcjapan (@yapcjapan) <a href="https://twitter.com/yapcjapan/status/1989905545210597784?ref_src=twsrc%5Etfw">November 16, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">YAPC::Fukuoka 2025 本編・懇親会にご参加いただいた皆さま、ありがとうございました。無事すべての日程を終えることができました。… <a href="https://t.co/SDqFH7mSz4">pic.twitter.com/SDqFH7mSz4</a></p>&mdash; yapcjapan (@yapcjapan) <a href="https://twitter.com/yapcjapan/status/1989905545210597784?ref_src=twsrc%5Etfw">November 16, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ​/自分が写ってる写真見ると毎回はちゃめちゃに笑ってるな〜って思うし実際はちゃめちゃに楽しかった/​
@@ -93,7 +93,7 @@ textlintの作者azuさんによるセッションでした。
 ** なんと同担がいた
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">これ僕です <a href="https://t.co/QjpnQtqt4g">https://t.co/QjpnQtqt4g</a></p>&mdash; こまもか🦊@YAPC福岡ありがとう！ (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1989418404613333248?ref_src=twsrc%5Etfw">November 14, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">これ僕です <a href="https://t.co/QjpnQtqt4g">https://t.co/QjpnQtqt4g</a></p>&mdash; こまもか🦊@YAPC福岡ありがとう！ (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1989418404613333248?ref_src=twsrc%5Etfw">November 14, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 Day1の時にニアミスしていたシャニマスPの方と懇親会でお会いできた。

@@ -8,7 +8,7 @@
 *** vibe codingした
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">秒で完成して嬉しすぎる<br>これは総喝采ですわ <a href="https://t.co/bD6DH3sopc">https://t.co/bD6DH3sopc</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1937999613245714559?ref_src=twsrc%5Etfw">June 25, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">秒で完成して嬉しすぎる<br>これは総喝采ですわ <a href="https://t.co/bD6DH3sopc">https://t.co/bD6DH3sopc</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1937999613245714559?ref_src=twsrc%5Etfw">June 25, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 claude

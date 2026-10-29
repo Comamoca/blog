@@ -15,7 +15,7 @@
 結果ちゃんと付けられたので感謝しかない。ありがとうございます。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">やっと寝室に明かりが戻った<br>照明壊れてたから数日間暗いままだったんだよな… <a href="https://t.co/8pbsuX41CM">pic.twitter.com/8pbsuX41CM</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1926165819408408995?ref_src=twsrc%5Etfw">May 24, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">やっと寝室に明かりが戻った<br>照明壊れてたから数日間暗いままだったんだよな… <a href="https://t.co/8pbsuX41CM">pic.twitter.com/8pbsuX41CM</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1926165819408408995?ref_src=twsrc%5Etfw">May 24, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 *** 漫喫缶詰合宿(ぼっち)
@@ -38,7 +38,7 @@
 まぁ完成と言っても良いんじゃないかな〜という感じ。もちろんこれかもブラッシュアップしていくつもり。
 
 #+begin_export html
-  <blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">見た目は良い感じになってきた <a href="https://t.co/k2Hc77aNn9">pic.twitter.com/k2Hc77aNn9</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1926340792538325077?ref_src=twsrc%5Etfw">May 24, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">見た目は良い感じになってきた <a href="https://t.co/k2Hc77aNn9">pic.twitter.com/k2Hc77aNn9</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1926340792538325077?ref_src=twsrc%5Etfw">May 24, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 「見た目は」と含みがあるのはコードが結構汚いからで、これは後々整理していこうかなと思っている。

@@ -26,7 +26,7 @@ ReleasesからURLを取得して、​~nix-prefetch-url~​でhashを算出し�
 *** Emacs
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">良い感じになってきた <a href="https://t.co/Kh5Nq7YvcK">pic.twitter.com/Kh5Nq7YvcK</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1902418746666578151?ref_src=twsrc%5Etfw">March 19, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">良い感じになってきた <a href="https://t.co/Kh5Nq7YvcK">pic.twitter.com/Kh5Nq7YvcK</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1902418746666578151?ref_src=twsrc%5Etfw">March 19, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 Emacsをいじっていた。

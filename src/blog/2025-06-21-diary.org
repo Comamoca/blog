@@ -8,7 +8,7 @@
 *** HADO会
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="qme" dir="ltr"><a href="https://twitter.com/hashtag/%E5%98%98%E3%82%B7%E3%83%A3%E3%83%8B%E3%83%9E%E3%82%B9%E8%81%96%E5%9C%B0?src=hash&amp;ref_src=twsrc%5Etfw">#嘘シャニマス聖地</a> <a href="https://t.co/wInvBQZYYr">pic.twitter.com/wInvBQZYYr</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1936308537363415096?ref_src=twsrc%5Etfw">June 21, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="qme" dir="ltr"><a href="https://twitter.com/hashtag/%E5%98%98%E3%82%B7%E3%83%A3%E3%83%8B%E3%83%9E%E3%82%B9%E8%81%96%E5%9C%B0?src=hash&amp;ref_src=twsrc%5Etfw">#嘘シャニマス聖地</a> <a href="https://t.co/wInvBQZYYr">pic.twitter.com/wInvBQZYYr</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1936308537363415096?ref_src=twsrc%5Etfw">June 21, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 HADOをやりにお台場まで入った。
@@ -49,7 +49,7 @@ HADOは初めてだったのでドキドキしてたのだけど、避けるの�
 これは僕がここ最近感じている感覚と一致してるので納得感があったし、今度そういうlazyなNixの使い方に関する記事も書きたいなと思ってる。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">BEAM好きなのでJIM BEAMを飲むなど <a href="https://t.co/JT3hk88MnI">pic.twitter.com/JT3hk88MnI</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1936429902158602243?ref_src=twsrc%5Etfw">June 21, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">BEAM好きなのでJIM BEAMを飲むなど <a href="https://t.co/JT3hk88MnI">pic.twitter.com/JT3hk88MnI</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1936429902158602243?ref_src=twsrc%5Etfw">June 21, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 本当は飲まないつもりだったけど、技術トークが盛り上ってきたのでコークハイを飲んだ。

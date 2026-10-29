@@ -46,7 +46,7 @@ Miniを買うという個人的には意味不明なブームがあったんで�
 3B上にホストして動かしてます。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">おぉ〜 <a href="https://t.co/2OgnsBXaBD">pic.twitter.com/2OgnsBXaBD</a></p>&mdash; こまもか🦊@シャニマスありがとう (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/2045910035231023318?ref_src=twsrc%5Etfw">April 19, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">おぉ〜 <a href="https://t.co/2OgnsBXaBD">pic.twitter.com/2OgnsBXaBD</a></p>&mdash; こまもか🦊@シャニマスありがとう (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/2045910035231023318?ref_src=twsrc%5Etfw">April 19, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 スマホでOpneClawを実行するメリットとしては、現在地をコンテキストに含めた会話を実現しやすいという点が挙げられます。

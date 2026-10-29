@@ -13,7 +13,7 @@ Antfuさんが東京に住むらしい。びっくり。
 *** 皿うどん
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">親から致死量の皿うどん届いてめっちゃ笑った<br>皿うどん大好きだけど限度ってものがあるだろ <a href="https://t.co/JLKRbBjzSD">pic.twitter.com/JLKRbBjzSD</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1909552722854256662?ref_src=twsrc%5Etfw">April 8, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">親から致死量の皿うどん届いてめっちゃ笑った<br>皿うどん大好きだけど限度ってものがあるだろ <a href="https://t.co/JLKRbBjzSD">pic.twitter.com/JLKRbBjzSD</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1909552722854256662?ref_src=twsrc%5Etfw">April 8, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 母が皿うどんを送ってくれた。皿うどんは大好きなのだけどいくらなんでも多すぎるだろ...と笑ってしまった。ありがとう。

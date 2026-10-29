@@ -168,11 +168,8 @@ ASP.NETはデフォルト時はHonoに比べて取引レートが低いですが
 ASP.NETが大規模なwebシステムで使われるあたり概ね自分の感覚とも合っているので納得できる結論だと感じている。
 
 #+begin_export html
-  <details>
-#+end_export
-
-#+begin_export html
-  <summary>プロンプト</summary>
+<details>
+<summary>プロンプト</summary>
 #+end_export
 
 以下はsiegeを使いHonoとASP.NETのサーバーを計測した結果です。
@@ -255,7 +252,7 @@ Shortest transaction:           0.00
 #+end_example
 
 #+begin_export html
-  </details>
+</details>
 #+end_export
 
 ** 明日以降やりたいこと

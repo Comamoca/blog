@@ -11,7 +11,7 @@
 下のツイートは年末帰省した時に起動したところ。当時は[[https://alter.fascode.net/][AlterLinux]]を使っていたのでそれが起動してます。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">あけましておめでとうございます！<br>こちらは折られたThinkPadに入ってるAlterLinuxが起動したところです <a href="https://t.co/c0Qn7xasw2">pic.twitter.com/c0Qn7xasw2</a></p>&mdash; こまもか🦊@シャニ∞th両日 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/2006379831827849383?ref_src=twsrc%5Etfw">December 31, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">あけましておめでとうございます！<br>こちらは折られたThinkPadに入ってるAlterLinuxが起動したところです <a href="https://t.co/c0Qn7xasw2">pic.twitter.com/c0Qn7xasw2</a></p>&mdash; こまもか🦊@シャニ∞th両日 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/2006379831827849383?ref_src=twsrc%5Etfw">December 31, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ** 事件の背景

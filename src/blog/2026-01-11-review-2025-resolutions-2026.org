@@ -28,7 +28,7 @@
 と言うのも、知り合ったきっかけが「山梨出身でNixOSとVRChatをやっている」というあまりに狭すぎる積集合にいたからで、そんなことあるんだ...(1)と思ったりしてる。
 
 #+begin_export html
-  <iframe class="speakerdeck-iframe" style="border: 0px; background: rgba(0, 0, 0, 0.1) padding-box; margin: 0px; padding: 0px; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 100%; height: auto; aspect-ratio: 560 / 315;" frameborder="0" src="https://speakerdeck.com/player/ba3e4274722d495e91d64efe067ccf96" title="2025年 山梨の技術コミュニティを振り返る" allowfullscreen="true" data-ratio="1.7777777777777777"></iframe>
+<iframe class="speakerdeck-iframe" style="border: 0px; background: rgba(0, 0, 0, 0.1) padding-box; margin: 0px; padding: 0px; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 100%; height: auto; aspect-ratio: 560 / 315;" frameborder="0" src="https://speakerdeck.com/player/ba3e4274722d495e91d64efe067ccf96" title="2025年 山梨の技術コミュニティを振り返る" allowfullscreen="true" data-ratio="1.7777777777777777"></iframe>
 #+end_export
 
 あなぐらさんがきっかけでPerl界隈に出入りするようになって、YAPCに行ったり、そこでまた別の人と知り合えたりしたので、今年は人脈のバタフライエフェクトとでも言うべきか、人の連鎖的な繋がりをすごく感じられた年だった。
@@ -36,7 +36,7 @@
 YAPCでは、なんか色々あってスタッフとして参加することになったのだけど、そこで同担のアイマスPに出会ったというのが一番衝撃だった。そんなことあるんだ...(2)
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">これ僕です <a href="https://t.co/QjpnQtqt4g">https://t.co/QjpnQtqt4g</a></p>&mdash; こまもか🦊@シャニ∞th両日 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1989418404613333248?ref_src=twsrc%5Etfw">November 14, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">これ僕です <a href="https://t.co/QjpnQtqt4g">https://t.co/QjpnQtqt4g</a></p>&mdash; こまもか🦊@シャニ∞th両日 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1989418404613333248?ref_src=twsrc%5Etfw">November 14, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 その場ではクラフトビール飲みながらアイマスと女性声優の話してなかったけど、普段こういう事がなかったので楽しかったな〜と。
@@ -175,7 +175,7 @@ factが出てきて普通に取り乱しそうになった。
 **** ありすP打ち上げ
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">打ち上げなのでいちごサワー飲んでる<br>ありすPの方がいちごのぬいぐるみくださって感謝…！ <a href="https://t.co/h9cIX5nVrw">pic.twitter.com/h9cIX5nVrw</a></p>&mdash; こまもか🦊@シャニ∞th両日 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1994766664727236821?ref_src=twsrc%5Etfw">November 29, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">打ち上げなのでいちごサワー飲んでる<br>ありすPの方がいちごのぬいぐるみくださって感謝…！ <a href="https://t.co/h9cIX5nVrw">pic.twitter.com/h9cIX5nVrw</a></p>&mdash; こまもか🦊@シャニ∞th両日 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1994766664727236821?ref_src=twsrc%5Etfw">November 29, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 Day1の後はありすPの打ち上げに行った。

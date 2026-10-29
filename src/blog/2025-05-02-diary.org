@@ -18,7 +18,7 @@ nanashiさんとは初対面だったのでびっくりしたけれど、おう�
 ご馳走さまでした。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">チョコデートサンデー食べた <a href="https://t.co/U6FarKuVL4">pic.twitter.com/U6FarKuVL4</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1918310058607456336?ref_src=twsrc%5Etfw">May 2, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">チョコデートサンデー食べた <a href="https://t.co/U6FarKuVL4">pic.twitter.com/U6FarKuVL4</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1918310058607456336?ref_src=twsrc%5Etfw">May 2, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 サッと奢れる大人はマジでカッコイイので自分もこうなりたいなと思ったりした。
@@ -40,7 +40,7 @@ nanashiさんとは初対面だったのでびっくりしたけれど、おう�
 そんなこんなで本来は寝るはずだったのに、kuuさんを寝かさず朝になってしまったので、見送りがてら御徒町の小町食堂[fn:1]に朝ご飯を食べに行った。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">小町食堂 <a href="https://t.co/NXfFDQfdPP">pic.twitter.com/NXfFDQfdPP</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1918438988433764839?ref_src=twsrc%5Etfw">May 2, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">小町食堂 <a href="https://t.co/NXfFDQfdPP">pic.twitter.com/NXfFDQfdPP</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1918438988433764839?ref_src=twsrc%5Etfw">May 2, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 その道中ラジオの話になった時は、昨年からBluecastを使った配信をしたいと考えている事を話したりした。

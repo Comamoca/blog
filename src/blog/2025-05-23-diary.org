@@ -8,7 +8,7 @@
 *** 神田メシ
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">TSKaigiおわりのカツ丼 <a href="https://t.co/ChFDs7B00i">pic.twitter.com/ChFDs7B00i</a></p>&mdash; 🧶. (@mst_mkt_) <a href="https://twitter.com/mst_mkt_/status/1925851004731335160?ref_src=twsrc%5Etfw">May 23, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">TSKaigiおわりのカツ丼 <a href="https://t.co/ChFDs7B00i">pic.twitter.com/ChFDs7B00i</a></p>&mdash; 🧶. (@mst_mkt_) <a href="https://twitter.com/mst_mkt_/status/1925851004731335160?ref_src=twsrc%5Etfw">May 23, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 しーぴーさんと🧶さんと一緒にカツ丼を食べに行った。
@@ -16,7 +16,7 @@
 TSkaigiの会場が神田である事に託けて誰かとご飯食べたいな〜と思ったので、昼頃募集をかけてみた。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">@ 今日神田来た人<br>18時過ぎあたりにメシ食べに行きませんか？</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1925753582797672863?ref_src=twsrc%5Etfw">May 23, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">@ 今日神田来た人<br>18時過ぎあたりにメシ食べに行きませんか？</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1925753582797672863?ref_src=twsrc%5Etfw">May 23, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 誰も反応しないかなと思ってたけど、ありがたいことに数人手を挙げてくださったので無事開催できた。
@@ -133,7 +133,7 @@ kuuさんがDenoをパッケージングできるNix式を書いてくださっ�
 そろそろスライドを書かないとなので明日は照明買ったりスライド書いたりしたい。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">僕がCommon Lisp良いよなって言うのは数年のスパンで仕様が変わる言語を触ってきたからだし、<br>Gleam良いよなっていうのは複雑な言語を触った経験があるからだし、<br>Emacs良いよなって言うのはVimを触ってきたからなので、やっぱり一つの物事を推すにしても色々触らないと説得力が出ないんだよな</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1925939218544492956?ref_src=twsrc%5Etfw">May 23, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">僕がCommon Lisp良いよなって言うのは数年のスパンで仕様が変わる言語を触ってきたからだし、<br>Gleam良いよなっていうのは複雑な言語を触った経験があるからだし、<br>Emacs良いよなって言うのはVimを触ってきたからなので、やっぱり一つの物事を推すにしても色々触らないと説得力が出ないんだよな</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1925939218544492956?ref_src=twsrc%5Etfw">May 23, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 *** Gleam

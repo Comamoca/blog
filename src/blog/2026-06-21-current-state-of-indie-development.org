@@ -16,11 +16,11 @@ Disclaimer:\\
 最近の個人開発界隈に思うところがあるというツイートをしたので、じゃあ何に思うところがあるのかって内容を記事に
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">そもそも「個人開発」というワードがいつの間にか「個人で(主に)モバイルアプリを開発して収益を得ようとする行為」という意味になってるのが納得いかない…<br><br>みんながみんなアプリばっか作ってるわけではないし、ましてや収益目的で休日にコードを書いてるわけではないんですよ…！ <a href="https://t.co/y4PyxUlHJW">https://t.co/y4PyxUlHJW</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://x.com/Comamoca_/status/2067660357632696800?ref_src=twsrc%5Etfw">June 18, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">そもそも「個人開発」というワードがいつの間にか「個人で(主に)モバイルアプリを開発して収益を得ようとする行為」という意味になってるのが納得いかない…<br><br>みんながみんなアプリばっか作ってるわけではないし、ましてや収益目的で休日にコードを書いてるわけではないんですよ…！ <a href="https://t.co/y4PyxUlHJW">https://t.co/y4PyxUlHJW</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://x.com/Comamoca_/status/2067660357632696800?ref_src=twsrc%5Etfw">June 18, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">これに思うところがありすぎるのでブログでお気持ち表明したいところ… <a href="https://t.co/d0bWszfSTC">https://t.co/d0bWszfSTC</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://x.com/Comamoca_/status/2067677045715603673?ref_src=twsrc%5Etfw">June 18, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">これに思うところがありすぎるのでブログでお気持ち表明したいところ… <a href="https://t.co/d0bWszfSTC">https://t.co/d0bWszfSTC</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://x.com/Comamoca_/status/2067677045715603673?ref_src=twsrc%5Etfw">June 18, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ** 前提

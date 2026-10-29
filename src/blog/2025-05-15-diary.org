@@ -8,7 +8,7 @@
 美鈴さん実装前にこんな引きしちゃって大丈夫なのだろうか。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">とんでもない神引きをしてしまった…<br>美鈴さんの前にこんなに運使っちゃって大丈夫なのか…？ <a href="https://t.co/TTnDU35Zgt">pic.twitter.com/TTnDU35Zgt</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1922406027238027643?ref_src=twsrc%5Etfw">May 13, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">とんでもない神引きをしてしまった…<br>美鈴さんの前にこんなに運使っちゃって大丈夫なのか…？ <a href="https://t.co/TTnDU35Zgt">pic.twitter.com/TTnDU35Zgt</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1922406027238027643?ref_src=twsrc%5Etfw">May 13, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ** 今日やったこと

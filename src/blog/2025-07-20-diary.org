@@ -10,11 +10,11 @@ VimConf 2025
 Smallとフロントエンドカンファレンス関西にプロポーザルを出した。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">VimConf 2025 Smallにプロポーザル出した！ <a href="https://t.co/KZ80NRc0r3">pic.twitter.com/KZ80NRc0r3</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1946938140339692006?ref_src=twsrc%5Etfw">July 20, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">VimConf 2025 Smallにプロポーザル出した！ <a href="https://t.co/KZ80NRc0r3">pic.twitter.com/KZ80NRc0r3</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1946938140339692006?ref_src=twsrc%5Etfw">July 20, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">フロントエンドカンファレンス関西2025 にプロポーザルが投稿されました！<br>「Nimでフロントエンドを書こう」 / こまもかさん （<a href="https://twitter.com/Comamoca_?ref_src=twsrc%5Etfw">@Comamoca_</a>）<a href="https://t.co/ap0OPiagKP">https://t.co/ap0OPiagKP</a><a href="https://twitter.com/hashtag/fec_kansai?src=hash&amp;ref_src=twsrc%5Etfw">#fec_kansai</a></p>&mdash; フロントエンドカンファレンス関西 (@fec_kansai) <a href="https://twitter.com/fec_kansai/status/1946955264110002676?ref_src=twsrc%5Etfw">July 20, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">フロントエンドカンファレンス関西2025 にプロポーザルが投稿されました！<br>「Nimでフロントエンドを書こう」 / こまもかさん （<a href="https://twitter.com/Comamoca_?ref_src=twsrc%5Etfw">@Comamoca_</a>）<a href="https://t.co/ap0OPiagKP">https://t.co/ap0OPiagKP</a><a href="https://twitter.com/hashtag/fec_kansai?src=hash&amp;ref_src=twsrc%5Etfw">#fec_kansai</a></p>&mdash; フロントエンドカンファレンス関西 (@fec_kansai) <a href="https://twitter.com/fec_kansai/status/1946955264110002676?ref_src=twsrc%5Etfw">July 20, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 採択されるか楽しみ。

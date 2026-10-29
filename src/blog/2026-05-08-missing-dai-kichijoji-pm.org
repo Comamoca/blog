@@ -6,7 +6,7 @@
 #+DRAFT: false
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">大吉祥寺.pm、なんと全日IWSFが被っているので参加できそうにない…</p>&mdash; こまもか🦊@シャニマスありがとう (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/2049853752736358530?ref_src=twsrc%5Etfw">April 30, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">大吉祥寺.pm、なんと全日IWSFが被っているので参加できそうにない…</p>&mdash; こまもか🦊@シャニマスありがとう (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/2049853752736358530?ref_src=twsrc%5Etfw">April 30, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 という状況になったので、提出しようとしたプロポーザルをここで供養するというのがこちらの記事になります。

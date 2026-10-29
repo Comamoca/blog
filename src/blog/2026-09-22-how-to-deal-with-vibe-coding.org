@@ -15,7 +15,7 @@ codingで終わっているコードを良く目にするのでその気持ち�
 ソフトウェア工学の観点から「死んだソフロウェア」とは「プログラムが問題を解決しようと書かれた際に構築された理論が失われること」と指し、僕は以下のツイートにてその概念を知りました。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Peter Naur が言うところの「死んだ」ソフトウェアが出来上がってしまった <a href="https://t.co/YSkcY5Qwww">https://t.co/YSkcY5Qwww</a></p>&mdash; Takuto Wada (@t_wada) <a href="https://x.com/t_wada/status/2053250899620082164?ref_src=twsrc%5Etfw">May 9, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Peter Naur が言うところの「死んだ」ソフトウェアが出来上がってしまった <a href="https://t.co/YSkcY5Qwww">https://t.co/YSkcY5Qwww</a></p>&mdash; Takuto Wada (@t_wada) <a href="https://x.com/t_wada/status/2053250899620082164?ref_src=twsrc%5Etfw">May 9, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 このツイートにてPeter Naurが指摘している内容は論文「Programming as

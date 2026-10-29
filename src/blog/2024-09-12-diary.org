@@ -10,9 +10,8 @@ Nix楽しいねぇ～
 ** 今日やったこと
 *** めっちゃunixpornした
 
-#+begin_export html
-  <img src="https://r2.comamoca.dev/unixporn-nixos.jpg" width="400">
-#+end_export
+#+attr_html: :width 400
+[[https://r2.comamoca.dev/unixporn-nixos.jpg]]
 
 楽しかった。全部catppuccinに揃えたのだけどなかなか良い感じになって嬉しい。
 

@@ -13,7 +13,7 @@
 こんなツイートを見かけました。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">カンファレンス行くといつも思うが、もっと若い人いっぱい来ても良くないか？<br><br>ジュニアとかなんなら大学生とか若くて優秀な人たちがもっと集結したら、また別の形の熱気が生まれそう。</p>&mdash; 市川 達大@TECH WORLD ITエンジニア向け動画メディア (@tech_world18) <a href="https://x.com/tech_world18/status/2060280069587865694?ref_src=twsrc%5Etfw">May 29, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">カンファレンス行くといつも思うが、もっと若い人いっぱい来ても良くないか？<br><br>ジュニアとかなんなら大学生とか若くて優秀な人たちがもっと集結したら、また別の形の熱気が生まれそう。</p>&mdash; 市川 達大@TECH WORLD ITエンジニア向け動画メディア (@tech_world18) <a href="https://x.com/tech_world18/status/2060280069587865694?ref_src=twsrc%5Etfw">May 29, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 これを見て個人的に思ったことを書いていきたいと思います。
@@ -97,7 +97,7 @@ TSKaigiの記事はまだ書けてません...書けたら追記します。
 また、事前準備は基本オンラインで行うので、遠方にいて当日は参加できない...という方もカンファレンスを支える一員になれるという魅力もあります。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">事前準備とかはリモートですし、事前準備はするけど現地参加しないスタッフさんも普通にいるのでその辺りは特に気にしなくても大丈夫な気がする…！<br>常に人手不足なので事前準備を手伝ってくださるだけでもめちゃくちゃありがたかったり<br><br>逆に僕は事前準備をあんまり手伝えてなくて最近は反省してる… <a href="https://t.co/t8y0ySX941">https://t.co/t8y0ySX941</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://x.com/Comamoca_/status/2060573932982554956?ref_src=twsrc%5Etfw">May 30, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">事前準備とかはリモートですし、事前準備はするけど現地参加しないスタッフさんも普通にいるのでその辺りは特に気にしなくても大丈夫な気がする…！<br>常に人手不足なので事前準備を手伝ってくださるだけでもめちゃくちゃありがたかったり<br><br>逆に僕は事前準備をあんまり手伝えてなくて最近は反省してる… <a href="https://t.co/t8y0ySX941">https://t.co/t8y0ySX941</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://x.com/Comamoca_/status/2060573932982554956?ref_src=twsrc%5Etfw">May 30, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 *** デメリット
@@ -125,7 +125,7 @@ TSKaigiの記事はまだ書けてません...書けたら追記します。
 こちらはプロポーザル募集がまだ始まっていないので、奮ってご応募ください！
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">YAPC::Tokyo 2026の「トークプロポーザル募集開始お知らせ 登録フォーム」を作成しました！<br><br>メールアドレスを登録いただくと、後日CfPを開始した際にご連絡いたします。<br><br>応募に興味のある方、迷っているけど情報が欲しいという方、ぜひご登録ください！ <a href="https://x.com/hashtag/yapcjapan?src=hash&amp;ref_src=twsrc%5Etfw">#yapcjapan</a><a href="https://t.co/hhOV5rNBmb">https://t.co/hhOV5rNBmb</a></p>&mdash; yapcjapan (@yapcjapan) <a href="https://x.com/yapcjapan/status/2059092776487412212?ref_src=twsrc%5Etfw">May 26, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">YAPC::Tokyo 2026の「トークプロポーザル募集開始お知らせ 登録フォーム」を作成しました！<br><br>メールアドレスを登録いただくと、後日CfPを開始した際にご連絡いたします。<br><br>応募に興味のある方、迷っているけど情報が欲しいという方、ぜひご登録ください！ <a href="https://x.com/hashtag/yapcjapan?src=hash&amp;ref_src=twsrc%5Etfw">#yapcjapan</a><a href="https://t.co/hhOV5rNBmb">https://t.co/hhOV5rNBmb</a></p>&mdash; yapcjapan (@yapcjapan) <a href="https://x.com/yapcjapan/status/2059092776487412212?ref_src=twsrc%5Etfw">May 26, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 5/31追記:

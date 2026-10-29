@@ -80,9 +80,7 @@ pub fn main() {
 
 [[https://comamoca.dev/blog/2024-12-09-gleam-iterator-update/]]
 
-#+begin_export html
-  <br>
-#+end_export
+#+HTML: <br>
 
 [[https://hexdocs.pm/gleam_yielder/gleam/yielder.html#fold]]
 

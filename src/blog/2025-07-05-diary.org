@@ -14,7 +14,7 @@
 *** 技術書典の本届いた
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">ちょうど忘れてた頃に届いたな… <a href="https://t.co/K7dmMrQ1FB">pic.twitter.com/K7dmMrQ1FB</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1941357580112261286?ref_src=twsrc%5Etfw">July 5, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">ちょうど忘れてた頃に届いたな… <a href="https://t.co/K7dmMrQ1FB">pic.twitter.com/K7dmMrQ1FB</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1941357580112261286?ref_src=twsrc%5Etfw">July 5, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 忘れた頃に届いてびっくりした。

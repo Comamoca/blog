@@ -8,7 +8,7 @@
 めちゃくちゃ良い気分なので自分から名乗っていきたいくらい。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">国際的に認知されているcomamoca師匠 <a href="https://twitter.com/hashtag/fp_matsuri_a?src=hash&amp;ref_src=twsrc%5Etfw">#fp_matsuri_a</a></p>&mdash; にゃんだーすわん (@tadsan) <a href="https://twitter.com/tadsan/status/1934157312543150153?ref_src=twsrc%5Etfw">June 15, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">国際的に認知されているcomamoca師匠 <a href="https://twitter.com/hashtag/fp_matsuri_a?src=hash&amp;ref_src=twsrc%5Etfw">#fp_matsuri_a</a></p>&mdash; にゃんだーすわん (@tadsan) <a href="https://twitter.com/tadsan/status/1934157312543150153?ref_src=twsrc%5Etfw">June 15, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ** 今日やったこと
@@ -20,7 +20,7 @@ GleamのLustreとLispでフロントエンドをする話を送ってみた。
 また新たな戦いが始まるので気合を入れていきたい。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">FEC東京にプロポーザル送った<br>対戦よろしくお願いします</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1934416426158403657?ref_src=twsrc%5Etfw">June 16, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">FEC東京にプロポーザル送った<br>対戦よろしくお願いします</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1934416426158403657?ref_src=twsrc%5Etfw">June 16, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ** 明日以降やりたいこと

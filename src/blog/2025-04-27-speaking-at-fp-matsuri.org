@@ -8,7 +8,7 @@
 今更ですが関数型まつりの採択結果が出ましたね。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">🎉「関数型まつり2025」セッション採択結果を公開しました！<br> <a href="https://t.co/z7yhEntwNX">https://t.co/z7yhEntwNX</a><br>⬆️一覧で「採択」 が付与されています<br>初開催にも関わらず、熱意あるプロポーザルを多数お寄せいただき、本当にありがとうございました🙌<br>ご応募いただいたすべての皆さまに、心より感謝申し上げます！<a href="https://twitter.com/hashtag/fp_matsuri?src=hash&amp;ref_src=twsrc%5Etfw">#fp_matsuri</a></p>&mdash; 関数型まつり (@fp_matsuri) <a href="https://twitter.com/fp_matsuri/status/1906300693981651043?ref_src=twsrc%5Etfw">March 30, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">🎉「関数型まつり2025」セッション採択結果を公開しました！<br> <a href="https://t.co/z7yhEntwNX">https://t.co/z7yhEntwNX</a><br>⬆️一覧で「採択」 が付与されています<br>初開催にも関わらず、熱意あるプロポーザルを多数お寄せいただき、本当にありがとうございました🙌<br>ご応募いただいたすべての皆さまに、心より感謝申し上げます！<a href="https://twitter.com/hashtag/fp_matsuri?src=hash&amp;ref_src=twsrc%5Etfw">#fp_matsuri</a></p>&mdash; 関数型まつり (@fp_matsuri) <a href="https://twitter.com/fp_matsuri/status/1906300693981651043?ref_src=twsrc%5Etfw">March 30, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 なんと僕が出したプロポーザルも採択されています！

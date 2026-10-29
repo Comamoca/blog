@@ -14,18 +14,20 @@ Swingなんですが、千奈ちゃんの歌い方が良すぎてびっくりし
 
 あとこのイベントは手毬のSSRが出たんですけど、自分は一発で出せたのでそのままライブ映像を開放しました。
 
-#+begin_export html
-  <img width="450" style="margin:0 auto" src="https://r2.comamoca.dev/2024-09-30-temari-halloween.webp" />
-#+end_export
+#+begin_center
+#+attr_html: :width 450 :style margin:0 auto
+[[https://r2.comamoca.dev/2024-09-30-temari-halloween.webp]]
+#+end_center
 
 かわいい
 
 ** 今日やったこと
 *** 学マスで月村手毬がA+に到達した
 
-#+begin_export html
-  <img width="200" style="margin:0 auto;" src="https://r2.comamoca.dev/2024-09-30-temari-aplus.webp" />
-#+end_export
+#+begin_center
+#+attr_html: :width 200 :style margin:0 auto
+[[https://r2.comamoca.dev/2024-09-30-temari-aplus.webp]]
+#+end_center
 
 学マス始めてからの目標だったので嬉しい...
 
@@ -35,7 +37,7 @@ mode!!流して泣かせにくるのずるすぎる。泣くじゃん
 *** Common Lisp x Nix x Emacs(sly)をした
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Nix環境のCommon Lispでslyを使ってホットデプロイ<br><br>動画ではサーバーを再起動せずにサーバーのメッセージを書き換えてる<br><br>ここ最近はこういうことをやってます <a href="https://t.co/eUCAPSDJrD">pic.twitter.com/eUCAPSDJrD</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1840750756024160673?ref_src=twsrc%5Etfw">September 30, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Nix環境のCommon Lispでslyを使ってホットデプロイ<br><br>動画ではサーバーを再起動せずにサーバーのメッセージを書き換えてる<br><br>ここ最近はこういうことをやってます <a href="https://t.co/eUCAPSDJrD">pic.twitter.com/eUCAPSDJrD</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1840750756024160673?ref_src=twsrc%5Etfw">September 30, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 やっと本来Common

@@ -9,7 +9,7 @@
 これを「やったこと」扱いしても良いのか悩むけど、ブログに残しておきたいものがあるので書いとく。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">これに関してはBorgoくらいの落とし所が良いのかなって思ったりする<a href="https://t.co/rcCbQ4NLwL">https://t.co/rcCbQ4NLwL</a> <a href="https://t.co/DEm8ljPePl">https://t.co/DEm8ljPePl</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1930876692719112538?ref_src=twsrc%5Etfw">June 6, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">これに関してはBorgoくらいの落とし所が良いのかなって思ったりする<a href="https://t.co/rcCbQ4NLwL">https://t.co/rcCbQ4NLwL</a> <a href="https://t.co/DEm8ljPePl">https://t.co/DEm8ljPePl</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1930876692719112538?ref_src=twsrc%5Etfw">June 6, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 Borgoは前々から目を付けている言語で、Rust風味のGoトランスパイル言語って観点から見るとGleamにちょっと似ているので気になる。

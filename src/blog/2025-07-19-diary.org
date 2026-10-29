@@ -5,18 +5,18 @@
 #+DRAFT: false
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">この世にはスマホでググることもままならないお年寄りがごまんといる訳だけど、Twitterやってるとそういう人達の存在は可視化されないんだよな…</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1946206812518379622?ref_src=twsrc%5Etfw">July 18, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">この世にはスマホでググることもままならないお年寄りがごまんといる訳だけど、Twitterやってるとそういう人達の存在は可視化されないんだよな…</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1946206812518379622?ref_src=twsrc%5Etfw">July 18, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">ITでご飯食べてる人間として、ITはその存在自体が一部の人達にとっては「バリア」である事に自覚的であるべきだよなって思ったりはする</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1946207501868818735?ref_src=twsrc%5Etfw">July 18, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">ITでご飯食べてる人間として、ITはその存在自体が一部の人達にとっては「バリア」である事に自覚的であるべきだよなって思ったりはする</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1946207501868818735?ref_src=twsrc%5Etfw">July 18, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ** 今日やったこと
 *** Gigo行ってきた
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Gigo1号館終わっちゃうと聞いたのでオンゲキやりに行ってきた <a href="https://t.co/iLhzZvrsnt">pic.twitter.com/iLhzZvrsnt</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1946189574168068208?ref_src=twsrc%5Etfw">July 18, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Gigo1号館終わっちゃうと聞いたのでオンゲキやりに行ってきた <a href="https://t.co/iLhzZvrsnt">pic.twitter.com/iLhzZvrsnt</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1946189574168068208?ref_src=twsrc%5Etfw">July 18, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 本当は駅前のnamcoでオンゲキやろうかなと思ったけれど、なんと駅前のnamcoにはオンゲキがなかったのと、秋葉原のGigo一号館が8月一杯で終わるらしいので行ってきた。

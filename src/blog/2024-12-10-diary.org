@@ -22,9 +22,7 @@ CSSを追加した方がデバッグの観点からも良いのかなと思っ�
 
 [[https://comamoca.dev/blog/2024-12-11-gleam-list-fold/]]
 
-#+begin_export html
-  <br>
-#+end_export
+#+HTML: <br>
 
 [[https://comamoca.dev/blog/2024-12-10-gleam-playground/]]
 

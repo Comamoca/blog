@@ -20,7 +20,7 @@ org-modeとtypstでスライドを生成するやつをやっていた。
 まぁ全部暗記して話せば良いのだけども。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">org-mode-&gt;typst-&gt;PDFでスライドが錬成される <a href="https://t.co/JsEpFoLNlk">https://t.co/JsEpFoLNlk</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1927060427931812311?ref_src=twsrc%5Etfw">May 26, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">org-mode-&gt;typst-&gt;PDFでスライドが錬成される <a href="https://t.co/JsEpFoLNlk">https://t.co/JsEpFoLNlk</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1927060427931812311?ref_src=twsrc%5Etfw">May 26, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 *** なりすましをされた

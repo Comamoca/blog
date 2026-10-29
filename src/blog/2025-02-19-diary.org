@@ -21,7 +21,7 @@
 新宿で外国の人から下北沢への行き方を聞かれた。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">新宿駅いたら外国の方に英語で下北沢(小田急線)への行き方を尋ねられたので、普通にあっちですよ〜って答えた</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1892186156600836218?ref_src=twsrc%5Etfw">February 19, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">新宿駅いたら外国の方に英語で下北沢(小田急線)への行き方を尋ねられたので、普通にあっちですよ〜って答えた</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1892186156600836218?ref_src=twsrc%5Etfw">February 19, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 無事下北沢へは行けたのだろうか...

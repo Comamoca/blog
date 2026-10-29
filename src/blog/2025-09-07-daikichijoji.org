@@ -65,7 +65,7 @@ Lispの方を見ながら)
 *** 懇親会
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">参加したいです！</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964270584394838396?ref_src=twsrc%5Etfw">September 6, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">参加したいです！</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964270584394838396?ref_src=twsrc%5Etfw">September 6, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 公式も非公式も埋まってたので途方に暮れてたのだけど、このツイートを見て勢いで突撃した。
@@ -89,7 +89,7 @@ DJイベントは初めてだったけど、とりあえず勢いで行くこと
 ** 大吉祥寺 Day2
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">薫ちゃんにしか見えない <a href="https://t.co/fZSg1alKfu">pic.twitter.com/fZSg1alKfu</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964427762435051846?ref_src=twsrc%5Etfw">September 6, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">薫ちゃんにしか見えない <a href="https://t.co/fZSg1alKfu">pic.twitter.com/fZSg1alKfu</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964427762435051846?ref_src=twsrc%5Etfw">September 6, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 完全に徹夜して眠かったので、とりあえず井の頭公園で一眠りすることにした。
@@ -103,19 +103,19 @@ DJイベントは初めてだったけど、とりあえず勢いで行くこと
 本来は大吉祥寺の前に寄ろうと思ってたけど寝坊してしまったので、帰りに寄ることにした。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">気象神社で晴守り買えた <a href="https://t.co/miynMq3SXU">pic.twitter.com/miynMq3SXU</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964492480784847363?ref_src=twsrc%5Etfw">September 7, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">気象神社で晴守り買えた <a href="https://t.co/miynMq3SXU">pic.twitter.com/miynMq3SXU</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964492480784847363?ref_src=twsrc%5Etfw">September 7, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 氷川神社の近くにめちゃくちゃ櫻木真乃みたいな名前のカフェがあったのでここで朝飯を食べた。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="qme" dir="ltr"><a href="https://twitter.com/hashtag/%E5%98%98%E3%82%B7%E3%83%A3%E3%83%8B%E3%83%9E%E3%82%B9%E8%81%96%E5%9C%B0?src=hash&amp;ref_src=twsrc%5Etfw">#嘘シャニマス聖地</a> <a href="https://t.co/Ig5KL1gojd">pic.twitter.com/Ig5KL1gojd</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964492090701992409?ref_src=twsrc%5Etfw">September 7, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="qme" dir="ltr"><a href="https://twitter.com/hashtag/%E5%98%98%E3%82%B7%E3%83%A3%E3%83%8B%E3%83%9E%E3%82%B9%E8%81%96%E5%9C%B0?src=hash&amp;ref_src=twsrc%5Etfw">#嘘シャニマス聖地</a> <a href="https://t.co/Ig5KL1gojd">pic.twitter.com/Ig5KL1gojd</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964492090701992409?ref_src=twsrc%5Etfw">September 7, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ** 宮下公園
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">宮下公園でしぶりんと写真撮ってきた<br>オタクの自撮りに需要はないので代理で佑芽広に来てもらった <a href="https://t.co/ogpOnxy1Bu">pic.twitter.com/ogpOnxy1Bu</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964519902506864786?ref_src=twsrc%5Etfw">September 7, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">宮下公園でしぶりんと写真撮ってきた<br>オタクの自撮りに需要はないので代理で佑芽広に来てもらった <a href="https://t.co/ogpOnxy1Bu">pic.twitter.com/ogpOnxy1Bu</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964519902506864786?ref_src=twsrc%5Etfw">September 7, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 先日出たデレステガシャのしぶりんの背景が宮下公園らしいので、行って写真を撮ってきた。
@@ -124,7 +124,7 @@ DJイベントは初めてだったけど、とりあえず勢いで行くこと
 ** オタク飲み会
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">家帰ってから秋葉原向かおうかな <a href="https://t.co/bAXaqjs8S3">https://t.co/bAXaqjs8S3</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964535725132828964?ref_src=twsrc%5Etfw">September 7, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">家帰ってから秋葉原向かおうかな <a href="https://t.co/bAXaqjs8S3">https://t.co/bAXaqjs8S3</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964535725132828964?ref_src=twsrc%5Etfw">September 7, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 Twitter見てたらオタクの号令がかかってたので勢いで向かった。
@@ -132,7 +132,7 @@ Twitter見てたらオタクの号令がかかってたので勢いで向かっ�
 飲み会でこんなに笑ったの久々かもしれない。この日に来れなかった方もいたので、今度はその方も加えて飲み会したいところ。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Twitterのオタクたちと飲み会をしており、めちゃくちゃ楽しい <a href="https://t.co/0ocaaZEPS4">pic.twitter.com/0ocaaZEPS4</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964658430725279952?ref_src=twsrc%5Etfw">September 7, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Twitterのオタクたちと飲み会をしており、めちゃくちゃ楽しい <a href="https://t.co/0ocaaZEPS4">pic.twitter.com/0ocaaZEPS4</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1964658430725279952?ref_src=twsrc%5Etfw">September 7, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ** まとめ

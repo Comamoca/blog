@@ -9,7 +9,7 @@
 久々に秋葉原に行った。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">昨日の戦利品 <a href="https://t.co/HxT28D4KfH">pic.twitter.com/HxT28D4KfH</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1925315010370445534?ref_src=twsrc%5Etfw">May 21, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">昨日の戦利品 <a href="https://t.co/HxT28D4KfH">pic.twitter.com/HxT28D4KfH</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1925315010370445534?ref_src=twsrc%5Etfw">May 21, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 アイマスショップに行ったらもりくぼのスプーンが売ってたので買ってしまった。

@@ -37,5 +37,5 @@ leafに​~defer-config~​っていう設定オプションがあることを�
 最近org-mode使えてないし、org-modeで内容をまとめながら記事を書いていくやつを試してみたい。
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">「{任意のマイナー言語}って今どうなん？」みたいな記事書きたいんだよな〜<br><br>一発目はV言語くん</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1879076448365060422?ref_src=twsrc%5Etfw">January 14, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">「{任意のマイナー言語}って今どうなん？」みたいな記事書きたいんだよな〜<br><br>一発目はV言語くん</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1879076448365060422?ref_src=twsrc%5Etfw">January 14, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export

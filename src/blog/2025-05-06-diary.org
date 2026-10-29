@@ -105,7 +105,7 @@
 あれ鉛筆削りだったんだ...
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">こ、これは…！？ <a href="https://t.co/S3eFipk8Ik">pic.twitter.com/S3eFipk8Ik</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1919693243626684442?ref_src=twsrc%5Etfw">May 6, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">こ、これは…！？ <a href="https://t.co/S3eFipk8Ik">pic.twitter.com/S3eFipk8Ik</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1919693243626684442?ref_src=twsrc%5Etfw">May 6, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 ひっくり返すとクトゥルフにそっくりな鹿のやつを見つけて一人でテンションが上がっていた。

@@ -6,7 +6,7 @@
 #+DRAFT: false
 
 #+begin_export html
-  <blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">Hono Hackathonお疲れ様でした！！ <a href="https://twitter.com/hashtag/honohackathon?src=hash&amp;ref_src=twsrc%5Etfw">#honohackathon</a> <a href="https://t.co/5PPKu1Y1C8">pic.twitter.com/5PPKu1Y1C8</a></p>&mdash; Yusuke Wada (@yusukebe) <a href="https://twitter.com/yusukebe/status/2021514844546154994?ref_src=twsrc%5Etfw">February 11, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">Hono Hackathonお疲れ様でした！！ <a href="https://twitter.com/hashtag/honohackathon?src=hash&amp;ref_src=twsrc%5Etfw">#honohackathon</a> <a href="https://t.co/5PPKu1Y1C8">pic.twitter.com/5PPKu1Y1C8</a></p>&mdash; Yusuke Wada (@yusukebe) <a href="https://twitter.com/yusukebe/status/2021514844546154994?ref_src=twsrc%5Etfw">February 11, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 Hono Hackathonに行ってきたのでその感想を書いていく。
@@ -50,7 +50,7 @@ Neovimで開発するにあたって、LSPとGit、コーディングエージ�
 とはいえこういう時の設定が一番捗るんですよね...
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">honoxのバグ直しながらneovimの設定いじってるけど、こういう時の設定いじりが一番捗るんだよな</p>&mdash; こまもか🦊@シャニ∞th両日 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/2021486440056864870?ref_src=twsrc%5Etfw">February 11, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">honoxのバグ直しながらneovimの設定いじってるけど、こういう時の設定いじりが一番捗るんだよな</p>&mdash; こまもか🦊@シャニ∞th両日 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/2021486440056864870?ref_src=twsrc%5Etfw">February 11, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 導入したプラグインは以下。

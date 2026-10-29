@@ -12,7 +12,7 @@
 その後は本をみて回ったのだけど、ことごとく好みが同じなのでその度に笑ってしまった...
 
 #+begin_export html
-  <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">技術者展の個人的ハイライトはこれです(買いました) <a href="https://t.co/QmB5xCKnKR">pic.twitter.com/QmB5xCKnKR</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1929186612610523264?ref_src=twsrc%5Etfw">June 1, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">技術者展の個人的ハイライトはこれです(買いました) <a href="https://t.co/QmB5xCKnKR">pic.twitter.com/QmB5xCKnKR</a></p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://twitter.com/Comamoca_/status/1929186612610523264?ref_src=twsrc%5Etfw">June 1, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 これめちゃくちゃ笑った。
