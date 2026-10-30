@@ -420,7 +420,14 @@ regressions in the build logic are caught before merge. The `deploy` job itself
 never runs on pull requests.
 
 The OG Worker (`og/`) deploys separately, only when its inputs change:
-`og/**`, `flake.nix`, `flake.lock`, or the font corpus (the `#+TITLE:` /
-`#+DESCRIPTION:` lines of `src/blog/*.org`, which `flake.nix`'s `ogFonts`
-subsets from). Article edits that leave those two lines alone do not trigger
-the OG jobs.
+`og/**` (which includes the frozen font charset in `og/data/`), `flake.nix`, and
+`flake.lock`. Article edits never trigger the OG jobs: `flake.nix`'s `ogFonts`
+subsets Noto Sans CJK from `og/data/charset-ranges.txt` (Unicode ranges) plus
+`og/data/jisx0208-kanji.txt` (all JIS X 0208 kanji), never from article text, so
+article titles/descriptions are not part of the font corpus.
+
+When a title or description uses a character outside that charset, the render
+would draw tofu (□), so `tests/og_charset_test.ts` fails with the offending
+codepoints (it also checks the Worker's own string literals). The fix is to add
+that range to `og/data/charset-ranges.txt`; because that file lives under
+`og/**`, the OG jobs then run and redeploy the Worker with the wider subset.

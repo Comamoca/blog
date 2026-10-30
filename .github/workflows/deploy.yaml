@@ -26,10 +26,10 @@ concurrency:
   # PRでは同一PR内の古い実行をキャンセルする (head_refがグループ名になる)。
   # それ以外 (mainへのpush・workflow_dispatch) はrunごとにユニークなグループ
   # (run_id) になるため一切キャンセルされない。
-  # mainのrunをキャンセルすると、og/やsrc/blog/ (OGフォントのコーパス) の
-  # 変更を含むrunが中断されたとき、次のrunのpaths-filterは直前コミットとの
-  # 差分しか見ないためOG Workerの再デプロイがスキップされ、記事タイトルの
-  # グリフが欠けたOG画像が生成されてしまうため。
+  # mainのrunをキャンセルすると、og/ (OGフォントの文字集合を含む) の変更を
+  # 含むrunが中断されたとき、次のrunのpaths-filterは直前コミットとの差分しか
+  # 見ないためOG Workerの再デプロイがスキップされ、グリフが欠けたOG画像が
+  # 生成されてしまうため。
   # (注意: queue: maxとcancel-in-progress: trueはリテラル・式ともに併用不可
   # なので、デプロイの直列化はdeployジョブ側のqueue: maxで行う)
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -42,12 +42,18 @@ jobs:
       contents: read
       pull-requests: read
     outputs:
-      og: ${{ steps.og.outputs.changed }}
+      og: ${{ steps.filter.outputs.og }}
     steps:
+      # push では paths-filter が git で base commit との差分を取るため、
+      # shallow clone だと判定できない (fetch-depth: 0 が要る)
       - uses: actions/checkout@v7
         with:
-          # 記事コーパスの比較に「変更前のコミット」が要るので浅いcloneにしない
           fetch-depth: 0
+      # OG Worker の入力だけで判定する。記事 (src/blog/**) は入力ではない:
+      # ogFonts は og/data の固定文字集合 (charset-ranges.txt + JIS X 0208) から
+      # サブセットするので、記事を足してもタイトルを変えてもフォントは変わらない。
+      # 記事が集合外の文字を使った場合は tests/og_charset_test.ts が落ちる
+      # (このテストは通常のCI (deployジョブの test suite) で走る)。
       - uses: dorny/paths-filter@v4
         id: filter
         with:
@@ -58,57 +64,6 @@ jobs:
               # ogFonts derivationとWorkerのビルド定義
               - "flake.nix"
               - "flake.lock"
-      # 記事 (src/blog/**) は ogFonts のコーパス元だが、カードに載るのは
-      # #+TITLE: / #+DESCRIPTION: だけで、本文だけの修正ではフォントは
-      # 1バイトも変わらない。ファイル単位のパス判定は中身を見ないため、
-      # 本文修正だけのpushでもOG Workerのテスト・デプロイが走っていた。
-      # そこでコーパスに実際に寄与する文字 (title/description 由来の集合) を
-      # 変更前後で比較し、差があるときだけ og 扱いにする。
-      - name: Check OG font corpus changes
-        id: og
-        env:
-          BASE_REV: ${{ github.event_name == 'push' && github.event.before || '' }}
-        run: |
-          set -euo pipefail
-
-          # flake.nix の ogFonts と同じ抽出規則。ここが乖離すると
-          # 「フォントが変わったのにジョブが飛ぶ」または逆の誤判定になる。
-          extract() {
-            if [ "$1" = "" ] || ! git cat-file -e "$1^{commit}" 2>/dev/null; then
-              return 1
-            fi
-            git ls-tree -r --name-only "$1" -- src/blog |
-              grep -E '\.org$' |
-              while IFS= read -r f; do
-                git show "$1:$f" | awk '
-                  index($0, "#+TITLE:") == 1 || index($0, "#+DESCRIPTION:") == 1 {
-                    sub(/^[^:]*:[ \t]*/, "");
-                    print
-                  }
-                '
-              done | LC_ALL=C sort
-          }
-
-          # 1行 = 1タイトル or 1説明文なので、行の差分がそのままコーパスの差分になる
-          if extract "$BASE_REV" > /tmp/before.txt 2>/dev/null; then
-            extract HEAD > /tmp/after.txt
-            if diff -q /tmp/before.txt /tmp/after.txt > /dev/null; then
-              corpus_changed=false
-            else
-              corpus_changed=true
-            fi
-          else
-            # 比較対象が取れない (初回push・force push・手動実行など) は
-            # 取りこぼすより安全側に倒して実行する
-            corpus_changed=true
-          fi
-
-          echo "corpus_changed=$corpus_changed"
-          if [ "$corpus_changed" = "true" ] || [ "${{ steps.filter.outputs.og }}" = "true" ]; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          fi
 
   test-og:
     needs: changes
@@ -122,7 +77,7 @@ jobs:
       # og_worker/router.gleam のASSETS bindingとgleam testの
       # test_support.load_file_bytes が参照する og/static/fonts/*.ttf は
       # gitにコミットせず、flake.nixの packages.og-fonts (pyftsubsetで
-      # ブログ記事コーパスからサブセット生成) をここでビルドして配置する
+      # og/data の固定文字集合からサブセット生成) をここでビルドして配置する
       - name: Build & place OG fonts (nix)
         run: |
           nix build .#og-fonts -o og-fonts-result
@@ -264,12 +219,12 @@ jobs:
           nix develop .#ci --command vp run build
           nix develop .#ci --command wrangler pages deploy ./dist --project-name=blog --commit-dirty=true
 
-      # OG Workerはビルド入力 (og/・記事コーパス・nix定義) に変更がある場合のみ
-      # デプロイ (手動実行時は常にデプロイ)
+      # OG Workerはビルド入力 (og/・nix定義) に変更がある場合のみデプロイ
+      # (手動実行時は常にデプロイ)。記事の追加・タイトル変更では走らない
       # `vp run deploy-og` は gleam/npm を使うため、それらを含まない .#ci ではなく
-      # デフォルトのdevShellを使う (devShellのshellHookが最新コーパスで
-      # サブセットしたフォントを og/static/fonts/ に配置する。vpはこのシェルの
-      # vite-plus パッケージから提供される)
+      # デフォルトのdevShellを使う (devShellのshellHookが ogFonts を
+      # og/static/fonts/ に配置する。vpはこのシェルの vite-plus パッケージから
+      # 提供される)
       - name: Deploy OG worker
         if: >-
           (github.event_name == 'workflow_dispatch' || needs.changes.outputs.og == 'true') &&

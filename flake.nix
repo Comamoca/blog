@@ -134,16 +134,20 @@
           };
 
           # OG Worker (og/) 用フォント。design.md「フォント戦略」の通り、
-          # Noto Sans CJK JP フルOTF (~16MB×2) をブログ記事のtitle/description
-          # コーパス+og/の実描画ソース/テスト+基本的な仮名/半角全角/約物レンジで
-          # サブセットする。
-          # さらに JIS X 0208 (第1・第2水準) の漢字全字 (og/data/jisx0208-kanji.txt)
-          # を常に含める。コーパスだけだと、記事を追加してもWorkerが再デプロイされる
-          # までその記事のtitle/descriptionの未知の漢字が豆腐 (□) になる
-          # (例: 2026-09-11の記事の「既」)
+          # Noto Sans CJK JP フルOTF (~16MB×2) を固定の文字集合でサブセットする。
+          #
+          # 文字集合はブログ記事に依存させない:
+          #   - og/data/charset-ranges.txt: 仮名/約物/ラテン/ギリシャ/記号のレンジ
+          #     (pyftsubset の --unicodes にそのまま渡す)
+          #   - og/data/jisx0208-kanji.txt: JIS X 0208 (第1・第2水準) の漢字全字
+          # 以前は記事の #+TITLE: / #+DESCRIPTION: をコーパスとして混ぜていたが、
+          # それだと記事を1本足すだけで導出物が変わってOG Workerの再ビルド・
+          # 再デプロイが走ってしまう。記事が集合外の文字を使った場合は
+          # tests/og_charset_test.ts がPR時に落ちるので、そこで
+          # charset-ranges.txt に追記する (= フォントが変わって再デプロイされる)。
           # `nix build .#og-fonts` で単体生成できる他、devShells.default の
           # shellHook / CIの test-og ジョブから og/static/fonts/ へ配置される
-          # (gitにはコミットしない。ブログ記事が増えたら再ビルドで自動追随する)
+          # (gitにはコミットしない)
           ogFonts =
             let
               clean-pkgs' = import inputs.nixpkgs { inherit system; };
@@ -151,9 +155,18 @@
             in
             pkgs.stdenv.mkDerivation {
               pname = "og-fonts";
-              version = "1.0";
+              version = "2.0";
 
-              src = ./src/blog;
+              # 入力は文字集合データだけに絞る。og/data を丸ごと src にすると
+              # README を直しただけで導出のストアパスが変わり、再ビルド扱いに
+              # なってしまう
+              src = lib.fileset.toSource {
+                root = ./og/data;
+                fileset = lib.fileset.unions [
+                  ./og/data/charset-ranges.txt
+                  ./og/data/jisx0208-kanji.txt
+                ];
+              };
               dontUnpack = true;
 
               buildPhase = ''
@@ -161,32 +174,10 @@
 
                 mkdir -p $out
 
-                # 記事の #+TITLE: / #+DESCRIPTION: (org keyword) を抽出してコーパスに
-                # する (カードに載る記事由来のテキストはこの2フィールドのみ)。
-                # org移行前は .md frontmatter (title/description) だった。
-                # awkで #+ を正規表現に書くと \+ の解釈が実装依存になるため、
-                # index() による前置一致で判定する
-                for f in $src/*.org; do
-                  awk "
-                    index(\$0, \"#+TITLE:\") == 1 || index(\$0, \"#+DESCRIPTION:\") == 1 {
-                      sub(/^[^:]*:[ \t]*/, \"\");
-                      print
-                    }
-                  " "$f" >> corpus.txt
-                done
-                # 実描画に載る固定文字列 (og_worker/card.gleam の site_title) と
-                # golden/koishiテストの固定入力。記事コーパスだけでは拾えない文字を
-                # 保証する。手書きリストはコードと乖離するためソース/テストを直接食わせる
-                cat ${./og/src/og_worker/card.gleam} >> corpus.txt
-                find ${./og/test} -name '*.gleam' | LC_ALL=C sort | xargs cat >> corpus.txt
-                # JIS X 0208の漢字全字 (第1・第2水準)。日常的な日本語の漢字を
-                # ほぼ網羅するので、記事追加だけで未知の漢字が豆腐になることを防ぐ
-                cat ${./og/data/jisx0208-kanji.txt} >> corpus.txt
-
                 for weight in Regular Bold; do
                   ${subsetter}/bin/pyftsubset ${fonts}/bin/NotoSansCJKjp-$weight.otf \
-                    --text-file=corpus.txt \
-                    --unicodes="U+0020-007E,U+00A0-00FF,U+2000-206F,U+3000-303F,U+3040-309F,U+30A0-30FF,U+FF00-FFEF" \
+                    --text-file=$src/jisx0208-kanji.txt \
+                    --unicodes="$(cat $src/charset-ranges.txt)" \
                     --output-file=$out/NotoSansJP-$weight.ttf \
                     --layout-features='*' \
                     --glyph-names \
@@ -199,6 +190,42 @@
                     --recalc-bounds \
                     --recalc-timestamp \
                     --canonical-order
+                done
+
+                # 文字集合に載っているコードポイントが実際にサブセットへ入った
+                # ことを確認する。元フォント (Noto Sans CJK JP) が持たない文字を
+                # charset-ranges.txt に足すと、pyftsubset は黙って捨てるため
+                # OGP が豆腐になる。ここで落とせばデータ側の誤りに気付ける。
+                for weight in Regular Bold; do
+                  ${subsetter}/bin/python3 - $src/charset-ranges.txt \
+                    $src/jisx0208-kanji.txt $out/NotoSansJP-$weight.ttf <<'PY'
+                import pathlib
+                import sys
+
+                from fontTools.ttLib import TTFont
+
+                ranges_path, kanji_path, font_path = (pathlib.Path(a) for a in sys.argv[1:4])
+
+                requested = set()
+                for entry in ranges_path.read_text(encoding="utf-8").replace(",", " ").split():
+                    if not entry:
+                        continue
+                    low, _, high = entry.partition("-")
+                    lo = int(low.removeprefix("U+"), 16)
+                    hi = int(high.removeprefix("U+"), 16) if high else lo
+                    requested.update(range(lo, hi + 1))
+
+                requested.update(ord(c) for c in kanji_path.read_text(encoding="utf-8") if not c.isspace())
+
+                cmap = TTFont(font_path).getBestCmap()
+                missing = sorted(c for c in requested if c not in cmap)
+                if missing:
+                    sys.exit(
+                        f"{font_path.name}: {len(missing)} characters are not in the source font: "
+                        + " ".join(f"U+{c:04X}" for c in missing[:40])
+                    )
+                print(f"{font_path.name}: {len(requested)} characters covered")
+                PY
                 done
 
                 runHook postBuild
