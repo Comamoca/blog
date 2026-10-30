@@ -428,6 +428,8 @@ article titles/descriptions are not part of the font corpus.
 
 When a title or description uses a character outside that charset, the render
 would draw tofu (□), so `tests/og_charset_test.ts` fails with the offending
-codepoints (it also checks the Worker's own string literals). The fix is to add
+codepoints (it also checks the Worker's own string literals). That check runs on
+pull requests in the `test-og-charset` job, so a bad title is caught before
+merge rather than by the `deploy` job's test suite afterwards. The fix is to add
 that range to `og/data/charset-ranges.txt`; because that file lives under
 `og/**`, the OG jobs then run and redeploy the Worker with the wider subset.

@@ -53,7 +53,8 @@ jobs:
       # ogFonts は og/data の固定文字集合 (charset-ranges.txt + JIS X 0208) から
       # サブセットするので、記事を足してもタイトルを変えてもフォントは変わらない。
       # 記事が集合外の文字を使った場合は tests/og_charset_test.ts が落ちる
-      # (このテストは通常のCI (deployジョブの test suite) で走る)。
+      # (PRでは下の test-og-charset が、mainでは deploy ジョブの
+      # test suite が走らせる)。
       - uses: dorny/paths-filter@v4
         id: filter
         with:
@@ -64,6 +65,36 @@ jobs:
               # ogFonts derivationとWorkerのビルド定義
               - "flake.nix"
               - "flake.lock"
+
+  # 記事のtitle/descriptionがOGフォントの固定文字集合からはみ出していないかを
+  # PRの時点で見る。deploy ジョブはPRでは走らないため、ここが無いと集合外の
+  # 文字を含む記事がmergeされるまで気づけず、その後のmainのデプロイが
+  # (test suiteで落ちて) 止まる。
+  # og/ を触らないPRでも記事追加で実行される必要があるので、paths-filterの
+  # og判定ではなくPRイベントで無条件に走らせる。フォントのビルドはしないので
+  # 数十秒で終わる (nixのdevShell + 依存のinstall + このテストだけ)。
+  test-og-charset:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    name: Check OG font charset coverage
+    steps:
+      - uses: actions/checkout@v7
+      - uses: nixbuild/nix-quick-install-action@v35
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Cache dependencies
+        uses: actions/cache@v6
+        with:
+          path: |
+            ~/.npm
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-
+      - name: Check charset coverage
+        run: |
+          nix develop .#ci --command bash -c '
+            vp install --frozen-lockfile &&
+            vp test tests/og_charset_test.ts
+          '
 
   test-og:
     needs: changes
