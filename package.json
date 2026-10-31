@@ -13,7 +13,7 @@
     "deploy-og": "cd og && npm ci && gleam build --no-print-progress && wrangler deploy"
   },
   "dependencies": {
-    "@ox-content/unplugin": "3.3.2",
+    "@ox-content/unplugin": "3.7.2",
     "@ox-content/vite-plugin": "3.3.3",
     "@shikijs/rehype": "^4.0.0",
     "@tailwindcss/typography": "^0.5.19",
