@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@ox-content/unplugin':
-        specifier: 3.8.0
-        version: 3.8.0(@types/markdown-it@14.2.0)(@voidzero-dev/vite-plus-core@1.4.0(jiti@2.7.0)(terser@5.51.2)(typescript@7.0.2)(yaml@2.9.1))(rolldown@1.2.15)
+        specifier: 3.8.2
+        version: 3.8.2(@types/markdown-it@14.2.0)(@voidzero-dev/vite-plus-core@1.4.0(jiti@2.7.0)(terser@5.51.2)(typescript@7.0.2)(yaml@2.9.1))(rolldown@1.2.15)
       '@ox-content/vite-plugin':
         specifier: 3.8.0
         version: 3.8.0(@voidzero-dev/vite-plus-core@1.4.0(jiti@2.7.0)(terser@5.51.2)(typescript@7.0.2)(yaml@2.9.1))(katex@0.16.47)
@@ -367,8 +367,18 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
+  '@ox-content/binding-darwin-arm64@3.8.2':
+    resolution: {integrity: sha512-v+i6PU1Qsglix8LP0KN7y0kd3pz3lV/Hl8qNSKZ8V+aypsMGavpt6aZ86w6jZ+eyHw3/wPSuaviPby4D7cE08A==}
+    cpu: [arm64]
+    os: [darwin]
+
   '@ox-content/binding-darwin-x64@3.8.0':
     resolution: {integrity: sha512-3gq+s4aDI3yab5hxjLnVpo+Y4vBCvsxoar17g5UxQU3Eh1w5yh5i9Y0fQbe7hw1XaJyU8APicjaeoy0DXm9StQ==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@ox-content/binding-darwin-x64@3.8.2':
+    resolution: {integrity: sha512-YYgH3dNgpJHu8L+Pgqhrgm1wmtWIsUtDFcn9OkX/kYX6YIJ+F/TH7G5LojaNr/mgQJmE+YPm5AoJDsTSeOxKhg==}
     cpu: [x64]
     os: [darwin]
 
@@ -377,8 +387,18 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+  '@ox-content/binding-linux-arm64-gnu@3.8.2':
+    resolution: {integrity: sha512-Drvu1MhqTbr8mqunExoU2s6WOPfBvUjFw2dHgNa1ks0gRjrMT0oasNC/5euogGX8tLU110TETwYv/SvbInys1w==}
+    cpu: [arm64]
+    os: [linux]
+
   '@ox-content/binding-linux-arm64-musl@3.8.0':
     resolution: {integrity: sha512-aITNBLV+TZFD40ZKNeCnKgfmwHGniwEawJYO+EK2PmbRsQpQSKq2ckxnLohnA+8HbQBEon7BJi1srURrhRlq6Q==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@ox-content/binding-linux-arm64-musl@3.8.2':
+    resolution: {integrity: sha512-cAUv8BBsOUT950cb5248x68guJKakl7s2++4yoaOdu80GClUqZ4vyDRtnyXNCXy21ovI/zqlH22iUuMM8+Kqtg==}
     cpu: [arm64]
     os: [linux]
 
@@ -387,8 +407,18 @@ packages:
     cpu: [x64]
     os: [linux]
 
+  '@ox-content/binding-linux-x64-gnu@3.8.2':
+    resolution: {integrity: sha512-friWay1egyDNhzR89Em94ItMC16LJ1s5ciNfKmWejoO9WaQEV+Q+BpCkQIkEoM/Wq2GBSWzmupBy4ny0nNwvTw==}
+    cpu: [x64]
+    os: [linux]
+
   '@ox-content/binding-linux-x64-musl@3.8.0':
     resolution: {integrity: sha512-zDek/JNAYtKUN+qIxmd7TPbesyhrY4DkLtdjqUpUHVJHTppxxqxk/P57KNMmsvXUat2H7o7UhW4Xaqp5PhjKmA==}
+    cpu: [x64]
+    os: [linux]
+
+  '@ox-content/binding-linux-x64-musl@3.8.2':
+    resolution: {integrity: sha512-6WKKg1k/OxH4RtpZvFBJbUUoE3kxIXFujPRPksn+B4Kkk+1OZ0+oq9IXUBLGKDz511H6ISgdASQ4PY5Ne3yrZg==}
     cpu: [x64]
     os: [linux]
 
@@ -397,11 +427,19 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@ox-content/binding-win32-x64-msvc@3.8.2':
+    resolution: {integrity: sha512-jOY7nrbTCQkYMAgm9rvIAnjMrQ6X9bqq/Gu84YyPXVvLBczCCkLimo5IDYMslqAcsU+5UopuDc1zKM2TYp/VlA==}
+    cpu: [x64]
+    os: [win32]
+
   '@ox-content/napi@3.8.0':
     resolution: {integrity: sha512-eXZivk5B8zX8jI6rKjuBbiEnltw3dU3HWQfPXsQ+Sr45DN6XS6y2rXSxb0pVqatQ8Ynvz/nqTAOPERgO7n1tRA==}
 
-  '@ox-content/unplugin@3.8.0':
-    resolution: {integrity: sha512-2Hzo7j1auE75IkhRe4/7V5dCqutYVxdzBfBT4Op1+LXRrRJmsAUCnCRQNJUo2Jf1d+0e1DDH41SK9SMp9aCNeg==}
+  '@ox-content/napi@3.8.2':
+    resolution: {integrity: sha512-0Ql5nw+IOjjhhBNuhp+4LnVDCgxlDiRD8zNPKXmLNwh2FvF2WE1ft3qLXqnBeqCSFN+FKe08/ZP/hjxYSzxVeA==}
+
+  '@ox-content/unplugin@3.8.2':
+    resolution: {integrity: sha512-5YHnhuctM49ZjRI3xRcqxemYK4P/YOcIKIPTMQE1vId1WYqzNlXFwewP3FIsfLbv8HL5yv6fs87viyNiVpTJmA==}
 
   '@ox-content/vite-plugin@3.8.0':
     resolution: {integrity: sha512-Fxg2x6huDwDDdxIO9R570NPQKyfKyJ270i16i6DUT2iBoLZw1tig9fgJNfdGdRt5iWOuE83dyJaT+S98wMoGHw==}
@@ -3444,22 +3482,43 @@ snapshots:
   '@ox-content/binding-darwin-arm64@3.8.0':
     optional: true
 
+  '@ox-content/binding-darwin-arm64@3.8.2':
+    optional: true
+
   '@ox-content/binding-darwin-x64@3.8.0':
+    optional: true
+
+  '@ox-content/binding-darwin-x64@3.8.2':
     optional: true
 
   '@ox-content/binding-linux-arm64-gnu@3.8.0':
     optional: true
 
+  '@ox-content/binding-linux-arm64-gnu@3.8.2':
+    optional: true
+
   '@ox-content/binding-linux-arm64-musl@3.8.0':
+    optional: true
+
+  '@ox-content/binding-linux-arm64-musl@3.8.2':
     optional: true
 
   '@ox-content/binding-linux-x64-gnu@3.8.0':
     optional: true
 
+  '@ox-content/binding-linux-x64-gnu@3.8.2':
+    optional: true
+
   '@ox-content/binding-linux-x64-musl@3.8.0':
     optional: true
 
+  '@ox-content/binding-linux-x64-musl@3.8.2':
+    optional: true
+
   '@ox-content/binding-win32-x64-msvc@3.8.0':
+    optional: true
+
+  '@ox-content/binding-win32-x64-msvc@3.8.2':
     optional: true
 
   '@ox-content/napi@3.8.0':
@@ -3472,9 +3531,19 @@ snapshots:
       '@ox-content/binding-linux-x64-musl': 3.8.0
       '@ox-content/binding-win32-x64-msvc': 3.8.0
 
-  '@ox-content/unplugin@3.8.0(@types/markdown-it@14.2.0)(@voidzero-dev/vite-plus-core@1.4.0(jiti@2.7.0)(terser@5.51.2)(typescript@7.0.2)(yaml@2.9.1))(rolldown@1.2.15)':
+  '@ox-content/napi@3.8.2':
+    optionalDependencies:
+      '@ox-content/binding-darwin-arm64': 3.8.2
+      '@ox-content/binding-darwin-x64': 3.8.2
+      '@ox-content/binding-linux-arm64-gnu': 3.8.2
+      '@ox-content/binding-linux-arm64-musl': 3.8.2
+      '@ox-content/binding-linux-x64-gnu': 3.8.2
+      '@ox-content/binding-linux-x64-musl': 3.8.2
+      '@ox-content/binding-win32-x64-msvc': 3.8.2
+
+  '@ox-content/unplugin@3.8.2(@types/markdown-it@14.2.0)(@voidzero-dev/vite-plus-core@1.4.0(jiti@2.7.0)(terser@5.51.2)(typescript@7.0.2)(yaml@2.9.1))(rolldown@1.2.15)':
     dependencies:
-      '@ox-content/napi': 3.8.0
+      '@ox-content/napi': 3.8.2
       '@rollup/pluginutils': 5.5.1
       markdown-it: 15.0.3
       markdown-it-anchor: 10.0.0(@types/markdown-it@14.2.0)(markdown-it@15.0.3)
