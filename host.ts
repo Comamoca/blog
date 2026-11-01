@@ -10,13 +10,11 @@
  * ox-content の srcDir スキャンには依存せず src/blog を直接列挙する。
  */
 import * as fs from "node:fs/promises";
-import * as path from "node:path";
-import { fileURLToPath } from "node:url";
 import { raw, renderToString } from "@ox-content/vite-plugin";
 
 import { renderOrg } from "./ssg/org.ts";
-import { extractOrgMeta } from "./ssg/org-meta.ts";
 import { buildOgImageUrl } from "./ssg/og_metas.ts";
+import { BLOG_DIR, PAGE_SIZE, REPO_ROOT, loadPosts, type Post } from "./ssg/posts.ts";
 import {
   combineDate,
   type FeedItem,
@@ -39,62 +37,6 @@ import NotFoundPage from "./ssg/pages/NotFoundPage.tsx";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "./src/consts.ts";
 import { buildPageLinks } from "./utils/paginate.ts";
 import type { PageLink, Pagination, PostSummary } from "./ssg/pages/types.ts";
-
-const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
-const BLOG_DIR = "src/blog";
-const PAGE_SIZE = 10;
-
-type Post = {
-  stem: string;
-  file: string;
-  relFile: string;
-  url: string;
-  title: string;
-  description: string;
-  pubDateRaw: string;
-  pubDateMs: number;
-  tags: string[];
-  emoji: string;
-  isDiary: boolean;
-};
-
-/**
- * 記事一覧を組み立てる。
- *
- * `includeDrafts` が true のとき `#+DRAFT: true` の記事も含める。開発サーバー
- * (ctx.mode === "serve") では下書きも確認したいので true にする。本番ビルド
- * (ctx.mode === "build") では下書きを公開しない。
- */
-async function loadPosts(includeDrafts: boolean): Promise<Post[]> {
-  const dir = path.join(REPO_ROOT, BLOG_DIR);
-  const names = (await fs.readdir(dir)).filter((n) => n.endsWith(".org"));
-  const posts: Post[] = [];
-
-  for (const name of names) {
-    const file = path.join(dir, name);
-    const src = await fs.readFile(file, "utf8");
-    const stem = name.replace(/\.org$/, "");
-    const meta = extractOrgMeta(src, stem);
-    if (meta.draft && !includeDrafts) continue;
-
-    posts.push({
-      stem,
-      file,
-      relFile: `${BLOG_DIR}/${name}`,
-      url: `/blog/${stem}/`,
-      title: meta.title,
-      description: meta.description,
-      pubDateRaw: meta.pubDate,
-      pubDateMs: new Date(meta.pubDate).getTime(),
-      tags: meta.tags,
-      emoji: meta.emoji,
-      isDiary: stem.includes("-diary"),
-    });
-  }
-
-  posts.sort((a, b) => b.pubDateMs - a.pubDateMs);
-  return posts;
-}
 
 function toSummary(p: Post): PostSummary {
   return { title: p.title, url: p.url, description: p.description };

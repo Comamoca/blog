@@ -39,9 +39,11 @@ export const host = {
 };
 ```
 
-新しいURLを追加する場合は `host.ts` にルートを足す。URL互換性は
-`tests/fixtures/urls.txt` との照合テスト (`tests/url_compat_test.ts`) で
-担保している。
+新しいURLを追加する場合は `host.ts` にルートを足す。記事のURLは記事ソースから
+`ssg/posts.ts` の `derivePublishedUrls()` が導出するので、記事を追加しても
+fixture の更新は不要。`tests/fixtures/urls.txt` は移行時点の凍結スナップショット
+(481件) で、`tests/url_compat_test.ts` が「スナップショットのURLが今も出力にある
+こと」と「出力URL集合がソース導出集合と完全一致すること」を検証する。
 
 ## Source Directory Structure (`src/`)
 
@@ -96,6 +98,8 @@ Lumeプラグインの移植先。ox-content固有のビルドロジックをこ
 
 ```
 ssg/
+├── posts.ts                # 記事ソースの選別 (isPostSource) と一覧組み立て
+│                            # (loadPosts)、公開URLの導出 (derivePublishedUrls)
 ├── org.ts                 # org→HTMLパイプライン (uniorg + shiki + linkcard + 脚注)
 ├── org-meta.ts            # orgキーワード抽出 (記事一覧用)
 ├── highlight.ts           # 共有 Shiki ハイライタ
@@ -154,6 +158,9 @@ scripts/
 
 - **Blog Posts**: `YYYY-MM-DD-title.org` format
 - **Diary Entries**: `YYYY-MM-DD-diary.org` format
+
+`.org` 以外のファイル (無効化した記事の `foo.md.nop`、flycheck の一時ファイル) は
+`ssg/posts.ts` の `isPostSource()` が落とすので、URLもPagefindの索引も作られない。
 
 ## Key Architectural Principles
 

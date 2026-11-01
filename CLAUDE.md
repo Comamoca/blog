@@ -252,9 +252,18 @@ create.rb                # Blog post creation script
 
 There is no `*.page.tsx` file-naming convention. All routes (articles, listing
 pages, static pages, feeds, sitemap, 404) are defined programmatically in
-`host.ts`'s `routes()`. To add a URL, add a route there. URL compatibility with
-the pre-migration site is enforced by `tests/url_compat_test.ts` against
-`tests/fixtures/urls.txt`.
+`host.ts`'s `routes()`. To add a URL, add a route there.
+
+公開URL集合は `ssg/posts.ts` の `derivePublishedUrls()` が記事ソースから導出
+する。**記事を追加しても `tests/fixtures/urls.txt` を更新する必要はない**。
+このfixture は移行時点の凍結スナップショット (481件、うち記事426件) で、
+`tests/url_compat_test.ts` が次の2点を検証する:
+
+1. スナップショットの全URLが今も出力に存在する (移行前URLを失っていない)
+2. 出力URL集合がソース導出集合と完全一致する (余剰・欠落の両方)
+
+2 が下書き・`.nop`・`flycheck_*` の混入と、新記事の出力漏れを同時に捕まえる。
+記事の削除・改名はURL互換性の破壊としてテストが落ちる。
 
 ### Component Architecture
 
@@ -281,6 +290,16 @@ component as props.
 - Diary entries: Special posts with `-diary.org` suffix
 - Image assets: Stored in `src/img/` and served as-is (no build-time
   optimization/resizing)
+
+### 記事ソースの選別
+
+`src/blog/` のファイルが公開記事のソースになるかは `ssg/posts.ts` の
+`isPostSource()` が決める。記事として扱うのは org のみで、次は URL も
+Pagefind の索引も作らない:
+
+- `flycheck_*`: Emacs flycheck の一時ファイル (`.gitignore` 済み)
+- `*.nop`: 意図的に無効化した記事 (`2024-10-26-diary.md.nop` など)
+- org 以外の拡張子 (`.md` など)
 
 ### Drafts
 
@@ -330,6 +349,9 @@ sitemap・Pagefind のインデックスすべてで除外される (`tests/` �
 - `tests/url_compat_test.ts` と `tests/feed_compat_test.ts` はビルド出力
   (`dist/`、`vite.config.ts` の `outDir`) を検査する。`BUILD_OUTPUT_DIR` で
   別ディレクトリを指せる。出力ディレクトリが無い場合はskip
+- `tests/published_urls.test.ts` はビルド不要で、ソースツリーだけから公開URL
+  を検証する (下書き・`.nop`・`flycheck_*` の除外、固定ページ・ページネーション
+  の網羅、凍結スナップショットのURLが今も導出できること)
 
 ## Configuration Files
 

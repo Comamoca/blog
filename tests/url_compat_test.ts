@@ -2,18 +2,23 @@ import { test } from "vite-plus/test";
 import { assert, assertEquals } from "./_asserts.ts";
 import { join } from "node:path";
 import { readdir, readFile, stat } from "node:fs/promises";
+import { derivePublishedUrls } from "../ssg/posts.ts";
 
 /**
- * ox-content移行のURL互換性回帰テスト。
+ * ox-content移行のURL互換性回帰テスト (ビルド出力側)。
  *
- * tests/fixtures/urls.txt は移行前 (Lume, RELEASE=1) のビルド出力から生成した
- * 正規URL一覧 (477件)。移行の全フェーズを通じて、ビルド出力に対応するURL一覧が
- * 1件でもこのスナップショットと乖離したら失敗させる。
+ * tests/fixtures/urls.txt は移行時に取得した**凍結スナップショット**
+ * (移行前 Lume のビルド出力 477件 + 移行直後に main へ入った新規記事4件 =
+ * 481件)。このファイルはもう更新しない。新規記事を追加しても追記不要で、
+ * 代わりに「ソースから導出したURL集合」を基準に出力を検証する。
  *
- * スナップショット取得後にmainから入った新規記事はここに追記する
- * (直近は /blog/2026-11-01-nixos-suddenly-stopped-booting/ など4件)。
- * 移行前URLが1件も消えていないこと・ドラフトが混入していないことの検証としては
- * 変わらず機能する。
+ * 検証は2段構え:
+ *   1. スナップショットの全URLが今も出力に存在する (移行前URLを1件も失わない)
+ *   2. 出力URL集合がソース導出集合と完全一致する (余剰・欠落の両方を検出)
+ *
+ * 2 が「ドラフト・`.nop`・`flycheck_*` の混入」と「新規記事の出力漏れ」の
+ * 両方を捕まえる。ソース側だけの検証 (ビルド不要) は
+ * tests/published_urls.test.ts にある。
  *
  * 出力先は BUILD_OUTPUT_DIR 環境変数で切り替える。未指定なら dist
  * (vite.config.ts の outDir と同じ)。出力ディレクトリが存在しない場合は
@@ -22,6 +27,10 @@ import { readdir, readFile, stat } from "node:fs/promises";
 
 const OUTPUT_DIR = process.env.BUILD_OUTPUT_DIR ?? "dist";
 const FIXTURE_PATH = join("tests", "fixtures", "urls.txt");
+
+/** 凍結スナップショットの件数。fixture が壊れていないことの目印。 */
+const FROZEN_TOTAL = 481;
+const FROZEN_BLOG = 426;
 
 async function dirExists(path: string): Promise<boolean> {
   try {
@@ -32,53 +41,23 @@ async function dirExists(path: string): Promise<boolean> {
   }
 }
 
-async function loadExpectedUrls(): Promise<string[]> {
+async function loadFrozenUrls(): Promise<string[]> {
   const text = await readFile(FIXTURE_PATH, "utf-8");
   return text
     .split("\n")
     .map((l) => l.trim())
     .filter(Boolean)
-    .sort();
+    .sort((a, b) => a.localeCompare(b));
 }
 
-/** urls.txt の1エントリ (例: "/blog/foo/" や "/me.html") を出力ファイルパスへ変換する */
-function urlToOutputPath(url: string): string {
-  if (url.endsWith("/")) {
-    return join(OUTPUT_DIR, url, "index.html");
-  }
-  return join(OUTPUT_DIR, url);
-}
-
-const outputReady = await dirExists(OUTPUT_DIR);
-
-test.skipIf(!outputReady)(
-  "URL互換性: スナップショットの全URLに対応する出力ファイルが存在する",
-  async () => {
-    const expected = await loadExpectedUrls();
-    const missing: string[] = [];
-
-    for (const url of expected) {
-      const path = urlToOutputPath(url);
-      try {
-        await stat(path);
-      } catch {
-        missing.push(url);
-      }
-    }
-
-    assertEquals(
-      missing,
-      [],
-      `${missing.length}件のURLに対応する出力が見つからない (先頭10件: ${missing
-        .slice(0, 10)
-        .join(", ")})`,
-    );
-  },
-);
-
-test.skipIf(!outputReady)("URL互換性: 出力に余剰URL (ドラフト混入等) が無い", async () => {
-  const expected = new Set(await loadExpectedUrls());
-  const extra: string[] = [];
+/**
+ * ビルド出力に含まれるページURLを列挙する。
+ *
+ * ページ (index.html / *.html) に加え、サイトマップとフィードも
+ * 「公開URL」として数える (derivePublishedUrls 側の STATIC_URLS と対応)。
+ */
+async function collectOutputUrls(): Promise<string[]> {
+  const urls: string[] = [];
 
   async function walk(dir: string, urlPrefix: string) {
     for (const entry of await readdir(dir, { withFileTypes: true })) {
@@ -88,38 +67,80 @@ test.skipIf(!outputReady)("URL互換性: 出力に余剰URL (ドラフト混入�
         continue;
       }
       if (entry.name === "index.html") {
-        if (!expected.has(urlPrefix)) extra.push(urlPrefix);
+        urls.push(urlPrefix);
         continue;
       }
       if (entry.name.endsWith(".html")) {
-        const url = `${urlPrefix}${entry.name}`;
-        if (!expected.has(url)) extra.push(url);
+        urls.push(`${urlPrefix}${entry.name}`);
         continue;
       }
-      if (
-        (urlPrefix === "/api/" || full.includes(`${OUTPUT_DIR}/api/`)) &&
-        (entry.name === "feed.xml" || entry.name === "feed.json")
-      ) {
-        const url = `${urlPrefix}${entry.name}`;
-        if (!expected.has(url)) extra.push(url);
+      if (urlPrefix === "/" && entry.name === "sitemap.xml") {
+        urls.push("/sitemap.xml");
+        continue;
+      }
+      if (urlPrefix === "/api/" && (entry.name === "feed.xml" || entry.name === "feed.json")) {
+        urls.push(`${urlPrefix}${entry.name}`);
       }
     }
   }
 
   await walk(OUTPUT_DIR, "/");
+  return urls.sort((a, b) => a.localeCompare(b));
+}
+
+const outputReady = await dirExists(OUTPUT_DIR);
+
+test("URL互換性: 凍結スナップショットが壊れていない (481件・記事426件)", async () => {
+  const frozen = await loadFrozenUrls();
+  const blogUrls = frozen.filter((u) => u.startsWith("/blog/"));
+
+  assert(
+    frozen.length === FROZEN_TOTAL,
+    `スナップショットの件数が想定外 (${frozen.length}件、${FROZEN_TOTAL}件を期待)。` +
+      `tests/fixtures/urls.txt は凍結済みなので、新規記事を追記してはいけない`,
+  );
+  assert(
+    blogUrls.length === FROZEN_BLOG,
+    `スナップショットの記事URL数が想定外 (${blogUrls.length}件、${FROZEN_BLOG}件を期待)。` +
+      `fixture が壊れている可能性がある`,
+  );
+});
+
+test.skipIf(!outputReady)(
+  "URL互換性: スナップショットの全URLに対応する出力ファイルが存在する",
+  async () => {
+    const output = new Set(await collectOutputUrls());
+    const missing = (await loadFrozenUrls()).filter((url) => !output.has(url));
+
+    assertEquals(
+      missing,
+      [],
+      `${missing.length}件の移行前URLが出力から消えている (先頭10件: ${missing
+        .slice(0, 10)
+        .join(", ")})`,
+    );
+  },
+);
+
+test.skipIf(!outputReady)("URL互換性: 出力URL集合がソース導出の公開URL集合と一致する", async () => {
+  const output = await collectOutputUrls();
+  const derived = await derivePublishedUrls();
+
+  const outputSet = new Set(output);
+  const derivedSet = new Set(derived);
+
+  const extra = output.filter((url) => !derivedSet.has(url));
+  const missing = derived.filter((url) => !outputSet.has(url));
 
   assertEquals(
     extra,
     [],
-    `${extra.length}件の余剰URL (先頭10件: ${extra.slice(0, 10).join(", ")})`,
+    `${extra.length}件の余剰URL。下書き・.nop・flycheck_* の混入か、` +
+      `host.ts のルート追加漏れの疑い (先頭10件: ${extra.slice(0, 10).join(", ")})`,
   );
-});
-
-test.skipIf(!outputReady)("URL互換性: 公開記事URLの件数が426件", async () => {
-  const expected = await loadExpectedUrls();
-  const blogUrls = expected.filter((u) => u.startsWith("/blog/"));
-  assert(
-    blogUrls.length === 426,
-    `スナップショット自体が想定外 (${blogUrls.length}件、426件を期待)。fixtureが壊れている可能性がある`,
+  assertEquals(
+    missing,
+    [],
+    `${missing.length}件の公開URLが出力に無い (先頭10件: ${missing.slice(0, 10).join(", ")})`,
   );
 });
