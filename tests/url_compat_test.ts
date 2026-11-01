@@ -11,7 +11,7 @@ import { readdir, readFile, stat } from "node:fs/promises";
  * 1件でもこのスナップショットと乖離したら失敗させる。
  *
  * スナップショット取得後にmainから入った新規記事はここに追記する
- * (直近は /blog/2026-10-18-switched-blog-from-lume-to-ox-content/ など3件)。
+ * (直近は /blog/2026-11-01-nixos-suddenly-stopped-booting/ など4件)。
  * 移行前URLが1件も消えていないこと・ドラフトが混入していないことの検証としては
  * 変わらず機能する。
  *
@@ -115,11 +115,11 @@ test.skipIf(!outputReady)("URL互換性: 出力に余剰URL (ドラフト混入�
   );
 });
 
-test.skipIf(!outputReady)("URL互換性: 公開記事URLの件数が425件", async () => {
+test.skipIf(!outputReady)("URL互換性: 公開記事URLの件数が426件", async () => {
   const expected = await loadExpectedUrls();
   const blogUrls = expected.filter((u) => u.startsWith("/blog/"));
   assert(
-    blogUrls.length === 425,
-    `スナップショット自体が想定外 (${blogUrls.length}件、425件を期待)。fixtureが壊れている可能性がある`,
+    blogUrls.length === 426,
+    `スナップショット自体が想定外 (${blogUrls.length}件、426件を期待)。fixtureが壊れている可能性がある`,
   );
 });

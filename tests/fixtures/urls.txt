@@ -436,6 +436,7 @@
 /blog/2026-10-18-switched-blog-from-lume-to-ox-content/
 /blog/2026-10-18-visiting-spots-named-komiya/
 /blog/2026-10-25-memorable-artworks/
+/blog/2026-11-01-nixos-suddenly-stopped-booting/
 /diary/1/
 /diary/10/
 /diary/11/
