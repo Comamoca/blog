@@ -1,0 +1,109 @@
+#+TITLE: NixOS 起動しない なぜ
+#+DESCRIPTION: 突然NixOSが起動しなくなったので、その原因をまとめます
+#+DATE: [2026-11-01 Sun]
+#+FILETAGS: :tech:troubleshoot:nixos:nix:uefi:
+#+EMOJI: 🦊
+#+DRAFT: true
+
+
+僕は日常的にhibanateを常用しているですけど、ある日セッションがRAMに乗りきらなくなってシャットダウンした後起動しようとしたらNixOSの起動がStage2に進まなくなりました。
+NixOSが起動しない大抵のトラブルはBootloaderから過去のOS Imageを起動すれば回復できるんですけど、今回はそれが通用しなかったので再発を防ぐべく内容を記事にします。
+
+トラブル解決自体は全部GPT Solとdeepseek v4.1に任せたので、その作業内容を確認する狙いもあります。
+
+** 3行まとめ
+
+- GCは完全に安全性を保証するものではない
+- 主にブート関連の設定を変更した際のGCは注意した方が良い
+- NixOSの世代巻き戻しでも回復できないタイブのトラブルは存在する
+
+** タイムライン
+| 日付 | 出来事 |
+|------+--------|
+| 2026-01-21 | systemd-bootのGeneration 1〜10 のエントリが存在。 |
+| 2026-02-01 | NixOS設定をsystemd-boot から GRUB に変更。古い EFI エントリは残存。 |
+| 2026-10-25 | Nix GCが44,548 store path（約 69.3 GiB）を削除。 |
+| 2026-10-31 | UEFI が古いsystemd-bootを起動し、削除済みの =init= を参照して起動失敗。 |
+| 2026-10-31 | Live USBと jcodeで調査し、GRUB と Generation 63 が正常と確認。 |
+| 2026-11-01 | GRUBのUEFI エントリ =Boot0001= を使った一度限りの起動に成功。 |
+
+** トラブルの概要
+普段から日常的にhibanateしているNixOSマシンを再起動した際に突如起動不能になり、すべてのsystemd-boot世代でStage 1からStage 2への移行時に =init not found= が発生した。
+具体的な症状は以下の通り。
+
+- ブートメニューのどの Generation を選んでも起動できない。
+- Stage 1 でルートファイルシステムのマウントには成功する。
+- Stage 2 の init が見つからず、起動が停止する。
+
+画面には以下のエラーメッセージが表示されていた。
+#+begin_src text
+stage 2 init script
+(/mnt-root/nix/store/...-nixos-system-comabook-26.05.../init)
+not found
+#+end_src
+
+** 原因
+systemd-boot から GRUB への移行後、古いブートエントリが残っていたことが原因。
+
+1. 2026年2月1日にsystemd-bootからGRUBへ移行した。
+2. 古いsystemd-bootのEFI ファイルとGeneration 1〜10 のブートエントリが残存していた。
+3. 2026-10-25のNix GCにより、古いGenerationのNix store が削除された。
+4. GRUBのUEFI NVRAMエントリが消失し、古い systemd-boot が起動されるようになった。
+5. systemd-bootが削除済みのinitを参照したため、起動に失敗した。
+
+現在の63世代(NixOS 26.11)やGRUB自体は正常だった。
+GRUBのNVRAMエントリが消失した直接の理由は特定できていない。
+
+** 対処方法
+
+NixOSをLive USBから起動し、efibootmgrでGRUBのUEFI エントリを復元した。
+
+*** 1. GRUB の EFI ファイルを確認
+
+#+begin_src sh
+ls /mnt/esp/EFI/NixOS-boot/grubx64.efi
+#+end_src
+
+*** 2. GRUB の起動エントリを登録
+
+#+begin_src sh
+sudo efibootmgr --create-only \
+  --disk /dev/nvme0n1 \
+  --part 1 \
+  --label "NixOS GRUB" \
+  --loader '\EFI\NixOS-boot\grubx64.efi'
+#+end_src
+
+*** 3. BootNext で一度だけ GRUB を起動
+
+#+begin_src sh
+sudo efibootmgr -n 0001
+sudo reboot
+#+end_src
+
+再起動後、BootCurrentが0001であることと、
+Generation 63のNixOSが正常起動することを確認した。
+
+*** 4. 再発防止
+
+GRUBを通常の起動先にするため、BootOrderを変更する。
+
+#+begin_src sh
+sudo efibootmgr -o 0001,104F,0000,104E,104C,104D
+#+end_src
+
+さらに、UEFI NVRAMのエントリが消失してもGRUBから起動できるよう、
+EFI フォールバックへのGRUB配置を検討する。
+
+以下の設定はNixOSの制約上、組み合わせて変更する必要がある。
+
+#+begin_src nix
+boot.loader.efi.canTouchEfiVariables = false;
+boot.loader.grub.efiInstallAsRemovable = true;
+#+end_src
+
+** 感想
+systemd-bootからGRUBに移行した理由に心当りがなかったのだけど、時期的にNixOSのテーマをcatppucinに統一していたのでその一環でやった作業かなと思っている。
+GCはそろそろディスクの空きが減ってきたしな〜でおもむろに実施した。当時は63GBくらい削減できてホクホクしてたのだけど、その時にGRUBへ移行した際の残骸が残っていて、それが悪さをしたってことだと解釈している。
+
+以前再起動した時にkernel panicを起したこともあったので、遂にこのマシンも寿命か…と思っていたけど、まだまだ頑張ってくれそうなのは良かったなと。
