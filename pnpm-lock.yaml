@@ -12,8 +12,8 @@ importers:
         specifier: 3.7.3
         version: 3.7.3(@types/markdown-it@14.2.0)(@voidzero-dev/vite-plus-core@1.4.0(jiti@2.7.0)(terser@5.51.2)(typescript@7.0.2)(yaml@2.9.1))(rolldown@1.2.15)
       '@ox-content/vite-plugin':
-        specifier: 3.7.3
-        version: 3.7.3(@voidzero-dev/vite-plus-core@1.4.0(jiti@2.7.0)(terser@5.51.2)(typescript@7.0.2)(yaml@2.9.1))(katex@0.16.47)
+        specifier: 3.8.0
+        version: 3.8.0(@voidzero-dev/vite-plus-core@1.4.0(jiti@2.7.0)(terser@5.51.2)(typescript@7.0.2)(yaml@2.9.1))(katex@0.16.47)
       '@shikijs/rehype':
         specifier: ^4.0.0
         version: 4.5.0
@@ -370,8 +370,18 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
+  '@ox-content/binding-darwin-arm64@3.8.0':
+    resolution: {integrity: sha512-eJAdyB5B+/E9GuvzQXB7YrB8fUpLD3r9VhQ9G/ND0cFhN/EBXqjlgrD5q92C6G/qlfeQjcCPVg1TyiZ5/utCQg==}
+    cpu: [arm64]
+    os: [darwin]
+
   '@ox-content/binding-darwin-x64@3.7.3':
     resolution: {integrity: sha512-vFHT7PO16/0wIkmBrnspGT9yGWSY/XjcFi/b827i3831eAnzStdwkXVF6WiJQqcPYZM+hv06sDaDKeiEnQjeYA==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@ox-content/binding-darwin-x64@3.8.0':
+    resolution: {integrity: sha512-3gq+s4aDI3yab5hxjLnVpo+Y4vBCvsxoar17g5UxQU3Eh1w5yh5i9Y0fQbe7hw1XaJyU8APicjaeoy0DXm9StQ==}
     cpu: [x64]
     os: [darwin]
 
@@ -380,8 +390,18 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+  '@ox-content/binding-linux-arm64-gnu@3.8.0':
+    resolution: {integrity: sha512-+T94Un9rWeIN5oIQ7Xn56dgbmYjWxZ6ubFlXKL5xoSJQ+msH87W//OGq3bP0xJHj5PGzx4kVuj4S5JO0k1z+6w==}
+    cpu: [arm64]
+    os: [linux]
+
   '@ox-content/binding-linux-arm64-musl@3.7.3':
     resolution: {integrity: sha512-DCzvo7hrDpr87zbFs308bapx1AIYnWMHERWRIS5ymMkyJ53ei89xAY2chKNEumw3Kx7w71kRZvjeJgbUykirIA==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@ox-content/binding-linux-arm64-musl@3.8.0':
+    resolution: {integrity: sha512-aITNBLV+TZFD40ZKNeCnKgfmwHGniwEawJYO+EK2PmbRsQpQSKq2ckxnLohnA+8HbQBEon7BJi1srURrhRlq6Q==}
     cpu: [arm64]
     os: [linux]
 
@@ -390,8 +410,18 @@ packages:
     cpu: [x64]
     os: [linux]
 
+  '@ox-content/binding-linux-x64-gnu@3.8.0':
+    resolution: {integrity: sha512-0+weLxkiuFJ5aDFlxSP3E2ZP94tD8K9P+5Z9vZfKDOsICsS1SBGrx0hD4zrmxSrPVBa/470VBF9f8H0YRBwC5g==}
+    cpu: [x64]
+    os: [linux]
+
   '@ox-content/binding-linux-x64-musl@3.7.3':
     resolution: {integrity: sha512-C0wivqPF2ykWFH/btPwpeRc3bZJU1oIiQm201eNuXCskfUWh+5FWUoLTUO+2Vfz5ttkHIY+XiqgcYfucJOuAOg==}
+    cpu: [x64]
+    os: [linux]
+
+  '@ox-content/binding-linux-x64-musl@3.8.0':
+    resolution: {integrity: sha512-zDek/JNAYtKUN+qIxmd7TPbesyhrY4DkLtdjqUpUHVJHTppxxqxk/P57KNMmsvXUat2H7o7UhW4Xaqp5PhjKmA==}
     cpu: [x64]
     os: [linux]
 
@@ -400,14 +430,22 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@ox-content/binding-win32-x64-msvc@3.8.0':
+    resolution: {integrity: sha512-ezILicvb8eyhcupMLBOfpthqvM72TflauXK+sZn3O+3PO6+v0J+ZhBxhj+bJUHRDjvPa3MizOmnHWvh/2/pUxg==}
+    cpu: [x64]
+    os: [win32]
+
   '@ox-content/napi@3.7.3':
     resolution: {integrity: sha512-hVpM790N8b+TkDBR9GYMBxBDRNjqeVwyc4xR1gA40S9zUWmulnm4h1zoZGcDraCywPSHCoDLyrTKr16m7PwKLQ==}
+
+  '@ox-content/napi@3.8.0':
+    resolution: {integrity: sha512-eXZivk5B8zX8jI6rKjuBbiEnltw3dU3HWQfPXsQ+Sr45DN6XS6y2rXSxb0pVqatQ8Ynvz/nqTAOPERgO7n1tRA==}
 
   '@ox-content/unplugin@3.7.3':
     resolution: {integrity: sha512-uwa+DGGOx4d4vyN7PIDlslxmxwvwVfqfmWuhiWMZ73R0BFqE0kcRCYyLl/wLBQV333Hn08hTKmzL3c4XzCcMfA==}
 
-  '@ox-content/vite-plugin@3.7.3':
-    resolution: {integrity: sha512-/KyPYma5UqhPuxVE6pRQT6ldMol8cPYf2yLew/4bz12qGo/V/DiTnq6yn8gV/kZl9YdPw0iOBIxutDqMhSoGlg==}
+  '@ox-content/vite-plugin@3.8.0':
+    resolution: {integrity: sha512-Fxg2x6huDwDDdxIO9R570NPQKyfKyJ270i16i6DUT2iBoLZw1tig9fgJNfdGdRt5iWOuE83dyJaT+S98wMoGHw==}
     hasBin: true
     peerDependencies:
       '@solidjs/compiler': ^2.0.0-rc.9
@@ -746,6 +784,9 @@ packages:
     resolution: {integrity: sha512-Fa2Iyw7kaDRzGMfNYNUXNW2zbL5FQVDgSOcbDHdzBrDEdpqOqg8TcZ68F22ol6NJ9IGzvUdmeyZypLW5dyhqsg==}
     cpu: [x64]
     os: [win32]
+
+  '@pierre/highlights@0.3.0':
+    resolution: {integrity: sha512-s6xZ/giPPrSeCO2w254GiysUXD4ditKMTOrl1vHynvPqP7VdlujYi01O9joxJ0T16XkoXGQMN6zkRi9+O8NCzg==}
 
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
@@ -3442,22 +3483,43 @@ snapshots:
   '@ox-content/binding-darwin-arm64@3.7.3':
     optional: true
 
+  '@ox-content/binding-darwin-arm64@3.8.0':
+    optional: true
+
   '@ox-content/binding-darwin-x64@3.7.3':
+    optional: true
+
+  '@ox-content/binding-darwin-x64@3.8.0':
     optional: true
 
   '@ox-content/binding-linux-arm64-gnu@3.7.3':
     optional: true
 
+  '@ox-content/binding-linux-arm64-gnu@3.8.0':
+    optional: true
+
   '@ox-content/binding-linux-arm64-musl@3.7.3':
+    optional: true
+
+  '@ox-content/binding-linux-arm64-musl@3.8.0':
     optional: true
 
   '@ox-content/binding-linux-x64-gnu@3.7.3':
     optional: true
 
+  '@ox-content/binding-linux-x64-gnu@3.8.0':
+    optional: true
+
   '@ox-content/binding-linux-x64-musl@3.7.3':
     optional: true
 
+  '@ox-content/binding-linux-x64-musl@3.8.0':
+    optional: true
+
   '@ox-content/binding-win32-x64-msvc@3.7.3':
+    optional: true
+
+  '@ox-content/binding-win32-x64-msvc@3.8.0':
     optional: true
 
   '@ox-content/napi@3.7.3':
@@ -3469,6 +3531,16 @@ snapshots:
       '@ox-content/binding-linux-x64-gnu': 3.7.3
       '@ox-content/binding-linux-x64-musl': 3.7.3
       '@ox-content/binding-win32-x64-msvc': 3.7.3
+
+  '@ox-content/napi@3.8.0':
+    optionalDependencies:
+      '@ox-content/binding-darwin-arm64': 3.8.0
+      '@ox-content/binding-darwin-x64': 3.8.0
+      '@ox-content/binding-linux-arm64-gnu': 3.8.0
+      '@ox-content/binding-linux-arm64-musl': 3.8.0
+      '@ox-content/binding-linux-x64-gnu': 3.8.0
+      '@ox-content/binding-linux-x64-musl': 3.8.0
+      '@ox-content/binding-win32-x64-msvc': 3.8.0
 
   '@ox-content/unplugin@3.7.3(@types/markdown-it@14.2.0)(@voidzero-dev/vite-plus-core@1.4.0(jiti@2.7.0)(terser@5.51.2)(typescript@7.0.2)(yaml@2.9.1))(rolldown@1.2.15)':
     dependencies:
@@ -3497,13 +3569,14 @@ snapshots:
       - vite
       - webpack
 
-  '@ox-content/vite-plugin@3.7.3(@voidzero-dev/vite-plus-core@1.4.0(jiti@2.7.0)(terser@5.51.2)(typescript@7.0.2)(yaml@2.9.1))(katex@0.16.47)':
+  '@ox-content/vite-plugin@3.8.0(@voidzero-dev/vite-plus-core@1.4.0(jiti@2.7.0)(terser@5.51.2)(typescript@7.0.2)(yaml@2.9.1))(katex@0.16.47)':
     dependencies:
       '@cspell/dict-de-de': 4.1.3
       '@cspell/dict-en_us': 4.4.43
       '@cspell/dict-fr-fr': 2.3.2
       '@cspell/dict-pl_pl': 3.0.8
-      '@ox-content/napi': 3.7.3
+      '@ox-content/napi': 3.8.0
+      '@pierre/highlights': 0.3.0
       '@resvg/resvg-js': 2.6.2
       '@standard-schema/spec': 1.1.0
       '@takumi-rs/core': 2.19.0
@@ -3696,6 +3769,8 @@ snapshots:
 
   '@pagefind/windows-x64@1.5.2':
     optional: true
+
+  '@pierre/highlights@0.3.0': {}
 
   '@polka/url@1.0.0-next.29': {}
 
