@@ -93,7 +93,7 @@ sudo efibootmgr -o 0001,104F,0000,104E,104C,104D
 #+end_src
 
 さらに、UEFI NVRAMのエントリが消失してもGRUBから起動できるよう、
-EFI フォールバックへのGRUB配置を検討する。
+EFIフォールバックへのGRUB配置を検討する。
 
 以下の設定はNixOSの制約上、組み合わせて変更する必要がある。
 
