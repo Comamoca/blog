@@ -112,13 +112,18 @@ jobs:
           #       キューにいる (check run が作られていない) 状態を落として
           #       「全部終わった」と誤判定しうるため。
           #   (2) check run。job 単位の失敗を拾う。
-          # 同じ名前のチェックが複数 (再実行分) あるときは、id が最大の
-          # (最新の) ものだけを判定に使う。
+          # 同じ名前のチェック・run が複数 (再実行・concurrency キャンセルで
+          # 前の run が cancelled になるケース) あるときは、id が最大の
+          # (最新の) ものだけを判定に使う。古い run を残したまま判定すると、
+          # キャンセルされた run を失敗と見て merge できなくなる。
           deadline=$(( $(date +%s) + 1800 ))
           while :; do
             runs=$(gh api "repos/$GH_REPO/actions/runs?head_sha=$sha&per_page=100" \
               --jq '
                 [.workflow_runs[] | select(.name != "Renovate Automerge")]
+                | group_by(.name)
+                | map(max_by(.id))
+                | sort_by(.id)
                 | .[] | [.name, .status, (.conclusion // "-")] | @tsv')
             checks=$(gh api "repos/$GH_REPO/commits/$sha/check-runs?per_page=100" \
               --jq '
