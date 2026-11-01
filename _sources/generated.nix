@@ -10,34 +10,34 @@
 {
   vite-plus-cli-darwin-arm64 = {
     pname = "vite-plus-cli-darwin-arm64";
-    version = "1.3.0";
+    version = "1.4.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@voidzero-dev/vite-plus-cli-darwin-arm64/-/vite-plus-cli-darwin-arm64-1.3.0.tgz";
-      sha256 = "sha256-lgVFl5HUb08xavml5ITAvoDqG3aVefPbvfbbpS09a9g=";
+      url = "https://registry.npmjs.org/@voidzero-dev/vite-plus-cli-darwin-arm64/-/vite-plus-cli-darwin-arm64-1.4.0.tgz";
+      sha256 = "sha256-h8OmqE6TVswjuyHwbGUJ3/M892WTS/9mO6RAQCqO4rU=";
     };
   };
   vite-plus-cli-darwin-x64 = {
     pname = "vite-plus-cli-darwin-x64";
-    version = "1.3.0";
+    version = "1.4.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@voidzero-dev/vite-plus-cli-darwin-x64/-/vite-plus-cli-darwin-x64-1.3.0.tgz";
-      sha256 = "sha256-n2QwetP2byV8TmHQRixL6aVOj5Z57QVWtThmcgn+zSY=";
+      url = "https://registry.npmjs.org/@voidzero-dev/vite-plus-cli-darwin-x64/-/vite-plus-cli-darwin-x64-1.4.0.tgz";
+      sha256 = "sha256-oQtV2V16nzc/txFO6IuWkBkDGAEbIOxmVJIee9UmT+I=";
     };
   };
   vite-plus-cli-linux-arm64-gnu = {
     pname = "vite-plus-cli-linux-arm64-gnu";
-    version = "1.3.0";
+    version = "1.4.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@voidzero-dev/vite-plus-cli-linux-arm64-gnu/-/vite-plus-cli-linux-arm64-gnu-1.3.0.tgz";
-      sha256 = "sha256-/oh2Z3UGA058GFiI4CJAAgiY/4X11qB5Bnhw6we1iTw=";
+      url = "https://registry.npmjs.org/@voidzero-dev/vite-plus-cli-linux-arm64-gnu/-/vite-plus-cli-linux-arm64-gnu-1.4.0.tgz";
+      sha256 = "sha256-TvMYzR/vzu2hGE2MANkq3K7GaWhkmm9IVR2wFUzcQuA=";
     };
   };
   vite-plus-cli-linux-x64-gnu = {
     pname = "vite-plus-cli-linux-x64-gnu";
-    version = "1.3.0";
+    version = "1.4.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@voidzero-dev/vite-plus-cli-linux-x64-gnu/-/vite-plus-cli-linux-x64-gnu-1.3.0.tgz";
-      sha256 = "sha256-ebEUvMzz96CQ/Qz9/sb3W8nxLPXDKaoPF+dJRfxJRb0=";
+      url = "https://registry.npmjs.org/@voidzero-dev/vite-plus-cli-linux-x64-gnu/-/vite-plus-cli-linux-x64-gnu-1.4.0.tgz";
+      sha256 = "sha256-9FsIgyVgaB5z1Bqd68+iM8TbjtMHEuAAxYYZQkKIwrg=";
     };
   };
 }
