@@ -1,0 +1,178 @@
+name: Renovate Automerge
+
+# Renovate Test (pull_request) が成功したら、PR のチェックが全部
+# グリーンになった時点で自動で merge する。
+#
+# pull_request ではなく workflow_run で起動するのは、実行される
+# workflow 定義を default branch (信用できる側) から読ませるため。
+# pull_request で merge すると、PR 側の workflow 定義を書き換えられた
+# ときに write トークンで任意の操作ができてしまう。workflow_run では
+# default branch の定義が使われるので、依存更新の postinstall が
+# トークンを奪う余地がない。
+on:
+  workflow_run:
+    workflows: ["Renovate Test"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  automerge:
+    # テストが成功した run、かつ Renovate が作った PR だけを扱う。
+    # head_branch は PR の head ブランチ名、Renovate App の author は
+    # app/renovate (このリポジトリで実際に Renovate が作った PR の author)。
+    # author の確認は後のステップでも API で行う (belt and braces)。
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      startsWith(github.event.workflow_run.head_branch, 'renovate/')
+    runs-on: ubuntu-latest
+    name: Automerge
+    permissions:
+      contents: write
+      pull-requests: write
+      # merge 後の deploy を明示的に起動するため (GITHUB_TOKEN による push
+      # は workflow を起動しないため)
+      actions: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+      # テストが走ったコミット
+      HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+    steps:
+      - name: Resolve pull request
+        id: pr
+        env:
+          # workflow_run の payload に入っている関連 PR (取れないことがある)
+          PR_CANDIDATES: ${{ toJSON(github.event.workflow_run.pull_requests) }}
+        run: |
+          set -euo pipefail
+          # テストしたコミット (HEAD_SHA) を head に持つ PR を探す。
+          # payload に複数の PR が入っていても、対象を 1 つに絞れる。
+          pr=$(printf '%s' "$PR_CANDIDATES" \
+            | jq -r --arg sha "$HEAD_SHA" '[.[] | select(.head.sha == $sha) | .number] | first // empty')
+          if [ -z "$pr" ]; then
+            # payload に無い場合はコミットから PR を引き当てる
+            pr=$(gh api "repos/$GH_REPO/commits/$HEAD_SHA/pulls" \
+              | jq -r --arg sha "$HEAD_SHA" '[.[] | select(.head.sha == $sha) | .number] | first // empty')
+          fi
+          if [ -z "$pr" ]; then
+            echo "::warning::sha=$HEAD_SHA に対応する PR が見つからない。スキップする。"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "found=true" >> "$GITHUB_OUTPUT"
+          echo "number=$pr" >> "$GITHUB_OUTPUT"
+          echo "PR #$pr を処理する"
+
+      - name: Wait for all checks
+        id: checks
+        if: steps.pr.outputs.found == 'true'
+        env:
+          PR: ${{ steps.pr.outputs.number }}
+        run: |
+          set -euo pipefail
+          sha="$HEAD_SHA"
+          pr="$PR"
+
+          # --- merge してよい状態か確認する ---
+          head_sha=$(gh api "repos/$GH_REPO/pulls/$pr" --jq '.head.sha')
+          if [ "$head_sha" != "$sha" ]; then
+            echo "::warning::PR #$pr の HEAD ($head_sha) がテスト時 ($sha) と異なる。"
+            echo "新しいコミットに対するテストが走っているので、ここでは merge しない。"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Renovate が作った PR であることを確認する (Renovate Test 側でも
+          # 絞っているが、merge 権限を持つのはこの workflow なので念のため)
+          author=$(gh api "repos/$GH_REPO/pulls/$pr" --jq '.user.login')
+          if [ "$author" != "app/renovate" ]; then
+            echo "::warning::PR #$pr の author は app/renovate ではない ($author)。スキップする。"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          state=$(gh api "repos/$GH_REPO/pulls/$pr" --jq '.state')
+          draft=$(gh api "repos/$GH_REPO/pulls/$pr" --jq '.draft')
+          if [ "$state" != "open" ] || [ "$draft" != "false" ]; then
+            echo "::warning::PR #$pr は open な通常 PR ではない (state=$state draft=$draft)。スキップする。"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          mergeable=$(gh api "repos/$GH_REPO/pulls/$pr" --jq '.mergeable')
+          if [ "$mergeable" = "false" ]; then
+            echo "::error::PR #$pr は merge conflict がある。"
+            exit 1
+          fi
+
+          # --- 他のチェックの完了を待つ ---
+          # 2 つの API を使う:
+          #   (1) 同じ SHA の workflow run。check run だけを見ると、run がまだ
+          #       キューにいる (check run が作られていない) 状態を落として
+          #       「全部終わった」と誤判定しうるため。
+          #   (2) check run。job 単位の失敗を拾う。
+          # 同じ名前のチェックが複数 (再実行分) あるときは、id が最大の
+          # (最新の) ものだけを判定に使う。
+          deadline=$(( $(date +%s) + 1800 ))
+          while :; do
+            runs=$(gh api "repos/$GH_REPO/actions/runs?head_sha=$sha&per_page=100" \
+              --jq '
+                [.workflow_runs[] | select(.name != "Renovate Automerge")]
+                | .[] | [.name, .status, (.conclusion // "-")] | @tsv')
+            checks=$(gh api "repos/$GH_REPO/commits/$sha/check-runs?per_page=100" \
+              --jq '
+                [.check_runs[] | select(.name != "Automerge")]
+                | group_by(.name)
+                | map(max_by(.id))
+                | sort_by(.id)
+                | .[] | [.name, .status, (.conclusion // "-")] | @tsv')
+            pending=$(printf '%s\n%s\n' "$runs" "$checks" \
+              | awk -F'\t' 'NF >= 2 && $2 != "completed"')
+            if [ -z "$pending" ]; then
+              break
+            fi
+            if [ "$(date +%s)" -ge "$deadline" ]; then
+              echo "::error::チェックの完了待ちがタイムアウトした。"
+              printf '%s\n%s\n' "$runs" "$checks"
+              exit 1
+            fi
+            echo "完了を待っているチェック:"
+            printf '%s\n' "$pending"
+            sleep 15
+          done
+
+          # --- 判定 ---
+          # skipped (PRでは deploy ジョブが該当) と neutral は許容する。
+          failed=$(printf '%s\n%s\n' "$runs" "$checks" \
+            | awk -F'\t' 'NF >= 3 && $2 == "completed" && $3 != "success" && $3 != "skipped" && $3 != "neutral"')
+          if [ -n "$failed" ]; then
+            echo "::error::失敗したチェックがあるため merge しない。"
+            printf '%s\n' "$failed"
+            exit 1
+          fi
+
+          echo "全てのチェックが成功した:"
+          printf '%s\n%s\n' "$runs" "$checks"
+          echo "ready=true" >> "$GITHUB_OUTPUT"
+
+      - name: Merge pull request
+        if: steps.checks.outputs.ready == 'true'
+        env:
+          PR: ${{ steps.pr.outputs.number }}
+          # CI なので対話プロンプトで止まらないようにする
+          GH_PROMPT_DISABLED: "1"
+        run: |
+          set -euo pipefail
+          # 既存の merge commit の慣習 (Merge pull request #N from ...) に
+          # 合わすため squash ではなく merge commit にする。
+          # --match-head-commit で、テストしたコミットと同一のものを merge する。
+          gh pr merge "$PR" --merge --match-head-commit "$HEAD_SHA"
+
+      - name: Trigger deploy
+        if: steps.checks.outputs.ready == 'true'
+        run: |
+          set -euo pipefail
+          # GITHUB_TOKEN による push は (再帰防止のため) workflow を起動しない。
+          # そのため merge 後に deploy.yaml を明示的に起動する。
+          # 手動起動 (workflow_dispatch) では blog のデプロイに加えて OG Worker
+          # も必ず再デプロイされる (deploy.yaml の既存ルール)。
+          gh workflow run deploy.yaml --ref main

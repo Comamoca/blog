@@ -1,0 +1,75 @@
+name: Renovate Test
+
+# Renovate が作った PR に対して、テストスイート全体を GitHub Check として
+# 走らせる。
+#
+# 既存 workflow (deploy.yaml) は PR では og/** や src/** などが変わった
+# ときしか起動せず、しかも PR 上で full test suite を走らせるジョブは
+# ない (deploy ジョブは PR では skipped になる)。そのため依存更新 PR
+# (Renovate) ではテストが通ったかどうかが GitHub 上で確認できない。
+#
+# ここで走らせた Test Check の結果を使い、Renovate Automerge workflow
+# (workflow_run 側) が merge する。この workflow 自体は merge しない。
+#
+# 権限は read のみ。merge 権限は workflow_run 側の Renovate Automerge
+# workflow が持つので、依存の postinstall スクリプトから書き換えトークンを
+# 奪われる心配がない。
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+concurrency:
+  # 同じ PR に新しいコミットが push されたら古い実行はキャンセルする。
+  # キャンセルされた run は conclusion が cancelled になり、Renovate
+  # Automerge 側では merge 対象から弾かれる。
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    # Renovate が作った PR に限定する。このリポジトリの Renovate は GitHub
+    # App (app/renovate) として PR を作り、ブランチ名は renovate/ で始まる。
+    # 両方を要求する (どちらか一方だけだと、renovate/ ブランチを人間が使っ
+    # た PR まで自動 merge の対象になりうるため)。
+    #
+    # 条件に合わない PR ではこのジョブは skipped になる。check として
+    # 「Test (skipped)」が残るが、Renovate Automerge 側は
+    # workflow_run の head_branch と PR の author で同じ条件を確認する
+    # ので、merge は行われない。
+    if: >-
+      github.event.pull_request.user.login == 'app/renovate' &&
+      startsWith(github.head_ref, 'renovate/')
+    runs-on: ubuntu-latest
+    name: Test
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # feed の pubDate は git のコミット時刻から取るため、浅い clone だと
+          # 値が合わず feed_compat_test.ts が落ちる (deploy ジョブと同じ理由)。
+          fetch-depth: 0
+      - uses: nixbuild/nix-quick-install-action@v35
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Cache dependencies
+        uses: actions/cache@v6
+        with:
+          path: |
+            ~/.npm
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-
+      - name: Install dependencies
+        run: nix develop .#ci --command vp install --frozen-lockfile
+      # テストスイート全体を走らせる。互換性テストは dist/ を参照するので、
+      # 先に DISABLE_LINKCARD=1 でビルドしておく必要がある
+      # (deploy ジョブの test suite と同じ条件)。
+      - name: Run test suite
+        run: |
+          nix develop .#ci --command bash -c '
+            DISABLE_LINKCARD=1 vp build &&
+            BUILD_OUTPUT_DIR=dist vp run test
+          '
