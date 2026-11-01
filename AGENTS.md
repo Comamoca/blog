@@ -433,3 +433,32 @@ pull requests in the `test-og-charset` job, so a bad title is caught before
 merge rather than by the `deploy` job's test suite afterwards. The fix is to add
 that range to `og/data/charset-ranges.txt`; because that file lives under
 `og/**`, the OG jobs then run and redeploy the Worker with the wider subset.
+
+## Renovate の自動テスト・自動マージ
+
+依存更新 PR (Renovate) には、専用の 2 つの workflow が働く。どちらも
+`renovate/` ブランチの PR だけを対象にする。
+
+- `.github/workflows/renovate-test.yaml` — PR ごとに `vp build` と
+  `vp run test` (CI と同じテストスイート) を走らせる `Test` Check を作る。
+  ビルドは `DISABLE_LINKCARD=1` を有効にして、リンクカード取得のネットワーク
+  依存を排除する。テストした HEAD SHA と PR の HEAD SHA が一致することを
+  検証する。権限は `contents: read` のみ。
+- `.github/workflows/renovate-automerge.yaml` — `Renovate Test` が成功すると
+  `workflow_run` で起動する。対象 PR のすべての Check が成功するまで待ち、
+  `gh pr merge --merge --match-head-commit` で **merge commit** を作って
+  merge する (squash ではない)。merge 後は `GITHUB_TOKEN` の push では
+  workflow が起動しないため、`gh workflow run deploy.yaml --ref main` で
+  既存のデプロイを明示的に起動する。
+
+判定の作法:
+
+- author 判定は `renovate[bot]` と `app/renovate` の両方を受け付ける。
+  GitHub Actions が評価するのは event payload の生値 (`renovate[bot]`) だが、
+  `gh pr view --json author` は bot アカウントを `app/renovate` と表示する。
+  片方だけを許可すると、対象 PR でジョブが `skipped` になり、merge されない。
+- 判定に使うのは、workflow 名 / Check 名ごとに **最新の** run だけ
+  (`id` が最大)。concurrency で前の run が `cancelled` になると、それを失敗と
+  見て merge が永久にできなくなる。
+- `skipped` と `neutral` は許容する。それ以外の失敗 (`failure`, `cancelled`)
+  があれば merge しない (Renovate Test が失敗した PR は開いたまま残る)。
