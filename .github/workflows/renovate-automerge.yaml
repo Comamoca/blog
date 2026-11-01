@@ -21,7 +21,7 @@ jobs:
   automerge:
     # テストが成功した run、かつ Renovate が作った PR だけを扱う。
     # head_branch は PR の head ブランチ名、Renovate App の author は
-    # app/renovate (このリポジトリで実際に Renovate が作った PR の author)。
+    # API 上では renovate[bot] (gh CLI では app/renovate と表示される)。
     # author の確認は後のステップでも API で行う (belt and braces)。
     if: >-
       github.event.workflow_run.conclusion == 'success' &&
