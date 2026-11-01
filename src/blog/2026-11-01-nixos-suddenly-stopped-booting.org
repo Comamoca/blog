@@ -3,7 +3,7 @@
 #+DATE: [2026-11-01 Sun]
 #+FILETAGS: :tech:troubleshoot:nixos:nix:uefi:
 #+EMOJI: 🦊
-#+DRAFT: true
+#+DRAFT: false
 
 
 僕は日常的にhibanateを常用しているですけど、ある日セッションがRAMに乗りきらなくなってシャットダウンした後起動しようとしたらNixOSの起動がStage2に進まなくなりました。
