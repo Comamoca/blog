@@ -31,16 +31,22 @@ concurrency:
 jobs:
   test:
     # Renovate が作った PR に限定する。このリポジトリの Renovate は GitHub
-    # App (app/renovate) として PR を作り、ブランチ名は renovate/ で始まる。
+    # App (renovate) として PR を作り、ブランチ名は renovate/ で始まる。
     # 両方を要求する (どちらか一方だけだと、renovate/ ブランチを人間が使っ
     # た PR まで自動 merge の対象になりうるため)。
+    #
+    # author の login は API 上では "renovate[bot]" になる。gh CLI の
+    # `gh pr view --json author` は "app/renovate" と表示するが、
+    # GitHub Actions が評価するのは event payload の生値なので "renovate[bot]"
+    # と比較する (app/renovate も受け皿として残す)。
     #
     # 条件に合わない PR ではこのジョブは skipped になる。check として
     # 「Test (skipped)」が残るが、Renovate Automerge 側は
     # workflow_run の head_branch と PR の author で同じ条件を確認する
     # ので、merge は行われない。
     if: >-
-      github.event.pull_request.user.login == 'app/renovate' &&
+      (github.event.pull_request.user.login == 'renovate[bot]' ||
+      github.event.pull_request.user.login == 'app/renovate') &&
       startsWith(github.head_ref, 'renovate/')
     runs-on: ubuntu-latest
     name: Test

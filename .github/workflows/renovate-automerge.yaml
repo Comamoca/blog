@@ -85,9 +85,11 @@ jobs:
           fi
           # Renovate が作った PR であることを確認する (Renovate Test 側でも
           # 絞っているが、merge 権限を持つのはこの workflow なので念のため)
+          # author の login は API 上では "renovate[bot]" になる
+          # (gh CLI の表示は "app/renovate" になるが、API の生値は前者)
           author=$(gh api "repos/$GH_REPO/pulls/$pr" --jq '.user.login')
-          if [ "$author" != "app/renovate" ]; then
-            echo "::warning::PR #$pr の author は app/renovate ではない ($author)。スキップする。"
+          if [ "$author" != "renovate[bot]" ] && [ "$author" != "app/renovate" ]; then
+            echo "::warning::PR #$pr の author は Renovate ではない ($author)。スキップする。"
             echo "ready=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
