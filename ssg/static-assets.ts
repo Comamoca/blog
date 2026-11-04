@@ -35,6 +35,18 @@ const MIME: Record<string, string> = {
   ".avif": "image/avif",
 };
 
+/**
+ * 拡張子を持たないファイルのMIMEタイプ (ファイル名全体で判定)。
+ *
+ * atprotoのhandle解決仕様は /.well-known/atproto-did を text/plain で
+ * 返すことを定めている (クライアント側でのContent-Type厳密検証はされない)。
+ * 拡張子なしでは application/octet-stream に落ちるため、ここで上書きする。
+ * 本番 (Cloudflare Pages) 側は src/public/_headers で同じ宣言をする。
+ */
+const FILE_MIME: Record<string, string> = {
+  "atproto-did": "text/plain",
+};
+
 export function staticAssets(): Plugin {
   return {
     name: "blog:static-assets",
@@ -52,7 +64,10 @@ export function staticAssets(): Plugin {
             const stat = await fsp.stat(filePath);
             if (!stat.isFile()) continue;
             const ext = path.extname(filePath);
-            res.setHeader("Content-Type", MIME[ext] ?? "application/octet-stream");
+            res.setHeader(
+              "Content-Type",
+              FILE_MIME[path.basename(filePath)] ?? MIME[ext] ?? "application/octet-stream",
+            );
             res.setHeader("Cache-Control", "public, max-age=86400, immutable");
             fs.createReadStream(filePath).pipe(res);
             return;

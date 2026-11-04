@@ -1,0 +1,7 @@
+# Cloudflare Pages: atproto handle 解決仕様は /.well-known/atproto-did を
+# text/plain で返すことを定めている。拡張子なしファイルの既定MIMEでは
+# これを満たせないため、明示的に上書きする。
+#
+# 仕様: https://atproto.com/specs/handle (HTTPS well-known Method)
+/.well-known/atproto-did
+  Content-Type: text/plain
