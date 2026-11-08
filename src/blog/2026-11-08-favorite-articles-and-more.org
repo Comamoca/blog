@@ -1,7 +1,7 @@
 #+TITLE: 個人的に好きな記事などを紹介する
 #+DESCRIPTION: 随時更新していきたい
 #+DATE: [2026-11-08 Sun]
-#+FILETAGS: :prose:
+#+FILETAGS: :idea:prose:
 #+EMOJI: 🦊
 #+DRAFT: false
 

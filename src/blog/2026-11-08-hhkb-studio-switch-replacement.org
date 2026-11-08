@@ -1,7 +1,7 @@
 #+TITLE: HHKB Studioの軸を換装した
 #+DESCRIPTION: タクタイルにして打ち心地が良くなった
 #+DATE: [2026-11-08 Sun]
-#+FILETAGS: :keyboard:tactile:keyswitch:
+#+FILETAGS: :tech:keyboard:tactile:keyswitch:
 #+EMOJI: 🦊
 #+DRAFT: false
 
