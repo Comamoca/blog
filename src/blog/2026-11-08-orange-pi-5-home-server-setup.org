@@ -1,0 +1,7 @@
+#+TITLE: Orange Pi5を自宅サーバーとして導入した
+#+DESCRIPTION: 
+#+DATE: [2026-11-08 Sun]
+#+FILETAGS: :tech:orangepi:nixos:初星学園自宅サーバー部:
+#+EMOJI: 🦊
+#+DRAFT: true
+
