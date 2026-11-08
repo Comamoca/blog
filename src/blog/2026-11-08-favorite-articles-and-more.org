@@ -1,0 +1,55 @@
+#+TITLE: 個人的に好きな記事などを紹介する
+#+DESCRIPTION: 
+#+DATE: [2026-11-08 Sun]
+#+FILETAGS: :prose:
+#+EMOJI: 🦊
+#+DRAFT: false
+
+個人的に好きな記事をTwitterで紹介したらそこそこ反応あったので勝手に紹介していきます。
+他にも気に入ったものがあったら随時追加していきたい。
+
+#+begin_export html
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今日はライブ帰りにエンジニアの知人と会って、事ある事に特定技術をsageる人の話をしたのでこの記事紹介するなどした
+この記事好きなんだよな〜
+
+https://t.co/oSxlBv0TOW</p>&mdash; こまもか🦊 (@Comamoca_) <a href="https://x.com/Comamoca_/status/2119076780288192873?ref_src=twsrc%5Etfw">November 7, 2026</a></blockquote>
+<script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+#+end_export
+
+** 思想が強いのではない，ただイキっているだけ 
+https://wtrclred.io/ja/posts/29
+
+Twitterによくいる特定言語をdisってくる勢力へのアンチテーゼとして秀逸だと思っている。
+
+** 若者よ，インターネットを荒らせ 
+https://wtrclred.io/ja/posts/20
+
+** ピを広めたい
+https://blog.3qe.us/entry/pi
+
+記事の想定とは異なるけどこれを読んだ後に「ぴ」を聞くと気持ち良くなれる。
+
+#+begin_export html
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lxk1UcXcLc8?si=_SmR-9xa4ZGczIkn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+#+end_export
+
+** 田舎の中学生
+
+#+begin_export html
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">田舎の中学生が今こうやってソフトウェア屋として糊口を凌げているのは、ソフトウェア産業というものが建前として「すべての人のためのコンピューティング」を掲げ、Raspberry Piを作ったり、多言語対応をしたり、無償でOSSを提供してくれた結果なので、それに報いる形で、その多様性を守りたい</p>&mdash; Windymelt🍊🇯🇵🌸🚀❤️‍🔥F2FC 63C2 42C0 4D9D (@windymelt) <a href="https://x.com/windymelt/status/2014133190445969709?ref_src=twsrc%5Etfw">January 22, 2026</a></blockquote>
+<script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+#+end_export
+
+僕も田舎の中学生だったのでかなり共感した。
+
+** 「ブランケットを、 かけてあげられたらって――――！」
+[[https://shinycolors.idolmaster.jp/][アイドルマスターシャイニーカラーズ]]に登場するアイドル[[https://shinycolors.idolmaster-official.jp/idol/illuminationstars/meguru/][八宮めぐる]]のプロデュースシナリオG.R.A.Dにて登場する台詞。
+このセリフ自体は友人氏と話している時に教えてもらったもので、すごぶる気にいってるので半ば私物化する形で引用しまくっている。
+
+引用しまくっているのにもい関わらずG.R.A.DどころかW.I.N.Gすらやっていないし、クロノスタシスも絆光記もチエルアルコも読めてなくて申し分けなさがある…
+
+** 速いコンピュータを買いなさい
+https://gihyo.jp/article/2023/11/memorial-to-bram-moolenaar#:~:text=Bram%E6%B0%8F%E3%81%AF%E8%AC%9B%E6%BC%94%E3%81%AE%E4%B8%AD%E3%81%A7%E3%80%8CVim%20script%E3%82%92%E9%80%9F%E3%81%8F%E3%81%99%E3%82%8B%E3%81%AB%E3%81%AF%E3%81%A9%E3%81%86%E3%81%99%E3%82%8C%E3%81%B0%E8%89%AF%E3%81%84%E3%81%8B%E3%80%8D%E3%81%A8%E3%81%84%E3%81%86%E5%95%8F%E9%A1%8C%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E3%80%8C%E9%80%9F%E3%81%84%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%92%E8%B2%B7%E3%81%84%E3%81%AA%E3%81%95%E3%81%84%E3%80%8D%E3%81%A8%E7%AD%94%E3%81%88%E3%81%A6%E4%BC%9A%E5%A0%B4%E3%82%92%E7%88%86%E7%AC%91%E3%81%95%E3%81%9B%E3%81%A6%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82
+
+Vimの作者Bram氏が「Vim scriptを速くするにはどうすれば良いか」という質問にを受けた際の回答。
+一部界隈ではマシンスペックを強化することを `:bram:する` と言ったりするらしい。
