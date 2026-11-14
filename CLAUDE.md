@@ -400,6 +400,19 @@ Vite plugin hook:
 - Only runs in production builds; `dev` has no search index, matching the
   dev-speed tradeoff documented for the other whole-site plugins
 
+### Agent Readiness
+
+isitagentready.com (`POST /api/scan`) のチェックに対応する静的リソース:
+
+- `src/public/robots.txt` (Content-Signal / Sitemap)、`llms.txt`、`_headers` の `Link` ヘッダ
+- `src/well-known/api-catalog` (RFC 9727)、`agent-skills/index.json` + `src/public/skills/*/SKILL.md`
+  (SKILL.md を編集したら index.json の `digest` を sha256 で更新する。`tests/agent_ready.test.ts` が検査)
+- Markdown negotiation: `ssg/run-markdown.ts` が `dist/**/*.md` を生成し、Cloudflare の
+  Transform Rule (`scripts/cloudflare/markdown-rewrite-ruleset.json`) が `Accept: text/markdown`
+  のGETを `.md` へ書き換える。ルールセットはダッシュボードまたはAPIで別途適用する
+- DNS-AID (`_index._agents`) はDNSレコードのためリポジトリ管理外。Cloudflare DNS側で設定する
+- WebMCP: `ssg/webmcp-client.ts` が `search_blog` ツールを登録する
+
 ### Link Cards
 
 - External link preview generation via `ssg/linkcard-rehype.ts` (HAST/rehype

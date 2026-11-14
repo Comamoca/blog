@@ -2,6 +2,8 @@ import Header from "../../_components/Header.tsx";
 import Footer from "../../_components/Footer.tsx";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, TWITTER_USERNAME } from "../../consts.ts";
 import { PAGEFIND_INIT_SCRIPT } from "../../../ssg/pagefind-client.ts";
+import { markdownUrlFor } from "../../../ssg/markdown-path.ts";
+import { WEBMCP_SCRIPT } from "../../../ssg/webmcp-client.ts";
 import { raw } from "@ox-content/vite-plugin";
 
 export interface MainLayoutData {
@@ -33,6 +35,9 @@ export default (data: MainLayoutData) => {
             <meta property="og:title" content={title} />
             <meta property="og:description" content={description ?? SITE_DESCRIPTION} />
             {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
+            {canonicalUrl ? (
+              <link rel="alternate" type="text/markdown" href={markdownUrlFor(canonicalUrl)} />
+            ) : null}
             <meta property="og:image" content={ogImage} />
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:site" content={TWITTER_USERNAME} />
@@ -47,6 +52,7 @@ export default (data: MainLayoutData) => {
         <Footer />
         <script src="/pagefind/pagefind-ui.js" data-cfasync="false"></script>
         <script data-cfasync="false">{raw(PAGEFIND_INIT_SCRIPT)}</script>
+        <script data-cfasync="false">{raw(WEBMCP_SCRIPT)}</script>
       </body>
     </html>
   );

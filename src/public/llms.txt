@@ -1,0 +1,23 @@
+# Comamoca's Blog
+
+> Comamoca (Comamoca) の個人ブログ。主に日本語で、技術記事と日記を公開している。
+
+## Content
+
+- [全記事](https://comamoca.dev/all/1): 全記事の一覧 (ページネーション)
+- [技術記事](https://comamoca.dev/tech/1): 技術記事のみの一覧
+- [日記](https://comamoca.dev/diary/1): 日報・日記
+- [About](https://comamoca.dev/me.html): 著者について
+- [Info](https://comamoca.dev/info.html): サイト情報
+- [Hub](https://comamoca.dev/hub.html): 関連リンク集
+
+## Machine-readable
+
+- [Sitemap](https://comamoca.dev/sitemap.xml): 全ページのURL一覧
+- [RSS feed](https://comamoca.dev/api/feed.xml): 最新10記事
+- [JSON Feed](https://comamoca.dev/api/feed.json): 最新10記事
+- [API Catalog](https://comamoca.dev/.well-known/api-catalog): 上記エンドポイントのRFC 9727カタログ
+
+## Notes
+
+- 各ページのMarkdown版は、`/blog/<slug>/index.md` のようにURL末尾を `index.md` に (`me.html` は `me.md` に) 置き換えると取得できる。

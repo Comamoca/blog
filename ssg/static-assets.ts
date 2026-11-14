@@ -29,6 +29,8 @@ const MIME: Record<string, string> = {
   ".svg": "image/svg+xml",
   ".ico": "image/x-icon",
   ".json": "application/json",
+  ".txt": "text/plain; charset=utf-8",
+  ".md": "text/markdown; charset=utf-8",
   ".webp": "image/webp",
   ".gif": "image/gif",
   ".woff2": "font/woff2",
@@ -45,6 +47,7 @@ const MIME: Record<string, string> = {
  */
 const FILE_MIME: Record<string, string> = {
   "atproto-did": "text/plain",
+  "api-catalog": 'application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"',
 };
 
 export function staticAssets(): Plugin {

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "comamoca-blog",
+      "type": "skill-md",
+      "description": "comamoca.dev (Comamoca の個人ブログ) の記事を探して読む。",
+      "url": "/skills/comamoca-blog/SKILL.md",
+      "digest": "sha256:222dbaae7452622ffcd669980ab02749850b49b904cacf8b7df864209999b92d"
+    }
+  ]
+}

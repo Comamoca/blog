@@ -1,0 +1,29 @@
+# Content Signals (https://contentsignals.org/): 検索・AI回答での引用は許可、学習利用は不可。
+# クローラ個別のグループは `*` を継承しないため、各グループに同じシグナルを明記する。
+
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+# AI検索・回答生成用クローラ: 許可
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+# AI学習用クローラ: 拒否
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: Meta-ExternalAgent
+Content-Signal: search=no, ai-input=no, ai-train=no
+Disallow: /
+
+Sitemap: https://comamoca.dev/sitemap.xml

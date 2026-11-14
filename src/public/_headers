@@ -5,3 +5,20 @@
 # 仕様: https://atproto.com/specs/handle (HTTPS well-known Method)
 /.well-known/atproto-did
   Content-Type: text/plain
+
+# RFC 9727: API Catalog は application/linkset+json で返す。
+/.well-known/api-catalog
+  Content-Type: application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"
+  Access-Control-Allow-Origin: *
+
+/.well-known/agent-skills/index.json
+  Access-Control-Allow-Origin: *
+
+# RFC 8288 Link ヘッダでエージェント向けリソースを広告する (isitagentready の linkHeaders)。
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog"
+  Link: </sitemap.xml>; rel="sitemap"; type="application/xml"
+  Link: </api/feed.xml>; rel="alternate"; type="application/rss+xml"; title="RSS"
+  Link: </index.md>; rel="alternate"; type="text/markdown"
+  Link: </llms.txt>; rel="describedby"; type="text/plain"
+  Link: </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json"

@@ -1,0 +1,20 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://comamoca.dev/.well-known/api-catalog",
+      "item": [
+        { "href": "https://comamoca.dev/api/feed.xml", "type": "application/rss+xml", "title": "RSS feed" },
+        { "href": "https://comamoca.dev/api/feed.json", "type": "application/feed+json", "title": "JSON Feed" },
+        { "href": "https://comamoca.dev/sitemap.xml", "type": "application/xml", "title": "Sitemap" }
+      ]
+    },
+    {
+      "anchor": "https://comamoca.dev/api/feed.xml",
+      "service-desc": [{ "href": "https://www.rssboard.org/rss-specification", "type": "text/html" }]
+    },
+    {
+      "anchor": "https://comamoca.dev/api/feed.json",
+      "service-desc": [{ "href": "https://www.jsonfeed.org/version/1.1/", "type": "text/html" }]
+    }
+  ]
+}

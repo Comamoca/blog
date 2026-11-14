@@ -1,0 +1,28 @@
+{
+  "name": "Markdown for agents",
+  "description": "Accept: text/markdown のGETを、ビルド時に生成した .md へ書き換える (ssg/run-markdown.ts)",
+  "kind": "zone",
+  "phase": "http_request_transform",
+  "rules": [
+    {
+      "description": "Markdown: ディレクトリURL -> index.md",
+      "expression": "(http.request.method in {\"GET\" \"HEAD\"} and any(http.request.headers[\"accept\"][*] contains \"text/markdown\") and ends_with(http.request.uri.path, \"/\"))",
+      "action": "rewrite",
+      "action_parameters": {
+        "uri": {
+          "path": { "expression": "concat(http.request.uri.path, \"index.md\")" }
+        }
+      }
+    },
+    {
+      "description": "Markdown: *.html -> *.md",
+      "expression": "(http.request.method in {\"GET\" \"HEAD\"} and any(http.request.headers[\"accept\"][*] contains \"text/markdown\") and ends_with(http.request.uri.path, \".html\"))",
+      "action": "rewrite",
+      "action_parameters": {
+        "uri": {
+          "path": { "expression": "concat(substring(http.request.uri.path, 0, -5), \".md\")" }
+        }
+      }
+    }
+  ]
+}

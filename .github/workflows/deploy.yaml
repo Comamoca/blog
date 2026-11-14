@@ -235,10 +235,13 @@ jobs:
       # 脚注の水平線化 (ssg/org.ts) や下書きの非公開化 (host.ts) の
       # 回帰がCIで検出されなくなるため。互換性テストは dist/ を参照する
       # ので、先にDISABLE_LINKCARD=1 でビルドしておく必要がある。
+      # tests/markdown_output.test.ts は .md の存在を見るため、
+      # ssg/run-markdown.ts もテスト前に走らせる。
       - name: Run test suite
         run: |
           nix develop .#ci --command bash -c '
             DISABLE_LINKCARD=1 vp build &&
+            node --experimental-strip-types ssg/run-markdown.ts &&
             BUILD_OUTPUT_DIR=dist vp run test
           '
 
