@@ -4,7 +4,11 @@
 
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@plugin "daisyui";
+/* join はサイトで未使用。`@scope` 内の先頭結合子セレクタ (`> :where(...)`) を
+   lightningcss が解釈できず、ビルドのたびに警告が出るため除外する */
+@plugin "daisyui" {
+  exclude: join;
+}
 
 @source inline("py-3");
 
