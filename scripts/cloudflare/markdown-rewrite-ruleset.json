@@ -15,6 +15,16 @@
       }
     },
     {
+      "description": "Markdown: 拡張子なしの固定ページ (Pagesは /me.html を /me へ308する) -> *.md",
+      "expression": "(http.request.method in {\"GET\" \"HEAD\"} and any(http.request.headers[\"accept\"][*] contains \"text/markdown\") and http.request.uri.path in {\"/me\" \"/info\" \"/hub\"})",
+      "action": "rewrite",
+      "action_parameters": {
+        "uri": {
+          "path": { "expression": "concat(http.request.uri.path, \".md\")" }
+        }
+      }
+    },
+    {
       "description": "Markdown: *.html -> *.md",
       "expression": "(http.request.method in {\"GET\" \"HEAD\"} and any(http.request.headers[\"accept\"][*] contains \"text/markdown\") and ends_with(http.request.uri.path, \".html\"))",
       "action": "rewrite",
