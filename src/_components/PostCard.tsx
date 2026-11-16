@@ -22,7 +22,7 @@ export default function PostCard(props: PostCardProps) {
         <div className="text-lg md:text-2xl py-1 md:py-2 px-3 font-bold tracking-tight text-gray-900">
           {title}
         </div>
-        <p className="font-normal py-1 md:py-2 px-3 text-gray-700 text-sm md:text-base">
+        <p className="font-normal py-1 md:py-2 px-3 text-gray-700 text-sm md:text-base line-clamp-1 min-h-5 md:min-h-6">
           {description}
         </p>
       </a>
