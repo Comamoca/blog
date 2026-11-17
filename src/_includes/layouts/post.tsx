@@ -8,6 +8,7 @@ import { SITE_DESCRIPTION, SITE_URL, TWITTER_USERNAME } from "../../consts.ts";
 import { PAGEFIND_INIT_SCRIPT } from "../../../ssg/pagefind-client.ts";
 import { markdownUrlFor } from "../../../ssg/markdown-path.ts";
 import { WEBMCP_SCRIPT } from "../../../ssg/webmcp-client.ts";
+import { postJsonLd } from "../../../ssg/json-ld.ts";
 import { raw } from "@ox-content/vite-plugin";
 
 function yymmdd(date: string): string {
@@ -48,6 +49,7 @@ export default function (data: PostLayoutData) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap@latest"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/nostr-zap-view@1.3.4"></script>
+        {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
         {ogImage ? (
           <>
             <meta property="og:type" content="article" />
@@ -56,6 +58,21 @@ export default function (data: PostLayoutData) {
             {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
             {canonicalUrl ? (
               <link rel="alternate" type="text/markdown" href={markdownUrlFor(canonicalUrl)} />
+            ) : null}
+            {canonicalUrl ? (
+              <script type="application/ld+json">
+                {raw(
+                  JSON.stringify(
+                    postJsonLd({
+                      title,
+                      description: description ?? SITE_DESCRIPTION,
+                      url: canonicalUrl,
+                      pubDate,
+                      image: ogImage,
+                    }),
+                  ),
+                )}
+              </script>
             ) : null}
             <meta property="og:image" content={ogImage} />
             <meta name="twitter:card" content="summary_large_image" />

@@ -14,6 +14,10 @@
 /.well-known/agent-skills/index.json
   Access-Control-Allow-Origin: *
 
+# ARD (Agentic Resource Discovery): https://agenticresourcediscovery.org/
+/.well-known/ard.json
+  Access-Control-Allow-Origin: *
+
 # RFC 8288 Link ヘッダでエージェント向けリソースを広告する (isitagentready の linkHeaders)。
 /
   Link: </.well-known/api-catalog>; rel="api-catalog"
@@ -22,3 +26,9 @@
   Link: </index.md>; rel="alternate"; type="text/markdown"
   Link: </llms.txt>; rel="describedby"; type="text/plain"
   Link: </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json"
+
+# Markdown negotiation (scripts/cloudflare/markdown-rewrite-ruleset.json) は
+# Accept ヘッダで表現を切り替える。Vary が無いとCDN/共有キャッシュがどちらかの
+# 表現を全クライアントに固定配信してしまう (acceptmarkdown.com のチェック対象)。
+/*
+  Vary: Accept

@@ -17,6 +17,7 @@
 - [RSS feed](https://comamoca.dev/api/feed.xml): 最新10記事
 - [JSON Feed](https://comamoca.dev/api/feed.json): 最新10記事
 - [API Catalog](https://comamoca.dev/.well-known/api-catalog): 上記エンドポイントのRFC 9727カタログ
+- [ARD](https://comamoca.dev/.well-known/ard.json): Agentic Resource Discoveryカタログ (フィード・サイトマップ・Agent Skill)
 
 ## Notes
 

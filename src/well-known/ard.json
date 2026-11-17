@@ -1,0 +1,47 @@
+{
+  "entries": [
+    {
+      "identifier": "urn:air:comamoca.dev:feed:json",
+      "displayName": "comamoca.dev JSON Feed",
+      "type": "application/feed+json",
+      "url": "https://comamoca.dev/api/feed.json",
+      "description": "comamoca.dev (Comamoca の個人ブログ) の最新記事フィード。",
+      "representativeQueries": [
+        "comamoca.dev の最新記事を教えて",
+        "what are the latest posts on comamoca.dev"
+      ]
+    },
+    {
+      "identifier": "urn:air:comamoca.dev:feed:rss",
+      "displayName": "comamoca.dev RSS Feed",
+      "type": "application/rss+xml",
+      "url": "https://comamoca.dev/api/feed.xml",
+      "description": "comamoca.dev の最新記事フィード (RSS 2.0)。"
+    },
+    {
+      "identifier": "urn:air:comamoca.dev:sitemap",
+      "displayName": "comamoca.dev Sitemap",
+      "type": "application/xml",
+      "url": "https://comamoca.dev/sitemap.xml",
+      "description": "comamoca.dev の全ページURL一覧。"
+    },
+    {
+      "identifier": "urn:air:comamoca.dev:llms-txt",
+      "displayName": "comamoca.dev llms.txt",
+      "type": "text/plain",
+      "url": "https://comamoca.dev/llms.txt",
+      "description": "comamoca.dev のサイト概要とナビゲーション (llms.txt)。"
+    },
+    {
+      "identifier": "urn:air:comamoca.dev:skill:comamoca-blog",
+      "displayName": "comamoca-blog Agent Skill",
+      "type": "text/markdown",
+      "url": "https://comamoca.dev/skills/comamoca-blog/SKILL.md",
+      "description": "comamoca.dev の記事一覧取得・最新記事確認・本文Markdown取得・サイト内検索の手順。",
+      "representativeQueries": [
+        "comamoca.dev の記事を検索して",
+        "find and read articles on comamoca.dev"
+      ]
+    }
+  ]
+}

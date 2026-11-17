@@ -48,6 +48,47 @@ function title(tree: Root): string | undefined {
   return text || undefined;
 }
 
+function metaContent(tree: Root, name: string): string | undefined {
+  let found: string | undefined;
+  visit(tree, "element", (node: Element) => {
+    if (node.tagName === "meta" && node.properties?.name === name) {
+      const content = node.properties?.content;
+      if (typeof content === "string" && content) found = content;
+      return false;
+    }
+  });
+  return found;
+}
+
+function linkHref(tree: Root, rel: string): string | undefined {
+  let found: string | undefined;
+  visit(tree, "element", (node: Element) => {
+    if (node.tagName !== "link") return;
+    const relValue = node.properties?.rel;
+    const rels = Array.isArray(relValue) ? relValue.map(String) : [String(relValue)];
+    if (!rels.includes(rel)) return;
+    const href = node.properties?.href;
+    if (typeof href === "string" && href) found = href;
+    return false;
+  });
+  return found;
+}
+
+function yamlQuote(value: string): string {
+  return `"${value.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, " ")}"`;
+}
+
+/** agent向けMarkdownの先頭に載せるfrontmatter (title/description/canonical) */
+function frontmatter(tree: Root, heading: string | undefined): string {
+  const description = metaContent(tree, "description");
+  const canonical = linkHref(tree, "canonical");
+  const lines: string[] = [];
+  if (heading) lines.push(`title: ${yamlQuote(heading)}`);
+  if (description) lines.push(`description: ${yamlQuote(description)}`);
+  if (canonical) lines.push(`canonical: ${yamlQuote(canonical)}`);
+  return lines.length ? `---\n${lines.join("\n")}\n---\n\n` : "";
+}
+
 /** ナビゲーション・検索モーダルなど本文でない要素 */
 function isChrome(node: Element): boolean {
   if (DROP_TAGS.has(node.tagName)) return true;
@@ -111,5 +152,6 @@ export async function htmlToMarkdown(html: string): Promise<string> {
   const file = processor.stringify(mdast as never);
 
   const body = String(file).trim();
-  return heading && !/^#\s/m.test(body) ? `# ${heading}\n\n${body}\n` : `${body}\n`;
+  const content = heading && !/^#\s/m.test(body) ? `# ${heading}\n\n${body}\n` : `${body}\n`;
+  return `${frontmatter(tree, heading)}${content}`;
 }
