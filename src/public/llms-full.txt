@@ -23,12 +23,14 @@ Comamoca (Comamoca) の個人ブログ。主に日本語で、技術記事 (プ�
   または `Accept: text/markdown` を付けてGETすると、Cloudflare側のTransform RuleがHTMLをMarkdownへ書き換えて返す。
 - 各HTMLページには `WebSite`/`Person` (固定ページ) または `BlogPosting` (記事) のJSON-LDが埋め込まれている。
 - サイト内検索はPagefindのインデックス、またはページに登録されたWebMCPツール `search_blog` から呼べる。
+- 存在しないパスは404を返す。`Accept: text/markdown` ならMarkdownの、`Accept: application/json` または `/api/*` 配下ならJSON (`{"error":{"code","status","message","resolution","docs"}}`) のエラー本文になる。
 
 ## Machine-readable
 
 - [Sitemap](https://comamoca.dev/sitemap.xml): 全ページのURL一覧 (XML)
 - [Sitemap (Markdown)](https://comamoca.dev/sitemap.md): 記事タイトル・説明付きの全ページ一覧
 - [agents.md](https://comamoca.dev/agents.md): このサイトを読むAIエージェント向けの閲覧ガイド
+- [OpenAPI spec](https://comamoca.dev/openapi.json): フィード・サイトマップエンドポイントの仕様 (OpenAPI 3.1)
 - [RSS feed](https://comamoca.dev/api/feed.xml): 最新10記事
 - [JSON Feed](https://comamoca.dev/api/feed.json): 最新10記事
 - [API Catalog](https://comamoca.dev/.well-known/api-catalog): 上記エンドポイントのRFC 9727カタログ

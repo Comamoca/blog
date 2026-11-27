@@ -37,3 +37,12 @@ test("api-catalog: RFC 9727 の linkset として妥当", () => {
   assert(Array.isArray(catalog.linkset));
   assert(catalog.linkset[0].item.length > 0);
 });
+
+test("openapi.json: OpenAPI 3.1として妥当で、実在するエンドポイントを記述している", () => {
+  const spec = JSON.parse(readFileSync("src/public/openapi.json", "utf-8"));
+  assert(spec.openapi.startsWith("3."));
+  assert(typeof spec.info.title === "string" && spec.info.title.length > 0);
+  for (const path of ["/api/feed.xml", "/api/feed.json", "/sitemap.xml", "/sitemap.md"]) {
+    assert(spec.paths[path]?.get, `paths["${path}"].get が無い`);
+  }
+});

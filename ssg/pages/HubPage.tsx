@@ -44,7 +44,7 @@ export default function HubPage() {
   return (
     <div className="mt-5 mx-8 md:mx-auto">
       <div className="flex flex-col justify-center">
-        <h2 className="text-3xl md:text-4xl px-auto mx-auto">Hub</h2>
+        <h1 className="text-3xl md:text-4xl px-auto mx-auto">Hub</h1>
 
         <p className="p-10 mx-auto">
           自分が書いた情報やテンプレートなど、自身がよく引用するリソースの一覧です。

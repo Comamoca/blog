@@ -1,0 +1,86 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "comamoca.dev API",
+    "description": "Comamoca個人ブログの読み取り専用エンドポイント (フィード・サイトマップ)。記事投稿・更新用のAPIは無い。",
+    "version": "1.0.0"
+  },
+  "servers": [{ "url": "https://comamoca.dev" }],
+  "paths": {
+    "/api/feed.xml": {
+      "get": {
+        "summary": "最新記事のRSSフィード",
+        "operationId": "getRssFeed",
+        "responses": {
+          "200": {
+            "description": "最新10件の記事を含むRSS 2.0フィード",
+            "content": { "application/rss+xml": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/api/feed.json": {
+      "get": {
+        "summary": "最新記事のJSON Feed",
+        "operationId": "getJsonFeed",
+        "responses": {
+          "200": {
+            "description": "最新10件の記事を含むJSON Feed 1.1",
+            "content": { "application/feed+json": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/sitemap.xml": {
+      "get": {
+        "summary": "全ページのURL一覧 (XML Sitemap)",
+        "operationId": "getSitemapXml",
+        "responses": {
+          "200": {
+            "description": "XML Sitemap",
+            "content": { "application/xml": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/sitemap.md": {
+      "get": {
+        "summary": "記事タイトル・説明付きの全ページ一覧 (Markdown)",
+        "operationId": "getSitemapMarkdown",
+        "responses": {
+          "200": {
+            "description": "Markdown形式のサイトマップ",
+            "content": { "text/markdown": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": ["code", "status", "message"],
+            "properties": {
+              "code": { "type": "string", "example": "not_found" },
+              "status": { "type": "integer", "example": 404 },
+              "message": { "type": "string" },
+              "resolution": { "type": "string" },
+              "docs": { "type": "string", "format": "uri" }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "NotFound": {
+        "description": "存在しないパス。Accept: application/json またはapplication/jsonをデフォルトとする/api/*配下では、このJSON形式で返す。",
+        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } }
+      }
+    }
+  }
+}

@@ -30,43 +30,45 @@ export default function MePage() {
         <article className="prose flex justify-center mx-auto">
           <div className="border-t border-gray-200 w-140 m-3 p-4">
             <div className="block p-4 bg-white rounded-lg border border-gray-200 shadow md:p-6">
-              <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              <h2 className="mb-2 text-xl font-bold tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Comamoca
-              </h5>
+              </h2>
               <p className="font-normal text-gray-700">
                 Gleamが好きです。 <br />
                 普段はNixOSとEmacsでコードを書いています。
-                <h3>趣味</h3>
-                U149がきっかけでかれこれ3年くらいアイドルマスターを追っていて、主に学マスとシャニマスメインでやっています。
-                <div className="not-prose pt-2">
-                  担当アイドル:
-                  <div className="mt-2">
-                    <ul className="list-disc pl-5">
-                      <li className="py-0">小宮果穂</li>
-                      <li className="py-0">橘ありす</li>
-                      <li className="py-0">月村手毬</li>
-                      <li className="py-0">花海佑芽</li>
-                    </ul>
-                  </div>
-                  <div className="mt-2">
-                    担当ユニット:
-                    <ul className="list-disc pl-5">
-                      <li className="py-0">放クラ</li>
-                      <li className="py-0">Nightmare(学マス)</li>
-                    </ul>
-                  </div>
-                </div>
-                <h3>Links</h3>
-                <div className="flex flex-wrap">
-                  {links.map((link: { link: string; name: string }) => {
-                    return (
-                      <a href={link.link} className="px-1">
-                        {link.name}
-                      </a>
-                    );
-                  })}
-                </div>
               </p>
+              <h3>趣味</h3>
+              <p className="font-normal text-gray-700">
+                U149がきっかけでかれこれ3年くらいアイドルマスターを追っていて、主に学マスとシャニマスメインでやっています。
+              </p>
+              <div className="not-prose pt-2">
+                担当アイドル:
+                <div className="mt-2">
+                  <ul className="list-disc pl-5">
+                    <li className="py-0">小宮果穂</li>
+                    <li className="py-0">橘ありす</li>
+                    <li className="py-0">月村手毬</li>
+                    <li className="py-0">花海佑芽</li>
+                  </ul>
+                </div>
+                <div className="mt-2">
+                  担当ユニット:
+                  <ul className="list-disc pl-5">
+                    <li className="py-0">放クラ</li>
+                    <li className="py-0">Nightmare(学マス)</li>
+                  </ul>
+                </div>
+              </div>
+              <h3>Links</h3>
+              <div className="flex flex-wrap">
+                {links.map((link: { link: string; name: string }) => {
+                  return (
+                    <a href={link.link} className="px-1">
+                      {link.name}
+                    </a>
+                  );
+                })}
+              </div>
             </div>
             <img
               data-confetti-button

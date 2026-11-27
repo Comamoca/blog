@@ -29,7 +29,9 @@ export default function Search() {
         <div className="modal-box">
           <div className="flex flex-col h-96">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-bold">検索</h3>
+              {/* ダイアログの見出し。h3にすると全ページのh1より先に出現し見出し階層が
+                  崩れるため、文書のアウトラインには含めない非見出し要素にする */}
+              <p className="text-lg font-bold">検索</p>
               <label htmlFor="pagefind_modal" className="btn btn-sm btn-circle btn-ghost">
                 ✕
               </label>

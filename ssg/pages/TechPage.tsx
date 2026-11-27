@@ -13,7 +13,7 @@ export default function TechPage({
     <div className="mx-8 text-lg md:mx-auto">
       <div className="my-8 flex flex-col justify-center">
         <Logo />
-        <div className="text-center mt-2">全ての技術記事</div>
+        <h2 className="text-center mt-2">全ての技術記事</h2>
       </div>
       <div className="flex md:items-center flex-col gap-6 grid-cols-4">
         <PostList pages={posts} />

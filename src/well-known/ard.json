@@ -33,6 +33,13 @@
       "description": "comamoca.dev の全ページ一覧 (記事タイトル・説明付きのMarkdown版)。"
     },
     {
+      "identifier": "urn:air:comamoca.dev:openapi",
+      "displayName": "comamoca.dev OpenAPI spec",
+      "type": "application/vnd.oai.openapi+json",
+      "url": "https://comamoca.dev/openapi.json",
+      "description": "comamoca.dev が公開するフィード・サイトマップエンドポイントのOpenAPI 3.1仕様。"
+    },
+    {
       "identifier": "urn:air:comamoca.dev:agents-md",
       "displayName": "comamoca.dev agents.md",
       "type": "text/markdown",
