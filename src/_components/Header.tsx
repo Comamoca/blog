@@ -140,12 +140,18 @@ const links = [
 export default function Header() {
   return (
     <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:px-3 focus:py-2 focus:rounded"
+      >
+        本文へスキップ
+      </a>
       <div className="flex m-3 mt-5 sm:flex-row-reverse">
-        <div className="list-none flex items-stretch mx-auto">
+        <ul className="list-none flex items-stretch mx-auto">
           {links.map((child, idx) => (
             <li key={idx}>{child}</li>
           ))}
-        </div>
+        </ul>
       </div>
     </>
   );

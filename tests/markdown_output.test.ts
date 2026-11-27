@@ -16,6 +16,12 @@ const OUTPUT_DIR = process.env.BUILD_OUTPUT_DIR ?? "dist";
 const SKIP_DIRS = new Set(["pagefind", "assets", "img", "skills"]);
 const SITE_ORIGIN = "https://comamoca.dev";
 
+/**
+ * run-markdown.ts によるHTML→Markdown変換の出力ではなく、host.ts が
+ * 直接Markdownとして配信するネイティブなルート。HTML対が無いのは仕様。
+ */
+const NATIVE_MARKDOWN_ROUTES = new Set(["sitemap.md", "agents.md"]);
+
 async function dirExists(path: string): Promise<boolean> {
   try {
     return (await stat(path)).isDirectory();
@@ -66,10 +72,12 @@ t("markdown: .md に対応するHTMLがあり、本文が空でない", async ()
   const orphans: string[] = [];
   const empty: string[] = [];
   for (const md of mds) {
-    try {
-      await stat(md.replace(/\.md$/, ".html"));
-    } catch {
-      orphans.push(md);
+    if (!NATIVE_MARKDOWN_ROUTES.has(md.slice(OUTPUT_DIR.length + 1))) {
+      try {
+        await stat(md.replace(/\.md$/, ".html"));
+      } catch {
+        orphans.push(md);
+      }
     }
     if ((await readFile(md, "utf-8")).trim().length === 0) empty.push(md);
   }

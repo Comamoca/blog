@@ -115,78 +115,96 @@ export const host = {
 
     const blogDeps = [{ path: BLOG_DIR, kind: "directory" as const }];
 
-    const allRoutes = paginate(articles, "/all/").map(({ page, pagination, results }) => ({
-      path: `/all/${page}/`,
-      title: "全ての記事",
-      dependencies: blogDeps,
-      render: () => {
-        const body = renderToString(
-          MainLayout({
-            title: "全ての記事",
-            styles: styles(),
-            children: raw(
-              renderToString(
-                AllPage({
-                  posts: results.map(toSummary),
-                  pagination,
-                  pageLinks: toPageLinks(page, pagination.totalPages, "/all/"),
-                }) as any,
+    const allRoutes = paginate(articles, "/all/").map(({ page, pagination, results }) => {
+      const description = `${SITE_TITLE}の全記事一覧 (${page}/${pagination.totalPages}ページ目)`;
+      return {
+        path: `/all/${page}/`,
+        title: "全ての記事",
+        dependencies: blogDeps,
+        render: () => {
+          const body = renderToString(
+            MainLayout({
+              title: "全ての記事",
+              styles: styles(),
+              description,
+              ogImage: buildOgImageUrl("main", "全ての記事", description),
+              canonicalUrl: `${SITE_URL}/all/${page}/`,
+              children: raw(
+                renderToString(
+                  AllPage({
+                    posts: results.map(toSummary),
+                    pagination,
+                    pageLinks: toPageLinks(page, pagination.totalPages, "/all/"),
+                  }) as any,
+                ),
               ),
-            ),
-          }) as any,
-        );
-        return { html: `${DOC_PROLOGUE}${body}` };
-      },
-    }));
+            }) as any,
+          );
+          return { html: `${DOC_PROLOGUE}${body}` };
+        },
+      };
+    });
 
-    const techRoutes = paginate(techArticles, "/tech/").map(({ page, pagination, results }) => ({
-      path: `/tech/${page}/`,
-      title: "全ての技術記事",
-      dependencies: blogDeps,
-      render: () => {
-        const body = renderToString(
-          MainLayout({
-            title: "全ての技術記事",
-            styles: styles(),
-            children: raw(
-              renderToString(
-                TechPage({
-                  posts: results.map(toSummary),
-                  pageLinks: toPageLinks(page, pagination.totalPages, "/tech/"),
-                }) as any,
+    const techRoutes = paginate(techArticles, "/tech/").map(({ page, pagination, results }) => {
+      const description = `${SITE_TITLE}の技術記事一覧 (${page}/${pagination.totalPages}ページ目)`;
+      return {
+        path: `/tech/${page}/`,
+        title: "全ての技術記事",
+        dependencies: blogDeps,
+        render: () => {
+          const body = renderToString(
+            MainLayout({
+              title: "全ての技術記事",
+              styles: styles(),
+              description,
+              ogImage: buildOgImageUrl("main", "全ての技術記事", description),
+              canonicalUrl: `${SITE_URL}/tech/${page}/`,
+              children: raw(
+                renderToString(
+                  TechPage({
+                    posts: results.map(toSummary),
+                    pageLinks: toPageLinks(page, pagination.totalPages, "/tech/"),
+                  }) as any,
+                ),
               ),
-            ),
-          }) as any,
-        );
-        return { html: `${DOC_PROLOGUE}${body}` };
-      },
-    }));
+            }) as any,
+          );
+          return { html: `${DOC_PROLOGUE}${body}` };
+        },
+      };
+    });
 
-    const diaryRoutes = paginate(diaries, "/diary/").map(({ page, pagination, results }) => ({
-      path: `/diary/${page}/`,
-      title: "すべての日報",
-      dependencies: blogDeps,
-      render: () => {
-        const body = renderToString(
-          MainLayout({
-            title: "すべての日報",
-            styles: styles(),
-            children: raw(
-              renderToString(
-                DiaryPage({
-                  posts: results.map((p) => ({
-                    ...toSummary(p),
-                    isDiary: true,
-                  })),
-                  pagination,
-                }) as any,
+    const diaryRoutes = paginate(diaries, "/diary/").map(({ page, pagination, results }) => {
+      const description = `${SITE_TITLE}の日報一覧 (${page}/${pagination.totalPages}ページ目)`;
+      return {
+        path: `/diary/${page}/`,
+        title: "すべての日報",
+        dependencies: blogDeps,
+        render: () => {
+          const body = renderToString(
+            MainLayout({
+              title: "すべての日報",
+              styles: styles(),
+              description,
+              ogImage: buildOgImageUrl("main", "すべての日報", description),
+              canonicalUrl: `${SITE_URL}/diary/${page}/`,
+              children: raw(
+                renderToString(
+                  DiaryPage({
+                    posts: results.map((p) => ({
+                      ...toSummary(p),
+                      isDiary: true,
+                    })),
+                    pagination,
+                  }) as any,
+                ),
               ),
-            ),
-          }) as any,
-        );
-        return { html: `${DOC_PROLOGUE}${body}` };
-      },
-    }));
+            }) as any,
+          );
+          return { html: `${DOC_PROLOGUE}${body}` };
+        },
+      };
+    });
 
     const homeRoute = {
       path: "/",
@@ -350,6 +368,49 @@ ${sitemapEntries
       },
     };
 
+    // sitemap.md: エージェント向けのMarkdown版サイトマップ。XML版 (/sitemap.xml) は
+    // クローラ向けのURL一覧のみで記事タイトル・説明を持たないため、構造化ドキュメント
+    // 階層としては別に用意する (agent-ready.dev のAgent Readability Specが要求)。
+    const sitemapMdRoute = {
+      path: "/sitemap.md",
+      render: () => {
+        const entry = (p: Post) =>
+          `- [${p.title}](${SITE_URL}${p.url})${p.description ? `: ${p.description}` : ""}`;
+        const body = `# ${SITE_TITLE} Sitemap
+
+> 全ページのMarkdown版一覧。機械可読なURL一覧のみが必要な場合は [sitemap.xml](${SITE_URL}/sitemap.xml) を使う。
+
+## Tech Articles
+
+${techArticles.map(entry).join("\n")}
+
+## Other Articles
+
+${articles
+  .filter((p) => !p.tags.includes("tech"))
+  .map(entry)
+  .join("\n")}
+
+## Diary
+
+${diaries.map(entry).join("\n")}
+
+## Listing pages
+
+- [全ての記事](${SITE_URL}/all/1): ページネーション一覧
+- [技術記事](${SITE_URL}/tech/1): ページネーション一覧
+- [日記](${SITE_URL}/diary/1): ページネーション一覧
+
+## Static pages
+
+- [About](${SITE_URL}/me.html)
+- [Info](${SITE_URL}/info.html)
+- [Hub](${SITE_URL}/hub.html)
+`;
+        return { contentType: "text/markdown; charset=utf-8", body };
+      },
+    };
+
     return [
       homeRoute,
       ...articleRoutes,
@@ -361,6 +422,7 @@ ${sitemapEntries
       hubRoute,
       notFoundRoute,
       sitemapRoute,
+      sitemapMdRoute,
       ...feedRoutes,
     ];
   },

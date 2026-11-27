@@ -26,6 +26,20 @@
       "description": "comamoca.dev の全ページURL一覧。"
     },
     {
+      "identifier": "urn:air:comamoca.dev:sitemap-md",
+      "displayName": "comamoca.dev Sitemap (Markdown)",
+      "type": "text/markdown",
+      "url": "https://comamoca.dev/sitemap.md",
+      "description": "comamoca.dev の全ページ一覧 (記事タイトル・説明付きのMarkdown版)。"
+    },
+    {
+      "identifier": "urn:air:comamoca.dev:agents-md",
+      "displayName": "comamoca.dev agents.md",
+      "type": "text/markdown",
+      "url": "https://comamoca.dev/agents.md",
+      "description": "comamoca.dev を読むAIエージェント向けのサイト内閲覧ガイド (Markdown版・JSON-LD・検索の案内)。"
+    },
+    {
       "identifier": "urn:air:comamoca.dev:llms-txt",
       "displayName": "comamoca.dev llms.txt",
       "type": "text/plain",

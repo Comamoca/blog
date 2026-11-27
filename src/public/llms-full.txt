@@ -1,0 +1,46 @@
+# Comamoca's Blog (full)
+
+> [llms.txt](https://comamoca.dev/llms.txt) の詳細版。要点だけ必要な場合はそちらを使う。
+
+## About
+
+Comamoca (Comamoca) の個人ブログ。主に日本語で、技術記事 (プログラミング言語・NixOS・Emacs・Gleam など) と
+日々の日記を公開している。英語記事も一部ある。著者の情報は [About](https://comamoca.dev/me.html) と
+[Person JSON-LD](https://comamoca.dev/#person) (`sameAs`: GitHub / Twitter / Bluesky / Nostr / WakaTime) を参照。
+
+## Content
+
+- [全記事](https://comamoca.dev/all/1): 技術記事・日記を含む全記事の一覧 (ページネーション)
+- [技術記事](https://comamoca.dev/tech/1): `#+FILETAGS: tech` が付いた記事のみの一覧
+- [日記](https://comamoca.dev/diary/1): 日報・日記 (`-diary` 記事)
+- [About](https://comamoca.dev/me.html): 著者について
+- [Info](https://comamoca.dev/info.html): サイト情報
+- [Hub](https://comamoca.dev/hub.html): 著者が運営する他サービス・リポジトリへのリンク集
+
+## How to read a page as an agent
+
+- 記事ページ・固定ページには `<link rel="alternate" type="text/markdown">` でMarkdown版のURLが張られている。
+  または `Accept: text/markdown` を付けてGETすると、Cloudflare側のTransform RuleがHTMLをMarkdownへ書き換えて返す。
+- 各HTMLページには `WebSite`/`Person` (固定ページ) または `BlogPosting` (記事) のJSON-LDが埋め込まれている。
+- サイト内検索はPagefindのインデックス、またはページに登録されたWebMCPツール `search_blog` から呼べる。
+
+## Machine-readable
+
+- [Sitemap](https://comamoca.dev/sitemap.xml): 全ページのURL一覧 (XML)
+- [Sitemap (Markdown)](https://comamoca.dev/sitemap.md): 記事タイトル・説明付きの全ページ一覧
+- [agents.md](https://comamoca.dev/agents.md): このサイトを読むAIエージェント向けの閲覧ガイド
+- [RSS feed](https://comamoca.dev/api/feed.xml): 最新10記事
+- [JSON Feed](https://comamoca.dev/api/feed.json): 最新10記事
+- [API Catalog](https://comamoca.dev/.well-known/api-catalog): 上記エンドポイントのRFC 9727カタログ
+- [ARD](https://comamoca.dev/.well-known/ard.json): Agentic Resource Discoveryカタログ (フィード・サイトマップ・Agent Skill)
+- [Agent Skill](https://comamoca.dev/skills/comamoca-blog/SKILL.md): 記事一覧取得・最新記事確認・本文Markdown取得・サイト内検索の手順
+
+## Content policy
+
+[robots.txt](https://comamoca.dev/robots.txt) の [Content Signals](https://contentsignals.org/) で明示している通り、
+検索・AI回答生成での引用・参照は許可するが、AI学習での利用は許可していない (`ai-train=no`)。
+
+## Notes
+
+- 各ページのMarkdown版は、URL末尾を `index.md` に (`me.html` のような拡張子付きページは `me.md` に) 置き換えると取得できる。
+- ソースリポジトリ: https://github.com/Comamoca/blog

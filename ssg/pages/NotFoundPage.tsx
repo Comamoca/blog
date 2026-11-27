@@ -1,6 +1,6 @@
 export default function NotFoundPage() {
   return (
-    <main className="flex-grow flex flex-col min-h-96">
+    <div className="flex-grow flex flex-col min-h-96">
       <img
         id="img"
         src="https://deno-avatar.deno.dev/avatar/avatar.svg"
@@ -24,6 +24,6 @@ svgURL.pathname += "/" + svgName
 img.src = svgURL
 `}
       </script>
-    </main>
+    </div>
   );
 }

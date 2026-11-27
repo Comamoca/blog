@@ -14,6 +14,9 @@
 ## Machine-readable
 
 - [Sitemap](https://comamoca.dev/sitemap.xml): 全ページのURL一覧
+- [Sitemap (Markdown)](https://comamoca.dev/sitemap.md): 記事タイトル・説明付きの全ページ一覧
+- [llms-full.txt](https://comamoca.dev/llms-full.txt): このファイルの詳細版 (サイト構成・コンテンツ方針を含む)
+- [agents.md](https://comamoca.dev/agents.md): このサイトを読むAIエージェント向けの閲覧ガイド
 - [RSS feed](https://comamoca.dev/api/feed.xml): 最新10記事
 - [JSON Feed](https://comamoca.dev/api/feed.json): 最新10記事
 - [API Catalog](https://comamoca.dev/.well-known/api-catalog): 上記エンドポイントのRFC 9727カタログ

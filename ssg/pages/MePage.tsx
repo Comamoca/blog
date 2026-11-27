@@ -25,7 +25,7 @@ export default function MePage() {
         99e5be86-ac10-4698-a38b-3f8db4b91e0d
       </p>
 
-      <main>
+      <div>
         <h1 className="text-2xl md:text-4xl text-center my-4">About Me</h1>
         <article className="prose flex justify-center mx-auto">
           <div className="border-t border-gray-200 w-140 m-3 p-4">
@@ -77,7 +77,7 @@ export default function MePage() {
             />
           </div>
         </article>
-      </main>
+      </div>
 
       <script>
         {`

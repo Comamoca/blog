@@ -24,6 +24,7 @@ export const STATIC_URLS = [
   "/hub.html",
   "/404.html",
   "/sitemap.xml",
+  "/sitemap.md",
   "/api/feed.xml",
   "/api/feed.json",
 ];

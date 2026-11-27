@@ -5,7 +5,8 @@
       "item": [
         { "href": "https://comamoca.dev/api/feed.xml", "type": "application/rss+xml", "title": "RSS feed" },
         { "href": "https://comamoca.dev/api/feed.json", "type": "application/feed+json", "title": "JSON Feed" },
-        { "href": "https://comamoca.dev/sitemap.xml", "type": "application/xml", "title": "Sitemap" }
+        { "href": "https://comamoca.dev/sitemap.xml", "type": "application/xml", "title": "Sitemap" },
+        { "href": "https://comamoca.dev/sitemap.md", "type": "text/markdown", "title": "Sitemap (Markdown)" }
       ]
     },
     {

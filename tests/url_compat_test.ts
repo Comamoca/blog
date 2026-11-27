@@ -78,6 +78,10 @@ async function collectOutputUrls(): Promise<string[]> {
         urls.push("/sitemap.xml");
         continue;
       }
+      if (urlPrefix === "/" && entry.name === "sitemap.md") {
+        urls.push("/sitemap.md");
+        continue;
+      }
       if (urlPrefix === "/api/" && (entry.name === "feed.xml" || entry.name === "feed.json")) {
         urls.push(`${urlPrefix}${entry.name}`);
       }

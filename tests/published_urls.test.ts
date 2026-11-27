@@ -50,6 +50,7 @@ test("derivePublishedUrls: 下書き・.nop・flycheck_* のURLを含まない",
   const urls = await derivePublishedUrls();
 
   const leaked = urls.filter((url) => {
+    if (!url.startsWith("/blog/")) return false; // /sitemap.md, /agents.md 等の固定ルートは対象外
     const stem = blogStem(url);
     return stem.startsWith("flycheck_") || stem.endsWith(".nop") || /\.(md|txt|bak)$/.test(stem);
   });
