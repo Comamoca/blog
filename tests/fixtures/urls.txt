@@ -385,7 +385,6 @@
 /blog/2025-07-27-diary/
 /blog/2025-07-28-diary/
 /blog/2025-08-03-diary/
-/blog/2025-08-04-diary/
 /blog/2025-08-06-diary/
 /blog/2025-08-07-diary/
 /blog/2025-08-10-diary/

@@ -256,8 +256,9 @@ pages, static pages, feeds, sitemap, 404) are defined programmatically in
 
 公開URL集合は `ssg/posts.ts` の `derivePublishedUrls()` が記事ソースから導出
 する。**記事を追加しても `tests/fixtures/urls.txt` を更新する必要はない**。
-このfixture は移行時点の凍結スナップショット (481件、うち記事426件) で、
-`tests/url_compat_test.ts` が次の2点を検証する:
+このfixture は移行時点の凍結スナップショット (480件、うち記事425件。2026-11-27に
+本文の無い日報1件を削除し481/426から減った) で、`tests/url_compat_test.ts` が
+次の2点を検証する:
 
 1. スナップショットの全URLが今も出力に存在する (移行前URLを失っていない)
 2. 出力URL集合がソース導出集合と完全一致する (余剰・欠落の両方)

@@ -9,8 +9,11 @@ import { derivePublishedUrls } from "../ssg/posts.ts";
  *
  * tests/fixtures/urls.txt は移行時に取得した**凍結スナップショット**
  * (移行前 Lume のビルド出力 477件 + 移行直後に main へ入った新規記事4件 =
- * 481件)。このファイルはもう更新しない。新規記事を追加しても追記不要で、
+ * 481件)。このファイルは基本的に更新しない。新規記事を追加しても追記不要で、
  * 代わりに「ソースから導出したURL集合」を基準に出力を検証する。
+ *
+ * 例外: 記事を意図的に削除した場合は、そのURLをここからも取り除く
+ * (2026-11-27: 本文が空の日報 /blog/2025-08-04-diary/ を削除し480件に)。
  *
  * 検証は2段構え:
  *   1. スナップショットの全URLが今も出力に存在する (移行前URLを1件も失わない)
@@ -29,8 +32,8 @@ const OUTPUT_DIR = process.env.BUILD_OUTPUT_DIR ?? "dist";
 const FIXTURE_PATH = join("tests", "fixtures", "urls.txt");
 
 /** 凍結スナップショットの件数。fixture が壊れていないことの目印。 */
-const FROZEN_TOTAL = 481;
-const FROZEN_BLOG = 426;
+const FROZEN_TOTAL = 480;
+const FROZEN_BLOG = 425;
 
 async function dirExists(path: string): Promise<boolean> {
   try {
@@ -94,7 +97,7 @@ async function collectOutputUrls(): Promise<string[]> {
 
 const outputReady = await dirExists(OUTPUT_DIR);
 
-test("URL互換性: 凍結スナップショットが壊れていない (481件・記事426件)", async () => {
+test("URL互換性: 凍結スナップショットが壊れていない (480件・記事425件)", async () => {
   const frozen = await loadFrozenUrls();
   const blogUrls = frozen.filter((u) => u.startsWith("/blog/"));
 
