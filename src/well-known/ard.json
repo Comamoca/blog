@@ -33,6 +33,14 @@
       "description": "comamoca.dev の全ページ一覧 (記事タイトル・説明付きのMarkdown版)。"
     },
     {
+      "identifier": "urn:air:comamoca.dev:mcp-docs",
+      "displayName": "comamoca.dev API & Agent Tools",
+      "type": "text/html",
+      "url": "https://comamoca.dev/mcp.html",
+      "description": "comamoca.dev が公開するMCPツール (search_blog)・APIエンドポイントの人間向けドキュメント。",
+      "representativeQueries": ["comamoca.dev の API ドキュメント", "comamoca.dev MCP server docs"]
+    },
+    {
       "identifier": "urn:air:comamoca.dev:openapi",
       "displayName": "comamoca.dev OpenAPI spec",
       "type": "application/vnd.oai.openapi+json",

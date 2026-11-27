@@ -88,7 +88,15 @@ test("derivePublishedUrls: 固定ページとページネーションを含む",
   const diaries = posts.filter((p) => p.isDiary);
   const tech = articles.filter((p) => p.tags.includes("tech"));
 
-  for (const url of ["/", "/me.html", "/info.html", "/hub.html", "/404.html", "/sitemap.xml"]) {
+  for (const url of [
+    "/",
+    "/me.html",
+    "/info.html",
+    "/hub.html",
+    "/mcp.html",
+    "/404.html",
+    "/sitemap.xml",
+  ]) {
     assert(urls.has(url), `固定ページ ${url} が導出URLに無い`);
   }
   assert(urls.has("/api/feed.xml"), "RSSフィードが導出URLに無い");

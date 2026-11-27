@@ -32,6 +32,7 @@ import TechPage from "./ssg/pages/TechPage.tsx";
 import DiaryPage from "./ssg/pages/DiaryPage.tsx";
 import MePage from "./ssg/pages/MePage.tsx";
 import InfoPage from "./ssg/pages/InfoPage.tsx";
+import McpPage from "./ssg/pages/McpPage.tsx";
 import HubPage from "./ssg/pages/HubPage.tsx";
 import NotFoundPage from "./ssg/pages/NotFoundPage.tsx";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "./src/consts.ts";
@@ -263,6 +264,28 @@ export const host = {
       },
     };
 
+    const mcpTitle = `${SITE_TITLE} API & Agent Tools`;
+    const mcpDescription = "comamoca.dev のMCPツール・API・機械可読ドキュメントの一覧。";
+    const mcpRoute = {
+      path: "/mcp.html",
+      title: mcpTitle,
+      render: () => {
+        const body = renderToString(
+          PostLayout({
+            title: mcpTitle,
+            pubDate: "",
+            emoji: "🤖",
+            styles: styles(),
+            description: mcpDescription,
+            ogImage: buildOgImageUrl("post", mcpTitle, mcpDescription),
+            canonicalUrl: `${SITE_URL}/mcp.html`,
+            children: raw(renderToString(McpPage({}) as any)),
+          }) as any,
+        );
+        return { html: `${DOC_PROLOGUE}${body}` };
+      },
+    };
+
     const hubRoute = {
       path: "/hub.html",
       title: "Hub",
@@ -351,6 +374,7 @@ export const host = {
       meRoute,
       infoRoute,
       hubRoute,
+      mcpRoute,
     ].map((r) => r.path);
 
     const sitemapRoute = {
@@ -420,6 +444,7 @@ ${diaries.map(entry).join("\n")}
       meRoute,
       infoRoute,
       hubRoute,
+      mcpRoute,
       notFoundRoute,
       sitemapRoute,
       sitemapMdRoute,

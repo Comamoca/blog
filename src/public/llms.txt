@@ -10,6 +10,7 @@
 - [About](https://comamoca.dev/me.html): 著者について
 - [Info](https://comamoca.dev/info.html): サイト情報
 - [Hub](https://comamoca.dev/hub.html): 関連リンク集
+- [API & Agent Tools](https://comamoca.dev/mcp.html): MCPツール・APIエンドポイントのドキュメント
 
 ## Machine-readable
 

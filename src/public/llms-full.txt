@@ -16,6 +16,8 @@ Comamoca (Comamoca) の個人ブログ。主に日本語で、技術記事 (プ�
 - [About](https://comamoca.dev/me.html): 著者について
 - [Info](https://comamoca.dev/info.html): サイト情報
 - [Hub](https://comamoca.dev/hub.html): 著者が運営する他サービス・リポジトリへのリンク集
+- [API & Agent Tools](https://comamoca.dev/mcp.html): MCPツール (`search_blog`)・APIエンドポイント・
+  機械可読ドキュメントのまとめページ
 
 ## How to read a page as an agent
 

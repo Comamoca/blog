@@ -22,6 +22,7 @@ export const STATIC_URLS = [
   "/me.html",
   "/info.html",
   "/hub.html",
+  "/mcp.html",
   "/404.html",
   "/sitemap.xml",
   "/sitemap.md",

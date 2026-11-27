@@ -6,6 +6,10 @@
     "version": "1.0.0"
   },
   "servers": [{ "url": "https://comamoca.dev" }],
+  "externalDocs": {
+    "description": "API & Agent Tools (人間向けドキュメント・MCPツールの説明)",
+    "url": "https://comamoca.dev/mcp.html"
+  },
   "paths": {
     "/api/feed.xml": {
       "get": {
