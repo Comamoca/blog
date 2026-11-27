@@ -79,7 +79,7 @@ jobs:
     name: Check OG font charset coverage
     steps:
       - uses: actions/checkout@v7
-      - uses: nixbuild/nix-quick-install-action@v35
+      - uses: nixbuild/nix-quick-install-action@v36
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Cache dependencies
         uses: actions/cache@v6
@@ -103,7 +103,7 @@ jobs:
     name: Test OG worker
     steps:
       - uses: actions/checkout@v7
-      - uses: nixbuild/nix-quick-install-action@v35
+      - uses: nixbuild/nix-quick-install-action@v36
       - uses: DeterminateSystems/magic-nix-cache-action@main
       # og_worker/router.gleam のASSETS bindingとgleam testの
       # test_support.load_file_bytes が参照する og/static/fonts/*.ttf は
@@ -199,7 +199,7 @@ jobs:
           # RSS dates come from git commit times, so the full history
           # (not a shallow clone) is required for correct pubDates.
           fetch-depth: 0
-      - uses: nixbuild/nix-quick-install-action@v35
+      - uses: nixbuild/nix-quick-install-action@v36
       # - uses: cachix/install-nix-action@v31
       #   with:
       #     github_access_token: ${{ secrets.GITHUB_TOKEN }}

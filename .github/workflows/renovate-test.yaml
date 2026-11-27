@@ -58,7 +58,7 @@ jobs:
           # feed の pubDate は git のコミット時刻から取るため、浅い clone だと
           # 値が合わず feed_compat_test.ts が落ちる (deploy ジョブと同じ理由)。
           fetch-depth: 0
-      - uses: nixbuild/nix-quick-install-action@v35
+      - uses: nixbuild/nix-quick-install-action@v36
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Cache dependencies
         uses: actions/cache@v6
